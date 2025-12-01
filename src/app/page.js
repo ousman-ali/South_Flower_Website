@@ -1,4 +1,5 @@
 import AboutSection from "@/components/about/AboutSection";
+import CTACard from "@/components/cta/CtaSection";
 import HeroSection from "@/components/hero/HeroSection";
 import ProductSection from "@/components/products/ProductSection";
 import ProjectSection from "@/components/projects/ProjectSection";
@@ -13,6 +14,7 @@ export default function Home() {
       <ServicesSection />
       <ProjectSection />
       <ProductSection />
+      <CTACard />
       <TestimonialSection />
     </>
   );
