@@ -1,5 +1,6 @@
 import AboutSection from "@/components/about/AboutSection";
 import CTACard from "@/components/cta/CtaSection";
+import Footer from "@/components/footer/Footer";
 import HeroSection from "@/components/hero/HeroSection";
 import PartnersSection from "@/components/partners/Partners";
 import ProductSection from "@/components/products/ProductSection";
@@ -18,6 +19,7 @@ export default function Home() {
       <CTACard />
       <TestimonialSection />
       <PartnersSection />
+      <Footer />
     </>
   );
 }
