@@ -1,0 +1,995 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { motion } from "framer-motion";
+import {
+  Calendar,
+  User,
+  ArrowRight,
+  Eye,
+  Heart,
+  MessageCircle,
+  BookOpen,
+  Tag,
+  Clock,
+  ChevronRight,
+  Sparkles,
+  Leaf,
+  Flower,
+  Search,
+  TrendingUp,
+  Filter,
+  Share2,
+  Bookmark,
+  PenTool,
+  Camera,
+  ChevronLeft,
+  ChevronRight as ChevronRightIcon,
+} from "lucide-react";
+
+export default function BlogSection1() {
+  const [isHovered, setIsHovered] = useState(null);
+  const [favorites, setFavorites] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [mounted, setMounted] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [isMobile, setIsMobile] = useState(false);
+  const containerRef = useRef(null);
+
+  // Categories
+  const categories = [
+    "All",
+    "Gardening Tips",
+    "Plant Care",
+    "Seasonal",
+    "Design",
+    "Flower Arranging",
+    "Sustainability",
+    "DIY Projects",
+  ];
+
+  // Blog posts data - Full image cards
+  const blogPosts = [
+    {
+      id: 1,
+      title: "The Art of Flower Arranging",
+      excerpt:
+        "Learn professional techniques for creating stunning floral displays that last longer and look beautiful.",
+      date: "Mar 15, 2024",
+      author: "Sarah Gardner",
+      readTime: "5 min read",
+      image:
+        "https://images.unsplash.com/photo-1563974313767-7d26570bb586?w=800&h=500&fit=crop",
+      category: "Flower Arranging",
+      tags: ["Flowers", "Arrangement", "Design"],
+      comments: 24,
+      views: 1560,
+      gradient: "from-rose-500 to-pink-400",
+    },
+    {
+      id: 2,
+      title: "Spring Garden Preparation Guide",
+      excerpt:
+        "Essential steps to prepare your garden for the blooming season ahead. From soil prep to planting schedules.",
+      date: "Mar 12, 2024",
+      author: "Michael Bloom",
+      readTime: "8 min read",
+      image:
+        "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&h=500&fit=crop",
+      category: "Seasonal",
+      tags: ["Spring", "Gardening", "Preparation"],
+      comments: 18,
+      views: 2340,
+      gradient: "from-emerald-500 to-teal-400",
+    },
+    {
+      id: 3,
+      title: "Indoor Plant Care Masterclass",
+      excerpt:
+        "Complete guide to keeping your indoor plants thriving. Light, water, humidity, and common issues solved.",
+      date: "Mar 10, 2024",
+      author: "Lisa Green",
+      readTime: "12 min read",
+      image:
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&h=500&fit=crop",
+      category: "Plant Care",
+      tags: ["Indoor", "Care", "Tips"],
+      comments: 42,
+      views: 3120,
+      gradient: "from-blue-500 to-cyan-400",
+    },
+    {
+      id: 4,
+      title: "Sustainable Gardening Practices",
+      excerpt:
+        "How to create an eco-friendly garden that supports local wildlife and conserves resources.",
+      date: "Mar 8, 2024",
+      author: "David Earth",
+      readTime: "7 min read",
+      image:
+        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=500&fit=crop",
+      category: "Sustainability",
+      tags: ["Eco", "Sustainable", "Green"],
+      comments: 31,
+      views: 1890,
+      gradient: "from-lime-500 to-green-400",
+    },
+    {
+      id: 5,
+      title: "Creating a Butterfly Garden",
+      excerpt:
+        "Design and plant selection tips to attract butterflies and create a magical outdoor space.",
+      date: "Mar 5, 2024",
+      author: "Emma Wings",
+      readTime: "6 min read",
+      image:
+        "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=500&fit=crop",
+      category: "Design",
+      tags: ["Butterflies", "Wildlife", "Design"],
+      comments: 27,
+      views: 2670,
+      gradient: "from-purple-500 to-violet-400",
+    },
+    {
+      id: 6,
+      title: "Vertical Garden DIY Project",
+      excerpt:
+        "Step-by-step guide to building your own vertical garden wall for small spaces.",
+      date: "Mar 3, 2024",
+      author: "Tom Build",
+      readTime: "10 min read",
+      image:
+        "https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?w=800&h=500&fit=crop",
+      category: "DIY Projects",
+      tags: ["DIY", "Vertical", "Project"],
+      comments: 56,
+      views: 3560,
+      gradient: "from-amber-500 to-orange-400",
+    },
+    {
+      id: 7,
+      title: "Herb Garden for Beginners",
+      excerpt:
+        "Start your culinary herb garden with these easy-to-grow varieties and care tips.",
+      date: "Mar 1, 2024",
+      author: "Chef Green",
+      readTime: "4 min read",
+      image:
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&h=500&fit=crop",
+      category: "Gardening Tips",
+      tags: ["Herbs", "Beginners", "Culinary"],
+      comments: 38,
+      views: 2890,
+      gradient: "from-indigo-500 to-purple-400",
+    },
+    {
+      id: 8,
+      title: "Succulent Arrangement Ideas",
+      excerpt:
+        "Creative ways to arrange succulents for stunning indoor and outdoor displays.",
+      date: "Feb 28, 2024",
+      author: "Suzy Culent",
+      readTime: "5 min read",
+      image:
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&h=500&fit=crop",
+      category: "Design",
+      tags: ["Succulents", "Arrangement", "Ideas"],
+      comments: 22,
+      views: 1970,
+      gradient: "from-pink-500 to-rose-400",
+    },
+    {
+      id: 9,
+      title: "Organic Pest Control Methods",
+      excerpt:
+        "Natural solutions to protect your plants without harmful chemicals.",
+      date: "Feb 25, 2024",
+      author: "Eco Gardener",
+      readTime: "9 min read",
+      image:
+        "https://images.unsplash.com/photo-1592892111427-bc0c1f0c4658?w=800&h=500&fit=crop",
+      category: "Sustainability",
+      tags: ["Organic", "Pest Control", "Natural"],
+      comments: 47,
+      views: 3210,
+      gradient: "from-emerald-600 to-green-500",
+    },
+    {
+      id: 10,
+      title: "Seasonal Flower Photography",
+      excerpt:
+        "Tips for capturing the beauty of your garden through photography.",
+      date: "Feb 22, 2024",
+      author: "Photo Bloom",
+      readTime: "6 min read",
+      image:
+        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800&h=500&fit=crop",
+      category: "Design",
+      tags: ["Photography", "Flowers", "Seasonal"],
+      comments: 19,
+      views: 2450,
+      gradient: "from-cyan-500 to-blue-400",
+    },
+    {
+      id: 11,
+      title: "Composting for Better Soil",
+      excerpt:
+        "Everything you need to know about creating nutrient-rich compost for your garden.",
+      date: "Feb 20, 2024",
+      author: "Soil Expert",
+      readTime: "11 min read",
+      image:
+        "https://images.unsplash.com/photo-1600841541100-bf7835d5d3da?w=800&h=500&fit=crop",
+      category: "Gardening Tips",
+      tags: ["Compost", "Soil", "Nutrients"],
+      comments: 33,
+      views: 2780,
+      gradient: "from-amber-600 to-yellow-500",
+    },
+    {
+      id: 12,
+      title: "Winter Garden Protection",
+      excerpt:
+        "How to protect your plants during cold months and prepare for spring.",
+      date: "Feb 18, 2024",
+      author: "Winter Gardener",
+      readTime: "7 min read",
+      image:
+        "https://images.unsplash.com/photo-1545243421-89e5c9b6d12c?w=800&h=500&fit=crop",
+      category: "Seasonal",
+      tags: ["Winter", "Protection", "Care"],
+      comments: 29,
+      views: 2100,
+      gradient: "from-blue-600 to-cyan-500",
+    },
+  ];
+
+  // Popular products for sidebar
+  const popularProducts = [
+    {
+      id: 1,
+      name: "Premium Rose Seeds",
+      price: "$24.99",
+      image:
+        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w-300&h=200&fit=crop",
+      rating: 4.9,
+      category: "Seeds",
+    },
+    {
+      id: 2,
+      name: "Ceramic Plant Pots",
+      price: "$34.99",
+      image:
+        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300&h=200&fit=crop",
+      rating: 4.8,
+      category: "Pots",
+    },
+    {
+      id: 3,
+      name: "Organic Fertilizer",
+      price: "$19.99",
+      image:
+        "https://images.unsplash.com/photo-1600841541100-bf7835d5d3da?w=300&h=200&fit=crop",
+      rating: 4.7,
+      category: "Soil",
+    },
+    {
+      id: 4,
+      name: "Gardening Tool Set",
+      price: "$49.99",
+      image:
+        "https://images.unsplash.com/photo-1577041241576-f4b964db30ee?w=300&h=200&fit=crop",
+      rating: 4.9,
+      category: "Tools",
+    },
+  ];
+
+  // Featured tags
+  const featuredTags = ["Flowers", "Gardening", "Plants", "Design"];
+
+  // Animated shapes
+  const floatingShapes = [
+    {
+      id: 1,
+      size: 80,
+      x: "5%",
+      y: "15%",
+      duration: 30,
+      color: "from-emerald-500/10 to-teal-400/15",
+      icon: <Flower className="w-8 h-8 text-emerald-400/40" />,
+      shape: "circle",
+    },
+    {
+      id: 2,
+      size: 60,
+      x: "90%",
+      y: "25%",
+      duration: 35,
+      color: "from-rose-500/10 to-pink-400/15",
+      icon: <Leaf className="w-6 h-6 text-rose-400/40" />,
+      shape: "triangle",
+    },
+    {
+      id: 3,
+      size: 70,
+      x: "10%",
+      y: "75%",
+      duration: 28,
+      color: "from-blue-500/10 to-cyan-400/15",
+      icon: <Sparkles className="w-7 h-7 text-blue-400/40" />,
+      shape: "circle",
+    },
+    {
+      id: 4,
+      size: 50,
+      x: "85%",
+      y: "70%",
+      duration: 32,
+      color: "from-purple-500/10 to-violet-400/15",
+      icon: <PenTool className="w-5 h-5 text-purple-400/40" />,
+      shape: "hexagon",
+    },
+    {
+      id: 5,
+      size: 90,
+      x: "70%",
+      y: "15%",
+      duration: 25,
+      color: "from-amber-500/10 to-yellow-400/15",
+      icon: <Camera className="w-9 h-9 text-amber-400/40" />,
+      shape: "circle",
+    },
+    {
+      id: 6,
+      size: 55,
+      x: "20%",
+      y: "60%",
+      duration: 29,
+      color: "from-lime-500/10 to-green-400/15",
+      icon: <BookOpen className="w-5 h-5 text-lime-400/40" />,
+      shape: "triangle",
+    },
+  ];
+
+  // Filter blog posts based on selected category
+  const filteredPosts =
+    selectedCategory === "All"
+      ? blogPosts
+      : blogPosts.filter((post) => post.category === selectedCategory);
+
+  // Pagination settings
+  const postsPerPage = 4; // Always 4 cards per page on mobile
+
+  // Calculate total pages
+  const totalPages = Math.ceil(filteredPosts.length / postsPerPage);
+
+  // Get current posts for the page
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = filteredPosts.slice(indexOfFirstPost, indexOfLastPost);
+
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+  // Next page
+  const nextPage = () => {
+    if (currentPage < totalPages) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  // Previous page
+  const prevPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Toggle favorite
+  const toggleFavorite = (postId) => {
+    setFavorites((prev) =>
+      prev.includes(postId)
+        ? prev.filter((id) => id !== postId)
+        : [...prev, postId]
+    );
+  };
+
+  // Fix hydration error and detect mobile
+  useEffect(() => {
+    setMounted(true);
+
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024); // lg breakpoint
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Reset to page 1 when category changes
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [selectedCategory]);
+
+  // Prevent rendering mismatched content
+  if (!mounted) {
+    return (
+      <section className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
+        <div className="max-w-7xl mx-auto px-4 py-8">
+          <div className="h-96 flex items-center justify-center">
+            <div className="animate-pulse text-gray-500">Loading...</div>
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  return (
+    <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+      {/* Animated Background Grid */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_40%,transparent_100%)]" />
+
+      {/* Animated Floating Shapes */}
+      <div className="absolute inset-0 overflow-hidden">
+        {floatingShapes.map((shape) => (
+          <motion.div
+            key={shape.id}
+            className={`absolute ${shape.color} border border-white/5 backdrop-blur-sm flex items-center justify-center`}
+            style={{
+              width: shape.size,
+              height: shape.size,
+              left: shape.x,
+              top: shape.y,
+              borderRadius:
+                shape.shape === "circle"
+                  ? "50%"
+                  : shape.shape === "hexagon"
+                  ? "30%"
+                  : "20%",
+              clipPath:
+                shape.shape === "triangle"
+                  ? "polygon(50% 0%, 0% 100%, 100% 100%)"
+                  : "none",
+            }}
+            animate={{
+              y: [0, -25, 0],
+              x: [0, 15, 0],
+              rotate: shape.id % 2 === 0 ? [0, 180, 360] : [0, 0, 0],
+            }}
+            transition={{
+              duration: shape.duration,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: shape.id * 0.5,
+            }}
+          >
+            {shape.icon}
+          </motion.div>
+        ))}
+
+        {/* Large gradient orbs */}
+        <motion.div
+          className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-emerald-700/10 via-teal-700/5 to-cyan-700/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, 50, 0],
+            y: [0, -40, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 45,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+
+        <motion.div
+          className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-rose-700/10 via-purple-700/5 to-pink-700/10 rounded-full blur-3xl"
+          animate={{
+            x: [0, -60, 0],
+            y: [0, 50, 0],
+            scale: [1.1, 1, 1.1],
+          }}
+          transition={{
+            duration: 50,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+      </div>
+
+      {/* Main Content Container */}
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Header */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-8"
+        >
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
+            <div>
+              <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-900/30 to-teal-900/30 border border-emerald-500/20">
+                <BookOpen className="w-3 h-3 text-emerald-400" />
+                <span className="text-xs font-medium text-emerald-300">
+                  South Flower Blog
+                </span>
+              </div>
+
+              <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
+                Garden{" "}
+                <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                  Insights & Tips
+                </span>
+              </h1>
+
+              <p className="text-gray-400 text-sm">
+                Discover expert gardening advice, floral design tips, and
+                sustainable practices
+              </p>
+            </div>
+
+            {/* Quick Stats */}
+            <div className="flex items-center gap-6">
+              {[
+                { value: blogPosts.length, label: "Articles" },
+                { value: "4.8★", label: "Rating" },
+                { value: "10K+", label: "Readers" },
+              ].map((stat, idx) => (
+                <div key={idx} className="text-center">
+                  <div className="text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-gray-500">{stat.label}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Category Filter */}
+        <motion.div
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.2 }}
+          className="mb-6"
+        >
+          <div className="flex flex-wrap gap-2">
+            {categories.map((category) => (
+              <motion.button
+                key={category}
+                onClick={() => setSelectedCategory(category)}
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
+                  selectedCategory === category
+                    ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                    : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+                }`}
+              >
+                {category}
+              </motion.button>
+            ))}
+          </div>
+        </motion.div>
+
+        {/* Main Layout: Blog Posts + Sidebar */}
+        <div className="flex flex-col lg:flex-row gap-6">
+          {/* Blog Posts Section - Left */}
+          <div className="lg:w-3/4">
+            {/* Desktop: Scrollable Container */}
+            {!isMobile ? (
+              <div
+                ref={containerRef}
+                className="overflow-y-auto blog-scrollbar rounded-lg border border-gray-800 bg-gray-900/30 p-4"
+                style={{
+                  height: "600px",
+                  maxHeight: "calc(100vh)",
+                }}
+              >
+                <div className="grid grid-cols-2 gap-4">
+                  {filteredPosts.map((post) => (
+                    <BlogCard
+                      key={post.id}
+                      post={post}
+                      isHovered={isHovered}
+                      setIsHovered={setIsHovered}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                    />
+                  ))}
+                </div>
+              </div>
+            ) : (
+              /* Mobile: Listed Cards (4 per page) - No Scroll */
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 gap-4">
+                  {currentPosts.map((post) => (
+                    <BlogCard
+                      key={post.id}
+                      post={post}
+                      isHovered={isHovered}
+                      setIsHovered={setIsHovered}
+                      favorites={favorites}
+                      toggleFavorite={toggleFavorite}
+                    />
+                  ))}
+                </div>
+
+                {/* Pagination Controls - Mobile Only */}
+                {totalPages > 1 && (
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                    className="mt-8 flex flex-col items-center justify-center space-y-4"
+                  >
+                    {/* Page Info */}
+                    <div className="text-sm text-gray-400">
+                      Page {currentPage} of {totalPages} • Showing{" "}
+                      {indexOfFirstPost + 1}-
+                      {Math.min(indexOfLastPost, filteredPosts.length)} of{" "}
+                      {filteredPosts.length} posts
+                    </div>
+
+                    {/* Pagination Buttons */}
+                    <div className="flex items-center justify-center space-x-4">
+                      {/* Previous Button */}
+                      <motion.button
+                        onClick={prevPage}
+                        disabled={currentPage === 1}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`p-3 rounded-lg flex items-center gap-2 ${
+                          currentPage === 1
+                            ? "bg-gray-800 text-gray-600 cursor-not-allowed"
+                            : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+                        }`}
+                      >
+                        <ChevronLeft className="w-4 h-4" />
+                        <span className="text-sm font-medium">Previous</span>
+                      </motion.button>
+
+                      {/* Page Numbers */}
+                      <div className="flex items-center space-x-2">
+                        {Array.from(
+                          { length: Math.min(5, totalPages) },
+                          (_, i) => {
+                            let pageNumber;
+                            if (totalPages <= 5) {
+                              pageNumber = i + 1;
+                            } else if (currentPage <= 3) {
+                              pageNumber = i + 1;
+                            } else if (currentPage >= totalPages - 2) {
+                              pageNumber = totalPages - 4 + i;
+                            } else {
+                              pageNumber = currentPage - 2 + i;
+                            }
+
+                            if (pageNumber > 0 && pageNumber <= totalPages) {
+                              return (
+                                <motion.button
+                                  key={pageNumber}
+                                  onClick={() => paginate(pageNumber)}
+                                  whileHover={{ scale: 1.1 }}
+                                  whileTap={{ scale: 0.9 }}
+                                  className={`w-10 h-10 rounded-lg text-sm font-medium transition-all duration-300 ${
+                                    currentPage === pageNumber
+                                      ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                                      : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+                                  }`}
+                                >
+                                  {pageNumber}
+                                </motion.button>
+                              );
+                            }
+                            return null;
+                          }
+                        )}
+                      </div>
+
+                      {/* Next Button */}
+                      <motion.button
+                        onClick={nextPage}
+                        disabled={currentPage === totalPages}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        className={`p-3 rounded-lg flex items-center gap-2 ${
+                          currentPage === totalPages
+                            ? "bg-gray-800 text-gray-600 cursor-not-allowed"
+                            : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+                        }`}
+                      >
+                        <span className="text-sm font-medium">Next</span>
+                        <ChevronRightIcon className="w-4 h-4" />
+                      </motion.button>
+                    </div>
+
+                    {/* Quick Page Navigation */}
+                    <div className="flex items-center gap-2 mt-2">
+                      <span className="text-xs text-gray-500">Go to:</span>
+                      <div className="flex items-center gap-1">
+                        {[1, 2, 3]
+                          .filter((p) => p <= totalPages)
+                          .map(
+                            (page) =>
+                              page !== currentPage && (
+                                <button
+                                  key={page}
+                                  onClick={() => paginate(page)}
+                                  className="px-2 py-1 text-xs text-gray-400 hover:text-emerald-400 transition-colors"
+                                >
+                                  {page}
+                                </button>
+                              )
+                          )}
+                        {totalPages > 3 && (
+                          <>
+                            <span className="text-xs text-gray-600">...</span>
+                            <button
+                              onClick={() => paginate(totalPages)}
+                              className="px-2 py-1 text-xs text-gray-400 hover:text-emerald-400 transition-colors"
+                            >
+                              {totalPages}
+                            </button>
+                          </>
+                        )}
+                      </div>
+                    </div>
+                  </motion.div>
+                )}
+              </div>
+            )}
+          </div>
+
+          {/* Sidebar - Right (Fixed on Desktop, Below on Mobile) */}
+          <div className={`${isMobile ? "mt-8" : "lg:w-1/4"}`}>
+            <div className={`${!isMobile ? "sticky top-6" : ""} space-y-4`}>
+              {/* Popular Products */}
+              <motion.div
+                initial={{ opacity: 0, x: isMobile ? 0 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-4"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <TrendingUp className="w-4 h-4 text-emerald-400" />
+                  <h3 className="text-sm font-bold text-white">
+                    Popular Products
+                  </h3>
+                </div>
+                <div className="space-y-3">
+                  {popularProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700/30 transition-colors duration-300 cursor-pointer"
+                    >
+                      <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="text-xs font-medium text-white truncate">
+                          {product.name}
+                        </h4>
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs text-emerald-400 font-medium">
+                            {product.price}
+                          </span>
+                          <div className="flex items-center gap-1">
+                            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
+                            <span className="text-xs text-gray-400">
+                              {product.rating}
+                            </span>
+                          </div>
+                        </div>
+                        <span className="text-[10px] text-gray-500">
+                          {product.category}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+
+              {/* Featured Tags */}
+              <motion.div
+                initial={{ opacity: 0, x: isMobile ? 0 : 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.6, delay: 0.5 }}
+                className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-4"
+              >
+                <div className="flex items-center gap-2 mb-4">
+                  <Tag className="w-4 h-4 text-emerald-400" />
+                  <h3 className="text-sm font-bold text-white">
+                    Why Choose us
+                  </h3>
+                </div>
+                <ul className="list-disc pl-4 text-gray-300 space-y-1">
+                  {featuredTags.map((tag, index) => (
+                    <li key={index} className="text-sm">
+                      {tag}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Custom Scrollbar Styling */}
+      <style jsx global>{`
+        .blog-scrollbar {
+          scrollbar-width: thin;
+          scrollbar-color: #10b981 transparent;
+        }
+        .blog-scrollbar::-webkit-scrollbar {
+          width: 8px;
+        }
+        .blog-scrollbar::-webkit-scrollbar-track {
+          background: rgba(255, 255, 255, 0.05);
+          border-radius: 4px;
+          margin: 4px;
+        }
+        .blog-scrollbar::-webkit-scrollbar-thumb {
+          background: linear-gradient(to bottom, #10b981, #059669);
+          border-radius: 4px;
+        }
+        .blog-scrollbar::-webkit-scrollbar-thumb:hover {
+          background: linear-gradient(to bottom, #059669, #047857);
+        }
+      `}</style>
+    </section>
+  );
+}
+
+// Blog Card Component
+const BlogCard = ({
+  post,
+  isHovered,
+  setIsHovered,
+  favorites,
+  toggleFavorite,
+}) => (
+  <motion.div
+    initial={{ opacity: 0, scale: 0.95 }}
+    animate={{ opacity: 1, scale: 1 }}
+    transition={{ duration: 0.3 }}
+    whileHover={{
+      scale: 1.02,
+      y: -3,
+    }}
+    onMouseEnter={() => setIsHovered(post.id)}
+    onMouseLeave={() => setIsHovered(null)}
+    className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer"
+    style={{ height: "300px" }}
+  >
+    {/* Full Image Background */}
+    <div className="absolute inset-0 overflow-hidden">
+      <motion.img
+        src={post.image}
+        alt={post.title}
+        className="w-full h-full object-cover"
+        animate={{
+          scale: isHovered === post.id ? 1.1 : 1,
+        }}
+        transition={{ duration: 0.7 }}
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
+    </div>
+
+    {/* Hover Overlay - Shows Title & Info */}
+    <div className="absolute inset-0 bg-gradient-to-t from-black via-black/90 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 p-6 flex flex-col justify-end">
+      {/* Post Info - Visible on Hover */}
+      <div className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
+        {/* Category & Date */}
+        <div className="flex items-center justify-between mb-4">
+          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium">
+            {post.category}
+          </span>
+          <div className="flex items-center gap-2">
+            <Calendar className="w-3 h-3 text-gray-400" />
+            <span className="text-xs text-gray-300">{post.date}</span>
+          </div>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
+          {post.title}
+        </h3>
+
+        {/* Excerpt */}
+        <p className="text-gray-300 text-sm mb-4 line-clamp-2">
+          {post.excerpt}
+        </p>
+
+        {/* Author & Stats */}
+        <div className="flex items-center justify-between">
+          <div className="flex items-center gap-2">
+            <User className="w-3 h-3 text-emerald-400" />
+            <span className="text-xs text-gray-300">{post.author}</span>
+          </div>
+          <div className="flex items-center gap-4">
+            <div className="flex items-center gap-1">
+              <Eye className="w-3 h-3 text-gray-400" />
+              <span className="text-xs text-gray-300">{post.views}</span>
+            </div>
+            <div className="flex items-center gap-1">
+              <MessageCircle className="w-3 h-3 text-gray-400" />
+              <span className="text-xs text-gray-300">{post.comments}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* Floating Badge - Always Visible */}
+    <div className="absolute top-4 left-4">
+      <div className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
+        <span className="text-xs font-medium text-white">{post.category}</span>
+      </div>
+    </div>
+
+    {/* Favorite Button */}
+    <motion.button
+      onClick={(e) => {
+        e.stopPropagation();
+        toggleFavorite(post.id);
+      }}
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="absolute top-4 right-4 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/10"
+    >
+      <Heart
+        className={`w-4 h-4 transition-colors duration-300 ${
+          favorites.includes(post.id)
+            ? "fill-rose-500 text-rose-500"
+            : "text-gray-300 group-hover:text-rose-400"
+        }`}
+      />
+    </motion.button>
+
+    {/* Bottom Info - Minimal, Always Visible */}
+    <div className="absolute bottom-4 left-4 right-4">
+      <div className="flex items-center justify-between">
+        <div className="flex items-center gap-2">
+          <Clock className="w-3 h-3 text-emerald-400" />
+          <span className="text-xs text-gray-300">{post.readTime}</span>
+        </div>
+        <motion.button
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+          className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+        >
+          <span>Read More</span>
+          <ArrowRight className="w-3 h-3" />
+        </motion.button>
+      </div>
+    </div>
+
+    {/* Tags - Appear on Hover */}
+    <div className="absolute bottom-16 left-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+      <div className="flex flex-wrap gap-1">
+        {post.tags.slice(0, 2).map((tag, idx) => (
+          <span
+            key={idx}
+            className="px-2 py-1 text-[10px] text-gray-300 bg-black/40 backdrop-blur-sm rounded border border-white/10"
+          >
+            #{tag}
+          </span>
+        ))}
+      </div>
+    </div>
+  </motion.div>
+);
+
+// Helper component for star rating
+const Star = ({ className }) => (
+  <svg className={className} viewBox="0 0 20 20" fill="currentColor">
+    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+  </svg>
+);
