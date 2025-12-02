@@ -1,0 +1,694 @@
+"use client";
+
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import {
+  ChevronLeft,
+  ChevronRight,
+  X,
+  ZoomIn,
+  ZoomOut,
+  Maximize2,
+  Heart,
+  Share2,
+  Calendar,
+  Clock,
+  Users,
+  Award,
+  CheckCircle,
+  Star,
+  ArrowRight,
+  ShoppingCart,
+  Tag,
+  MapPin,
+  Phone,
+  Mail,
+  Globe,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+  Youtube,
+} from "lucide-react";
+
+// Mock data for the service - you can replace this with actual data from props/API
+const serviceData = {
+  id: 1,
+  title: "Web Development",
+  category: "Technology",
+  description:
+    "Custom websites and web applications built with modern frameworks for optimal performance and scalability. We create digital experiences that drive business growth and engage users effectively.",
+  longDescription: `
+    Our web development services are designed to transform your business ideas into powerful digital solutions. We specialize in creating responsive, high-performance websites and web applications using cutting-edge technologies like React, Next.js, and Node.js.
+
+    <h3>What We Offer:</h3>
+    <ul>
+      <li>Custom website design and development</li>
+      <li>E-commerce solutions with seamless payment integration</li>
+      <li>Progressive Web Apps (PWAs) for mobile-like experience</li>
+      <li>API development and integration</li>
+      <li>Website maintenance and support</li>
+      <li>Performance optimization and SEO</li>
+    </ul>
+
+    <h3>Our Process:</h3>
+    <p>We follow an agile development methodology to ensure transparency and timely delivery. From initial consultation to deployment and beyond, we work closely with you to achieve your business objectives.</p>
+  `,
+  mainImage:
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+  images: [
+    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
+  ],
+  price: "$5,000 - $50,000",
+  duration: "4-12 weeks",
+  teamSize: "3-8 members",
+  rating: 4.8,
+  reviews: 124,
+  features: [
+    "Responsive Design",
+    "SEO Optimized",
+    "Fast Loading",
+    "Secure Hosting",
+    "24/7 Support",
+    "Custom CMS",
+    "Mobile First",
+    "Analytics Integration",
+  ],
+  tags: [
+    "React",
+    "Next.js",
+    "Node.js",
+    "TypeScript",
+    "Tailwind CSS",
+    "MongoDB",
+  ],
+  status: "Available",
+  location: "Worldwide",
+  createdAt: "2024-01-15",
+  updatedAt: "2024-03-20",
+};
+
+const relatedServices = [
+  {
+    id: 2,
+    title: "UI/UX Design",
+    image:
+      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=400&q=80",
+    description: "User-centered design solutions",
+    price: "$3,000 - $25,000",
+    rating: 4.7,
+  },
+  {
+    id: 3,
+    title: "Mobile Apps",
+    image:
+      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=80",
+    description: "Cross-platform mobile applications",
+    price: "$10,000 - $80,000",
+    rating: 4.9,
+  },
+  {
+    id: 4,
+    title: "E-commerce Solutions",
+    image:
+      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80",
+    description: "Custom online store platforms",
+    price: "$8,000 - $60,000",
+    rating: 4.8,
+  },
+];
+
+const relatedProducts = [
+  {
+    id: 1,
+    name: "Enterprise CMS",
+    description: "Scalable content management system",
+    price: "$4,999",
+    rating: 4.9,
+    image:
+      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w-100&q=80",
+  },
+  {
+    id: 2,
+    name: "SEO Toolkit",
+    description: "Complete SEO optimization package",
+    price: "$2,499",
+    rating: 4.7,
+    image:
+      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=100&q=80",
+  },
+  {
+    id: 3,
+    name: "Analytics Dashboard",
+    description: "Real-time business intelligence",
+    price: "$3,999",
+    rating: 4.8,
+    image:
+      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100&q=80",
+  },
+];
+
+export default function ServiceDetails() {
+  // State for zoom functionality
+  const [zoomLevel, setZoomLevel] = useState(1);
+  const [isZoomed, setIsZoomed] = useState(false);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  // State for image gallery
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [lightboxOpen, setLightboxOpen] = useState(false);
+
+  // State for favorites
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  // Ref for zoom container
+  const zoomContainerRef = useRef(null);
+
+  // Handle zoom in/out
+  const handleZoomIn = () => {
+    setZoomLevel((prev) => Math.min(prev + 0.5, 3));
+    setIsZoomed(true);
+  };
+
+  const handleZoomOut = () => {
+    setZoomLevel((prev) => Math.max(prev - 0.5, 1));
+    if (zoomLevel <= 1.5) setIsZoomed(false);
+  };
+
+  const handleResetZoom = () => {
+    setZoomLevel(1);
+    setIsZoomed(false);
+    setPosition({ x: 0, y: 0 });
+  };
+
+  // Handle mouse move for panning when zoomed
+  const handleMouseMove = (e) => {
+    if (!isZoomed || !zoomContainerRef.current) return;
+
+    const container = zoomContainerRef.current;
+    const rect = container.getBoundingClientRect();
+    const x = ((e.clientX - rect.left) / rect.width) * 100;
+    const y = ((e.clientY - rect.top) / rect.height) * 100;
+
+    setPosition({ x, y });
+  };
+
+  // Image gallery navigation
+  const nextImage = () => {
+    setCurrentImageIndex((prev) => (prev + 1) % serviceData.images.length);
+  };
+
+  const prevImage = () => {
+    setCurrentImageIndex((prev) =>
+      prev === 0 ? serviceData.images.length - 1 : prev - 1
+    );
+  };
+
+  // Open lightbox
+  const openLightbox = (index) => {
+    setCurrentImageIndex(index);
+    setLightboxOpen(true);
+    document.body.style.overflow = "hidden";
+  };
+
+  // Close lightbox
+  const closeLightbox = () => {
+    setLightboxOpen(false);
+    document.body.style.overflow = "auto";
+  };
+
+  // Handle keyboard navigation
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (!lightboxOpen) return;
+
+      if (e.key === "Escape") closeLightbox();
+      if (e.key === "ArrowRight") nextImage();
+      if (e.key === "ArrowLeft") prevImage();
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [lightboxOpen]);
+
+  // Format date
+  const formatDate = (dateString) => {
+    return new Date(dateString).toLocaleDateString("en-US", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });
+  };
+
+  // Render stars
+  const renderStars = (rating) => {
+    return (
+      <div className="flex items-center gap-1">
+        {[...Array(5)].map((_, i) => (
+          <Star
+            key={i}
+            className={`w-4 h-4 ${
+              i < Math.floor(rating)
+                ? "fill-yellow-400 text-yellow-400"
+                : "fill-gray-700 text-gray-700"
+            }`}
+          />
+        ))}
+        <span className="ml-2 text-sm text-gray-300">{rating.toFixed(1)}</span>
+      </div>
+    );
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white">
+      {/* Main Content */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Left Column - Main Content */}
+          <div className="lg:w-2/3">
+            {/* Breadcrumb */}
+            <nav className="mb-6">
+              <ol className="flex items-center space-x-2 text-sm text-gray-400">
+                <li>
+                  <a href="/" className="hover:text-white transition-colors">
+                    Home
+                  </a>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4" />
+                </li>
+                <li>
+                  <a
+                    href="/services"
+                    className="hover:text-white transition-colors"
+                  >
+                    Services
+                  </a>
+                </li>
+                <li>
+                  <ChevronRight className="w-4 h-4" />
+                </li>
+                <li className="text-white">{serviceData.title}</li>
+              </ol>
+            </nav>
+
+            {/* Main Image with Zoom */}
+            <div className="mb-8">
+              <div className="relative bg-gray-800 rounded-2xl overflow-hidden border border-gray-700">
+                {/* Zoom Controls */}
+                <div className="absolute top-4 right-4 z-10 flex items-center gap-2">
+                  <button
+                    onClick={handleZoomOut}
+                    disabled={zoomLevel <= 1}
+                    className="p-2 bg-black/50 backdrop-blur-sm rounded-lg hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  >
+                    <ZoomOut className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={handleZoomIn}
+                    disabled={zoomLevel >= 3}
+                    className="p-2 bg-black/50 backdrop-blur-sm rounded-lg hover:bg-black/70 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                  >
+                    <ZoomIn className="w-5 h-5" />
+                  </button>
+                  {isZoomed && (
+                    <button
+                      onClick={handleResetZoom}
+                      className="p-2 bg-black/50 backdrop-blur-sm rounded-lg hover:bg-black/70 transition-all"
+                    >
+                      <Maximize2 className="w-5 h-5" />
+                    </button>
+                  )}
+                </div>
+
+                {/* Zoom Container */}
+                <div
+                  ref={zoomContainerRef}
+                  className="relative w-full h-[500px] overflow-hidden cursor-zoom-in"
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={() => isZoomed && handleResetZoom()}
+                  onClick={() => openLightbox(0)}
+                >
+                  <motion.div
+                    className="w-full h-full"
+                    animate={{
+                      scale: zoomLevel,
+                      x: isZoomed ? `calc(50% - ${position.x}%)` : 0,
+                      y: isZoomed ? `calc(50% - ${position.y}%)` : 0,
+                    }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <img
+                      src={serviceData.images[currentImageIndex]}
+                      alt={serviceData.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+
+                  {/* Zoom Overlay Instructions */}
+                  {isZoomed && (
+                    <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg text-sm">
+                      Drag to pan • Click to reset
+                    </div>
+                  )}
+                </div>
+
+                {/* Image Gallery Thumbnails */}
+                <div className="p-4 bg-gray-900/50">
+                  <div className="flex items-center gap-4 overflow-x-auto pb-2">
+                    {serviceData.images.map((img, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentImageIndex(index)}
+                        className={`flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2 transition-all ${
+                          currentImageIndex === index
+                            ? "border-blue-500 ring-2 ring-blue-500/30"
+                            : "border-transparent hover:border-gray-600"
+                        }`}
+                      >
+                        <img
+                          src={img}
+                          alt={`Thumbnail ${index + 1}`}
+                          className="w-full h-full object-cover"
+                        />
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Service Header */}
+            <div className="mb-8">
+              <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
+                <div>
+                  <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium mb-2">
+                    {serviceData.category}
+                  </span>
+                  <h1 className="text-4xl font-bold mb-2">
+                    {serviceData.title}
+                  </h1>
+                  <div className="flex items-center gap-4 text-gray-400">
+                    <span className="flex items-center gap-1">
+                      <Calendar className="w-4 h-4" />
+                      {formatDate(serviceData.createdAt)}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Clock className="w-4 h-4" />
+                      {serviceData.duration}
+                    </span>
+                    <span className="flex items-center gap-1">
+                      <Users className="w-4 h-4" />
+                      {serviceData.teamSize}
+                    </span>
+                  </div>
+                </div>
+
+                <div className="flex items-center gap-3">
+                  <button
+                    onClick={() => setIsFavorite(!isFavorite)}
+                    className={`p-3 rounded-full border transition-all ${
+                      isFavorite
+                        ? "bg-red-500/20 border-red-500/50 text-red-400"
+                        : "bg-gray-800 border-gray-700 hover:bg-gray-700"
+                    }`}
+                  >
+                    <Heart
+                      className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
+                    />
+                  </button>
+                  <button className="p-3 rounded-full bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-all">
+                    <Share2 className="w-5 h-5" />
+                  </button>
+                </div>
+              </div>
+
+              {/* Rating and Price */}
+              <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-gray-800/50 rounded-xl">
+                <div>
+                  {renderStars(serviceData.rating)}
+                  <p className="text-sm text-gray-400 mt-1">
+                    {serviceData.reviews} reviews
+                  </p>
+                </div>
+                <div className="text-right">
+                  <div className="text-3xl font-bold text-white">
+                    {serviceData.price}
+                  </div>
+                  <p className="text-sm text-gray-400">Starting from</p>
+                </div>
+              </div>
+            </div>
+
+            {/* Service Description */}
+            <div className="mb-8">
+              <h2 className="text-2xl font-bold mb-4">Description</h2>
+              <div className="prose prose-invert max-w-none">
+                <p className="text-gray-300 mb-6">{serviceData.description}</p>
+                <div
+                  className="text-gray-300"
+                  dangerouslySetInnerHTML={{
+                    __html: serviceData.longDescription,
+                  }}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Right Column - Sidebar */}
+          <div className="lg:w-1/3">
+            <div className="sticky top-24 space-y-6">
+              {/* Related Services */}
+              <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                  <Tag className="w-5 h-5 text-blue-400" />
+                  Related Services
+                </h3>
+                <div className="space-y-4">
+                  {relatedServices.map((service) => (
+                    <a
+                      key={service.id}
+                      href={`/services/${service.id}`}
+                      className="group block"
+                    >
+                      <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
+                        <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
+                          <img
+                            src={service.image}
+                            alt={service.title}
+                            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
+                            {service.title}
+                          </h4>
+                          <p className="text-sm text-gray-400 truncate">
+                            {service.description}
+                          </p>
+                          <div className="flex items-center justify-between mt-2">
+                            <div className="flex items-center gap-1">
+                              <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                              <span className="text-sm text-gray-300">
+                                {service.rating}
+                              </span>
+                            </div>
+                            <span className="text-sm font-medium text-blue-400">
+                              {service.price}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </a>
+                  ))}
+                </div>
+                <a
+                  href="/services"
+                  className="mt-6 block text-center py-3 text-gray-400 hover:text-white transition-colors"
+                >
+                  View All Services →
+                </a>
+              </div>
+
+              {/* Related Products */}
+              <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
+                  <ShoppingCart className="w-5 h-5 text-green-400" />
+                  Related Products
+                </h3>
+                <div className="space-y-4">
+                  {relatedProducts.map((product) => (
+                    <div
+                      key={product.id}
+                      className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all"
+                    >
+                      <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden">
+                        <img
+                          src={product.image}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-white truncate">
+                          {product.name}
+                        </h4>
+                        <p className="text-xs text-gray-400 truncate">
+                          {product.description}
+                        </p>
+                        <div className="flex items-center justify-between mt-1">
+                          <div className="flex items-center gap-1">
+                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
+                            <span className="text-xs text-gray-300">
+                              {product.rating}
+                            </span>
+                          </div>
+                          <span className="text-sm font-medium text-green-400">
+                            {product.price}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <button className="mt-6 w-full py-3 bg-gray-700/50 hover:bg-gray-700 rounded-xl transition-colors">
+                  View All Products
+                </button>
+              </div>
+
+              {/* Social Share */}
+              <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
+                <h3 className="text-xl font-bold mb-6">Share This Service</h3>
+                <div className="flex items-center justify-center gap-4">
+                  {[
+                    { icon: Facebook, color: "bg-blue-600", label: "Facebook" },
+                    { icon: Twitter, color: "bg-sky-500", label: "Twitter" },
+                    { icon: Linkedin, color: "bg-blue-700", label: "LinkedIn" },
+                    {
+                      icon: Instagram,
+                      color: "bg-pink-600",
+                      label: "Instagram",
+                    },
+                    { icon: Youtube, color: "bg-red-600", label: "YouTube" },
+                  ].map((social) => (
+                    <button
+                      key={social.label}
+                      className={`p-3 ${social.color} rounded-full hover:opacity-90 transition-opacity`}
+                      aria-label={`Share on ${social.label}`}
+                    >
+                      <social.icon className="w-5 h-5" />
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* Quick Contact */}
+              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-6">
+                <h3 className="text-xl font-bold mb-4">Need Help?</h3>
+                <p className="text-gray-300 mb-6">
+                  Have questions about this service? Our team is here to help!
+                </p>
+                <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-xl font-medium transition-colors">
+                  Contact Sales Team
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Lightbox Modal */}
+      <AnimatePresence>
+        {lightboxOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 bg-black/90 backdrop-blur-sm flex items-center justify-center p-4"
+            onClick={closeLightbox}
+          >
+            {/* Close Button */}
+            <button
+              className="absolute top-6 right-6 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-all z-10"
+              onClick={closeLightbox}
+            >
+              <X className="w-6 h-6" />
+            </button>
+
+            {/* Navigation Buttons */}
+            <button
+              className="absolute left-6 top-1/2 transform -translate-y-1/2 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-all z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                prevImage();
+              }}
+            >
+              <ChevronLeft className="w-6 h-6" />
+            </button>
+
+            <button
+              className="absolute right-6 top-1/2 transform -translate-y-1/2 p-3 bg-black/50 rounded-full hover:bg-black/70 transition-all z-10"
+              onClick={(e) => {
+                e.stopPropagation();
+                nextImage();
+              }}
+            >
+              <ChevronRight className="w-6 h-6" />
+            </button>
+
+            {/* Current Image Index */}
+            <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg text-sm">
+              {currentImageIndex + 1} / {serviceData.images.length}
+            </div>
+
+            {/* Main Image */}
+            <motion.div
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.9, opacity: 0 }}
+              className="relative max-w-4xl max-h-[80vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <img
+                src={serviceData.images[currentImageIndex]}
+                alt={`Gallery ${currentImageIndex + 1}`}
+                className="max-w-full max-h-[80vh] object-contain rounded-lg"
+              />
+            </motion.div>
+
+            {/* Thumbnails */}
+            <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex items-center gap-2">
+              {serviceData.images.map((img, index) => (
+                <button
+                  key={index}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setCurrentImageIndex(index);
+                  }}
+                  className={`w-12 h-12 rounded-lg overflow-hidden border-2 transition-all ${
+                    currentImageIndex === index
+                      ? "border-white"
+                      : "border-transparent hover:border-gray-600"
+                  }`}
+                >
+                  <img
+                    src={img}
+                    alt={`Thumbnail ${index + 1}`}
+                    className="w-full h-full object-cover"
+                  />
+                </button>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  );
+}
