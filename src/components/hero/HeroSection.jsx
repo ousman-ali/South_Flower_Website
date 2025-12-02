@@ -67,21 +67,51 @@ const heroSlides = [
   },
 ];
 
+// Deterministic particle positions - same on server and client
+const particlePositions = [
+  { left: "42.9%", top: "10.2%" },
+  { left: "94.3%", top: "95.5%" },
+  { left: "56.7%", top: "26.3%" },
+  { left: "98.2%", top: "65.1%" },
+  { left: "15.7%", top: "66.9%" },
+  { left: "86.9%", top: "73.0%" },
+  { left: "6.3%", top: "17.4%" },
+  { left: "97.4%", top: "0.1%" },
+  { left: "89.6%", top: "18.2%" },
+  { left: "62.1%", top: "4.1%" },
+  { left: "90.4%", top: "83.1%" },
+  { left: "7.2%", top: "62.1%" },
+  { left: "5.3%", top: "65.7%" },
+  { left: "60.4%", top: "12.9%" },
+  { left: "91.3%", top: "9.3%" },
+  { left: "99.2%", top: "13.2%" },
+  { left: "51.0%", top: "99.9%" },
+  { left: "51.1%", top: "89.4%" },
+  { left: "64.9%", top: "20.6%" },
+  { left: "89.7%", top: "47.5%" },
+];
+
 export default function HeroSection() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
+  const [isMounted, setIsMounted] = useState(false);
+
+  // Set mounted state after component mounts on client
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   // Auto slide every 8 seconds
   useEffect(() => {
-    if (!isAutoPlaying || isPaused) return;
+    if (!isAutoPlaying || isPaused || !isMounted) return;
 
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [isAutoPlaying, isPaused]);
+  }, [isAutoPlaying, isPaused, isMounted]);
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
@@ -100,6 +130,66 @@ export default function HeroSection() {
   const togglePlay = () => {
     setIsPaused(!isPaused);
   };
+
+  // Don't render animated content until mounted
+  if (!isMounted) {
+    return (
+      <section className="relative min-h-screen overflow-hidden bg-gradient-to-br from-gray-900 to-black">
+        {/* Simple loading state with just the first slide */}
+        <div className="absolute inset-0">
+          <div
+            className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${heroSlides[0].image})` }}
+          />
+          <div
+            className={`absolute inset-0 bg-gradient-to-br ${heroSlides[0].color}`}
+          />
+          <div className="absolute inset-0 bg-black/30" />
+        </div>
+        <div className="relative z-10 h-screen flex items-center justify-center">
+          <div className="max-w-7xl mx-auto px-6 w-full">
+            <div className="grid lg:grid-cols-2 gap-12 items-center">
+              <div className="text-white">
+                <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg">
+                  <Sparkles className="w-5 h-5 text-yellow-300" />
+                  <span className="text-sm font-semibold">
+                    {heroSlides[0].subtitle}
+                  </span>
+                  <Star className="w-5 h-5 text-yellow-300" />
+                </div>
+                <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+                  {heroSlides[0].title}
+                </h1>
+                <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mb-10">
+                  {heroSlides[0].description}
+                </p>
+                <div className="flex items-center gap-4 mb-12">
+                  <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
+                    {heroSlides[0].icon}
+                  </div>
+                  <div>
+                    <div className="text-2xl md:text-3xl font-bold">
+                      {heroSlides[0].stats}
+                    </div>
+                    <div className="text-gray-300">Trusted Worldwide</div>
+                  </div>
+                </div>
+              </div>
+              <div className="space-y-6">
+                <button className="w-[50%] px-8 py-5 bg-white text-gray-900 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3">
+                  <span className="text-lg">Start Your Project</span>
+                  <ArrowRight className="w-6 h-6" />
+                </button>
+                <button className="w-[50%] px-8 py-5 bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm">
+                  Explore Our Services
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="relative min-h-screen overflow-hidden">
@@ -139,24 +229,24 @@ export default function HeroSection() {
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Floating Particles */}
-        {[...Array(20)].map((_, i) => (
+        {particlePositions.map((pos, i) => (
           <motion.div
             key={i}
             className="absolute w-2 h-2 rounded-full bg-white/20"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: pos.left,
+              top: pos.top,
             }}
             animate={{
               y: [0, -30, 0],
-              x: [0, Math.random() * 40 - 20, 0],
+              x: [0, (i % 3) * 10 - 10, 0], // Deterministic x movement
               scale: [1, 1.5, 1],
               opacity: [0, 1, 0],
             }}
             transition={{
-              duration: Math.random() * 10 + 10,
+              duration: (i % 10) + 10, // Deterministic duration
               repeat: Infinity,
-              delay: Math.random() * 5,
+              delay: (i % 5) * 0.5, // Deterministic delay
             }}
           />
         ))}
