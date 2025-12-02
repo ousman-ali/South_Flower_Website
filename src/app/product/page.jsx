@@ -2,6 +2,7 @@
 
 import Breadcrumb from "@/components/breadcrumb/BreadCrumb";
 import CTACard from "@/components/cta/CtaSection";
+import ProductSection1 from "@/components/products/ProductSection1";
 import ServicesSection1 from "@/components/services/ServiceSection1";
 
 export default function AboutPage() {
@@ -13,6 +14,7 @@ export default function AboutPage() {
         pageName="Our Products"
         currentPage="South Flower Products"
       />
+      <ProductSection1 />
       <CTACard />
     </div>
   );
