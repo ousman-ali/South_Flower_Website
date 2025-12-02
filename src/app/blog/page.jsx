@@ -9,11 +9,10 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       {/* Breadcrumb Component */}
       <Breadcrumb
-        pageTitle="Services"
-        pageName="Our Services"
-        currentPage="South Flower Services"
+        pageTitle="Blog"
+        pageName="Our Blog Posts"
+        currentPage="South Flower Posts"
       />
-      <ServicesSection1 />
       <CTACard />
     </div>
   );

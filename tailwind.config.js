@@ -16,6 +16,20 @@ module.exports = {
           light: "#F4F6F8",
         },
       },
+      animation: {
+        float: "float 2s ease-in-out infinite",
+        "spin-slow": "spin 3s linear infinite",
+        "ping-slow": "ping 2s cubic-bezier(0, 0, 0.2, 1) infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-10px)" },
+        },
+      },
+      transitionTimingFunction: {
+        "out-expo": "cubic-bezier(0.19, 1, 0.22, 1)",
+      },
     },
   },
   plugins: [],
