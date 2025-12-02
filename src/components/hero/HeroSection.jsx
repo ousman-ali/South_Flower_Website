@@ -216,116 +216,125 @@ export default function HeroSection() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 h-screen flex items-center">
+      <div className="relative z-10 h-screen flex items-center justify-center ml-10">
         <div className="max-w-7xl mx-auto px-6 w-full">
-          <AnimatePresence mode="wait">
-            {heroSlides.map(
-              (slide, index) =>
-                currentSlide === index && (
-                  <motion.div
-                    key={slide.id}
-                    initial={{ opacity: 0, y: 50 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -50 }}
-                    transition={{ duration: 0.8, delay: 0.2 }}
-                    className="text-white"
-                  >
-                    {/* Badge */}
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            {/* Left Side - Content */}
+            <AnimatePresence mode="wait">
+              {heroSlides.map(
+                (slide, index) =>
+                  currentSlide === index && (
                     <motion.div
-                      initial={{ scale: 0, rotate: -180 }}
-                      animate={{ scale: 1, rotate: 0 }}
-                      transition={{ type: "spring", duration: 0.8, delay: 0.3 }}
-                      className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+                      key={slide.id}
+                      initial={{ opacity: 0, x: -50 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: 50 }}
+                      transition={{ duration: 0.8, delay: 0.2 }}
+                      className="text-white"
                     >
-                      <Sparkles className="w-5 h-5 text-yellow-300" />
-                      <span className="text-sm font-semibold">
-                        {slide.subtitle}
-                      </span>
-                      <Star className="w-5 h-5 text-yellow-300" />
-                    </motion.div>
+                      {/* Badge */}
+                      <motion.div
+                        initial={{ scale: 0, rotate: -180 }}
+                        animate={{ scale: 1, rotate: 0 }}
+                        transition={{
+                          type: "spring",
+                          duration: 0.8,
+                          delay: 0.3,
+                        }}
+                        className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg"
+                      >
+                        <Sparkles className="w-5 h-5 text-yellow-300" />
+                        <span className="text-sm font-semibold">
+                          {slide.subtitle}
+                        </span>
+                        <Star className="w-5 h-5 text-yellow-300" />
+                      </motion.div>
 
-                    {/* Title */}
-                    <h1 className="text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-tight mb-6">
-                      {slide.title.split(" ").map((word, wordIndex) => (
-                        <motion.span
-                          key={wordIndex}
-                          initial={{ opacity: 0, y: 30 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          transition={{
-                            duration: 0.5,
-                            delay: 0.4 + wordIndex * 0.1,
-                          }}
-                          className="inline-block mr-4"
-                        >
-                          {word}
-                        </motion.span>
-                      ))}
-                    </h1>
+                      {/* Title */}
+                      <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+                        {slide.title.split(" ").map((word, wordIndex) => (
+                          <motion.span
+                            key={wordIndex}
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{
+                              duration: 0.5,
+                              delay: 0.4 + wordIndex * 0.1,
+                            }}
+                            className="inline-block mr-4"
+                          >
+                            {word}
+                          </motion.span>
+                        ))}
+                      </h1>
 
-                    {/* Description */}
-                    <motion.p
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.8, delay: 0.8 }}
-                      className="text-xl md:text-2xl text-gray-200 leading-relaxed max-w-3xl mb-10"
-                    >
-                      {slide.description}
-                    </motion.p>
+                      {/* Description */}
+                      <motion.p
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8, delay: 0.8 }}
+                        className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mb-10"
+                      >
+                        {slide.description}
+                      </motion.p>
 
-                    {/* Stats & CTA */}
-                    <div className="flex flex-col md:flex-row items-start md:items-center gap-8">
                       {/* Stats */}
                       <motion.div
                         initial={{ opacity: 0, x: -20 }}
                         animate={{ opacity: 1, x: 0 }}
                         transition={{ duration: 0.8, delay: 1 }}
-                        className="flex items-center gap-4"
+                        className="flex items-center gap-4 mb-12"
                       >
                         <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
                           {slide.icon}
                         </div>
                         <div>
-                          <div className="text-3xl font-bold">
+                          <div className="text-2xl md:text-3xl font-bold">
                             {slide.stats}
                           </div>
                           <div className="text-gray-300">Trusted Worldwide</div>
                         </div>
                       </motion.div>
+                    </motion.div>
+                  )
+              )}
+            </AnimatePresence>
 
-                      {/* CTA Buttons */}
-                      <motion.div
-                        initial={{ opacity: 0, x: 20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 1.2 }}
-                        className="flex flex-wrap gap-4"
-                      >
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="px-8 py-4 bg-white text-gray-900 font-semibold rounded-xl shadow-2xl flex items-center gap-3 group hover:shadow-3xl transition-all"
-                        >
-                          <span>Get Started</span>
-                          <motion.span
-                            animate={{ x: [0, 5, 0] }}
-                            transition={{ duration: 1.5, repeat: Infinity }}
-                          >
-                            <ArrowRight className="w-5 h-5" />
-                          </motion.span>
-                        </motion.button>
+            {/* Right Side - CTA Buttons */}
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 1.2 }}
+              className="space-y-6"
+            >
+              {/* Main CTA Button */}
+              <motion.button
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0 20px 40px rgba(255, 255, 255, 0.2)",
+                }}
+                whileTap={{ scale: 0.95 }}
+                className="w-[50%] px-8 py-5 bg-white text-gray-900 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3 group hover:shadow-3xl transition-all"
+              >
+                <span className="text-lg">Start Your Project</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-6 h-6" />
+                </motion.span>
+              </motion.button>
 
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="px-8 py-4 bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-all"
-                        >
-                          View Portfolio
-                        </motion.button>
-                      </motion.div>
-                    </div>
-                  </motion.div>
-                )
-            )}
-          </AnimatePresence>
+              {/* Secondary CTA Button */}
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-[50%] px-8 py-5 bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-all"
+              >
+                Explore Our Services
+              </motion.button>
+            </motion.div>
+          </div>
         </div>
       </div>
 
@@ -396,11 +405,106 @@ export default function HeroSection() {
         </div>
       </div>
 
+      {/* Stunning Footer Shape */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        {/* Main Wave Shape */}
+        <svg
+          className="w-full h-32 md:h-48"
+          viewBox="0 0 1440 320"
+          preserveAspectRatio="none"
+        >
+          <defs>
+            <linearGradient id="waveGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop
+                offset="0%"
+                style={{ stopColor: "#3b82f6", stopOpacity: 1 }}
+              />
+              <stop
+                offset="50%"
+                style={{ stopColor: "#8b5cf6", stopOpacity: 1 }}
+              />
+              <stop
+                offset="100%"
+                style={{ stopColor: "#ec4899", stopOpacity: 1 }}
+              />
+            </linearGradient>
+          </defs>
+
+          <motion.path
+            d="M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,122.7C960,107,1056,117,1152,138.7C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
+            fill="url(#waveGradient)"
+            animate={{
+              d: [
+                "M0,224L48,213.3C96,203,192,181,288,181.3C384,181,480,203,576,192C672,181,768,139,864,122.7C960,107,1056,117,1152,138.7C1248,160,1344,192,1392,208L1440,224L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,256L48,250.7C96,245,192,235,288,224C384,213,480,203,576,192C672,181,768,171,864,154.7C960,139,1056,117,1152,122.7C1248,128,1344,160,1392,176L1440,192L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+                "M0,192L48,176C96,160,192,128,288,133.3C384,139,480,181,576,192C672,203,768,181,864,165.3C960,149,1056,139,1152,154.7C1248,171,1344,213,1392,234.7L1440,256L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z",
+              ],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          />
+        </svg>
+
+        {/* Floating Orbs Above Wave */}
+        <motion.div
+          className="absolute -top-6 left-1/4 w-12 h-12 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full blur-sm"
+          animate={{
+            y: [0, -20, 0],
+            scale: [1, 1.2, 1],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+        />
+        <motion.div
+          className="absolute -top-4 left-1/2 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-400 rounded-full blur-sm"
+          animate={{
+            y: [0, -15, 0],
+            scale: [1, 1.3, 1],
+          }}
+          transition={{
+            duration: 3,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 0.5,
+          }}
+        />
+        <motion.div
+          className="absolute -top-8 right-1/4 w-10 h-10 bg-gradient-to-r from-cyan-500 to-blue-400 rounded-full blur-sm"
+          animate={{
+            y: [0, -25, 0],
+            scale: [1, 1.1, 1],
+          }}
+          transition={{
+            duration: 5,
+            repeat: Infinity,
+            ease: "easeInOut",
+            delay: 1,
+          }}
+        />
+      </div>
+
+      {/* Progress Bar */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 z-20 bg-white/10">
+        <motion.div
+          key={currentSlide}
+          className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
+          initial={{ width: "0%" }}
+          animate={{ width: "100%" }}
+          transition={{ duration: 8, ease: "linear" }}
+        />
+      </div>
+
       {/* Scroll Indicator */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-8 right-8 z-20 hidden md:block"
+        className="absolute bottom-32 right-8 z-20 hidden md:block"
       >
         <div className="flex flex-col items-center gap-2">
           <span className="text-sm text-white/80">Scroll</span>
@@ -417,17 +521,6 @@ export default function HeroSection() {
           </div>
         </div>
       </motion.div>
-
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 bg-white/10">
-        <motion.div
-          key={currentSlide}
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 8, ease: "linear" }}
-        />
-      </div>
     </section>
   );
 }
