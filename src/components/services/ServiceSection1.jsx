@@ -23,6 +23,7 @@ import {
   ExternalLink,
   Tag,
 } from "lucide-react";
+import styles from "./service.module.css";
 
 export default function ServicesSection1() {
   const [activeService, setActiveService] = useState(0);
@@ -414,46 +415,12 @@ export default function ServicesSection1() {
               // Desktop - MANUALLY Scrollable Cards with Custom Scrollbar
               <div
                 ref={scrollContainerRef}
-                className="grid grid-cols-1 sm:grid-cols-2 gap-6 h-[600px] overflow-y-auto pr-4"
+                className={`grid grid-cols-1 sm:grid-cols-2 gap-6 h-[600px] overflow-y-auto pr-4 ${styles.scrollContainer}`}
                 style={{
                   scrollbarWidth: "thin",
                   scrollbarColor: "rgba(255, 255, 255, 0.2) transparent",
                 }}
               >
-                {/* Custom scrollbar styles */}
-                <style jsx>{`
-                  div::-webkit-scrollbar {
-                    width: 8px;
-                  }
-                  div::-webkit-scrollbar-track {
-                    background: transparent;
-                    border-radius: 4px;
-                  }
-                  div::-webkit-scrollbar-thumb {
-                    background: linear-gradient(
-                      to bottom,
-                      #3b82f6,
-                      #8b5cf6,
-                      #ec4899
-                    );
-                    border-radius: 4px;
-                    border: 2px solid transparent;
-                    background-clip: padding-box;
-                  }
-                  div::-webkit-scrollbar-thumb:hover {
-                    background: linear-gradient(
-                      to bottom,
-                      #60a5fa,
-                      #a78bfa,
-                      #f472b6
-                    );
-                    border-radius: 4px;
-                  }
-                  div::-webkit-scrollbar-corner {
-                    background: transparent;
-                  }
-                `}</style>
-
                 {services.map((service) => (
                   <motion.div
                     key={service.id}
