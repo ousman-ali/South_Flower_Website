@@ -1,6 +1,7 @@
 "use client";
 
 import Breadcrumb from "@/components/breadcrumb/BreadCrumb";
+import ContactSection from "@/components/contact/ContactSection";
 import CTACard from "@/components/cta/CtaSection";
 import ServicesSection1 from "@/components/services/ServiceSection1";
 
@@ -13,6 +14,7 @@ export default function AboutPage() {
         pageName="Our Socials"
         currentPage="Contact South Flower"
       />
+      <ContactSection />
       <CTACard />
     </div>
   );

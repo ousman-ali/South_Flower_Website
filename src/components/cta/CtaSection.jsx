@@ -7,24 +7,6 @@ import { ArrowRight, Sparkles, Mail, Phone, MessageSquare } from "lucide-react";
 export default function CTACard() {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
 
-  const contactMethods = [
-    {
-      icon: <Mail className="w-5 h-5" />,
-      text: "hello@example.com",
-      delay: 0.1,
-    },
-    {
-      icon: <Phone className="w-5 h-5" />,
-      text: "+1 (555) 123-4567",
-      delay: 0.2,
-    },
-    {
-      icon: <MessageSquare className="w-5 h-5" />,
-      text: "Live Chat Available",
-      delay: 0.3,
-    },
-  ];
-
   // Subtle floating shapes data
   const floatingShapes = [
     { id: 1, size: 60, x: "10%", y: "20%", duration: 25 },
@@ -148,35 +130,6 @@ export default function CTACard() {
               >
                 Our team is ready to help you bring your vision to life
               </motion.p>
-            </motion.div>
-
-            {/* Contact Methods */}
-            <motion.div
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.5 }}
-              className="flex flex-wrap justify-center gap-4 mb-10"
-            >
-              {contactMethods.map((method, idx) => (
-                <motion.div
-                  key={idx}
-                  initial={{ opacity: 0, scale: 0.95 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.4, delay: method.delay }}
-                  whileHover={{ scale: 1.02, y: -1 }}
-                  className="flex items-center gap-3 px-4 py-3 rounded-lg bg-gray-50/80 border border-gray-200/50 backdrop-blur-sm"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.1 }}
-                    className="text-blue-500"
-                  >
-                    {method.icon}
-                  </motion.div>
-                  <span className="text-sm font-medium text-gray-700">
-                    {method.text}
-                  </span>
-                </motion.div>
-              ))}
             </motion.div>
 
             {/* Main CTA Button */}
