@@ -63,7 +63,7 @@ export default function Navbar() {
             {/* Get Quote Button */}
             <Link
               href="/contact"
-              className="ml-4 px-5 py-2 rounded-lg metallic-bg text-white font-medium text-sm shadow transition"
+              className="ml-4 px-5 py-2 rounded-lg metallic-bg text-white font-medium text-sm shadow transition hover:scale-[1.1]"
             >
               Get Quote
               <span className="inline-block animate-danceRight text-white ml-1">

@@ -13,6 +13,7 @@ import {
   Heart,
   ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
 // Floating shape component
@@ -100,7 +101,7 @@ export default function Footer() {
       </div>
 
       {/* Main Footer Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 py-16">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 pt-16 pb-6">
         {/* Top Section */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 pb-16 border-b border-white/10">
           {/* Logo & Description */}
@@ -311,33 +312,6 @@ export default function Footer() {
                 </div>
               </motion.div>
             </div>
-
-            {/* Newsletter */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.6 }}
-              className="mt-8"
-            >
-              <p className="text-gray-400 text-sm mb-3">
-                Stay updated with our newsletter
-              </p>
-              <div className="relative">
-                <input
-                  type="email"
-                  placeholder="Enter your email"
-                  className="w-full px-4 py-3 rounded-xl bg-white/5 border border-white/10 text-white placeholder-gray-500 focus:outline-none focus:border-blue-500/50 focus:ring-2 focus:ring-blue-500/20 transition-all duration-300"
-                />
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="absolute right-2 top-2 px-4 py-1.5 bg-gradient-to-r from-blue-500 to-purple-500 text-white text-sm font-semibold rounded-lg hover:shadow-[0_0_20px_rgba(59,130,246,0.5)] transition-all duration-300"
-                >
-                  Subscribe
-                </motion.button>
-              </div>
-            </motion.div>
           </motion.div>
         </div>
 
@@ -347,12 +321,21 @@ export default function Footer() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.7 }}
-          className="pt-8 flex flex-col md:flex-row justify-between items-center"
+          className="pt-4 flex flex-col md:flex-row justify-center items-center"
         >
-          {/* Copyright */}
-          <div className="flex items-center gap-2 text-gray-400 mb-4 md:mb-0">
+          Copyright
+          <div className="flex items-center just gap-2 text-gray-400 md:mb-0">
             <span>
-              © {new Date().getFullYear()} InnovateCo. All rights reserved.
+              © {new Date().getFullYear()}{" "}
+              <span className="text-gray-100">South Flower</span> All rights
+              reserved. Powered by
+              <Link
+                href="https://keradiontechnology.com"
+                className="text-blue-400 cursor-pointer"
+              >
+                {" "}
+                Keradion Technology
+              </Link>
             </span>
             <motion.div
               animate={{
@@ -363,28 +346,7 @@ export default function Footer() {
                 repeat: Infinity,
                 ease: "easeInOut",
               }}
-            >
-              <Heart className="w-4 h-4 text-pink-500 fill-pink-500" />
-            </motion.div>
-          </div>
-
-          {/* Additional Links */}
-          <div className="flex flex-wrap gap-6 text-sm text-gray-400">
-            {[
-              "Privacy Policy",
-              "Terms of Service",
-              "Cookie Policy",
-              "Sitemap",
-            ].map((item, index) => (
-              <motion.a
-                key={index}
-                href="#"
-                whileHover={{ scale: 1.1, color: "#fff" }}
-                className="hover:text-white transition-colors duration-300"
-              >
-                {item}
-              </motion.a>
-            ))}
+            ></motion.div>
           </div>
         </motion.div>
       </div>
