@@ -38,11 +38,7 @@ export default function TopHeader() {
 
         {/* Email */}
         <div className="flex items-center gap-2 px-2 py-1 rounded-full">
-          <span
-            className="
-                        flex items-center justify-center 
-                    "
-          >
+          <span className=" flex items-center justify-center ">
             <EmailIcon size={15} className="text-blue-600" />
           </span>
           <span className="text-blue-400">info@example.com</span>
@@ -52,7 +48,7 @@ export default function TopHeader() {
       {/* Right: Social Icons */}
       <div className="flex space-x-5 relative z-10">
         {/* Facebook */}
-        <a href="#" className="icon-wrapper hover:bg-[#1877F2]">
+        <a href="#" className="icon-wrapper metallic-bg">
           <FacebookIcon
             size={15}
             className="text-white hover:text-blue-600 transition"
@@ -60,7 +56,7 @@ export default function TopHeader() {
         </a>
 
         {/* LinkedIn */}
-        <a href="#" className="icon-wrapper hover:bg-[#0A66C2]">
+        <a href="#" className="icon-wrapper metallic-bg">
           <LinkedInIcon
             size={15}
             className="
@@ -75,7 +71,7 @@ export default function TopHeader() {
         </a>
 
         {/* Telegram */}
-        <a href="#" className="icon-wrapper hover:bg-[#0088cc]">
+        <a href="#" className="icon-wrapper metallic-bg">
           <SendIcon
             size={15}
             className="
@@ -88,7 +84,7 @@ export default function TopHeader() {
         </a>
 
         {/* TikTok */}
-        <a href="#" className="icon-wrapper hover:bg-[#010101]">
+        <a href="#" className="icon-wrapper metallic-bg">
           <InstagramIcon
             size={15}
             className="
@@ -101,7 +97,7 @@ export default function TopHeader() {
                     "
           />
         </a>
-        <a href="#" className="icon-wrapper hover:bg-[#010101]">
+        <a href="#" className="icon-wrapper metallic-bg">
           <TikTokIcon
             size={15}
             className="
