@@ -2,18 +2,18 @@
 
 import Breadcrumb from "@/components/breadcrumb/BreadCrumb";
 import CTACard from "@/components/cta/CtaSection";
-import ProductSection1 from "@/components/products/ProductSection1";
+import ProductDetails from "@/components/products/ProductDetails";
 
 export default function AboutPage() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       {/* Breadcrumb Component */}
       <Breadcrumb
-        pageTitle="Products"
-        pageName="Our Products"
-        currentPage="South Flower Products"
+        pageTitle="Product Details"
+        pageName="Product Details"
+        currentPage="South Flower Product"
       />
-      <ProductSection1 />
+      <ProductDetails />
       <CTACard />
     </div>
   );
