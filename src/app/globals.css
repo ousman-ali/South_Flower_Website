@@ -79,3 +79,29 @@ body {
 ::-webkit-scrollbar-thumb:hover {
   background: linear-gradient(to bottom, #60a5fa, #a78bfa);
 }
+
+/* Floating Water Droplets */
+.droplet {
+  animation: float 6s infinite ease-in-out;
+}
+
+@keyframes float {
+  0% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.7;
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+    opacity: 0.7;
+  }
+}
+
+/* Social Icons Wrapper */
+.icon-wrapper {
+  @apply w-7 h-7 rounded-full bg-white/40 backdrop-blur flex items-center justify-center 
+  transition-all duration-300 hover:text-white;
+}

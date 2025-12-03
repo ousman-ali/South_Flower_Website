@@ -1,11 +1,14 @@
 import TopHeader from "./TopHeader";
 import Navbar from "./Navbar";
+import ClientOnly from "../clientOnly/ClientOnly";
 
 export default function Header() {
   return (
     <>
-      <TopHeader />
-      <Navbar />
+      <ClientOnly>
+        <TopHeader />
+        <Navbar />
+      </ClientOnly>
     </>
   );
 }
