@@ -26,11 +26,11 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Image
-              src="/logo.png"
+              src="/images/south_flower_logo.png"
               alt="Logo"
               width={120}
               height={50}
-              className="object-contain rounded-md"
+              className="object-contain rounded-md w-[120px] h-[50px]"
             />
           </div>
 
