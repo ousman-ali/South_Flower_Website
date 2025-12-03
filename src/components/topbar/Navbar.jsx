@@ -43,7 +43,7 @@ export default function Navbar() {
                 onClick={() => setActive(item.name)}
                 className={`relative px-4 py-2 rounded-lg text-sm font-medium transition ${
                   active === item.name
-                    ? "bg-blue-100 text-blue-700"
+                    ? "border-b border-l text-gray-900"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
               >
@@ -51,7 +51,11 @@ export default function Navbar() {
 
                 {/* Active dot */}
                 {active === item.name && (
-                  <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 w-2 h-2 rounded-full bg-blue-600"></span>
+                  <span
+                    className="absolute -bottom-1 inset-x-0 mx-auto w-4 h-2
+                      rounded-full bg-black shadow-lg shadow-blue-500/50
+                      animate-[pulseGlow_1.5s_ease-in-out_infinite]"
+                  ></span>
                 )}
               </Link>
             ))}
