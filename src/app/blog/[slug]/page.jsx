@@ -1,6 +1,6 @@
 "use client";
 
-import BlogSection1 from "@/components/blog/BlogSection1";
+import BlogDetails from "@/components/blog/BlogDetails";
 import Breadcrumb from "@/components/breadcrumb/BreadCrumb";
 import CTACard from "@/components/cta/CtaSection";
 
@@ -9,11 +9,11 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       {/* Breadcrumb Component */}
       <Breadcrumb
-        pageTitle="Blog"
-        pageName="Our Blog Posts"
-        currentPage="South Flower Posts"
+        pageTitle="Blog Details"
+        pageName="Blog Details"
+        currentPage="South Flower Post"
       />
-      <BlogSection1 />
+      <BlogDetails />
       <CTACard />
     </div>
   );
