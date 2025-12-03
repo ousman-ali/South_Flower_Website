@@ -1,17 +1,18 @@
 "use client";
 
-import { Phone, Mail } from "lucide-react";
 import FacebookIcon from "../icons/FacebookIcon";
 import LinkedInIcon from "../icons/LinkedlnIcon";
 import SendIcon from "../icons/TelegramIcon";
 import InstagramIcon from "../icons/InstagramIcon";
 import TikTokIcon from "../icons/TiktokIcon";
+import PhoneIcon from "../icons/PhoneIcon";
+import EmailIcon from "../icons/EmailIcon";
 
 export default function TopHeader() {
   return (
     <div
       className="hidden md:flex relative overflow-hidden w-full py-2 px-14 justify-between text-sm 
-      bg-gradient-to-r from-[#b3e5fc] to-[#81d4fa]"
+      bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900"
     >
       {/* Water Droplet Animations */}
       <div className="absolute inset-0 overflow-hidden">
@@ -23,14 +24,28 @@ export default function TopHeader() {
 
       {/* Left: Contact Info */}
       <div className="flex space-x-4 relative z-10">
-        <div className="flex items-center gap-2 bg-white/40 px-2 py-1 rounded-full backdrop-blur hover:bg-white/60 transition">
-          <Phone size={14} />
-          <span>+251 900 000 000</span>
+        {/* Phone */}
+        <div className="flex items-center gap-2 px-2 py-1 rounded-full">
+          <span
+            className="
+                         flex items-center justify-center 
+                    "
+          >
+            <PhoneIcon size={15} className="text-blue-600" />
+          </span>
+          <span className="text-blue-400">+251 900 000 000</span>
         </div>
 
-        <div className="flex items-center gap-2 bg-white/40 px-2 py-1 rounded-full backdrop-blur hover:bg-white/60 transition">
-          <Mail size={14} />
-          <span>info@example.com</span>
+        {/* Email */}
+        <div className="flex items-center gap-2 px-2 py-1 rounded-full">
+          <span
+            className="
+                        flex items-center justify-center 
+                    "
+          >
+            <EmailIcon size={15} className="text-blue-600" />
+          </span>
+          <span className="text-blue-400">info@example.com</span>
         </div>
       </div>
 
@@ -40,7 +55,7 @@ export default function TopHeader() {
         <a href="#" className="icon-wrapper hover:bg-[#1877F2]">
           <FacebookIcon
             size={15}
-            className="text-gray-500 hover:text-blue-600 transition"
+            className="text-white hover:text-blue-600 transition"
           />
         </a>
 
@@ -49,7 +64,7 @@ export default function TopHeader() {
           <LinkedInIcon
             size={15}
             className="
-                        text-gray-600 
+                        text-white 
                         hover:text-[#0A66C2] 
                         transition 
                         duration-200 
@@ -64,7 +79,7 @@ export default function TopHeader() {
           <SendIcon
             size={15}
             className="
-                        text-gray-600 
+                        text-white
                         hover:text-[#0088cc] 
                         transition 
                         duration-200  
@@ -77,7 +92,7 @@ export default function TopHeader() {
           <InstagramIcon
             size={15}
             className="
-                        text-gray-600 
+                        text-white
                         hover:text-pink-500 
                         transition 
                         duration-300 
@@ -90,10 +105,10 @@ export default function TopHeader() {
           <TikTokIcon
             size={15}
             className="
-                        text-gray-600
+                        text-white
                         transition
                         duration-300
-                        hover:text-white
+                        hover:text-black
                         hover:drop-shadow-[2px_2px_6px_rgba(0,242,234,0.7)]
                         hover:shadow-[ -2px_-2px_6px_rgba(255,0,80,0.7) ]
                     "
