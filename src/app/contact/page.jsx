@@ -15,7 +15,6 @@ export default function AboutPage() {
         currentPage="Contact South Flower"
       />
       <ContactSection />
-      <CTACard />
     </div>
   );
 }

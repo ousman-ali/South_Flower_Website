@@ -105,3 +105,13 @@ body {
   @apply w-7 h-7 rounded-full bg-white/40 backdrop-blur flex items-center justify-center 
   transition-all duration-300 hover:text-white;
 }
+
+.icon-wrapper {
+  @apply w-8 h-8 flex items-center justify-center rounded-full 
+         bg-white/40 backdrop-blur
+         transition duration-300;
+}
+
+.icon-wrapper:hover {
+  @apply text-white scale-110 shadow-md;
+}
