@@ -31,7 +31,8 @@ export default function MobileMenu({ open, navItems, active, setActive }) {
           {/* Menu Items */}
           <div className="flex flex-col space-y-4 text-lg text-gray-800">
             {navItems.map((item) => (
-              <button
+              <Link
+                href={item.href}
                 key={item.name}
                 onClick={() => setActive(item.name)}
                 className={`text-left px-2 py-2 rounded-md transition 
@@ -42,7 +43,7 @@ export default function MobileMenu({ open, navItems, active, setActive }) {
                 }`}
               >
                 {item.name}
-              </button>
+              </Link>
             ))}
           </div>
         </motion.div>
