@@ -483,7 +483,7 @@ export default function ServicesSection1() {
 
           {/* Right Sidebar - Only Top Products Card */}
           <div className="lg:w-1/4">
-            <div className="sticky top-24 self-start">
+            <div className="sticky top-20 self-start">
               {/* Top Products Card with Images */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}

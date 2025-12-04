@@ -26,7 +26,6 @@ export default function ProductSection1() {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
-  const [containerHeight, setContainerHeight] = useState(0);
 
   // Services for sidebar
   const services = [
@@ -287,7 +286,7 @@ export default function ProductSection1() {
   }
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_40%,transparent_100%)]" />
 
@@ -372,11 +371,7 @@ export default function ProductSection1() {
             {/* Products Grid - Scrollable Container with fixed height */}
             <div
               ref={containerRef}
-              className="flex-grow overflow-y-auto products-scrollbar rounded-lg border border-gray-800 bg-gray-900/30 p-4"
-              style={{
-                minHeight: containerHeight,
-                maxHeight: "calc(120vh)",
-              }}
+              className=" rounded-lg border border-gray-800 bg-gray-900/30 p-4"
             >
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 {filteredProducts.map((product) => (
@@ -502,7 +497,7 @@ export default function ProductSection1() {
 
           {/* Sidebar - Right (Fixed) */}
           <div className="lg:w-1/4">
-            <div className="sticky top-6 space-y-4">
+            <div className="sticky top-20 space-y-4">
               {/* Services Section */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
