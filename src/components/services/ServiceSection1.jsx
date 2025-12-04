@@ -248,7 +248,7 @@ export default function ServicesSection1() {
   };
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-gray-900 via-black to-gray-900">
+    <section className="relative py-20 bg-gradient-to-b from-gray-900 via-black to-gray-900">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -314,9 +314,9 @@ export default function ServicesSection1() {
           </p>
         </motion.div>
 
-        <div className="flex flex-col lg:flex-row gap-8">
+        <div className="flex flex-col lg:flex-row gap-8 relative">
           {/* Left Side - Services Cards - Full height scrollable container */}
-          <div className="lg:w-3/4">
+          <div className="lg:w-3/4 min-h-full" id="services-content">
             {isMobile ? (
               // Mobile - Paginated Cards
               <div className="space-y-6">
@@ -415,7 +415,7 @@ export default function ServicesSection1() {
               // Desktop - MANUALLY Scrollable Cards with Custom Scrollbar
               <div
                 ref={scrollContainerRef}
-                className={`grid grid-cols-1 sm:grid-cols-2 gap-6 h-[600px] overflow-y-auto pr-4 ${styles.scrollContainer}`}
+                className={`grid grid-cols-1 sm:grid-cols-2 gap-6 pr-4 ${styles.scrollContainer}`}
                 style={{
                   scrollbarWidth: "thin",
                   scrollbarColor: "rgba(255, 255, 255, 0.2) transparent",
@@ -483,7 +483,7 @@ export default function ServicesSection1() {
 
           {/* Right Sidebar - Only Top Products Card */}
           <div className="lg:w-1/4">
-            <div className="sticky top-24">
+            <div className="sticky top-24 self-start">
               {/* Top Products Card with Images */}
               <motion.div
                 initial={{ opacity: 0, x: 20 }}
@@ -590,24 +590,7 @@ export default function ServicesSection1() {
           viewport={{ once: true }}
           transition={{ delay: 0.3 }}
           className="text-center mt-12"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all duration-300"
-          >
-            <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
-              initial={{ x: "100%" }}
-              whileHover={{ x: 0 }}
-              transition={{ duration: 0.3 }}
-            />
-            <span className="relative z-10 flex items-center gap-2">
-              Rach Out
-              <ExternalLink className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </span>
-          </motion.button>
-        </motion.div>
+        ></motion.div>
       </div>
     </section>
   );
