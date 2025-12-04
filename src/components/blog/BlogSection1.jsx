@@ -426,7 +426,7 @@ export default function BlogSection1() {
   }
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden">
+    <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_40%,transparent_100%)]" />
 
@@ -581,11 +581,7 @@ export default function BlogSection1() {
             {!isMobile ? (
               <div
                 ref={containerRef}
-                className="overflow-y-auto blog-scrollbar rounded-lg border border-gray-800 bg-gray-900/30 p-4"
-                style={{
-                  height: "600px",
-                  maxHeight: "calc(100vh)",
-                }}
+                className=" rounded-lg border border-gray-800 bg-gray-900/30 p-4"
               >
                 <div className="grid grid-cols-2 gap-4">
                   {filteredPosts.map((post) => (
@@ -744,7 +740,7 @@ export default function BlogSection1() {
 
           {/* Sidebar - Right (Fixed on Desktop, Below on Mobile) */}
           <div className={`${isMobile ? "mt-8" : "lg:w-1/4"}`}>
-            <div className={`${!isMobile ? "sticky top-6" : ""} space-y-4`}>
+            <div className={`${!isMobile ? "sticky top-20" : ""} space-y-4`}>
               {/* Popular Products */}
               <motion.div
                 initial={{ opacity: 0, x: isMobile ? 0 : 20 }}
