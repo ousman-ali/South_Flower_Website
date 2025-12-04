@@ -1,3 +1,4 @@
+import { getBatchData } from "@/api/service";
 import AboutSection from "@/components/about/AboutSection";
 import BlogSection from "@/components/blog/BlogSection";
 import CTACard from "@/components/cta/CtaSection";
@@ -8,7 +9,18 @@ import ServicesSection from "@/components/services/ServicesSection";
 import TeamSection from "@/components/team/TeamSection";
 import TestimonialSection from "@/components/testimonials/TestimonialSection";
 
-export default function Home() {
+export default async function Home() {
+  const features = [
+    { name: "blog_post", amount: 3 },
+    { name: "about_service", amount: 4 },
+    { name: "project_project", amount: 2 },
+    { name: "about_content", amount: 2 },
+  ];
+
+  const data = await getBatchData(features);
+
+  console.log("datas", data);
+
   return (
     <>
       <HeroSection />
