@@ -203,14 +203,14 @@ export default function PartnersSection() {
           {/* Navigation Buttons */}
           <button
             onClick={handlePrevious}
-            className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
+            className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
           >
             <ChevronLeft className="w-5 h-5 text-gray-700" />
           </button>
 
           <button
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
+            className="absolute right-6 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
           >
             <ChevronRight className="w-5 h-5 text-gray-700" />
           </button>
