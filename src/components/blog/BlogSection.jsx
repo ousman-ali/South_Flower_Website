@@ -159,7 +159,7 @@ export default function BlogSection() {
             className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200"
           >
             <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              FEATURED PROJECTS
+              FEATURED BLOG POSTS
             </span>
           </motion.div>
 
@@ -170,9 +170,9 @@ export default function BlogSection() {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
           >
-            Our{" "}
+            Our Latest
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              Portfolio
+              News & Events
             </span>
           </motion.h2>
 
@@ -197,37 +197,11 @@ export default function BlogSection() {
           </button>
 
           <button
-            onClick={togglePlay}
-            className="px-6 py-3 rounded-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-medium hover:shadow-lg hover:scale-105 transition-all flex items-center gap-2"
-          >
-            {isPlaying ? <Pause size={20} /> : <Play size={20} />}
-            {isPlaying ? "Pause" : "Play"}
-          </button>
-
-          <button
             onClick={nextSlide}
             className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl border border-gray-200 hover:scale-105 transition-all"
           >
             <ChevronRight className="w-6 h-6 text-gray-700" />
           </button>
-        </div>
-
-        {/* Progress Indicator */}
-        <div className="flex justify-center gap-2 mb-12">
-          {projects.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => {
-                setCurrentIndex(index);
-                resetInterval();
-              }}
-              className={`transition-all duration-300 rounded-full ${
-                index === currentIndex
-                  ? "w-8 h-2 bg-gradient-to-r from-blue-600 to-purple-600"
-                  : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
-              }`}
-            />
-          ))}
         </div>
 
         {/* Slider Container */}
@@ -383,25 +357,23 @@ export default function BlogSection() {
           </div>
         </div>
 
-        {/* Current Project Indicator */}
-        <motion.div
-          key={currentIndex}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          className="text-center mt-16"
-        >
-          <div className="inline-flex items-center gap-4 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full border border-gray-200 shadow-lg">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium text-gray-500">
-                Now Viewing
-              </span>
-              <span className="text-lg font-bold text-gray-900">
-                {projects[currentIndex].title}
-              </span>
-            </div>
-            <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
-          </div>
-        </motion.div>
+        {/* Progress Indicator */}
+        <div className="flex justify-center gap-2 mb-12">
+          {projects.map((_, index) => (
+            <button
+              key={index}
+              onClick={() => {
+                setCurrentIndex(index);
+                resetInterval();
+              }}
+              className={`transition-all duration-300 rounded-full ${
+                index === currentIndex
+                  ? "w-8 h-2 bg-gradient-to-r from-blue-600 to-purple-600"
+                  : "w-2 h-2 bg-gray-300 hover:bg-gray-400"
+              }`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   );
