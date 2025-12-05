@@ -258,7 +258,7 @@ export default function PartnersSection() {
                   {/* Card */}
                   <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-300">
                     {/* Image Container */}
-                    <div className="relative h-56 md:h-64 overflow-hidden">
+                    <div className="relative h-56 md:h-44 overflow-hidden">
                       {/* Image */}
                       <div
                         className="absolute inset-0 bg-gray-100 transition-transform duration-500 group-hover:scale-110"
@@ -323,11 +323,6 @@ export default function PartnersSection() {
                 }}
               />
             </div>
-            <div className="text-center mt-3">
-              <span className="text-sm text-gray-500">
-                Auto-sliding every 3 seconds
-              </span>
-            </div>
           </div>
 
           {/* Partner Dots */}
@@ -346,18 +341,6 @@ export default function PartnersSection() {
                 }`}
               />
             ))}
-          </div>
-        </div>
-
-        {/* Decorative element */}
-        <div className="flex justify-center mt-16">
-          <div className="inline-flex items-center gap-4 px-6 py-3 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100/50">
-            <div className="flex items-center gap-2">
-              <div className="w-2 h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 animate-pulse" />
-              <span className="text-sm font-medium text-gray-700">
-                {partners.length}+ Trusted Partners
-              </span>
-            </div>
           </div>
         </div>
       </div>
