@@ -274,7 +274,7 @@ export default function AboutSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.4, delay: 0.1 * idx }}
                     whileHover={{ scale: 1.05, y: -3 }}
-                    className="bg-white/80 backdrop-blur-sm border border-gray-300/50 rounded-xl p-4 text-center group hover:border-gray-400/50 transition-all shadow-sm"
+                    className="bg-white/80 backdrop-blur-sm border border-gray-300/50 rounded-xl p-4 text-center group hover:border-gray-400/50 transition-all shadow-xl"
                   >
                     <div className="inline-flex p-3 bg-gradient-to-br from-gray-100 to-gray-50 rounded-lg mb-3 group-hover:from-gray-200 group-hover:to-gray-100 border border-gray-300/30">
                       <div className="text-gray-700 group-hover:text-gray-900">
