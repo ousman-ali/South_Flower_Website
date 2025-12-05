@@ -309,22 +309,6 @@ export default function PartnersSection() {
             </div>
           </div>
 
-          {/* Auto-slide progress indicator */}
-          <div className="relative mt-8">
-            <div className="h-1 bg-gray-200 rounded-full overflow-hidden">
-              <motion.div
-                className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-                initial={{ width: "0%" }}
-                animate={{ width: "100%" }}
-                transition={{
-                  duration: 3,
-                  repeat: Infinity,
-                  ease: "linear",
-                }}
-              />
-            </div>
-          </div>
-
           {/* Partner Dots */}
           <div className="flex justify-center gap-2 mt-12 flex-wrap">
             {partners.map((_, idx) => (
