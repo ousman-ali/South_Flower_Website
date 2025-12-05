@@ -191,7 +191,7 @@ export default function TestimonialSection() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-5xl md:text-7xl font-bold mb-6"
+            className="text-5xl md:text-7xl font-bold mb-6 text-amber-50"
           >
             Voices of{" "}
             <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
@@ -438,57 +438,6 @@ export default function TestimonialSection() {
             ))}
           </div>
         </div>
-
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-20"
-        >
-          {[
-            {
-              value: "500+",
-              label: "Happy Clients",
-              color: "from-blue-500 to-cyan-400",
-            },
-            {
-              value: "4.9★",
-              label: "Average Rating",
-              color: "from-emerald-500 to-green-400",
-            },
-            {
-              value: "1000+",
-              label: "Projects Delivered",
-              color: "from-purple-500 to-pink-400",
-            },
-            {
-              value: "98%",
-              label: "Client Retention",
-              color: "from-amber-500 to-orange-400",
-            },
-          ].map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * idx }}
-              whileHover={{ scale: 1.05, y: -5 }}
-              className="relative group"
-            >
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-white/10 to-transparent rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-              <div className="relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 text-center">
-                <div
-                  className={`text-4xl font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`}
-                >
-                  {stat.value}
-                </div>
-                <div className="text-gray-400 mt-2">{stat.label}</div>
-              </div>
-            </motion.div>
-          ))}
-        </motion.div>
       </div>
     </section>
   );
