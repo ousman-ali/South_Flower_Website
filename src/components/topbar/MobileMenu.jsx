@@ -2,7 +2,7 @@ import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Facebook, Linkedin, Send, Music } from "lucide-react";
 
-export default function MobileMenu({ open, navItems, active, setActive }) {
+export default function MobileMenu({ open, navItems, pathname }) {
   return (
     <AnimatePresence>
       {open && (
@@ -34,10 +34,9 @@ export default function MobileMenu({ open, navItems, active, setActive }) {
               <Link
                 href={item.href}
                 key={item.name}
-                onClick={() => setActive(item.name)}
                 className={`text-left px-2 py-2 rounded-md transition 
                 ${
-                  active === item.name
+                  pathname === item.href
                     ? "bg-blue-100 text-blue-700"
                     : "hover:bg-gray-100"
                 }`}

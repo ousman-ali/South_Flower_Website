@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -18,6 +19,7 @@ const navItems = [
 export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Home");
+  const pathname = usePathname();
 
   return (
     <>
@@ -40,9 +42,8 @@ export default function Navbar() {
               <Link
                 key={item.name}
                 href={item.href}
-                onClick={() => setActive(item.name)}
                 className={`relative px-4 py-2 rounded-lg text-sm font-medium transition ${
-                  active === item.name
+                  pathname === item.href
                     ? "border-b border-l text-gray-900"
                     : "text-gray-700 hover:bg-gray-100"
                 }`}
@@ -50,7 +51,7 @@ export default function Navbar() {
                 {item.name}
 
                 {/* Active dot */}
-                {active === item.name && (
+                {pathname === item.href && (
                   <span
                     className="absolute -bottom-1 inset-x-0 mx-auto w-4 h-2
                       rounded-full bg-black shadow-lg shadow-blue-500/50
@@ -83,8 +84,7 @@ export default function Navbar() {
       <MobileMenu
         open={open}
         navItems={navItems}
-        active={active}
-        setActive={setActive}
+        pathname={pathname}
       />
     </>
   );
