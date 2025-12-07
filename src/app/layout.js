@@ -3,7 +3,10 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import Footer from "@/components/footer/Footer";
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata = {
   title: "South Flower",
