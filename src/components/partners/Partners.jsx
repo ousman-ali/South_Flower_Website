@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 
@@ -9,6 +9,7 @@ export default function PartnersSection() {
   const [isHovered, setIsHovered] = useState(null);
   const [direction, setDirection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
 
   const partners = [
     {
@@ -73,10 +74,23 @@ export default function PartnersSection() {
     },
   ];
 
-  // Get current visible partners (4 at a time)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Get current visible partners (1 on mobile, 4 on desktop)
   const getVisiblePartners = () => {
+    const visibleCount = isMobile ? 1 : 4;
     const visible = [];
-    for (let i = 0; i < 4; i++) {
+
+    for (let i = 0; i < visibleCount; i++) {
       const index = (currentIndex + i) % partners.length;
       visible.push({ ...partners[index], position: i });
     }
@@ -88,14 +102,16 @@ export default function PartnersSection() {
     const interval = setInterval(() => {
       if (!isAnimating) {
         setDirection(1);
-        setCurrentIndex((prev) => (prev + 1) % partners.length);
+        setCurrentIndex(
+          (prev) => (prev + (isMobile ? 1 : 1)) % partners.length
+        );
         setIsAnimating(true);
-        setTimeout(() => setIsAnimating(false), 500); // Animation duration
+        setTimeout(() => setIsAnimating(false), 500);
       }
     }, 3000);
 
     return () => clearInterval(interval);
-  }, [partners.length, isAnimating]);
+  }, [partners.length, isAnimating, isMobile]);
 
   const handlePrevious = () => {
     if (!isAnimating) {
@@ -125,7 +141,7 @@ export default function PartnersSection() {
   ];
 
   return (
-    <section className="relative py-20 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+    <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-b from-white to-gray-50">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         {floatingShapes.map((shape) => (
@@ -150,7 +166,7 @@ export default function PartnersSection() {
         ))}
 
         <motion.div
-          className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-gradient-to-br from-blue-100/10 to-purple-100/5 rounded-full"
+          className="absolute top-1/4 left-1/4 w-[300px] h-[300px] md:w-[500px] md:h-[500px] bg-gradient-to-br from-blue-100/10 to-purple-100/5 rounded-full"
           animate={{
             scale: [1, 1.1, 1],
           }}
@@ -162,7 +178,7 @@ export default function PartnersSection() {
         />
 
         <motion.div
-          className="absolute bottom-1/4 right-1/4 w-[400px] h-[400px] bg-gradient-to-br from-amber-100/10 to-pink-100/5 rounded-full"
+          className="absolute bottom-1/4 right-1/4 w-[200px] h-[200px] md:w-[400px] md:h-[400px] bg-gradient-to-br from-amber-100/10 to-pink-100/5 rounded-full"
           animate={{
             scale: [1.1, 1, 1.1],
           }}
@@ -175,24 +191,24 @@ export default function PartnersSection() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-2 mb-6 px-5 py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg">
-            <Star className="w-5 h-5 text-amber-500" />
-            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+        <div className="text-center mb-10 md:mb-16">
+          <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-2 md:px-5 md:py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg">
+            <Star className="w-4 h-4 md:w-5 md:h-5 text-amber-500" />
+            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               Trusted Partners
             </span>
-            <Zap className="w-5 h-5 text-purple-500" />
+            <Zap className="w-4 h-4 md:w-5 md:h-5 text-purple-500" />
           </div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
             Our Global{" "}
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Network
             </span>
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+          <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-2">
             Collaborating with industry leaders to deliver exceptional results
             worldwide
           </p>
@@ -200,48 +216,60 @@ export default function PartnersSection() {
 
         {/* Partners Slider */}
         <div className="relative">
-          {/* Navigation Buttons */}
+          {/* Navigation Buttons - Mobile: closer, Desktop: farther */}
           <button
             onClick={handlePrevious}
-            className="absolute left-6 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
+            className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 -translate-x-2 md:-translate-x-4 lg:-translate-x-12 z-20 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
           >
-            <ChevronLeft className="w-5 h-5 text-gray-700" />
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
           </button>
 
           <button
             onClick={handleNext}
-            className="absolute right-6 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
+            className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 translate-x-2 md:translate-x-4 lg:translate-x-12 z-20 w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 bg-white/90 backdrop-blur-sm border border-gray-300 rounded-full shadow-xl flex items-center justify-center hover:shadow-2xl transition-all hover:bg-white hover:scale-110"
           >
-            <ChevronRight className="w-5 h-5 text-gray-700" />
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
           </button>
 
           {/* Slider Container */}
-          <div className="px-8 md:px-16 overflow-hidden">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 relative">
+          <div className="px-10 md:px-16 overflow-hidden">
+            <div
+              className={`flex ${
+                isMobile ? "justify-center" : "grid grid-cols-2 md:grid-cols-4"
+              } gap-4 md:gap-6 relative`}
+            >
               {getVisiblePartners().map((partner) => (
                 <motion.div
                   key={`${partner.id}-${partner.position}`}
                   initial={{
-                    x:
-                      direction > 0
-                        ? partner.position === 3
-                          ? 400
-                          : 0
+                    x: isMobile
+                      ? direction > 0
+                        ? 300
                         : direction < 0
-                        ? partner.position === 0
-                          ? -400
-                          : 0
-                        : 0,
-                    opacity:
-                      direction > 0
-                        ? partner.position === 3
-                          ? 0
-                          : 1
-                        : direction < 0
-                        ? partner.position === 0
-                          ? 0
-                          : 1
-                        : 1,
+                        ? -300
+                        : 0
+                      : direction > 0
+                      ? partner.position === (isMobile ? 0 : 3)
+                        ? 400
+                        : 0
+                      : direction < 0
+                      ? partner.position === 0
+                        ? -400
+                        : 0
+                      : 0,
+                    opacity: isMobile
+                      ? direction !== 0
+                        ? 0
+                        : 1
+                      : direction > 0
+                      ? partner.position === (isMobile ? 0 : 3)
+                        ? 0
+                        : 1
+                      : direction < 0
+                      ? partner.position === 0
+                        ? 0
+                        : 1
+                      : 1,
                   }}
                   animate={{
                     x: 0,
@@ -251,14 +279,16 @@ export default function PartnersSection() {
                     duration: 0.5,
                     ease: "easeInOut",
                   }}
-                  onMouseEnter={() => setIsHovered(partner.id)}
-                  onMouseLeave={() => setIsHovered(null)}
-                  className="relative group"
+                  onMouseEnter={() => !isMobile && setIsHovered(partner.id)}
+                  onMouseLeave={() => !isMobile && setIsHovered(null)}
+                  className={`relative group ${
+                    isMobile ? "w-full max-w-sm" : ""
+                  }`}
                 >
                   {/* Card */}
-                  <div className="relative bg-white rounded-2xl shadow-xl overflow-hidden border border-gray-200 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-300">
+                  <div className="relative bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-xl overflow-hidden border border-gray-200 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-300">
                     {/* Image Container */}
-                    <div className="relative h-56 md:h-44 overflow-hidden">
+                    <div className="relative h-40 sm:h-48 md:h-44 overflow-hidden">
                       {/* Image */}
                       <div
                         className="absolute inset-0 bg-gray-100 transition-transform duration-500 group-hover:scale-110"
@@ -272,19 +302,21 @@ export default function PartnersSection() {
                       {/* Gradient overlay on hover */}
                       <div
                         className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-300 ${
-                          isHovered === partner.id ? "opacity-100" : "opacity-0"
+                          isMobile || isHovered === partner.id
+                            ? "opacity-100"
+                            : "opacity-0"
                         }`}
                       />
 
-                      {/* Partner Name - Shows on hover */}
+                      {/* Partner Name - Shows on hover (or always on mobile) */}
                       <div
-                        className={`absolute bottom-0 left-0 right-0 p-6 transition-all duration-300 ${
-                          isHovered === partner.id
+                        className={`absolute bottom-0 left-0 right-0 p-4 md:p-6 transition-all duration-300 ${
+                          isMobile || isHovered === partner.id
                             ? "translate-y-0 opacity-100"
                             : "translate-y-4 opacity-0"
                         }`}
                       >
-                        <h3 className="text-2xl font-bold text-white text-center">
+                        <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white text-center">
                           {partner.name}
                         </h3>
                       </div>
@@ -292,16 +324,20 @@ export default function PartnersSection() {
 
                     {/* Subtle indicator */}
                     <div
-                      className={`absolute -top-2 -right-2 w-4 h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ${
-                        isHovered === partner.id ? "scale-125" : "scale-100"
+                      className={`absolute -top-2 -right-2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ${
+                        isMobile || isHovered === partner.id
+                          ? "scale-125"
+                          : "scale-100"
                       }`}
                     />
                   </div>
 
                   {/* Glow effect */}
                   <div
-                    className={`absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-2xl blur-xl transition-opacity duration-300 ${
-                      isHovered === partner.id ? "opacity-100" : "opacity-0"
+                    className={`absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl md:rounded-2xl blur-xl transition-opacity duration-300 ${
+                      isMobile || isHovered === partner.id
+                        ? "opacity-100"
+                        : "opacity-0"
                     }`}
                   />
                 </motion.div>
@@ -309,22 +345,36 @@ export default function PartnersSection() {
             </div>
           </div>
 
-          {/* Partner Dots */}
-          <div className="flex justify-center gap-2 mt-12 flex-wrap">
-            {partners.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => {
-                  setDirection(idx > currentIndex ? 1 : -1);
-                  setCurrentIndex(idx);
-                }}
-                className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  currentIndex === idx
-                    ? "w-6 bg-gradient-to-r from-blue-500 to-purple-500"
-                    : "bg-gray-300 hover:bg-gray-400"
-                }`}
-              />
-            ))}
+          {/* Partner Dots - Show fewer on mobile */}
+          <div className="flex justify-center gap-1.5 md:gap-2 mt-8 md:mt-12 overflow-x-auto pb-2 px-4">
+            {partners.map((_, idx) => {
+              // Show only every 2nd dot on mobile to avoid overflow
+              if (isMobile && idx % 2 !== 0 && idx !== currentIndex)
+                return null;
+
+              return (
+                <button
+                  key={idx}
+                  onClick={() => {
+                    setDirection(idx > currentIndex ? 1 : -1);
+                    setCurrentIndex(idx);
+                  }}
+                  className={`flex-shrink-0 transition-all duration-300 ${
+                    currentIndex === idx
+                      ? `w-4 sm:w-6 h-2 md:h-2 rounded-full bg-gradient-to-r from-blue-500 to-purple-500`
+                      : "w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-gray-300 hover:bg-gray-400"
+                  }`}
+                  aria-label={`Go to partner ${idx + 1}`}
+                />
+              );
+            })}
+          </div>
+
+          {/* Mobile indicator text */}
+          <div className="text-center mt-4 md:hidden">
+            <p className="text-sm text-gray-500">
+              {currentIndex + 1} of {partners.length}
+            </p>
           </div>
         </div>
       </div>
