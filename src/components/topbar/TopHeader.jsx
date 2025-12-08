@@ -25,23 +25,39 @@ export default function TopHeader() {
       {/* Left: Contact Info */}
       <div className="flex space-x-4 relative z-10">
         {/* Phone */}
-        <div className="flex items-center gap-2 px-2 py-1 rounded-full">
-          <span
-            className="
-                         flex items-center justify-center 
-                    "
-          >
-            <PhoneIcon size={15} className="text-blue-600" />
+        <div
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl
+            bg-white/10 backdrop-blur-md
+            border border-white/20
+            shadow-sm
+            transition-all duration-300
+            hover:bg-white/20 hover:border-white/30 
+            hover:shadow-md"
+        >
+          <span className="flex items-center justify-center">
+            <PhoneIcon size={15} className="text-blue-400" />
           </span>
-          <span className="text-blue-400">+251 900 000 000</span>
+          <span className="text-blue-200 font-medium tracking-wide">
+            +251 900 000 000
+          </span>
         </div>
 
         {/* Email */}
-        <div className="flex items-center gap-2 px-2 py-1 rounded-full">
-          <span className=" flex items-center justify-center ">
-            <EmailIcon size={15} className="text-blue-600" />
+        <div
+          className="flex items-center gap-2 px-3 py-1.5 rounded-xl
+            bg-white/10 backdrop-blur-md
+            border border-white/20
+            shadow-sm
+            transition-all duration-300
+            hover:bg-white/20 hover:border-white/30 
+            hover:shadow-md"
+        >
+          <span className="flex items-center justify-center">
+            <EmailIcon size={15} className="text-blue-400" />
           </span>
-          <span className="text-blue-400">info@example.com</span>
+          <span className="text-blue-200 font-medium tracking-wide">
+            info@example.com
+          </span>
         </div>
       </div>
 
