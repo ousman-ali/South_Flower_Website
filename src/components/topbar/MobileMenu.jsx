@@ -37,7 +37,7 @@ export default function MobileMenu({ open, navItems, pathname }) {
                 className={`text-left px-2 py-2 rounded-md transition 
                 ${
                   pathname === item.href
-                    ? "bg-blue-100 text-blue-700"
+                    ? "bg-gray-700 text-gray-100"
                     : "hover:bg-gray-100"
                 }`}
               >
