@@ -6,8 +6,6 @@ import {
   Star,
   Heart,
   Eye,
-  ShoppingBag,
-  Filter,
   ChevronRight,
   Sparkles,
   Leaf,
@@ -254,22 +252,8 @@ export default function ProductSection1() {
     );
   };
 
-  // Fix hydration error and calculate container height
   useEffect(() => {
     setMounted(true);
-    const updateHeight = () => {
-      if (containerRef.current) {
-        // Calculate height to show at least 2 cards
-        const cardHeight = 320; // Height of one card
-        const gap = 16; // Gap between cards
-        const minHeight = cardHeight * 2 + gap;
-        setContainerHeight(minHeight);
-      }
-    };
-
-    updateHeight();
-    window.addEventListener("resize", updateHeight);
-    return () => window.removeEventListener("resize", updateHeight);
   }, []);
 
   // Prevent rendering mismatched content
