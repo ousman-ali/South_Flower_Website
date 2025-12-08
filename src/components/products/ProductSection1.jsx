@@ -30,37 +30,43 @@ export default function ProductSection1() {
     {
       id: 1,
       name: "Floral Design",
-      icon: <Flower className="w-4 h-4" />,
+      image:
+        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=100&h=100&fit=crop&crop=center",
       color: "from-rose-500 to-pink-400",
     },
     {
       id: 2,
       name: "Garden Planning",
-      icon: <Leaf className="w-4 h-4" />,
+      image:
+        "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?w=100&h=100&fit=crop&crop=center",
       color: "from-emerald-500 to-teal-400",
     },
     {
       id: 3,
       name: "Plant Care",
-      icon: <Sparkles className="w-4 h-4" />,
+      image:
+        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=100&h=100&fit=crop&crop=center",
       color: "from-blue-500 to-cyan-400",
     },
     {
       id: 4,
       name: "Delivery",
-      icon: <Truck className="w-4 h-4" />,
+      image:
+        "https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=100&h=100&fit=crop&crop=center",
       color: "from-purple-500 to-violet-400",
     },
     {
       id: 5,
       name: "Consultation",
-      icon: <Search className="w-4 h-4" />,
+      image:
+        "https://images.unsplash.com/photo-1577041241576-f4b964db30ee?w=100&h=100&fit=crop&crop=center",
       color: "from-amber-500 to-orange-400",
     },
     {
       id: 6,
       name: "Maintenance",
-      icon: <TrendingUp className="w-4 h-4" />,
+      image:
+        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&h=100&fit=crop&crop=center",
       color: "from-indigo-500 to-purple-400",
     },
   ];
@@ -507,23 +513,28 @@ export default function ProductSection1() {
                         className="group cursor-pointer"
                       >
                         <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700/30 transition-colors duration-300">
+                          {/* Image Container */}
                           <div
-                            className={`p-1.5 rounded-md bg-gradient-to-r ${service.color}/10`}
+                            className={`p-0.5 rounded-md bg-gradient-to-r ${service.color} flex-shrink-0`}
                           >
-                            <div
-                              className={`bg-gradient-to-r ${service.color} bg-clip-text text-transparent`}
-                            >
-                              {service.icon}
+                            <div className="w-10 h-10 rounded overflow-hidden bg-gray-900">
+                              <img
+                                src={service.image}
+                                alt={service.name}
+                                className="w-full h-full object-cover"
+                              />
                             </div>
                           </div>
 
+                          {/* Service Name */}
                           <div className="flex-1">
                             <h3 className="text-xs font-medium text-gray-300 group-hover:text-white">
                               {service.name}
                             </h3>
                           </div>
 
-                          <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-emerald-400 transition-colors duration-300" />
+                          {/* Arrow */}
+                          <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-emerald-400 transition-colors duration-300 flex-shrink-0" />
                         </div>
                       </motion.div>
                     ))}
@@ -556,35 +567,6 @@ export default function ProductSection1() {
                         {benefit.text}
                       </span>
                     </div>
-                  ))}
-                </div>
-              </motion.div>
-
-              {/* Popular Tags */}
-              <motion.div
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.6, delay: 0.6 }}
-                className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-4"
-              >
-                <h3 className="text-sm font-bold text-white mb-3">
-                  Popular Tags
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "Organic",
-                    "Premium",
-                    "Rare",
-                    "Sustainable",
-                    "Luxury",
-                    "Handmade",
-                  ].map((tag) => (
-                    <span
-                      key={tag}
-                      className="px-2 py-1 text-xs text-gray-400 bg-gray-900/50 rounded-lg border border-gray-700 hover:text-emerald-400 hover:border-emerald-500/30 transition-colors duration-300 cursor-pointer"
-                    >
-                      {tag}
-                    </span>
                   ))}
                 </div>
               </motion.div>
