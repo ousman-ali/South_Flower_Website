@@ -135,20 +135,29 @@ body {
 .metallic-bg {
   background: linear-gradient(
       135deg,
-      #6d6d6d 0%,
-      /* light brushed gray */ #5a5a5a 25%,
-      /* darker steel */ #7a7a7a 50%,
-      /* metallic highlight */ #505050 75%,
-      /* deep gray */ #676767 100% /* smooth blend */
+      rgba(120, 120, 120, 0.25) 0%,
+      /* light metallic gray (semi-transparent) */ rgba(90, 90, 90, 0.28) 25%,
+      /* gray around 700 */ rgba(70, 70, 70, 0.32) 50%,
+      /* deeper brushed steel */ rgba(55, 55, 55, 0.35) 75%,
+      /* darker gray */ rgba(40, 40, 40, 0.38) 100% /* deep shadow gray */
     ),
     url("/textures/noise.png");
 
   background-size: cover, 200px;
   background-blend-mode: overlay;
 
-  /* Subtle brushed metal feel */
-  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.2);
-  opacity: 1; /* solid color, no transparency */
+  /* Frosted metallic blur */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  /* Metallic depth */
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25);
+
+  /* Slight transparency */
+  opacity: 0.9;
+
+  /* Optional subtle border */
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 @keyframes danceRight {
