@@ -4,12 +4,14 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function PartnersSection() {
+export default function PartnersSection({ partnersData }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(null);
   const [direction, setDirection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  console.log("partners", partnersData);
 
   const partners = [
     {

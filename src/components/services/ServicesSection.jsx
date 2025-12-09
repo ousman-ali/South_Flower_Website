@@ -19,7 +19,8 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
   return <div ref={ref} className={className} style={style} />;
 };
 
-export default function ServicesSection() {
+export default function ServicesSection({ servicesData }) {
+  console.log(" servicesData", servicesData);
   const services = [
     {
       icon: <Sparkles size={32} />,

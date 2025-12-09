@@ -13,7 +13,8 @@ import {
   Zap,
 } from "lucide-react";
 
-export default function TestimonialSection() {
+export default function TestimonialSection({ testimonialsData }) {
+  console.log("testimonials", testimonialsData);
   const testimonials = [
     {
       id: 1,

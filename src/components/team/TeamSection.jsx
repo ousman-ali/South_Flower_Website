@@ -183,11 +183,13 @@ const animatedShapes = [
   },
 ];
 
-export default function TeamSection() {
+export default function TeamSection({ teams }) {
   const [activeMember, setActiveMember] = useState(null);
   const [currentPage, setCurrentPage] = useState(0);
   const [favorites, setFavorites] = useState([]);
   const membersPerPage = 3;
+
+  console.log("teams team", teams);
 
   const totalPages = Math.ceil(teamMembers.length / membersPerPage);
   const currentMembers = teamMembers.slice(

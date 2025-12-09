@@ -55,12 +55,14 @@ const projects = [
   },
 ];
 
-export default function BlogSection() {
+export default function BlogSection({ blogs }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
   const [isHovering, setIsHovering] = useState(false);
   const sliderRef = useRef(null);
   const intervalRef = useRef(null);
+
+  console.log("blogs", blogs);
 
   // Auto-play functionality
   useEffect(() => {
