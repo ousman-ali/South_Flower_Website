@@ -6,50 +6,74 @@ import { Sparkles, Star, Zap, Shield, Heart, Eye } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 // Slide container with interval-based sliding
-const SlideContainer = ({ children, interval = 4000 }) => {
-  const [currentSlide, setCurrentSlide] = useState(0);
+const SlideContainer = ({ children, interval = 3000 }) => {
+  const [index, setIndex] = useState(0);
   const containerRef = useRef(null);
-  const slideCount = React.Children.count(children);
 
+  const items = React.Children.toArray(children);
+  const total = items.length;
+
+  const CARD_WIDTH = 340;
+
+  // Auto Slide
   useEffect(() => {
-    const slideInterval = setInterval(() => {
-      setCurrentSlide((prev) => {
-        const next = (prev + 1) % slideCount;
-
-        // Animate the slide
-        if (containerRef.current) {
-          const slideWidth = 340; // card width + gap
-          containerRef.current.style.transition = "transform 0.7s ease-in-out";
-          containerRef.current.style.transform = `translateX(-${
-            next * slideWidth
-          }px)`;
-
-          // Reset position when reaching end for seamless loop
-          setTimeout(() => {
-            if (next === slideCount - 1 && containerRef.current) {
-              containerRef.current.style.transition = "none";
-              containerRef.current.style.transform = "translateX(0)";
-              setCurrentSlide(0);
-            }
-          }, 700);
-        }
-
-        return next;
-      });
+    const timer = setInterval(() => {
+      nextSlide();
     }, interval);
 
-    return () => clearInterval(slideInterval);
-  }, [interval, slideCount]);
+    return () => clearInterval(timer);
+  }, [index]);
+
+  const nextSlide = () => {
+    setIndex((prev) => {
+      const newIndex = (prev + 1) % total;
+
+      if (containerRef.current) {
+        containerRef.current.style.transition = "transform 0.7s ease";
+        containerRef.current.style.transform = `translateX(-${
+          newIndex * CARD_WIDTH
+        }px)`;
+      }
+
+      return newIndex;
+    });
+  };
+
+  const prevSlide = () => {
+    setIndex((prev) => {
+      const newIndex = prev === 0 ? total - 1 : prev - 1;
+
+      if (containerRef.current) {
+        containerRef.current.style.transition = "transform 0.7s ease";
+        containerRef.current.style.transform = `translateX(-${
+          newIndex * CARD_WIDTH
+        }px)`;
+      }
+
+      return newIndex;
+    });
+  };
 
   return (
     <div className="relative overflow-hidden">
-      <div
-        ref={containerRef}
-        className="flex gap-6 transition-transform duration-700 ease-in-out"
+      {/* Arrows */}
+      <button
+        onClick={prevSlide}
+        className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white p-3 rounded-full"
       >
-        {children}
-        {/* Clone first few items for seamless transition */}
-        {React.Children.toArray(children).slice(0, 3)}
+        ◀
+      </button>
+
+      <button
+        onClick={nextSlide}
+        className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white p-3 rounded-full"
+      >
+        ▶
+      </button>
+
+      <div ref={containerRef} className="flex gap-6">
+        {items}
+        {items}
       </div>
     </div>
   );
@@ -249,14 +273,26 @@ export default function ProductSection() {
                     src={product.image}
                     alt={product.name}
                     className="w-full h-full object-cover"
-                    animate={{
-                      scale: isHovered === product.id ? 1.1 : 1,
-                    }}
+                    animate={{ scale: isHovered === product.id ? 1.1 : 1 }}
                     transition={{ duration: 0.5 }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
 
-                  {/* Badge - Positioned on image */}
+                  {/* Wave Shape Bottom */}
+                  <svg
+                    className="absolute bottom-0 left-0 w-full"
+                    viewBox="0 0 500 80"
+                    preserveAspectRatio="none"
+                  >
+                    <path
+                      d="M0,40 C120,80 380,0 500,40 L500,100 L0,100 Z"
+                      fill="rgba(0,0,0,0.85)"
+                    />
+                  </svg>
+
+                  {/* Gradient Overlay */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
+
+                  {/* Badge */}
                   <div className="absolute top-4 left-4 z-10">
                     <div
                       className={`px-3 py-1 rounded-full bg-gradient-to-r ${product.gradient} text-white text-xs font-bold shadow-lg`}
@@ -265,7 +301,7 @@ export default function ProductSection() {
                     </div>
                   </div>
 
-                  {/* Rating - Positioned on image */}
+                  {/* Rating */}
                   <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
                     <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
                     <span className="text-white text-xs font-bold">
