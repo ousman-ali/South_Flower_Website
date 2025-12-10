@@ -24,6 +24,7 @@ export default function Home() {
   const [setup, setSetup] = useState(null);
   const [partners, setPartners] = useState([]);
   const [stats, setStats] = useState([]);
+  const [products, setProducts] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -37,6 +38,7 @@ export default function Home() {
       { name: "about_gallery", amount: 10 },
       { name: "about_partner", amount: 10 },
       { name: "about_statistic", amount: 10 },
+      { name: "ecommerce_product", amount: 10 },
       { name: "about_setup" },
     ];
 
@@ -44,7 +46,6 @@ export default function Home() {
       try {
         const data = await getBatchData(features);
 
-        console.log("datas", data);
         // Set states individually
         setBlogs(data.blog_post || []);
         setServices(data.about_service || []);
@@ -55,6 +56,7 @@ export default function Home() {
         setSetup(data.about_setup || null);
         setPartners(data.about_partner || []);
         setStats(data.about_statistic || []);
+        setProducts(data.ecommerce_product || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -65,7 +67,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  console.log("stats home", stats.data);
+  console.log("products home", products.data);
 
   if (loading) {
     return (
@@ -86,7 +88,7 @@ export default function Home() {
       />
       <ServicesSection servicesData={services.data} />
       <BlogSection blogs={blogs.data} />
-      <ProductSection />
+      <ProductSection products={products.data} />
       <CTACard />
       <TeamSection teams={teams.data} />
       <TestimonialSection testimonialsData={testimonials.data} />

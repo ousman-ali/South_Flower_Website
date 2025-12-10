@@ -2,185 +2,107 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Sparkles, Star, Zap, Shield, Heart, Eye } from "lucide-react";
+import {
+  Sparkles,
+  Star,
+  Zap,
+  Shield,
+  Heart,
+  Eye,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 // Slide container with interval-based sliding
 const SlideContainer = ({ children, interval = 3000 }) => {
-  const [index, setIndex] = useState(0);
   const containerRef = useRef(null);
-
-  const items = React.Children.toArray(children);
-  const total = items.length;
-
   const CARD_WIDTH = 340;
+  const items = React.Children.toArray(children);
 
-  // Auto Slide
+  // Duplicate items enough times so there is no gap
+  const loopItems = [...items, ...items, ...items].map((child, i) =>
+    React.cloneElement(child, { key: `loop-${i}` })
+  );
+
+  const positionRef = useRef(0);
+
+  // Continuous automatic sliding
   useEffect(() => {
     const timer = setInterval(() => {
-      nextSlide();
+      slideLeft();
     }, interval);
-
     return () => clearInterval(timer);
-  }, [index]);
+  }, []);
 
-  const nextSlide = () => {
-    setIndex((prev) => {
-      const newIndex = (prev + 1) % total;
+  const slideLeft = () => {
+    positionRef.current += 1;
 
-      if (containerRef.current) {
-        containerRef.current.style.transition = "transform 0.7s ease";
-        containerRef.current.style.transform = `translateX(-${
-          newIndex * CARD_WIDTH
-        }px)`;
-      }
+    if (containerRef.current) {
+      containerRef.current.style.transition = "transform 0.7s ease";
+      containerRef.current.style.transform = `translateX(-${
+        positionRef.current * CARD_WIDTH
+      }px)`;
+    }
 
-      return newIndex;
-    });
+    // When we've moved past 1 full set, JUMP back without animation
+    const oneSetWidth = items.length * CARD_WIDTH;
+
+    if (positionRef.current * CARD_WIDTH >= oneSetWidth) {
+      setTimeout(() => {
+        if (containerRef.current) {
+          containerRef.current.style.transition = "none";
+          containerRef.current.style.transform = `translateX(0px)`;
+        }
+        positionRef.current = 0;
+      }, 700);
+    }
   };
 
-  const prevSlide = () => {
-    setIndex((prev) => {
-      const newIndex = prev === 0 ? total - 1 : prev - 1;
+  const slideRight = () => {
+    positionRef.current -= 1;
 
-      if (containerRef.current) {
-        containerRef.current.style.transition = "transform 0.7s ease";
-        containerRef.current.style.transform = `translateX(-${
-          newIndex * CARD_WIDTH
-        }px)`;
-      }
+    if (positionRef.current < 0) {
+      positionRef.current = items.length - 1;
+    }
 
-      return newIndex;
-    });
+    if (containerRef.current) {
+      containerRef.current.style.transition = "transform 0.7s ease";
+      containerRef.current.style.transform = `translateX(-${
+        positionRef.current * CARD_WIDTH
+      }px)`;
+    }
   };
 
   return (
     <div className="relative overflow-hidden">
-      {/* Arrows */}
+      {/* Left Button */}
       <button
-        onClick={prevSlide}
+        onClick={slideRight}
         className="absolute left-2 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white p-3 rounded-full"
       >
-        ◀
+        <ChevronLeft className="w-7 h-7" />
       </button>
 
+      {/* Right Button */}
       <button
-        onClick={nextSlide}
+        onClick={slideLeft}
         className="absolute right-2 top-1/2 -translate-y-1/2 z-20 bg-white/10 hover:bg-white/20 backdrop-blur-md text-white p-3 rounded-full"
       >
-        ▶
+        <ChevronRight className="w-7 h-7" />
       </button>
 
+      {/* Actual sliding track */}
       <div ref={containerRef} className="flex gap-6">
-        {items}
-        {items}
+        {loopItems}
       </div>
     </div>
   );
 };
 
-export default function ProductSection() {
+export default function ProductSection({ products }) {
   const [isHovered, setIsHovered] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-
-  const products = [
-    {
-      id: 1,
-      name: "Premium Organic Oil",
-      description:
-        "100% pure cold-pressed organic oil with anti-inflammatory properties",
-      price: "$49.99",
-      originalPrice: "$64.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1600185366007-6dcb42a1a9bc?auto=format&fit=crop&w=800&q=80",
-      features: [
-        "Organic",
-        "Cold-Pressed",
-        "Anti-Inflammatory",
-        "Vitamin E Rich",
-      ],
-      gradient: "from-emerald-500 to-teal-400",
-      glow: "bg-emerald-500/20",
-      badge: "BEST SELLER",
-    },
-    {
-      id: 2,
-      name: "Herbal Essence",
-      description: "Ancient herbal blend for relaxation and mental clarity",
-      price: "$39.99",
-      originalPrice: "$52.99",
-      rating: 4.7,
-      image:
-        "https://images.unsplash.com/photo-1600180758895-19f2c67cac95?auto=format&fit=crop&w=800&q=80",
-      features: [
-        "All Natural",
-        "Stress Relief",
-        "Energy Boost",
-        "Herbal Blend",
-      ],
-      gradient: "from-purple-500 to-pink-400",
-      glow: "bg-purple-500/20",
-      badge: "NEW",
-    },
-    {
-      id: 3,
-      name: "Luxury Flower Extract",
-      description:
-        "Rare flower extract with anti-aging and rejuvenating properties",
-      price: "$89.99",
-      originalPrice: "$119.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1524593166156-1f2e30b69f6b?auto=format&fit=crop&w=800&q=80",
-      features: ["Rare Extract", "Anti-Aging", "Rejuvenating", "Luxury Grade"],
-      gradient: "from-rose-500 to-amber-400",
-      glow: "bg-rose-500/20",
-      badge: "LUXURY",
-    },
-    {
-      id: 4,
-      name: "Aromatic Infused Oil",
-      description: "Therapeutic aromatic oil for holistic wellness",
-      price: "$44.99",
-      originalPrice: "$59.99",
-      rating: 4.8,
-      image:
-        "https://images.unsplash.com/photo-1582299008536-2a9a1f3a8c88?auto=format&fit=crop&w=800&q=80",
-      features: ["Aromatherapy", "Holistic", "Therapeutic", "Calming"],
-      gradient: "from-blue-500 to-cyan-400",
-      glow: "bg-blue-500/20",
-      badge: "POPULAR",
-    },
-    {
-      id: 5,
-      name: "Golden Elixir Serum",
-      description: "24K gold infused serum for ultimate skin radiance",
-      price: "$129.99",
-      originalPrice: "$169.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1556228578-9c360e0b8f3c?auto=format&fit=crop&w=800&q=80",
-      features: ["24K Gold", "Anti-Oxidant", "Radiance", "Premium"],
-      gradient: "from-amber-500 to-yellow-400",
-      glow: "bg-amber-500/20",
-      badge: "LIMITED",
-    },
-    {
-      id: 6,
-      name: "Crystal Essence Water",
-      description: "Crystal-infused purified water for energetic balance",
-      price: "$34.99",
-      originalPrice: "$44.99",
-      rating: 4.6,
-      image:
-        "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80",
-      features: ["Crystal Infused", "Energetic", "Purified", "Balancing"],
-      gradient: "from-indigo-500 to-violet-400",
-      glow: "bg-indigo-500/20",
-      badge: "ENERGY",
-    },
-  ];
 
   // Auto advance index for visual indication
   useEffect(() => {
@@ -226,10 +148,10 @@ export default function ProductSection() {
           className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 mb-8"
         >
           {[
-            { value: "10K+", label: "Happy Customers", icon: Heart },
-            { value: "4.9★", label: "Average Rating", icon: Star },
+            { value: "1K+", label: "Happy Customers", icon: Heart },
+            { value: "5.0★", label: "Average Rating", icon: Star },
             { value: "24/7", label: "Support", icon: Shield },
-            { value: "100%", label: "Natural", icon: Zap },
+            { value: "100%", label: "Original", icon: Zap },
           ].map((stat, idx) => (
             <motion.div
               key={idx}
@@ -250,7 +172,7 @@ export default function ProductSection() {
         </motion.div>
 
         {/* Products Carousel - Simple sliding */}
-        <div className="relative overflow-hidden py-4">
+        <div className="relative overflow-hidden ">
           <SlideContainer interval={4000}>
             {products.map((product) => (
               <motion.div
@@ -258,56 +180,19 @@ export default function ProductSection() {
                 initial={{ opacity: 0, scale: 0.9 }}
                 whileInView={{ opacity: 1, scale: 1 }}
                 transition={{ duration: 0.5 }}
-                whileHover={{
-                  scale: 1.05,
-                  y: -5,
-                  transition: { duration: 0.2 },
-                }}
                 onMouseEnter={() => setIsHovered(product.id)}
                 onMouseLeave={() => setIsHovered(null)}
-                className="relative min-w-[320px] max-w-[320px] bg-gradient-to-br from-black/60 to-black/40 backdrop-blur-xl rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 cursor-pointer hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/10"
+                className="relative min-w-[320px] max-w-[320px] bg-gradient-to-br bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl overflow-hidden border border-white/10 transition-all duration-300 cursor-pointer hover:border-emerald-500/30 hover:shadow-2xl hover:shadow-emerald-500/10"
               >
                 {/* Product Image - Full width, no padding */}
                 <div className="relative h-64 overflow-hidden">
                   <motion.img
-                    src={product.image}
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
                     alt={product.name}
                     className="w-full h-full object-cover"
                     animate={{ scale: isHovered === product.id ? 1.1 : 1 }}
                     transition={{ duration: 0.5 }}
                   />
-
-                  {/* Wave Shape Bottom */}
-                  <svg
-                    className="absolute bottom-0 left-0 w-full"
-                    viewBox="0 0 500 80"
-                    preserveAspectRatio="none"
-                  >
-                    <path
-                      d="M0,40 C120,80 380,0 500,40 L500,100 L0,100 Z"
-                      fill="rgba(0,0,0,0.85)"
-                    />
-                  </svg>
-
-                  {/* Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
-
-                  {/* Badge */}
-                  <div className="absolute top-4 left-4 z-10">
-                    <div
-                      className={`px-3 py-1 rounded-full bg-gradient-to-r ${product.gradient} text-white text-xs font-bold shadow-lg`}
-                    >
-                      {product.badge}
-                    </div>
-                  </div>
-
-                  {/* Rating */}
-                  <div className="absolute top-4 right-4 bg-black/60 backdrop-blur-sm rounded-full px-2 py-1 flex items-center gap-1">
-                    <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                    <span className="text-white text-xs font-bold">
-                      {product.rating}
-                    </span>
-                  </div>
                 </div>
 
                 {/* Product Details - Below image */}
@@ -323,31 +208,8 @@ export default function ProductSection() {
                     </div>
                   </div>
 
-                  {/* Features - Minimal */}
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {product.features.slice(0, 2).map((feature, idx) => (
-                      <span
-                        key={idx}
-                        className="px-2 py-1 bg-white/5 rounded-full text-[10px] text-gray-300 border border-white/10"
-                      >
-                        {feature}
-                      </span>
-                    ))}
-                  </div>
-
                   {/* Price & Details Button */}
                   <div className="flex items-center justify-between">
-                    <div>
-                      <div className="flex items-center gap-2">
-                        <span className="text-xl font-bold bg-gradient-to-r from-emerald-400 to-cyan-400 bg-clip-text text-transparent">
-                          {product.price}
-                        </span>
-                        <span className="text-gray-500 text-sm line-through">
-                          {product.originalPrice}
-                        </span>
-                      </div>
-                    </div>
-
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
