@@ -23,6 +23,7 @@ export default function Home() {
   const [gallery, setGallery] = useState([]);
   const [setup, setSetup] = useState(null);
   const [partners, setPartners] = useState([]);
+  const [stats, setStats] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -35,6 +36,7 @@ export default function Home() {
       { name: "about_team", amount: 10 },
       { name: "about_gallery", amount: 10 },
       { name: "about_partner", amount: 10 },
+      { name: "about_statistic", amount: 10 },
       { name: "about_setup" },
     ];
 
@@ -52,6 +54,7 @@ export default function Home() {
         setGallery(data.about_gallery || []);
         setSetup(data.about_setup || null);
         setPartners(data.about_partner || []);
+        setStats(data.about_statistic || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -62,7 +65,7 @@ export default function Home() {
     fetchData();
   }, []);
 
-  console.log("teams home", teams.data);
+  console.log("stats home", stats.data);
 
   if (loading) {
     return (
@@ -75,7 +78,11 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection setup={setup.data} gallery={gallery.data} />
+      <AboutSection
+        setup={setup.data}
+        gallery={gallery.data}
+        stats={stats.data}
+      />
       <ServicesSection servicesData={services.data} />
       <BlogSection blogs={blogs.data} />
       <ProductSection />

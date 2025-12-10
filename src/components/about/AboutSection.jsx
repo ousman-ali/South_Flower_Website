@@ -30,13 +30,7 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
   return <div ref={ref} className={className} style={style} />;
 };
 
-// const galleryImages = [
-//   "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80",
-//   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-//   "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-// ];
-
-export default function AboutSection({ setup, gallery }) {
+export default function AboutSection({ setup, gallery, stats }) {
   const [current, setCurrent] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
   const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
@@ -57,32 +51,26 @@ export default function AboutSection({ setup, gallery }) {
     return () => clearInterval(timer);
   }, [galleryImages.length]);
 
-  const stats = [
-    {
-      icon: <Users className="w-6 h-6" />,
-      value: "100+",
-      label: "Team Members",
-      color: "from-gray-700 to-gray-600",
-    },
-    {
-      icon: <Target className="w-6 h-6" />,
-      value: "500+",
-      label: "Projects",
-      color: "from-gray-600 to-gray-500",
-    },
-    {
-      icon: <Globe className="w-6 h-6" />,
-      value: "50+",
-      label: "Countries",
-      color: "from-gray-700 to-gray-400",
-    },
-    {
-      icon: <Award className="w-6 h-6" />,
-      value: "25+",
-      label: "Awards",
-      color: "from-gray-600 to-gray-300",
-    },
-  ];
+  function getFAIcon(iconName) {
+    if (
+      typeof iconName === "string" &&
+      iconName.trim() !== "" &&
+      (iconName.startsWith("fa ") || // "fa fa-facebook"
+        iconName.startsWith("fa-") || // "fa-facebook"
+        iconName.startsWith("fas ") || // "fas fa-user"
+        iconName.startsWith("fas-") || // "fas-user"
+        iconName.startsWith("fab ") || // "fab fa-instagram"
+        iconName.startsWith("fab-") || // "fab-instagram"
+        iconName.startsWith("far ") || // regular icons
+        iconName.startsWith("far-"))
+    ) {
+      // VALID → return the icon directly
+      return <i className={`${iconName} text-xl`}></i>;
+    }
+
+    // INVALID → fallback icon
+    return <i className="fa-solid fa-circle-exclamation text-xl"></i>;
+  }
 
   const values = [
     {
@@ -352,14 +340,16 @@ export default function AboutSection({ setup, gallery }) {
                   <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-300/20 to-transparent rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
                   <div className="relative bg-white/80 backdrop-blur-sm border border-gray-300/50 rounded-2xl p-6 text-center shadow-lg">
                     <div
-                      className={`inline-flex p-3 bg-gradient-to-br ${stat.color} rounded-xl mb-3`}
+                      className={`inline-flex p-3 bg-gradient-to-br from-gray-600 to-gray-500 rounded-xl mb-3`}
                     >
-                      <div className="text-white">{stat.icon}</div>
+                      <div className="text-white">
+                        {getFAIcon(stat.icon_class)}
+                      </div>
                     </div>
                     <div className="text-3xl font-bold text-gray-900 mb-1">
                       {stat.value}
                     </div>
-                    <div className="text-gray-600 text-sm">{stat.label}</div>
+                    <div className="text-gray-600 text-sm">{stat.name}</div>
                   </div>
                 </motion.div>
               ))}
