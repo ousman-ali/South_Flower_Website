@@ -68,7 +68,7 @@ export default function BlogSection({ blogs }) {
   useEffect(() => {
     if (isPlaying && !isHovering) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % projects.length);
+        setCurrentIndex((prev) => (prev + 1) % blogs.length);
       }, 4000); // Change slide every 4 seconds
     }
 
@@ -80,12 +80,12 @@ export default function BlogSection({ blogs }) {
   }, [isPlaying, isHovering]);
 
   const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % projects.length);
+    setCurrentIndex((prev) => (prev + 1) % blogs.length);
     resetInterval();
   };
 
   const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + projects.length) % projects.length);
+    setCurrentIndex((prev) => (prev - 1 + blogs.length) % blogs.length);
     resetInterval();
   };
 
@@ -95,7 +95,7 @@ export default function BlogSection({ blogs }) {
     }
     if (isPlaying && !isHovering) {
       intervalRef.current = setInterval(() => {
-        setCurrentIndex((prev) => (prev + 1) % projects.length);
+        setCurrentIndex((prev) => (prev + 1) % blogs.length);
       }, 4000);
     }
   };
@@ -109,7 +109,7 @@ export default function BlogSection({ blogs }) {
   const getVisibleIndices = () => {
     const indices = [];
     for (let i = -1; i <= 1; i++) {
-      const idx = (currentIndex + i + projects.length) % projects.length;
+      const idx = (currentIndex + i + blogs.length) % blogs.length;
       indices.push(idx);
     }
     return indices;
@@ -118,7 +118,7 @@ export default function BlogSection({ blogs }) {
   const visibleIndices = getVisibleIndices();
 
   return (
-    <section className="w-full py-24 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative">
+    <section className="w-full py-10 bg-gradient-to-b from-gray-50 to-white overflow-hidden relative">
       {/* Background Shapes */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Large gradient orbs */}
@@ -215,14 +215,14 @@ export default function BlogSection({ blogs }) {
         >
           {/* Main Slides */}
           <div className="relative h-full flex items-center justify-center">
-            {visibleIndices.map((projectIndex, cardIndex) => {
-              const project = projects[projectIndex];
+            {visibleIndices.map((blogIndex, cardIndex) => {
+              const blog = blogs[blogIndex];
               const position = cardIndex - 1; // -1: left, 0: center, 1: right
               const isActive = position === 0;
 
               return (
                 <motion.div
-                  key={projectIndex}
+                  key={blogIndex}
                   initial={false}
                   animate={{
                     x: position * 320,
@@ -245,7 +245,7 @@ export default function BlogSection({ blogs }) {
                   {/* Card Container */}
                   <div
                     className={`w-[380px] ${
-                      isActive ? "h-[500px]" : "h-[450px]"
+                      isActive ? "h-[400px]" : "h-[350px]"
                     } transition-all duration-300`}
                   >
                     {/* Decorative Shape */}
@@ -259,9 +259,9 @@ export default function BlogSection({ blogs }) {
                         repeat: isActive ? Infinity : 0,
                         ease: "linear",
                       }}
-                      className={`absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br ${project.color} opacity-10 rounded-full blur-xl`}
+                      className={`absolute -top-10 -right-10 w-40 h-40 bg-gradient-to-br from-blue-500 to-cyan-500 opacity-10 rounded-full blur-xl`}
                       style={{
-                        clipPath: getShapeClipPath(project.shape),
+                        clipPath: getShapeClipPath("star"),
                       }}
                     />
 
@@ -269,7 +269,7 @@ export default function BlogSection({ blogs }) {
                     <div className="relative bg-white rounded-3xl shadow-2xl border border-gray-100 overflow-hidden h-full">
                       {/* Gradient Header */}
                       <div
-                        className={`h-3 w-full bg-gradient-to-r ${project.color}`}
+                        className={`h-3 w-full bg-gradient-to-r from-blue-500 to-cyan-500`}
                       >
                         <motion.div
                           animate={{ x: ["-100%", "100%"] }}
@@ -288,25 +288,20 @@ export default function BlogSection({ blogs }) {
                         <div className="flex items-center justify-between mb-6">
                           <div className="flex items-center gap-2">
                             <div
-                              className={`w-3 h-3 rounded-full bg-gradient-to-r ${project.color}`}
+                              className={`w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500`}
                             />
                             <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                              Project {projectIndex + 1}
+                              {blog.title}
                             </span>
                           </div>
                           <div
-                            className={`w-16 h-1 rounded-full bg-gradient-to-r ${project.color}`}
+                            className={`w-16 h-1 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500`}
                           />
                         </div>
 
-                        {/* Title */}
-                        <h3 className="text-2xl font-bold text-gray-900 mb-4">
-                          {project.title}
-                        </h3>
-
                         {/* Description */}
-                        <p className="text-gray-600 mb-8 flex-grow">
-                          {project.description}
+                        <p className="text-gray-600 mb-4">
+                          {blog.excerpt}
                         </p>
 
                         {/* Image */}
@@ -314,9 +309,15 @@ export default function BlogSection({ blogs }) {
                           <div
                             className={`absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent z-10`}
                           />
+                          {/* Featured Badge */}
+                          {blog.is_featured && (
+                            <div className="absolute top-2 right-2 z-20 bg-yellow-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow-lg">
+                              Featured
+                            </div>
+                          )}
                           <img
-                            src={project.image}
-                            alt={project.title}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${blog.banner_image}`}
+                            alt={blog.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
                           />
 
@@ -334,7 +335,7 @@ export default function BlogSection({ blogs }) {
 
                         {/* Action Button */}
                         <button
-                          className={`w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r ${project.color} bg-opacity-10 hover:bg-opacity-20 rounded-xl transition-all duration-300 group/btn`}
+                          className={`w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 bg-opacity-10 hover:bg-opacity-20 rounded-xl transition-all duration-300 group/btn`}
                         >
                           <span className="text-gray-700 font-semibold">
                             View Details
@@ -349,7 +350,7 @@ export default function BlogSection({ blogs }) {
                       <motion.div
                         animate={{ opacity: [0.3, 0.6, 0.3] }}
                         transition={{ duration: 2, repeat: Infinity }}
-                        className={`absolute inset-0 -z-10 bg-gradient-to-r ${project.color} rounded-3xl blur-2xl`}
+                        className={`absolute inset-0 -z-10 bg-gradient-to-r from-blue-500 to-cyan-500 rounded-3xl blur-2xl`}
                       />
                     )}
                   </div>
@@ -360,8 +361,8 @@ export default function BlogSection({ blogs }) {
         </div>
 
         {/* Progress Indicator */}
-        <div className="flex justify-center gap-2 mb-12">
-          {projects.map((_, index) => (
+        <div className="flex justify-center gap-2">
+          {blogs.map((_, index) => (
             <button
               key={index}
               onClick={() => {
