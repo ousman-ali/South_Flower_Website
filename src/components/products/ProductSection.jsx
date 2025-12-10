@@ -113,7 +113,7 @@ export default function ProductSection({ products }) {
   }, []);
 
   return (
-    <section className="relative py-16 overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
+    <section className="relative py-10 overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:6rem_6rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]" />
 
