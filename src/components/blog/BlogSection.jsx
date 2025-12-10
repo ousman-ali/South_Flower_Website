@@ -189,23 +189,6 @@ export default function BlogSection({ blogs }) {
           </motion.p>
         </div>
 
-        {/* Controls */}
-        <div className="flex justify-center items-center gap-4 mb-12">
-          <button
-            onClick={prevSlide}
-            className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl border border-gray-200 hover:scale-105 transition-all"
-          >
-            <ChevronLeft className="w-6 h-6 text-gray-700" />
-          </button>
-
-          <button
-            onClick={nextSlide}
-            className="p-3 rounded-full bg-white shadow-lg hover:shadow-xl border border-gray-200 hover:scale-105 transition-all"
-          >
-            <ChevronRight className="w-6 h-6 text-gray-700" />
-          </button>
-        </div>
-
         {/* Slider Container */}
         <div
           ref={sliderRef}
@@ -213,6 +196,25 @@ export default function BlogSection({ blogs }) {
           onMouseEnter={() => setIsHovering(true)}
           onMouseLeave={() => setIsHovering(false)}
         >
+          {/* LEFT ARROW (side-centered) */}
+          <button
+            onClick={prevSlide}
+            className="absolute left-0 top-1/2 -translate-y-1/2 z-40
+             p-4 rounded-full bg-white shadow-xl border border-gray-200
+             hover:scale-110 transition-transform hover:shadow-2xl"
+          >
+            <ChevronLeft className="w-7 h-7 text-gray-700" />
+          </button>
+
+          {/* RIGHT ARROW (side-centered) */}
+          <button
+            onClick={nextSlide}
+            className="absolute right-0 top-1/2 -translate-y-1/2 z-40
+             p-4 rounded-full bg-white shadow-xl border border-gray-200
+             hover:scale-110 transition-transform hover:shadow-2xl"
+          >
+            <ChevronRight className="w-7 h-7 text-gray-700" />
+          </button>
           {/* Main Slides */}
           <div className="relative h-full flex items-center justify-center">
             {visibleIndices.map((blogIndex, cardIndex) => {
@@ -300,9 +302,7 @@ export default function BlogSection({ blogs }) {
                         </div>
 
                         {/* Description */}
-                        <p className="text-gray-600 mb-4">
-                          {blog.excerpt}
-                        </p>
+                        <p className="text-gray-600 mb-4">{blog.excerpt}</p>
 
                         {/* Image */}
                         <div className="relative h-48 rounded-2xl overflow-hidden mb-6 group">
