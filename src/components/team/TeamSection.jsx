@@ -6,131 +6,15 @@ import {
   Linkedin,
   Twitter,
   Instagram,
+  Facebook,
   Mail,
   Github,
   Globe,
   Sparkles,
   Users,
-  Award,
-  Star,
-  Zap,
   ChevronLeft,
   ChevronRight,
-  Heart,
-  Share2,
-  MessageCircle,
 } from "lucide-react";
-
-const teamMembers = [
-  {
-    id: 1,
-    name: "Alex Johnson",
-    role: "Lead Designer",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop",
-    bio: "Creative visionary with 8+ years in design. Passionate about user-centered design and innovation.",
-    skills: ["UI/UX", "Figma", "Prototyping", "Branding"],
-    social: {
-      linkedin: "alexjohnson",
-      twitter: "alexdesign",
-      instagram: "alex.designs",
-      email: "alex@southflower.com",
-    },
-    color: "from-blue-500 to-cyan-400",
-    accentColor: "text-blue-500",
-    bgColor: "bg-blue-50",
-  },
-  {
-    id: 2,
-    name: "Sarah Miller",
-    role: "Senior Developer",
-    image:
-      "https://images.unsplash.com/photo-1494790108755-2616c113a1c7?w=400&h=400&fit=crop",
-    bio: "Full-stack developer specializing in React and Node.js. Loves solving complex problems.",
-    skills: ["React", "Node.js", "TypeScript", "AWS"],
-    social: {
-      linkedin: "sarahmiller",
-      twitter: "sarah_dev",
-      github: "sarahmiller",
-      email: "sarah@southflower.com",
-    },
-    color: "from-purple-500 to-pink-400",
-    accentColor: "text-purple-500",
-    bgColor: "bg-purple-50",
-  },
-  {
-    id: 3,
-    name: "Michael Chen",
-    role: "Project Manager",
-    image:
-      "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&h=400&fit=crop",
-    bio: "Agile expert with 10+ years managing tech projects. Ensures timely delivery and quality.",
-    skills: ["Agile", "Scrum", "Jira", "Leadership"],
-    social: {
-      linkedin: "michaelchen",
-      twitter: "mike_pm",
-      instagram: "mike.chen",
-      email: "michael@southflower.com",
-    },
-    color: "from-emerald-500 to-green-400",
-    accentColor: "text-emerald-500",
-    bgColor: "bg-emerald-50",
-  },
-  {
-    id: 4,
-    name: "Emma Rodriguez",
-    role: "Marketing Director",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=400&h=400&fit=crop",
-    bio: "Marketing strategist with expertise in digital campaigns and brand growth.",
-    skills: ["SEO", "Content", "Analytics", "Strategy"],
-    social: {
-      linkedin: "emmarodriguez",
-      twitter: "emma_marketing",
-      instagram: "emma.marketing",
-      email: "emma@southflower.com",
-    },
-    color: "from-amber-500 to-orange-400",
-    accentColor: "text-amber-500",
-    bgColor: "bg-amber-50",
-  },
-  {
-    id: 5,
-    name: "David Kim",
-    role: "Data Scientist",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400&h=400&fit=crop",
-    bio: "Data wizard specializing in machine learning and predictive analytics.",
-    skills: ["Python", "ML", "SQL", "TensorFlow"],
-    social: {
-      linkedin: "davidkim",
-      twitter: "david_data",
-      github: "davidkim",
-      email: "david@southflower.com",
-    },
-    color: "from-indigo-500 to-blue-400",
-    accentColor: "text-indigo-500",
-    bgColor: "bg-indigo-50",
-  },
-  {
-    id: 6,
-    name: "Lisa Wong",
-    role: "UX Researcher",
-    image:
-      "https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=400&h=400&fit=crop",
-    bio: "User experience researcher focused on creating intuitive and accessible designs.",
-    skills: ["Research", "Testing", "Analytics", "Usability"],
-    social: {
-      linkedin: "lisawong",
-      twitter: "lisa_ux",
-      instagram: "lisa.ux",
-      email: "lisa@southflower.com",
-    },
-    color: "from-rose-500 to-pink-400",
-    accentColor: "text-rose-500",
-    bgColor: "bg-rose-50",
-  },
-];
 
 const animatedShapes = [
   {
@@ -189,10 +73,8 @@ export default function TeamSection({ teams }) {
   const [favorites, setFavorites] = useState([]);
   const membersPerPage = 3;
 
-  console.log("teams team", teams);
-
-  const totalPages = Math.ceil(teamMembers.length / membersPerPage);
-  const currentMembers = teamMembers.slice(
+  const totalPages = Math.ceil(teams.length / membersPerPage);
+  const currentMembers = teams.slice(
     currentPage * membersPerPage,
     (currentPage + 1) * membersPerPage
   );
@@ -222,6 +104,7 @@ export default function TeamSection({ teams }) {
     github: <Github className="w-4 h-4" />,
     email: <Mail className="w-4 h-4" />,
     globe: <Globe className="w-4 h-4" />,
+    facebook: <Facebook className="w-4 h-4" />,
   };
 
   return (
@@ -281,14 +164,14 @@ export default function TeamSection({ teams }) {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 md:py-10">
         {/* Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-12 md:mb-16"
+          className="text-center mb-12 md:mb-12"
         >
           <motion.div
             initial={{ scale: 0.9, opacity: 0 }}
@@ -311,14 +194,10 @@ export default function TeamSection({ teams }) {
             </span>{" "}
             Behind Our Success
           </h2>
-          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
-            A diverse team of experts dedicated to delivering exceptional
-            results and innovative solutions.
-          </p>
         </motion.div>
 
         {/* Team Cards */}
-        <div className="mb-12">
+        <div className="">
           {/* Desktop Grid */}
           <div className="hidden lg:grid grid-cols-3 gap-8">
             {currentMembers.map((member) => (
@@ -352,7 +231,7 @@ export default function TeamSection({ teams }) {
 
             {/* Pagination Controls */}
             {totalPages > 1 && (
-              <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="flex items-center justify-center gap-4 mt-4">
                 <button
                   onClick={prevPage}
                   disabled={currentPage === 0}
@@ -426,22 +305,8 @@ const TeamCard = ({
     >
       {/* Background Gradient */}
       <div
-        className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${member.color}`}
+        className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-400`}
       />
-
-      {/* Favorite Button */}
-      <motion.button
-        whileHover={{ scale: 1.1 }}
-        whileTap={{ scale: 0.9 }}
-        onClick={() => toggleFavorite(member.id)}
-        className="absolute top-4 right-4 z-10 p-2 bg-white/90 backdrop-blur-sm rounded-full border border-gray-200 shadow-lg"
-      >
-        <Heart
-          className={`w-5 h-5 transition-colors ${
-            isFavorite ? "fill-red-500 text-red-500" : "text-gray-400"
-          }`}
-        />
-      </motion.button>
 
       {/* Content */}
       <div className="p-6">
@@ -456,7 +321,7 @@ const TeamCard = ({
               transition={{ duration: 0.3 }}
             >
               <img
-                src={member.image}
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${member.image}`}
                 alt={member.name}
                 className="w-full h-full object-cover"
               />
@@ -466,17 +331,19 @@ const TeamCard = ({
           </div>
 
           <div className="flex-1">
-            <h3 className="text-xl font-bold text-gray-900">{member.name}</h3>
+            <h3 className="text-xl font-bold text-gray-900">
+              {member.title_prefix}
+              {". "}
+              {member.name}
+            </h3>
             <div className="flex items-center gap-2 mb-2">
               <span
-                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${member.bgColor} ${member.accentColor}`}
+                className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-blue-500 bg-blue-50`}
               >
-                {member.role}
+                {member.position}
               </span>
               <div className="flex-1" />
-              <div className="text-xs text-gray-500">Member since 2022</div>
             </div>
-            <p className="text-gray-600 text-sm line-clamp-2">{member.bio}</p>
           </div>
         </div>
 
@@ -489,7 +356,7 @@ const TeamCard = ({
         >
           <h4 className="text-sm font-semibold text-gray-700 mb-3">Connect</h4>
           <div className="flex items-center gap-3">
-            {Object.entries(member.social).map(([platform, handle]) => (
+            {Object.entries(member.social_media).map(([platform, handle]) => (
               <motion.a
                 key={platform}
                 href="#"
@@ -502,9 +369,9 @@ const TeamCard = ({
                     ? "bg-sky-50 text-sky-600 hover:bg-sky-100"
                     : platform === "instagram"
                     ? "bg-pink-50 text-pink-600 hover:bg-pink-100"
-                    : platform === "github"
-                    ? "bg-gray-100 text-gray-700 hover:bg-gray-200"
-                    : "bg-gray-50 text-gray-600 hover:bg-gray-100"
+                    : platform === "facebook"
+                    ? "bg-blue-50 text-blue-600 hover:bg-blue-100"
+                    : "bg-blue-50 text-blue-600 hover:bg-blue-100"
                 }`}
                 aria-label={`${platform} profile`}
                 onClick={(e) => e.stopPropagation()}
