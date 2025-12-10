@@ -36,10 +36,11 @@ const galleryImages = [
   "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
 ];
 
-export default function AboutSection({ setup }) {
+export default function AboutSection({ setup, gallery }) {
   const [current, setCurrent] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
   console.log("setup", setup);
+  console.log("gallery", gallery[0].images);
   // Auto change images every 4 seconds
   useEffect(() => {
     const timer = setInterval(() => {

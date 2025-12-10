@@ -75,7 +75,7 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <AboutSection setup={setup.data} />
+      <AboutSection setup={setup.data} gallery={gallery.data} />
       <ServicesSection servicesData={services.data} />
       <BlogSection blogs={blogs.data} />
       <ProductSection />
