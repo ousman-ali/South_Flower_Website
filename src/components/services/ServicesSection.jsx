@@ -2,6 +2,7 @@
 
 import { motion, useAnimationFrame } from "framer-motion";
 import { Sparkles, ShieldCheck, Stars, Globe2 } from "lucide-react";
+import Link from "next/link";
 import { useRef } from "react";
 
 // Floating shape component with continuous animation
@@ -21,39 +22,30 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
 
 export default function ServicesSection({ servicesData }) {
   console.log(" servicesData", servicesData);
-  const services = [
-    {
-      icon: <Sparkles size={32} />,
-      title: "Premium Quality",
-      desc: "We provide industry-leading quality with attention to detail and reliability.",
-      gradient: "from-blue-500 to-cyan-400",
-      glowColor: "bg-blue-500/20",
-    },
-    {
-      icon: <ShieldCheck size={32} />,
-      title: "Trusted Solutions",
-      desc: "Our work is trusted by top organizations for performance and excellence.",
-      gradient: "from-emerald-500 to-green-400",
-      glowColor: "bg-emerald-500/20",
-    },
-    {
-      icon: <Stars size={32} />,
-      title: "Innovation First",
-      desc: "We bring creativity and modern technology into every project.",
-      gradient: "from-purple-500 to-pink-400",
-      glowColor: "bg-purple-500/20",
-    },
-    {
-      icon: <Globe2 size={32} />,
-      title: "Worldwide Reach",
-      desc: "We deliver world-class solutions with global standards.",
-      gradient: "from-orange-500 to-amber-400",
-      glowColor: "bg-orange-500/20",
-    },
-  ];
+
+  function getFAIcon(iconName) {
+    if (
+      typeof iconName === "string" &&
+      iconName.trim() !== "" &&
+      (iconName.startsWith("fa ") || // "fa fa-facebook"
+        iconName.startsWith("fa-") || // "fa-facebook"
+        iconName.startsWith("fas ") || // "fas fa-user"
+        iconName.startsWith("fas-") || // "fas-user"
+        iconName.startsWith("fab ") || // "fab fa-instagram"
+        iconName.startsWith("fab-") || // "fab-instagram"
+        iconName.startsWith("far ") || // regular icons
+        iconName.startsWith("far-"))
+    ) {
+      // VALID → return the icon directly
+      return <i className={`${iconName} text-xl`}></i>;
+    }
+
+    // INVALID → fallback icon
+    return <i className="fa-solid fa-concierge-bell  text-xl"></i>;
+  }
 
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
+    <section className="relative py-10 overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
       {/* Animated Background Grid */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff08_1px,transparent_1px),linear-gradient(to_bottom,#ffffff08_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_80%_50%_at_50%_50%,#000_70%,transparent_110%)]" />
 
@@ -126,7 +118,7 @@ export default function ServicesSection({ servicesData }) {
             </span>
           </motion.div>
 
-          <h2 className="text-5xl md:text-6xl font-bold mb-6">
+          <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-300">
             Our{" "}
             <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Featured Services
@@ -141,7 +133,7 @@ export default function ServicesSection({ servicesData }) {
 
         {/* Services Grid */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {services.map((service, index) => (
+          {servicesData.slice(0, 4).map((service, index) => (
             <motion.div
               key={index}
               initial={{ y: 60, opacity: 0 }}
@@ -157,7 +149,7 @@ export default function ServicesSection({ servicesData }) {
             >
               {/* External Floating Shapes around card */}
               <motion.div
-                className={`absolute -top-8 -right-8 w-24 h-24 ${service.glowColor} rounded-full blur-2xl opacity-0 group-hover:opacity-100`}
+                className={`absolute -top-8 -right-8 w-24 h-24 bg-blue-500/20 rounded-full blur-2xl opacity-0 group-hover:opacity-100`}
                 animate={{
                   scale: [1, 1.3, 1],
                   rotate: [0, 180, 0],
@@ -172,13 +164,7 @@ export default function ServicesSection({ servicesData }) {
               <motion.div
                 className="absolute -bottom-8 -left-8 w-20 h-20 border-2 border-current opacity-10 group-hover:opacity-30"
                 style={{
-                  borderColor: service.gradient.includes("blue")
-                    ? "#3b82f6"
-                    : service.gradient.includes("emerald")
-                    ? "#10b981"
-                    : service.gradient.includes("purple")
-                    ? "#a855f7"
-                    : "#f97316",
+                  borderColor: "#3b82f6",
                 }}
                 animate={{
                   rotate: [0, 360],
@@ -193,14 +179,14 @@ export default function ServicesSection({ servicesData }) {
 
               {/* Gradient glow on hover */}
               <div
-                className={`absolute -inset-1 bg-gradient-to-br ${service.gradient} rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}
+                className={`absolute -inset-1 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl opacity-0 group-hover:opacity-20 blur-xl transition-opacity duration-500`}
               />
 
               {/* Main Card with glass effect */}
               <div className="relative bg-black/40 backdrop-blur-xl rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all duration-500 shadow-2xl group-hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] h-full flex flex-col">
                 {/* Animated gradient border on top */}
                 <div
-                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r ${service.gradient} rounded-t-2xl`}
+                  className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-t-2xl`}
                 >
                   <motion.div
                     className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent"
@@ -229,7 +215,7 @@ export default function ServicesSection({ servicesData }) {
                   }}
                 >
                   <div
-                    className={`w-full h-full bg-gradient-to-br ${service.gradient}`}
+                    className={`w-full h-full bg-gradient-to-br from-blue-500 to-cyan-400`}
                     style={{
                       clipPath: "polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%)",
                     }}
@@ -251,7 +237,7 @@ export default function ServicesSection({ servicesData }) {
                 {/* Icon with gradient background */}
                 <div className="relative mb-6 flex justify-center">
                   <motion.div
-                    className={`relative p-4 bg-gradient-to-br ${service.gradient} rounded-2xl shadow-lg`}
+                    className={`relative p-4 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl shadow-lg`}
                     whileHover={{
                       rotate: [0, -10, 10, -10, 0],
                       scale: 1.1,
@@ -259,9 +245,11 @@ export default function ServicesSection({ servicesData }) {
                     transition={{ duration: 0.5 }}
                   >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br ${service.gradient} rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-300`}
+                      className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-300`}
                     />
-                    <div className="relative text-white">{service.icon}</div>
+                    <div className="relative text-white">
+                      {getFAIcon(service.icon_class)}
+                    </div>
                   </motion.div>
                 </div>
 
@@ -271,12 +259,12 @@ export default function ServicesSection({ servicesData }) {
                 </h3>
 
                 <p className="relative text-gray-400 leading-relaxed flex-grow">
-                  {service.desc}
+                  {service.short_description}
                 </p>
 
                 {/* Hover indicator */}
                 <motion.div
-                  className={`mt-6 h-1 bg-gradient-to-r ${service.gradient} rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}
+                  className={`mt-6 h-1 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left`}
                 />
               </div>
             </motion.div>
@@ -294,7 +282,7 @@ export default function ServicesSection({ servicesData }) {
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transition-all duration-300"
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transition-all duration-300 cursor-pointer"
           >
             <motion.div
               className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
@@ -302,7 +290,10 @@ export default function ServicesSection({ servicesData }) {
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}
             />
-            <span className="relative z-10 flex items-center gap-2">
+            <Link
+              href="/service"
+              className="relative z-10 flex items-center gap-2"
+            >
               Explore All Services
               <motion.span
                 animate={{ x: [0, 5, 0] }}
@@ -310,7 +301,7 @@ export default function ServicesSection({ servicesData }) {
               >
                 →
               </motion.span>
-            </span>
+            </Link>
           </motion.button>
         </motion.div>
       </div>
