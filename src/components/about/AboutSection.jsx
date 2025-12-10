@@ -34,8 +34,6 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
   const [hoveredCard, setHoveredCard] = useState(null);
   const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
-  console.log("aboutContent", aboutContent);
-
   const galleryImages =
     gallery?.flatMap((album) =>
       album.images.map((img) => `${IMAGE_URL}/${img.image}`)
