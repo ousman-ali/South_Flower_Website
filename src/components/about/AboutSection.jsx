@@ -12,6 +12,7 @@ import {
   Lightbulb,
   Clock,
 } from "lucide-react";
+import Link from "next/link";
 
 // Floating shape component
 const FloatingShape = ({ delay = 0, className = "", style }) => {
@@ -104,7 +105,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
   ];
 
   return (
-    <section className="relative py-24 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
+    <section className="relative py-10 overflow-hidden bg-gradient-to-b from-gray-50 via-white to-gray-50">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Grid Pattern */}
@@ -313,9 +314,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
               </h2>
 
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-3xl">
-                We are a team of passionate innovators dedicated to creating
-                transformative solutions that drive growth, inspire change, and
-                shape the future of technology across global markets.
+                {aboutContent?.text || "this is about text area"}
               </p>
             </motion.div>
 
@@ -424,13 +423,14 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
               transition={{ duration: 0.6, delay: 0.4 }}
               className="mt-12"
             >
-              <motion.button
-                whileHover={{
+              <Link
+                href="/about"
+                whilehover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(107, 114, 128, 0.2)",
                 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-xl shadow-lg flex items-center gap-3 group hover:shadow-xl transition-shadow"
+                whiletap={{ scale: 0.95 }}
+                className="px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-xl shadow-lg flex items-center gap-3 group hover:shadow-xl transition-shadow cursor-pointer w-[38%]"
               >
                 Learn More About Us
                 <motion.span
@@ -440,7 +440,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 >
                   →
                 </motion.span>
-              </motion.button>
+              </Link>
             </motion.div>
           </div>
         </div>
