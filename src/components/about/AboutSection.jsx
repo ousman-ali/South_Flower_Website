@@ -30,25 +30,32 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
   return <div ref={ref} className={className} style={style} />;
 };
 
-const galleryImages = [
-  "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-];
+// const galleryImages = [
+//   "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80",
+//   "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
+//   "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
+// ];
 
 export default function AboutSection({ setup, gallery }) {
   const [current, setCurrent] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
-  console.log("setup", setup);
-  console.log("gallery", gallery[0].images);
+  const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
+
+  const galleryImages =
+    gallery?.flatMap((album) =>
+      album.images.map((img) => `${IMAGE_URL}/${img.image}`)
+    ) || [];
+
   // Auto change images every 4 seconds
   useEffect(() => {
+    if (!galleryImages.length) return;
+
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % galleryImages.length);
     }, 4000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [galleryImages.length]);
 
   const stats = [
     {
