@@ -9,8 +9,6 @@ import {
   Zap,
   Sparkles,
   TrendingUp,
-  Award,
-  Users,
   Lightbulb,
   Clock,
 } from "lucide-react";
@@ -30,10 +28,12 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
   return <div ref={ref} className={className} style={style} />;
 };
 
-export default function AboutSection({ setup, gallery, stats }) {
+export default function AboutSection({ setup, gallery, stats, aboutContent }) {
   const [current, setCurrent] = useState(0);
   const [hoveredCard, setHoveredCard] = useState(null);
   const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
+
+  console.log("aboutContent", aboutContent);
 
   const galleryImages =
     gallery?.flatMap((album) =>
@@ -380,11 +380,12 @@ export default function AboutSection({ setup, gallery, stats }) {
                       Our Mission
                     </h3>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    To deliver transformative technologies that enhance
-                    productivity, empower businesses, and create meaningful
-                    impact across industries through innovation and excellence.
-                  </p>
+                  <p
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{
+                      __html: aboutContent?.mission || "this is mission area",
+                    }}
+                  ></p>
                 </div>
               </motion.div>
 
@@ -405,11 +406,12 @@ export default function AboutSection({ setup, gallery, stats }) {
                       Our Vision
                     </h3>
                   </div>
-                  <p className="text-gray-700 leading-relaxed">
-                    To become a global leader in digital transformation,
-                    creating smarter, sustainable, and future-driven solutions
-                    that shape tomorrow's world.
-                  </p>
+                  <p
+                    className="text-gray-700 leading-relaxed"
+                    dangerouslySetInnerHTML={{
+                      __html: aboutContent?.vision || "this is vision area",
+                    }}
+                  ></p>
                 </div>
               </motion.div>
             </motion.div>

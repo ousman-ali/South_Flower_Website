@@ -82,6 +82,7 @@ export default function Home() {
         setup={setup.data}
         gallery={gallery.data}
         stats={stats.data}
+        aboutContent={aboutContent.data}
       />
       <ServicesSection servicesData={services.data} />
       <BlogSection blogs={blogs.data} />
