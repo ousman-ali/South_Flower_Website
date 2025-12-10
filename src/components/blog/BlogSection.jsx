@@ -6,54 +6,7 @@ import {
   ChevronLeft,
   ChevronRight,
   ExternalLink,
-  Play,
-  Pause,
 } from "lucide-react";
-
-const projects = [
-  {
-    title: "AI Management Platform",
-    description: "Transforming business operations with AI automation.",
-    image: "/project1.jpg",
-    color: "from-blue-500 to-cyan-500",
-    shape: "triangle",
-  },
-  {
-    title: "AgriTech Farming App",
-    description: "Helping farmers with AI-powered planning and guidance.",
-    image: "/project2.jpg",
-    color: "from-emerald-500 to-green-500",
-    shape: "circle",
-  },
-  {
-    title: "Enterprise ERP System",
-    description: "A scalable ERP solution for large organizations.",
-    image: "/project3.jpg",
-    color: "from-purple-500 to-pink-500",
-    shape: "hexagon",
-  },
-  {
-    title: "E-Commerce System",
-    description: "Modern online store with real-time inventory.",
-    image: "/project4.jpg",
-    color: "from-orange-500 to-amber-500",
-    shape: "square",
-  },
-  {
-    title: "Healthcare AI",
-    description: "AI-powered diagnostic tools for medical professionals.",
-    image: "/project5.jpg",
-    color: "from-rose-500 to-red-500",
-    shape: "diamond",
-  },
-  {
-    title: "Smart City IoT",
-    description: "Connected infrastructure for modern cities.",
-    image: "/project6.jpg",
-    color: "from-indigo-500 to-violet-500",
-    shape: "star",
-  },
-];
 
 export default function BlogSection({ blogs }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -61,8 +14,6 @@ export default function BlogSection({ blogs }) {
   const [isHovering, setIsHovering] = useState(false);
   const sliderRef = useRef(null);
   const intervalRef = useRef(null);
-
-  console.log("blogs", blogs);
 
   // Auto-play functionality
   useEffect(() => {
