@@ -44,6 +44,8 @@ export default function AboutPage() {
     fetchData();
   }, []);
 
+  console.log("featuredblogs", featuredBlogs);
+
   if (loading) {
     return (
       <div className="">
@@ -60,7 +62,9 @@ export default function AboutPage() {
         pageName="Our Blog Posts"
         currentPage="South Flower Posts"
       />
-      {featuredBlogs.length > 0 && <FeaturedBlogPosts blogs={featuredBlogs} />}
+      {featuredBlogs.length > 0 && (
+        <FeaturedBlogPosts featuredBlogs={featuredBlogs} />
+      )}
       <BlogSection1
         blogs={blogs.data}
         products={products.data}
