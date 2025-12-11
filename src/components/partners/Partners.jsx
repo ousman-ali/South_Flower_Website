@@ -4,77 +4,77 @@ import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Star, Zap, ChevronLeft, ChevronRight } from "lucide-react";
 
-export default function PartnersSection({ partnersData }) {
+export default function PartnersSection({ partners }) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(null);
   const [direction, setDirection] = useState(0);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  console.log("partners", partnersData);
+  console.log("partners", partners);
 
-  const partners = [
-    {
-      id: 1,
-      name: "Microsoft",
-      logo: "https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 2,
-      name: "Apple",
-      logo: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 3,
-      name: "Google",
-      logo: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 4,
-      name: "Amazon",
-      logo: "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 5,
-      name: "Tesla",
-      logo: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 6,
-      name: "Adobe",
-      logo: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 7,
-      name: "Salesforce",
-      logo: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 8,
-      name: "IBM",
-      logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 9,
-      name: "Intel",
-      logo: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 10,
-      name: "Samsung",
-      logo: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 11,
-      name: "Spotify",
-      logo: "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-    {
-      id: 12,
-      name: "Netflix",
-      logo: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&h=300&q=80",
-    },
-  ];
+  // const partners = [
+  //   {
+  //     id: 1,
+  //     name: "Microsoft",
+  //     logo: "https://images.unsplash.com/photo-1634942537034-2531766767d1?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Apple",
+  //     logo: "https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Google",
+  //     logo: "https://images.unsplash.com/photo-1573804633927-bfcbcd909acd?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Amazon",
+  //     logo: "https://images.unsplash.com/photo-1523474253046-8cd2748b5fd2?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Tesla",
+  //     logo: "https://images.unsplash.com/photo-1560958089-b8a1929cea89?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 6,
+  //     name: "Adobe",
+  //     logo: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 7,
+  //     name: "Salesforce",
+  //     logo: "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 8,
+  //     name: "IBM",
+  //     logo: "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 9,
+  //     name: "Intel",
+  //     logo: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 10,
+  //     name: "Samsung",
+  //     logo: "https://images.unsplash.com/photo-1610945265064-0e34e5519bbf?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 11,
+  //     name: "Spotify",
+  //     logo: "https://images.unsplash.com/photo-1611605698335-8b1569810432?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  //   {
+  //     id: 12,
+  //     name: "Netflix",
+  //     logo: "https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?auto=format&fit=crop&w=400&h=300&q=80",
+  //   },
+  // ];
 
   useEffect(() => {
     const checkMobile = () => {
@@ -143,7 +143,7 @@ export default function PartnersSection({ partnersData }) {
   ];
 
   return (
-    <section className="relative py-12 md:py-20 overflow-hidden bg-gradient-to-b from-white to-gray-50">
+    <section className="relative py-10 md:py-10 overflow-hidden bg-gradient-to-b from-white to-gray-50">
       {/* Animated Background */}
       <div className="absolute inset-0 overflow-hidden">
         {floatingShapes.map((shape) => (
@@ -288,14 +288,14 @@ export default function PartnersSection({ partnersData }) {
                   }`}
                 >
                   {/* Card */}
-                  <div className="relative bg-white rounded-xl md:rounded-2xl shadow-lg md:shadow-xl overflow-hidden border border-gray-200 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-300">
+                  <div className="relative bg-white rounded-xl mb-2 md:rounded-2xl shadow-lg md:shadow-xl overflow-hidden border border-gray-300 transition-all duration-300 group-hover:shadow-2xl group-hover:border-gray-300">
                     {/* Image Container */}
                     <div className="relative h-40 sm:h-48 md:h-44 overflow-hidden">
                       {/* Image */}
                       <div
                         className="absolute inset-0 bg-gray-100 transition-transform duration-500 group-hover:scale-110"
                         style={{
-                          backgroundImage: `url(${partner.logo})`,
+                          backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}/${partner.image})`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}

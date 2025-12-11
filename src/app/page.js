@@ -92,7 +92,7 @@ export default function Home() {
       <CTACard />
       <TeamSection teams={teams.data} />
       <TestimonialSection testimonials={testimonials.data} />
-      <PartnersSection partnersData={partners.data} />
+      <PartnersSection partners={partners.data} />
     </>
   );
 }
