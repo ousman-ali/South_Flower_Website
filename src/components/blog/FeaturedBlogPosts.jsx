@@ -161,14 +161,6 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
         : "bg-rose-500/30",
   }));
 
-  const toggleFavorite = (blogId) => {
-    setFavorites((prev) =>
-      prev.includes(blogId)
-        ? prev.filter((id) => id !== blogId)
-        : [...prev, blogId]
-    );
-  };
-
   const toggleBookmark = () => {
     setIsBookmarked(!isBookmarked);
   };
@@ -205,7 +197,7 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
   return (
     <section
       ref={containerRef}
-      className="relative py-12 bg-gradient-to-b from-gray-900 via-black to-gray-900 overflow-hidden"
+      className="relative py-12 bg-gradient-to-b from-gray-100 via-blue to-gray-50 overflow-hidden"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -360,10 +352,10 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                       onClick={() => setSelectedBlog(index)}
                       onMouseEnter={() => setIsHovered(blog.id)}
                       onMouseLeave={() => setIsHovered(null)}
-                      className={`relative p-4 rounded-xl cursor-pointer transition-all duration-300 ${
+                      className={`relative p-4 mb-2 rounded-xl cursor-pointer transition-all duration-300 ${
                         isSelected
                           ? `${colors.bg} ${colors.border} border-2 shadow-xl shadow-black/30`
-                          : "bg-gray-900/50 border border-gray-800 hover:bg-gray-800/50"
+                          : "bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800/50"
                       } backdrop-blur-sm overflow-hidden group`}
                     >
                       {/* Selection Indicator */}
@@ -395,17 +387,6 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                             <div
                               className={`absolute inset-0 ${blogColor.gradient} opacity-60`}
                             />
-
-                            {/* Category Badge */}
-                            <div className="absolute top-1 right-1">
-                              <div
-                                className={`p-1 rounded-full ${colors.bg} backdrop-blur-sm`}
-                              >
-                                {React.cloneElement(blogColor.icon, {
-                                  className: `w-3 h-3 ${colors.text}`,
-                                })}
-                              </div>
-                            </div>
                           </div>
                         </div>
 
@@ -467,53 +448,6 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                   );
                 })}
               </div>
-
-              {/* Stats Summary */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="p-6 rounded-xl bg-gradient-to-br from-gray-900/80 to-black/80 backdrop-blur-sm border border-gray-800/50"
-              >
-                <h4 className="text-sm font-bold text-white mb-4 flex items-center gap-2">
-                  <Zap className="w-4 h-4 text-amber-400" />
-                  Quick Stats
-                </h4>
-                <div className="grid grid-cols-3 gap-4">
-                  {[
-                    {
-                      label: "Total Views",
-                      value: `${featuredBlogs
-                        .reduce(
-                          (sum, blog) =>
-                            sum + (parseInt(blog.views_count) || 0),
-                          0
-                        )
-                        .toLocaleString()}+`,
-                      icon: Eye,
-                    },
-                    {
-                      label: "Avg Rating",
-                      value: "4.8★",
-                      icon: Star,
-                    },
-                    {
-                      label: "Articles",
-                      value: featuredBlogs.length,
-                      icon: BookOpen,
-                    },
-                  ].map((stat, idx) => (
-                    <div key={idx} className="text-center">
-                      <div className="text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                        {stat.value}
-                      </div>
-                      <div className="text-xs text-gray-400 mt-1">
-                        {stat.label}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </motion.div>
             </div>
           </div>
 
