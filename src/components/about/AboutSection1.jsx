@@ -6,9 +6,6 @@ import {
   Target,
   Rocket,
   Globe,
-  Sparkles,
-  Award,
-  Users,
   Lightbulb,
   Clock,
   Shield,
@@ -52,25 +49,54 @@ const FloatingShape = ({
   );
 };
 
-const galleryImages = [
-  "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=800&q=80",
-  "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=800&q=80",
-];
-
-export default function AboutSection1() {
+export default function AboutSection1({
+  setup,
+  gallery,
+  aboutContent,
+  services,
+}) {
   const [current, setCurrent] = useState(0);
-  const [hoveredCard, setHoveredCard] = useState(null);
+  const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
-  // Auto change images every 5 seconds
+  console.log("about", aboutContent);
+  console.log("setup", setup);
+
+  const galleryImages =
+    gallery?.flatMap((album) =>
+      album.images.map((img) => `${IMAGE_URL}/${img.image}`)
+    ) || [];
+
+  // Auto change images every 4 seconds
   useEffect(() => {
+    if (!galleryImages.length) return;
+
     const timer = setInterval(() => {
       setCurrent((prev) => (prev + 1) % galleryImages.length);
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [galleryImages.length]);
+
+  function getFAIcon(iconName) {
+    if (
+      typeof iconName === "string" &&
+      iconName.trim() !== "" &&
+      (iconName.startsWith("fa ") || // "fa fa-facebook"
+        iconName.startsWith("fa-") || // "fa-facebook"
+        iconName.startsWith("fas ") || // "fas fa-user"
+        iconName.startsWith("fas-") || // "fas-user"
+        iconName.startsWith("fab ") || // "fab fa-instagram"
+        iconName.startsWith("fab-") || // "fab-instagram"
+        iconName.startsWith("far ") || // regular icons
+        iconName.startsWith("far-"))
+    ) {
+      // VALID → return the icon directly
+      return <i className={`${iconName} text-xl`}></i>;
+    }
+
+    // INVALID → fallback icon
+    return <i className="fa-solid fa-concierge-bell  text-xl"></i>;
+  }
 
   const coreValues = [
     {
@@ -112,28 +138,28 @@ export default function AboutSection1() {
     },
   ];
 
-  const services = [
-    {
-      title: "Digital Strategy",
-      description: "Comprehensive planning for digital transformation",
-      icon: "📊",
-    },
-    {
-      title: "Web Development",
-      description: "Cutting-edge websites and applications",
-      icon: "💻",
-    },
-    {
-      title: "UX/UI Design",
-      description: "User-centered design solutions",
-      icon: "🎨",
-    },
-    {
-      title: "Cloud Solutions",
-      description: "Scalable and secure cloud infrastructure",
-      icon: "☁️",
-    },
-  ];
+  // const services = [
+  //   {
+  //     title: "Digital Strategy",
+  //     description: "Comprehensive planning for digital transformation",
+  //     icon: "📊",
+  //   },
+  //   {
+  //     title: "Web Development",
+  //     description: "Cutting-edge websites and applications",
+  //     icon: "💻",
+  //   },
+  //   {
+  //     title: "UX/UI Design",
+  //     description: "User-centered design solutions",
+  //     icon: "🎨",
+  //   },
+  //   {
+  //     title: "Cloud Solutions",
+  //     description: "Scalable and secure cloud infrastructure",
+  //     icon: "☁️",
+  //   },
+  // ];
 
   const floatingShapes = [
     {
@@ -268,17 +294,10 @@ export default function AboutSection1() {
 
               <div className="space-y-4">
                 <p className="text-gray-700 text-lg leading-relaxed">
-                  We are a visionary team of innovators, strategists, and
-                  creators dedicated to transforming businesses through
-                  cutting-edge digital solutions. With over a decade of
-                  experience, we've evolved from a passionate startup to a
-                  global leader in digital innovation.
+                  {aboutContent?.text || "this is about text area"}
                 </p>
-                <p className="text-gray-700 text-lg leading-relaxed">
-                  Our journey is defined by relentless pursuit of excellence,
-                  deep industry expertise, and an unwavering commitment to our
-                  clients' success. We bridge the gap between ambitious vision
-                  and remarkable reality.
+                <p className="text-xl font-semibold text-gray-700 italic tracking-wide">
+                  {setup?.company_moto || "This is the company moto area"}
                 </p>
               </div>
             </motion.div>
@@ -305,12 +324,12 @@ export default function AboutSection1() {
                       Our Mission
                     </h3>
                   </div>
-                  <p className="text-gray-700">
-                    To empower businesses with transformative digital solutions
-                    that drive growth, enhance efficiency, and create
-                    sustainable competitive advantages in an ever-evolving
-                    digital landscape.
-                  </p>
+                  <p
+                    className="text-gray-700"
+                    dangerouslySetInnerHTML={{
+                      __html: aboutContent?.mission || "this is mission area",
+                    }}
+                  ></p>
                 </motion.div>
 
                 {/* Vision */}
@@ -319,18 +338,19 @@ export default function AboutSection1() {
                   className="relative group bg-gradient-to-br from-purple-50 to-white p-6 rounded-2xl border border-purple-200/50 shadow-lg"
                 >
                   <div className="flex items-center gap-3 mb-4">
-                    <div className="p-3 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl">
+                    <div className="p-3 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-xl">
                       <Globe className="w-5 h-5 text-white" />
                     </div>
                     <h3 className="text-xl font-bold text-gray-900">
                       Our Vision
                     </h3>
                   </div>
-                  <p className="text-gray-700">
-                    To be the world's most trusted partner for digital
-                    innovation, creating a future where technology seamlessly
-                    enhances human potential and drives positive global impact.
-                  </p>
+                  <p
+                    className="text-gray-700"
+                    dangerouslySetInnerHTML={{
+                      __html: aboutContent?.vision || "this is vision area",
+                    }}
+                  ></p>
                 </motion.div>
               </div>
             </motion.div>
@@ -483,13 +503,15 @@ export default function AboutSection1() {
                     whileHover={{ x: 5 }}
                     className="flex items-center gap-3 p-3 bg-white/80 backdrop-blur-sm rounded-xl border border-gray-300/50 shadow-sm"
                   >
-                    <span className="text-xl">{service.icon}</span>
+                    <span className="text-xl bg-gradient-to-br from-blue-600 to-cyan-500 text-white px-2 py-1 rounded-lg ">
+                      {getFAIcon(service.icon_class)}
+                    </span>
                     <div className="flex-1">
                       <div className="font-medium text-gray-900">
                         {service.title}
                       </div>
                       <div className="text-sm text-gray-600">
-                        {service.description}
+                        {service.short_description}
                       </div>
                     </div>
                     <ThumbsUp className="w-4 h-4 text-green-500" />
@@ -506,7 +528,7 @@ export default function AboutSection1() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.4 }}
-          className="mt-12 text-center"
+          className="text-center"
         ></motion.div>
       </div>
     </section>

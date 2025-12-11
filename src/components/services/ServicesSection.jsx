@@ -21,7 +21,6 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
 };
 
 export default function ServicesSection({ servicesData }) {
-  console.log(" servicesData", servicesData);
 
   function getFAIcon(iconName) {
     if (
