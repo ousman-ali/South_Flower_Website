@@ -91,7 +91,7 @@ export default function Home() {
       <ProductSection products={products.data} />
       <CTACard />
       <TeamSection teams={teams.data} />
-      <TestimonialSection testimonialsData={testimonials.data} />
+      <TestimonialSection testimonials={testimonials.data} />
       <PartnersSection partnersData={partners.data} />
     </>
   );

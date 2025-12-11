@@ -13,80 +13,80 @@ import {
   Zap,
 } from "lucide-react";
 
-export default function TestimonialSection({ testimonialsData }) {
-  console.log("testimonials", testimonialsData);
-  const testimonials = [
-    {
-      id: 1,
-      name: "Sarah Johnson",
-      role: "CEO, Bloom Enterprises",
-      company: "Bloom Enterprises",
-      image:
-        "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80",
-      rating: 5,
-      message:
-        "South Flower delivered outstanding quality. Their professionalism, attention to detail, and innovative solutions exceeded our expectations. The team's dedication to excellence is truly remarkable.",
-      stats: { projects: 15, satisfaction: 98 },
-      color: "from-blue-500 to-cyan-400",
-      icon: <Award className="w-5 h-5" />,
-    },
-    {
-      id: 2,
-      name: "Michael Adams",
-      role: "Operations Manager, GreenLeaf Co.",
-      company: "GreenLeaf Co.",
-      image:
-        "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
-      rating: 5,
-      message:
-        "A highly trusted partner. The team brought our vision to life with dedication and exceptional skill. Their ability to understand complex requirements and deliver beyond expectations is impressive.",
-      stats: { projects: 8, satisfaction: 95 },
-      color: "from-emerald-500 to-green-400",
-      icon: <Zap className="w-5 h-5" />,
-    },
-    {
-      id: 3,
-      name: "Sophia Martinez",
-      role: "Marketing Director, Lux Botanics",
-      company: "Lux Botanics",
-      image:
-        "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
-      rating: 5,
-      message:
-        "Working with South Flower was an absolute pleasure. Their commitment to quality and service is unmatched. They transformed our brand identity with creativity and precision.",
-      stats: { projects: 12, satisfaction: 99 },
-      color: "from-purple-500 to-pink-400",
-      icon: <Heart className="w-5 h-5" />,
-    },
-    {
-      id: 4,
-      name: "David Chen",
-      role: "Founder, Nature's Essence",
-      company: "Nature's Essence",
-      image:
-        "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
-      rating: 5,
-      message:
-        "The results speak for themselves. South Flower's expertise elevated our product line to premium status. Their innovative approach and attention to detail set them apart in the industry.",
-      stats: { projects: 20, satisfaction: 97 },
-      color: "from-amber-500 to-orange-400",
-      icon: <Sparkles className="w-5 h-5" />,
-    },
-    {
-      id: 5,
-      name: "Emma Wilson",
-      role: "Creative Director, Botanic Arts",
-      company: "Botanic Arts",
-      image:
-        "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80",
-      rating: 5,
-      message:
-        "Exceptional service from start to finish. South Flower understands the essence of botanical beauty and translates it into stunning visual experiences. Highly recommended!",
-      stats: { projects: 10, satisfaction: 96 },
-      color: "from-rose-500 to-red-400",
-      icon: <Star className="w-5 h-5" />,
-    },
-  ];
+export default function TestimonialSection({ testimonials }) {
+  console.log("testimonials", testimonials);
+  // const testimonials = [
+  //   {
+  //     id: 1,
+  //     name: "Sarah Johnson",
+  //     role: "CEO, Bloom Enterprises",
+  //     company: "Bloom Enterprises",
+  //     image:
+  //       "https://images.unsplash.com/photo-1529626455594-4ff0802cfb7e?auto=format&fit=crop&w=800&q=80",
+  //     rating: 5,
+  //     message:
+  //       "South Flower delivered outstanding quality. Their professionalism, attention to detail, and innovative solutions exceeded our expectations. The team's dedication to excellence is truly remarkable.",
+  //     stats: { projects: 15, satisfaction: 98 },
+  //     color: "from-blue-500 to-cyan-400",
+  //     icon: <Award className="w-5 h-5" />,
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Michael Adams",
+  //     role: "Operations Manager, GreenLeaf Co.",
+  //     company: "GreenLeaf Co.",
+  //     image:
+  //       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=800&q=80",
+  //     rating: 5,
+  //     message:
+  //       "A highly trusted partner. The team brought our vision to life with dedication and exceptional skill. Their ability to understand complex requirements and deliver beyond expectations is impressive.",
+  //     stats: { projects: 8, satisfaction: 95 },
+  //     color: "from-emerald-500 to-green-400",
+  //     icon: <Zap className="w-5 h-5" />,
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Sophia Martinez",
+  //     role: "Marketing Director, Lux Botanics",
+  //     company: "Lux Botanics",
+  //     image:
+  //       "https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=800&q=80",
+  //     rating: 5,
+  //     message:
+  //       "Working with South Flower was an absolute pleasure. Their commitment to quality and service is unmatched. They transformed our brand identity with creativity and precision.",
+  //     stats: { projects: 12, satisfaction: 99 },
+  //     color: "from-purple-500 to-pink-400",
+  //     icon: <Heart className="w-5 h-5" />,
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "David Chen",
+  //     role: "Founder, Nature's Essence",
+  //     company: "Nature's Essence",
+  //     image:
+  //       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=800&q=80",
+  //     rating: 5,
+  //     message:
+  //       "The results speak for themselves. South Flower's expertise elevated our product line to premium status. Their innovative approach and attention to detail set them apart in the industry.",
+  //     stats: { projects: 20, satisfaction: 97 },
+  //     color: "from-amber-500 to-orange-400",
+  //     icon: <Sparkles className="w-5 h-5" />,
+  //   },
+  //   {
+  //     id: 5,
+  //     name: "Emma Wilson",
+  //     role: "Creative Director, Botanic Arts",
+  //     company: "Botanic Arts",
+  //     image:
+  //       "https://images.unsplash.com/photo-1488426862026-3ee34a7d66df?auto=format&fit=crop&w=800&q=80",
+  //     rating: 5,
+  //     message:
+  //       "Exceptional service from start to finish. South Flower understands the essence of botanical beauty and translates it into stunning visual experiences. Highly recommended!",
+  //     stats: { projects: 10, satisfaction: 96 },
+  //     color: "from-rose-500 to-red-400",
+  //     icon: <Star className="w-5 h-5" />,
+  //   },
+  // ];
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
@@ -148,7 +148,7 @@ export default function TestimonialSection({ testimonialsData }) {
   };
 
   return (
-    <section className="relative py-16 md:py-24 lg:py-32 overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
+    <section className="relative py-10 md:py-10 lg:py-10 overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff03_1px,transparent_1px),linear-gradient(to_bottom,#ffffff03_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_60%,transparent_100%)]" />
 
       <motion.div
@@ -238,12 +238,12 @@ export default function TestimonialSection({ testimonialsData }) {
             whileHover={{ scale: 1.1, x: 5 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 lg:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-purple-500 to-pink-400 rounded-full shadow-2xl flex items-center justify-center hover:shadow-purple-500/30 transition-all"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 lg:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-2xl flex items-center justify-center hover:shadow-purple-500/30 transition-all"
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
           </motion.button>
 
-          <div className="relative h-[650px] md:h-[500px]">
+          <div className="relative h-[350px] md:h-[300px]">
             <AnimatePresence custom={direction} mode="wait">
               <motion.div
                 key={activeIndex}
@@ -276,14 +276,14 @@ export default function TestimonialSection({ testimonialsData }) {
                         repeat: Infinity,
                         ease: "easeInOut",
                       }}
-                      className={`absolute -inset-4 md:-inset-6 lg:-inset-8 bg-gradient-to-br ${testimonials[activeIndex].color} rounded-full blur-3xl opacity-20`}
+                      className={`absolute -inset-4 md:-inset-6 lg:-inset-8 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-full blur-3xl opacity-20`}
                     />
 
                     <div className="relative">
                       <motion.img
-                        src={testimonials[activeIndex].image}
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${testimonials[activeIndex].image}`}
                         alt={testimonials[activeIndex].name}
-                        className="relative w-48 h-48 sm:w-56 sm:h-56 md:w-64 md:h-64 lg:w-72 lg:h-72 xl:w-80 xl:h-80 object-cover rounded-2xl sm:rounded-3xl border-4 border-white/20 shadow-2xl mx-auto"
+                        className="relative w-48 h-38 sm:w-56 sm:h-46 md:w-64 md:h-54 lg:w-72 lg:h-62 xl:w-80 xl:h-80 object-cover rounded-2xl sm:rounded-3xl border-4 border-white/20 shadow-2xl mx-auto"
                         initial={{ scale: 0.9, rotate: -5 }}
                         animate={{ scale: 1, rotate: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
@@ -306,7 +306,7 @@ export default function TestimonialSection({ testimonialsData }) {
                             ease: "linear",
                           },
                         }}
-                        className={`absolute -top-4 -right-4 sm:-top-5 sm:-right-5 md:-top-6 md:-right-6 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br ${testimonials[activeIndex].color} rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl`}
+                        className={`absolute -top-4 -right-4 sm:-top-5 sm:-right-5 md:-top-6 md:-right-6 w-14 h-14 sm:w-16 sm:h-16 md:w-20 md:h-20 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-xl sm:rounded-2xl p-3 sm:p-4 shadow-2xl`}
                       >
                         <Quote className="w-full h-full text-white" />
                       </motion.div>
@@ -337,22 +337,13 @@ export default function TestimonialSection({ testimonialsData }) {
                       transition={{ duration: 0.5, delay: 0.1 }}
                       className="space-y-4 md:space-y-6 lg:space-y-8"
                     >
-                      <motion.div
-                        initial={{ scale: 0, rotate: -180 }}
-                        animate={{ scale: 1, rotate: 0 }}
-                        transition={{ duration: 0.5, type: "spring" }}
-                        className="text-4xl sm:text-5xl md:text-6xl text-blue-400/30 text-center lg:text-left"
-                      >
-                        "
-                      </motion.div>
-
                       <motion.p
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                         className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-200 leading-relaxed italic text-center lg:text-left px-2 sm:px-0"
                       >
-                        "{testimonials[activeIndex].message}"
+                        "{testimonials[activeIndex].description}"
                       </motion.p>
 
                       <motion.div
@@ -363,60 +354,13 @@ export default function TestimonialSection({ testimonialsData }) {
                       >
                         <div className="text-center lg:text-left">
                           <h3 className="text-xl sm:text-2xl md:text-3xl font-bold text-white">
+                            {testimonials[activeIndex].title_prefix}
+                            {". "}
                             {testimonials[activeIndex].name}
                           </h3>
                           <p className="text-gray-400 text-sm sm:text-base md:text-lg">
                             {testimonials[activeIndex].role}
                           </p>
-                        </div>
-
-                        <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 md:gap-6 lg:gap-8 pt-4 md:pt-6 border-t border-white/10">
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.4 }}
-                            className="flex items-center gap-3"
-                          >
-                            <div
-                              className={`p-2 sm:p-3 bg-gradient-to-br ${testimonials[activeIndex].color} rounded-lg sm:rounded-xl`}
-                            >
-                              {React.cloneElement(
-                                testimonials[activeIndex].icon,
-                                {
-                                  className: "w-4 h-4 sm:w-5 sm:h-5",
-                                }
-                              )}
-                            </div>
-                            <div>
-                              <div className="text-xl sm:text-2xl font-bold text-white">
-                                {testimonials[activeIndex].stats.projects}+
-                              </div>
-                              <div className="text-gray-400 text-xs sm:text-sm">
-                                Projects
-                              </div>
-                            </div>
-                          </motion.div>
-
-                          <motion.div
-                            initial={{ scale: 0 }}
-                            animate={{ scale: 1 }}
-                            transition={{ delay: 0.5 }}
-                            className="flex items-center gap-3"
-                          >
-                            <div
-                              className={`p-2 sm:p-3 bg-gradient-to-br ${testimonials[activeIndex].color} rounded-lg sm:rounded-xl`}
-                            >
-                              <Heart className="w-4 h-4 sm:w-5 sm:h-5" />
-                            </div>
-                            <div>
-                              <div className="text-xl sm:text-2xl font-bold text-white">
-                                {testimonials[activeIndex].stats.satisfaction}%
-                              </div>
-                              <div className="text-gray-400 text-xs sm:text-sm">
-                                Satisfaction
-                              </div>
-                            </div>
-                          </motion.div>
                         </div>
                       </motion.div>
                     </motion.div>
@@ -441,7 +385,7 @@ export default function TestimonialSection({ testimonialsData }) {
                 <div
                   className={`w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full transition-all ${
                     activeIndex === idx
-                      ? `bg-gradient-to-r ${testimonials[activeIndex].color}`
+                      ? `bg-gradient-to-r from-blue-500 to-cyan-400`
                       : "bg-gray-700 group-hover:bg-gray-600"
                   }`}
                 />
