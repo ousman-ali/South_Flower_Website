@@ -3,272 +3,49 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
-  Star,
-  Heart,
   Eye,
   ChevronRight,
   Sparkles,
-  Leaf,
-  Flower,
   Truck,
   Shield,
   Zap,
   Clock,
   Search,
-  TrendingUp,
 } from "lucide-react";
 
-export default function ProductSection1() {
+export default function ProductSection1({ categories, products, services }) {
   const [isHovered, setIsHovered] = useState(null);
-  const [favorites, setFavorites] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  // Initialize with "all" instead of "All"
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [mounted, setMounted] = useState(false);
   const containerRef = useRef(null);
 
-  // Services for sidebar
-  const services = [
-    {
-      id: 1,
-      name: "Floral Design",
-      image:
-        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=100&h=100&fit=crop&crop=center",
-      color: "from-rose-500 to-pink-400",
-    },
-    {
-      id: 2,
-      name: "Garden Planning",
-      image:
-        "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?w=100&h=100&fit=crop&crop=center",
-      color: "from-emerald-500 to-teal-400",
-    },
-    {
-      id: 3,
-      name: "Plant Care",
-      image:
-        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=100&h=100&fit=crop&crop=center",
-      color: "from-blue-500 to-cyan-400",
-    },
-    {
-      id: 4,
-      name: "Delivery",
-      image:
-        "https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=100&h=100&fit=crop&crop=center",
-      color: "from-purple-500 to-violet-400",
-    },
-    {
-      id: 5,
-      name: "Consultation",
-      image:
-        "https://images.unsplash.com/photo-1577041241576-f4b964db30ee?w=100&h=100&fit=crop&crop=center",
-      color: "from-amber-500 to-orange-400",
-    },
-    {
-      id: 6,
-      name: "Maintenance",
-      image:
-        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=100&h=100&fit=crop&crop=center",
-      color: "from-indigo-500 to-purple-400",
-    },
-  ];
-
-  // Product categories
-  const categories = [
-    "All",
-    "Flowers",
-    "Plants",
-    "Seeds",
-    "Tools",
-    "Pots",
-    "Soil",
-    "Accessories",
-  ];
-
-  // Products data - minimized version
-  const products = [
-    {
-      id: 1,
-      name: "Premium Rose Bouquet",
-      description: "Fresh cut premium roses in elegant arrangement",
-      price: "$79.99",
-      originalPrice: "$99.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=400&h=250&fit=crop&crop=center",
-      category: "Flowers",
-      gradient: "from-rose-500 to-pink-400",
-      badge: "BEST SELLER",
-    },
-    {
-      id: 2,
-      name: "Orchid Collection",
-      description: "Exotic orchids with stunning blooms",
-      price: "$129.99",
-      originalPrice: "$159.99",
-      rating: 4.8,
-      image:
-        "https://images.unsplash.com/photo-1567095761054-7a02e69e5c43?w=400&h=250&fit=crop&crop=center",
-      category: "Plants",
-      gradient: "from-purple-500 to-violet-400",
-      badge: "EXOTIC",
-    },
-    {
-      id: 3,
-      name: "Herbal Seed Kit",
-      description: "Complete herb garden seed collection",
-      price: "$34.99",
-      originalPrice: "$49.99",
-      rating: 4.7,
-      image:
-        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=250&fit=crop&crop=center",
-      category: "Seeds",
-      gradient: "from-emerald-500 to-teal-400",
-      badge: "ORGANIC",
-    },
-    {
-      id: 4,
-      name: "Ceramic Plant Pots",
-      description: "Handcrafted ceramic pots in various sizes",
-      price: "$24.99",
-      originalPrice: "$34.99",
-      rating: 4.6,
-      image:
-        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=250&fit=crop&crop=center",
-      category: "Pots",
-      gradient: "from-amber-500 to-orange-400",
-      badge: "HANDCRAFTED",
-    },
-    {
-      id: 5,
-      name: "Pruning Shears",
-      description: "High-quality stainless steel pruning tools",
-      price: "$49.99",
-      originalPrice: "$69.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1577041241576-f4b964db30ee?w=400&h=250&fit=crop&crop=center",
-      category: "Tools",
-      gradient: "from-blue-500 to-cyan-400",
-      badge: "PROFESSIONAL",
-    },
-    {
-      id: 6,
-      name: "Organic Fertilizer",
-      description: "All-natural plant nutrition for healthy growth",
-      price: "$29.99",
-      originalPrice: "$39.99",
-      rating: 4.8,
-      image:
-        "https://images.unsplash.com/photo-1600841541100-bf7835d5d3da?w=400&h=250&fit=crop&crop=center",
-      category: "Soil",
-      gradient: "from-lime-500 to-green-400",
-      badge: "ECO FRIENDLY",
-    },
-    {
-      id: 7,
-      name: "Luxury Succulent Set",
-      description: "Rare succulent collection in decorative pots",
-      price: "$89.99",
-      originalPrice: "$119.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=400&h=250&fit=crop&crop=center",
-      category: "Plants",
-      gradient: "from-indigo-500 to-purple-400",
-      badge: "LUXURY",
-    },
-    {
-      id: 8,
-      name: "Garden Watering System",
-      description: "Smart automated watering system for gardens",
-      price: "$149.99",
-      originalPrice: "$199.99",
-      rating: 4.7,
-      image:
-        "https://images.unsplash.com/photo-1590165482129-1b8b27698780?w=400&h=250&fit=crop&crop=center",
-      category: "Tools",
-      gradient: "from-sky-500 to-blue-400",
-      badge: "SMART",
-    },
-    {
-      id: 9,
-      name: "Seasonal Flower Seeds",
-      description: "Mix of seasonal flowers for year-round blooms",
-      price: "$19.99",
-      originalPrice: "$29.99",
-      rating: 4.6,
-      image:
-        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=400&h=250&fit=crop&crop=center",
-      category: "Seeds",
-      gradient: "from-pink-500 to-rose-400",
-      badge: "SEASONAL",
-    },
-    {
-      id: 10,
-      name: "Bamboo Plant Stands",
-      description: "Sustainable bamboo stands for indoor plants",
-      price: "$39.99",
-      originalPrice: "$59.99",
-      rating: 4.8,
-      image:
-        "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=400&h=250&fit=crop&crop=center",
-      category: "Accessories",
-      gradient: "from-amber-600 to-yellow-500",
-      badge: "SUSTAINABLE",
-    },
-    {
-      id: 11,
-      name: "Premium Garden Soil",
-      description: "Nutrient-rich soil mix for optimal plant growth",
-      price: "$44.99",
-      originalPrice: "$59.99",
-      rating: 4.7,
-      image:
-        "https://images.unsplash.com/photo-1592892111427-bc0c1f0c4658?w=400&h=250&fit=crop&crop=center",
-      category: "Soil",
-      gradient: "from-brown-500 to-amber-700",
-      badge: "PREMIUM",
-    },
-    {
-      id: 12,
-      name: "Hydroponic Starter Kit",
-      description: "Complete hydroponic system for indoor gardening",
-      price: "$199.99",
-      originalPrice: "$249.99",
-      rating: 4.9,
-      image:
-        "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=400&h=250&fit=crop&crop=center",
-      category: "Tools",
-      gradient: "from-cyan-500 to-blue-400",
-      badge: "INNOVATIVE",
-    },
-  ];
-
   // Filter products based on selected category
   const filteredProducts =
-    selectedCategory === "All"
+    selectedCategory === "all"
       ? products
-      : products.filter((product) => product.category === selectedCategory);
-
-  // Toggle favorite
-  const toggleFavorite = (productId) => {
-    setFavorites((prev) =>
-      prev.includes(productId)
-        ? prev.filter((id) => id !== productId)
-        : [...prev, productId]
-    );
-  };
+      : products.filter(
+          (product) =>
+            product.product_category_id?.toString() ===
+            selectedCategory.toString()
+        );
 
   useEffect(() => {
     setMounted(true);
   }, []);
 
-  // Prevent rendering mismatched content
+  // If not mounted, show minimal UI to prevent hydration mismatch
   if (!mounted) {
     return (
-      <section className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="h-96 flex items-center justify-center">
-            <div className="animate-pulse text-gray-500">Loading...</div>
+      <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="h-80 bg-gray-800/50 rounded-xl animate-pulse"
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -336,19 +113,35 @@ export default function ProductSection1() {
           className="mb-6"
         >
           <div className="flex flex-wrap gap-2">
+            {/* Always include "All" option first */}
+            <motion.button
+              key="all"
+              onClick={() => setSelectedCategory("all")}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
+                selectedCategory === "all"
+                  ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+              }`}
+            >
+              All
+            </motion.button>
+
+            {/* Map through actual categories */}
             {categories.map((category) => (
               <motion.button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
-                  selectedCategory === category
+                  selectedCategory === category.id
                     ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                 }`}
               >
-                {category}
+                {category.name}
               </motion.button>
             ))}
           </div>
@@ -361,127 +154,83 @@ export default function ProductSection1() {
             {/* Products Grid - Scrollable Container with fixed height */}
             <div
               ref={containerRef}
-              className=" rounded-lg border border-gray-800 bg-gray-900/30 p-4"
+              className="rounded-lg border border-gray-800 bg-gray-900/30 p-4"
             >
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                {filteredProducts.map((product) => (
-                  <motion.div
-                    key={product.id}
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                    whileHover={{
-                      scale: 1.02,
-                      y: -3,
-                    }}
-                    onMouseEnter={() => setIsHovered(product.id)}
-                    onMouseLeave={() => setIsHovered(null)}
-                    className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer"
-                    style={{ height: "320px" }}
-                  >
-                    {/* Favorite Button */}
-                    <motion.button
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        toggleFavorite(product.id);
+              {/* Show message if no products */}
+              {filteredProducts.length === 0 ? (
+                <div className="text-center py-10">
+                  <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-gray-800/50 mb-4">
+                    <Search className="w-8 h-8 text-gray-500" />
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-300 mb-2">
+                    No products found
+                  </h3>
+                  <p className="text-gray-500 text-sm">
+                    Try selecting a different category
+                  </p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                  {filteredProducts.map((product) => (
+                    <motion.div
+                      key={product.id}
+                      initial={{ opacity: 0, scale: 0.95 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      whileHover={{
+                        scale: 1.02,
+                        y: -3,
                       }}
-                      whileHover={{ scale: 1.1 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="absolute top-2 right-2 z-20 p-1.5 rounded-full bg-gray-900/80 backdrop-blur-sm border border-gray-700/50"
+                      onMouseEnter={() => setIsHovered(product.id)}
+                      onMouseLeave={() => setIsHovered(null)}
+                      className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer"
+                      style={{ height: "320px" }}
                     >
-                      <Heart
-                        className={`w-3.5 h-3.5 transition-colors duration-300 ${
-                          favorites.includes(product.id)
-                            ? "fill-rose-500 text-rose-500"
-                            : "text-gray-400 group-hover:text-rose-400"
-                        }`}
-                      />
-                    </motion.button>
-
-                    {/* Badge */}
-                    <div className="absolute top-2 left-2 z-20">
-                      <div
-                        className={`px-2 py-0.5 rounded-full bg-gradient-to-r ${product.gradient} text-white text-[10px] font-bold`}
-                      >
-                        {product.badge}
+                      {/* Product Image */}
+                      <div className="relative h-32 overflow-hidden">
+                        <motion.img
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
+                          alt={product.name}
+                          className="w-full h-full object-cover"
+                          animate={{
+                            scale: isHovered === product.id ? 1.05 : 1,
+                          }}
+                          transition={{ duration: 0.5 }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
                       </div>
-                    </div>
 
-                    {/* Product Image */}
-                    <div className="relative h-32 overflow-hidden">
-                      <motion.img
-                        src={product.image}
-                        alt={product.name}
-                        className="w-full h-full object-cover"
-                        animate={{
-                          scale: isHovered === product.id ? 1.05 : 1,
-                        }}
-                        transition={{ duration: 0.5 }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent" />
-                    </div>
+                      {/* Product Details */}
+                      <div className="p-3 h-32 flex flex-col">
+                        {/* Name */}
+                        <h3 className="text-sm font-bold text-white mb-1 line-clamp-1">
+                          {product.name}
+                        </h3>
 
-                    {/* Product Details */}
-                    <div className="p-3 h-32 flex flex-col">
-                      {/* Category & Rating */}
-                      <div className="flex items-center justify-between mb-1.5">
-                        <span className="text-[10px] font-medium text-emerald-400 bg-emerald-900/20 px-1.5 py-0.5 rounded">
-                          {product.category}
-                        </span>
+                        {/* Truncated Description */}
+                        <p className="text-gray-400 text-xs mb-3 line-clamp-2 flex-grow">
+                          {product.description}
+                        </p>
 
-                        {/* Rating */}
-                        <div className="flex items-center gap-1">
-                          <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                          <span className="text-xs font-bold text-gray-300">
-                            {product.rating}
-                          </span>
+                        {/* Price & CTA */}
+                        <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-700/50">
+                          <motion.button
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                            className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
+                          >
+                            <Eye className="w-3 h-3" />
+                            <span>Details</span>
+                          </motion.button>
                         </div>
                       </div>
 
-                      {/* Name */}
-                      <h3 className="text-sm font-bold text-white mb-1 line-clamp-1">
-                        {product.name}
-                      </h3>
-
-                      {/* Truncated Description */}
-                      <p className="text-gray-400 text-xs mb-3 line-clamp-2 flex-grow">
-                        {product.description}
-                      </p>
-
-                      {/* Price & CTA */}
-                      <div className="flex items-center justify-between mt-auto pt-2 border-t border-gray-700/50">
-                        <div className="flex items-center gap-2">
-                          <span className="text-base font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                            {product.price}
-                          </span>
-                          <span className="text-gray-500 text-xs line-through">
-                            {product.originalPrice}
-                          </span>
-                        </div>
-
-                        <motion.button
-                          whileHover={{ scale: 1.05 }}
-                          whileTap={{ scale: 0.95 }}
-                          className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
-                        >
-                          <Eye className="w-3 h-3" />
-                          <span>Details</span>
-                        </motion.button>
-                      </div>
-                    </div>
-
-                    {/* Hover Glow Effect */}
-                    <div
-                      className={`absolute inset-0 rounded-xl bg-gradient-to-r ${product.gradient
-                        .replace("from-", "")
-                        .replace(
-                          " to-",
-                          "/5 to-"
-                        )}/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none`}
-                    />
-                  </motion.div>
-                ))}
-              </div>
+                      {/* Hover Glow Effect */}
+                      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/5 to-cyan-400/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </div>
           </div>
 
@@ -514,13 +263,11 @@ export default function ProductSection1() {
                       >
                         <div className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700/30 transition-colors duration-300">
                           {/* Image Container */}
-                          <div
-                            className={`p-0.5 rounded-md bg-gradient-to-r ${service.color} flex-shrink-0`}
-                          >
+                          <div className="p-0.5 rounded-md bg-gradient-to-r from-blue-500 to-cyan-400 flex-shrink-0">
                             <div className="w-10 h-10 rounded overflow-hidden bg-gray-900">
                               <img
-                                src={service.image}
-                                alt={service.name}
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service.banner_image}`}
+                                alt={service.title}
                                 className="w-full h-full object-cover"
                               />
                             </div>
@@ -529,8 +276,11 @@ export default function ProductSection1() {
                           {/* Service Name */}
                           <div className="flex-1">
                             <h3 className="text-xs font-medium text-gray-300 group-hover:text-white">
-                              {service.name}
+                              {service.title}
                             </h3>
+                            <p className="text-gray-400 text-xs line-clamp-2">
+                              {service.short_description}
+                            </p>
                           </div>
 
                           {/* Arrow */}
@@ -574,32 +324,6 @@ export default function ProductSection1() {
           </div>
         </div>
       </div>
-
-      {/* Custom Scrollbar Styling */}
-      <style jsx global>{`
-        .products-scrollbar {
-          scrollbar-width: thin;
-          scrollbar-color: #10b981 transparent;
-        }
-        .products-scrollbar::-webkit-scrollbar {
-          width: 8px;
-        }
-        .products-scrollbar::-webkit-scrollbar-track {
-          background: rgba(255, 255, 255, 0.05);
-          border-radius: 4px;
-          margin: 4px;
-        }
-        .products-scrollbar::-webkit-scrollbar-thumb {
-          background: linear-gradient(to bottom, #10b981, #059669);
-          border-radius: 4px;
-        }
-        .products-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: linear-gradient(to bottom, #059669, #047857);
-        }
-        .products-scrollbar::-webkit-scrollbar-corner {
-          background: transparent;
-        }
-      `}</style>
     </section>
   );
 }
