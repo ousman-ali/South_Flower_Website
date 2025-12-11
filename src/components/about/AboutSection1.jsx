@@ -13,7 +13,7 @@ import {
   Code,
   Briefcase,
   BarChart,
-  ThumbsUp,
+  ChevronRight,
 } from "lucide-react";
 
 // Floating shape component with enhanced animation
@@ -514,7 +514,7 @@ export default function AboutSection1({
                         {service.short_description}
                       </div>
                     </div>
-                    <ThumbsUp className="w-4 h-4 text-green-500" />
+                    <ChevronRight className="w-4 h-4 text-blue-500" />
                   </motion.div>
                 ))}
               </motion.div>
