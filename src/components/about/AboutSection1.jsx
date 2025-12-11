@@ -58,9 +58,6 @@ export default function AboutSection1({
   const [current, setCurrent] = useState(0);
   const IMAGE_URL = process.env.NEXT_PUBLIC_IMAGE_URL;
 
-  console.log("about", aboutContent);
-  console.log("setup", setup);
-
   const galleryImages =
     gallery?.flatMap((album) =>
       album.images.map((img) => `${IMAGE_URL}/${img.image}`)

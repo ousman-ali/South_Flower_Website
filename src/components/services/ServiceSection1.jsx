@@ -25,147 +25,34 @@ import {
 } from "lucide-react";
 import styles from "./service.module.css";
 
-export default function ServicesSection1() {
+export default function ServicesSection1({ services }) {
   const [activeService, setActiveService] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  // Define services array FIRST
-  const services = [
-    {
-      id: 1,
-      icon: <Code className="w-6 h-6" />,
-      title: "Web Development",
-      description:
-        "Custom websites and web applications built with modern frameworks for optimal performance and scalability.",
-      image:
-        "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=400&q=80",
-      color: "from-blue-500 to-cyan-400",
-      tags: ["React", "Next.js", "Node.js"],
-    },
-    {
-      id: 2,
-      icon: <Palette className="w-6 h-6" />,
-      title: "UI/UX Design",
-      description:
-        "User-centered design solutions that enhance engagement and drive conversions with beautiful interfaces.",
-      image:
-        "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=400&q=80",
-      color: "from-purple-500 to-pink-400",
-      tags: ["Figma", "Adobe XD", "Prototyping"],
-    },
-    {
-      id: 3,
-      icon: <Cloud className="w-6 h-6" />,
-      title: "Cloud Solutions",
-      description:
-        "Scalable cloud infrastructure and migration services for enhanced security and performance.",
-      image:
-        "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=400&q=80",
-      color: "from-emerald-500 to-green-400",
-      tags: ["AWS", "Azure", "Google Cloud"],
-    },
-    {
-      id: 4,
-      icon: <Smartphone className="w-6 h-6" />,
-      title: "Mobile Apps",
-      description:
-        "Cross-platform mobile applications with native performance and seamless user experience.",
-      image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=80",
-      color: "from-orange-500 to-amber-400",
-      tags: ["React Native", "Flutter", "iOS/Android"],
-    },
-    {
-      id: 5,
-      icon: <Database className="w-6 h-6" />,
-      title: "Database Management",
-      description:
-        "Efficient database design, optimization, and management solutions for high-performance applications.",
-      image:
-        "https://images.unsplash.com/photo-1544383835-bda2bc66a55d?auto=format&fit=crop&w=400&q=80",
-      color: "from-red-500 to-pink-400",
-      tags: ["MySQL", "MongoDB", "PostgreSQL"],
-    },
-    {
-      id: 6,
-      icon: <Server className="w-6 h-6" />,
-      title: "DevOps & CI/CD",
-      description:
-        "Automated deployment pipelines and infrastructure as code for reliable software delivery.",
-      image:
-        "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=400&q=80",
-      color: "from-indigo-500 to-blue-400",
-      tags: ["Docker", "Kubernetes", "Jenkins"],
-    },
-    {
-      id: 7,
-      icon: <Zap className="w-6 h-6" />,
-      title: "Performance Optimization",
-      description:
-        "Website and application optimization for speed, SEO, and better user experience.",
-      image:
-        "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=400&q=80",
-      color: "from-yellow-500 to-orange-400",
-      tags: ["Speed", "SEO", "Optimization"],
-    },
-    {
-      id: 8,
-      icon: <ShieldCheck className="w-6 h-6" />,
-      title: "Security Solutions",
-      description:
-        "Comprehensive security audits and implementation to protect your digital assets.",
-      image:
-        "https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=400&q=80",
-      color: "from-gray-600 to-gray-400",
-      tags: ["Security", "Audit", "Protection"],
-    },
-    {
-      id: 9,
-      icon: <Sparkles className="w-6 h-6" />,
-      title: "Digital Marketing",
-      description:
-        "Strategic digital marketing campaigns to boost your online presence and conversions.",
-      image:
-        "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=400&q=80",
-      color: "from-pink-500 to-rose-400",
-      tags: ["SEO", "Social Media", "PPC"],
-    },
-    {
-      id: 10,
-      icon: <Globe2 className="w-6 h-6" />,
-      title: "E-commerce Solutions",
-      description:
-        "Custom e-commerce platforms with seamless payment integration and inventory management.",
-      image:
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80",
-      color: "from-teal-500 to-cyan-400",
-      tags: ["Shopify", "WooCommerce", "Custom"],
-    },
-    {
-      id: 11,
-      icon: <Stars className="w-6 h-6" />,
-      title: "AI & Machine Learning",
-      description:
-        "Intelligent solutions powered by artificial intelligence and machine learning algorithms.",
-      image:
-        "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?auto=format&fit=crop&w=400&q=80",
-      color: "from-violet-500 to-purple-400",
-      tags: ["AI", "ML", "Data Science"],
-    },
-    {
-      id: 12,
-      icon: <TrendingUp className="w-6 h-6" />,
-      title: "Business Analytics",
-      description:
-        "Data-driven insights and analytics to help make informed business decisions.",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=400&q=80",
-      color: "from-amber-500 to-yellow-400",
-      tags: ["Analytics", "BI", "Reporting"],
-    },
-  ];
+  console.log("services", services);
+
+  function getFAIcon(iconName) {
+    if (
+      typeof iconName === "string" &&
+      iconName.trim() !== "" &&
+      (iconName.startsWith("fa ") || // "fa fa-facebook"
+        iconName.startsWith("fa-") || // "fa-facebook"
+        iconName.startsWith("fas ") || // "fas fa-user"
+        iconName.startsWith("fas-") || // "fas-user"
+        iconName.startsWith("fab ") || // "fab fa-instagram"
+        iconName.startsWith("fab-") || // "fab-instagram"
+        iconName.startsWith("far ") || // regular icons
+        iconName.startsWith("far-"))
+    ) {
+      // VALID → return the icon directly
+      return <i className={`${iconName} text-xl`}></i>;
+    }
+
+    // INVALID → fallback icon
+    return <i className="fa-solid fa-concierge-bell  text-xl"></i>;
+  }
 
   // Then use services in calculations
   const servicesPerPage = 6;
@@ -333,17 +220,17 @@ export default function ServicesSection1() {
                       {/* Service Image */}
                       <div className="relative h-40 mb-4 rounded-xl overflow-hidden">
                         <img
-                          src={service.image}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service.banner_image}`}
                           alt={service.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div
-                          className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-20`}
+                          className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 opacity-20`}
                         />
                         <div
-                          className={`absolute top-3 right-3 p-2 rounded-lg bg-gradient-to-br ${service.color}`}
+                          className={`absolute top-3 right-3 p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400`}
                         >
-                          {service.icon}
+                          {getFAIcon(service.icon_class)}
                         </div>
                       </div>
 
@@ -352,20 +239,8 @@ export default function ServicesSection1() {
                         {service.title}
                       </h3>
                       <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                        {service.description}
+                        {service.short_description}
                       </p>
-
-                      {/* Tags */}
-                      <div className="flex flex-wrap gap-2">
-                        {service.tags.map((tag, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300"
-                          >
-                            {tag}
-                          </span>
-                        ))}
-                      </div>
                     </motion.div>
                   ))}
                 </div>
@@ -434,12 +309,12 @@ export default function ServicesSection1() {
                       {/* Service Image */}
                       <div className="relative w-32 h-32 flex-shrink-0 rounded-xl overflow-hidden">
                         <img
-                          src={service.image}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service.banner_image}`}
                           alt={service.title}
                           className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                         />
                         <div
-                          className={`absolute inset-0 bg-gradient-to-br ${service.color} opacity-20`}
+                          className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 opacity-20`}
                         />
                       </div>
 
@@ -448,9 +323,9 @@ export default function ServicesSection1() {
                         <div className="flex items-start justify-between mb-2">
                           <div>
                             <div
-                              className={`inline-flex p-2 rounded-lg bg-gradient-to-br ${service.color} mb-2`}
+                              className={`inline-flex p-2 rounded-lg bg-gradient-to-br from-blue-500 to-cyan-400 mb-2`}
                             >
-                              {service.icon}
+                              {getFAIcon(service.icon_class)}
                             </div>
                             <h3 className="text-xl font-semibold text-white">
                               {service.title}
@@ -459,20 +334,8 @@ export default function ServicesSection1() {
                         </div>
 
                         <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                          {service.description}
+                          {service.short_description}
                         </p>
-
-                        {/* Tags */}
-                        <div className="flex flex-wrap gap-2">
-                          {service.tags.map((tag, idx) => (
-                            <span
-                              key={idx}
-                              className="px-3 py-1 bg-white/5 rounded-full text-xs text-gray-300"
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
                       </div>
                     </div>
                   </motion.div>

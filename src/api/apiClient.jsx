@@ -12,7 +12,7 @@ if (!apiUrl) {
 
 const apiClient = axios.create({
   baseURL: apiUrl,
-  timeout: 10000, // 10s, change if you like
+  timeout: 30000,
   headers: headers,
 });
 
