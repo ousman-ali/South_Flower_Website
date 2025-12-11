@@ -15,7 +15,7 @@ export default function AboutPage() {
 
   useEffect(() => {
     const features = [
-      { name: "ecommerce_product", amount: 100000 },
+      { name: "ecommerce_product", amount: 5 },
       { name: "about_service", amount: 5 },
     ];
 

@@ -24,14 +24,15 @@ import {
   Tag,
 } from "lucide-react";
 import styles from "./service.module.css";
+import Link from "next/link";
 
-export default function ServicesSection1({ services }) {
+export default function ServicesSection1({ services, products }) {
   const [activeService, setActiveService] = useState(0);
   const [currentPage, setCurrentPage] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  console.log("services", services);
+  console.log("products", products);
 
   function getFAIcon(iconName) {
     if (
@@ -70,48 +71,48 @@ export default function ServicesSection1({ services }) {
 
   // REMOVED AUTO SCROLL - Now manual scrolling only
 
-  const topProducts = [
-    {
-      id: 1,
-      name: "Enterprise CMS",
-      description: "Scalable content management system",
-      rating: 4.9,
-      users: "2.5k+",
-      image:
-        "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=100&q=80",
-      color: "from-blue-500 to-cyan-400",
-    },
-    {
-      id: 2,
-      name: "E-Commerce Suite",
-      description: "Complete online store solution",
-      rating: 4.8,
-      users: "1.8k+",
-      image:
-        "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w-100&q=80",
-      color: "from-purple-500 to-pink-400",
-    },
-    {
-      id: 3,
-      name: "Mobile Platform",
-      description: "Cross-platform mobile framework",
-      rating: 4.7,
-      users: "3.2k+",
-      image:
-        "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=100&q=80",
-      color: "from-emerald-500 to-green-400",
-    },
-    {
-      id: 4,
-      name: "Analytics Dashboard",
-      description: "Real-time business intelligence",
-      rating: 4.9,
-      users: "1.5k+",
-      image:
-        "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100&q=80",
-      color: "from-orange-500 to-amber-400",
-    },
-  ];
+  // const topProducts = [
+  //   {
+  //     id: 1,
+  //     name: "Enterprise CMS",
+  //     description: "Scalable content management system",
+  //     rating: 4.9,
+  //     users: "2.5k+",
+  //     image:
+  //       "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=100&q=80",
+  //     color: "from-blue-500 to-cyan-400",
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "E-Commerce Suite",
+  //     description: "Complete online store solution",
+  //     rating: 4.8,
+  //     users: "1.8k+",
+  //     image:
+  //       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w-100&q=80",
+  //     color: "from-purple-500 to-pink-400",
+  //   },
+  //   {
+  //     id: 3,
+  //     name: "Mobile Platform",
+  //     description: "Cross-platform mobile framework",
+  //     rating: 4.7,
+  //     users: "3.2k+",
+  //     image:
+  //       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=100&q=80",
+  //     color: "from-emerald-500 to-green-400",
+  //   },
+  //   {
+  //     id: 4,
+  //     name: "Analytics Dashboard",
+  //     description: "Real-time business intelligence",
+  //     rating: 4.9,
+  //     users: "1.5k+",
+  //     image:
+  //       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100&q=80",
+  //     color: "from-orange-500 to-amber-400",
+  //   },
+  // ];
 
   // REMOVED quickLinks array as requested
 
@@ -336,6 +337,16 @@ export default function ServicesSection1({ services }) {
                         <p className="text-gray-400 text-sm mb-4 line-clamp-3">
                           {service.short_description}
                         </p>
+                        <Link
+                          href={`/services/${service.slug}`}
+                          className="inline-flex items-center gap-2 px-4 py-2 rounded-lg 
+                            bg-gradient-to-r from-gray-700 to-cyan-500 
+                            text-white font-medium shadow-md 
+                            hover:shadow-lg hover:scale-[1.03] transition-all"
+                        >
+                          Details
+                          <ExternalLink className="w-4 h-4" />
+                        </Link>
                       </div>
                     </div>
                   </motion.div>
@@ -362,7 +373,7 @@ export default function ServicesSection1({ services }) {
                 </div>
 
                 <div className="space-y-4">
-                  {topProducts.map((product) => (
+                  {products.map((product) => (
                     <motion.div
                       key={product.id}
                       whileHover={{ x: 5 }}
@@ -372,12 +383,12 @@ export default function ServicesSection1({ services }) {
                         {/* Product Image */}
                         <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={product.image}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
                             alt={product.name}
                             className="w-full h-full object-cover"
                           />
                           <div
-                            className={`absolute inset-0 bg-gradient-to-br ${product.color} opacity-30`}
+                            className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 opacity-30`}
                           />
                         </div>
 
@@ -390,12 +401,8 @@ export default function ServicesSection1({ services }) {
                           </p>
                         </div>
                         <div className="text-right flex-shrink-0">
-                          <div className="flex items-center gap-1 text-sm text-yellow-400">
-                            <Stars className="w-3 h-3 fill-current" />
-                            <span>{product.rating}</span>
-                          </div>
-                          <div className="text-xs text-gray-400">
-                            {product.users}
+                          <div className="flex items-center gap-1 text-sm text-blue-400">
+                            <ChevronRight className="w-3 h-3 fill-current" />
                           </div>
                         </div>
                       </div>
@@ -438,7 +445,7 @@ export default function ServicesSection1({ services }) {
                         Success Rate
                       </span>
                     </div>
-                    <div className="text-xl font-bold text-white">98%</div>
+                    <div className="text-xl font-bold text-white">100%</div>
                   </div>
                 </div>
               </motion.div>
