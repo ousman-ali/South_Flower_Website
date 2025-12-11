@@ -32,3 +32,14 @@ export async function getBlogCategories() {
     return null;
   }
 }
+
+// fetch blog by slug
+export async function getBlogBySlug(slug) {
+  try {
+    const { data } = await apiClient.get(`/blog/slug/${slug}`);
+    return data.data; // adjust if your API returns differently
+  } catch (err) {
+    console.error("getBlogBySlug Error:", err);
+    return null;
+  }
+}

@@ -30,7 +30,7 @@ export default function Home() {
 
   useEffect(() => {
     const features = [
-      { name: "blog_post", amount: 4 },
+      { name: "blog_post", amount: 100000 },
       { name: "about_service", amount: 4 },
       { name: "about_content", amount: 4 },
       { name: "about_testimonial", amount: 4 },
