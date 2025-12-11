@@ -4,14 +4,10 @@ import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import {
   Calendar,
-  User,
   ArrowRight,
   Eye,
-  Heart,
-  MessageCircle,
   BookOpen,
   Tag,
-  Clock,
   Sparkles,
   Leaf,
   Flower,
@@ -22,262 +18,21 @@ import {
   ChevronRight as ChevronRightIcon,
 } from "lucide-react";
 
-export default function BlogSection1() {
+export default function BlogSection1({ categories, blogs, products }) {
   const [isHovered, setIsHovered] = useState(null);
-  const [favorites, setFavorites] = useState([]);
-  const [selectedCategory, setSelectedCategory] = useState("All");
+  const [selectedCategory, setSelectedCategory] = useState("all");
   const [mounted, setMounted] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [isMobile, setIsMobile] = useState(false);
   const containerRef = useRef(null);
 
-  // Categories
-  const categories = [
-    "All",
-    "Gardening Tips",
-    "Plant Care",
-    "Seasonal",
-    "Design",
-    "Flower Arranging",
-    "Sustainability",
-    "DIY Projects",
-  ];
-
-  // Blog posts data - Full image cards
-  const blogPosts = [
-    {
-      id: 1,
-      title: "The Art of Flower Arranging",
-      excerpt:
-        "Learn professional techniques for creating stunning floral displays that last longer and look beautiful.",
-      date: "Mar 15, 2024",
-      author: "Sarah Gardner",
-      readTime: "5 min read",
-      image:
-        "https://images.unsplash.com/photo-1563974313767-7d26570bb586?w=800&h=500&fit=crop",
-      category: "Flower Arranging",
-      tags: ["Flowers", "Arrangement", "Design"],
-      comments: 24,
-      views: 1560,
-      gradient: "from-rose-500 to-pink-400",
-    },
-    {
-      id: 2,
-      title: "Spring Garden Preparation Guide",
-      excerpt:
-        "Essential steps to prepare your garden for the blooming season ahead. From soil prep to planting schedules.",
-      date: "Mar 12, 2024",
-      author: "Michael Bloom",
-      readTime: "8 min read",
-      image:
-        "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07?w=800&h=500&fit=crop",
-      category: "Seasonal",
-      tags: ["Spring", "Gardening", "Preparation"],
-      comments: 18,
-      views: 2340,
-      gradient: "from-emerald-500 to-teal-400",
-    },
-    {
-      id: 3,
-      title: "Indoor Plant Care Masterclass",
-      excerpt:
-        "Complete guide to keeping your indoor plants thriving. Light, water, humidity, and common issues solved.",
-      date: "Mar 10, 2024",
-      author: "Lisa Green",
-      readTime: "12 min read",
-      image:
-        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&h=500&fit=crop",
-      category: "Plant Care",
-      tags: ["Indoor", "Care", "Tips"],
-      comments: 42,
-      views: 3120,
-      gradient: "from-blue-500 to-cyan-400",
-    },
-    {
-      id: 4,
-      title: "Sustainable Gardening Practices",
-      excerpt:
-        "How to create an eco-friendly garden that supports local wildlife and conserves resources.",
-      date: "Mar 8, 2024",
-      author: "David Earth",
-      readTime: "7 min read",
-      image:
-        "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=800&h=500&fit=crop",
-      category: "Sustainability",
-      tags: ["Eco", "Sustainable", "Green"],
-      comments: 31,
-      views: 1890,
-      gradient: "from-lime-500 to-green-400",
-    },
-    {
-      id: 5,
-      title: "Creating a Butterfly Garden",
-      excerpt:
-        "Design and plant selection tips to attract butterflies and create a magical outdoor space.",
-      date: "Mar 5, 2024",
-      author: "Emma Wings",
-      readTime: "6 min read",
-      image:
-        "https://images.unsplash.com/photo-1464207687429-7505649dae38?w=800&h=500&fit=crop",
-      category: "Design",
-      tags: ["Butterflies", "Wildlife", "Design"],
-      comments: 27,
-      views: 2670,
-      gradient: "from-purple-500 to-violet-400",
-    },
-    {
-      id: 6,
-      title: "Vertical Garden DIY Project",
-      excerpt:
-        "Step-by-step guide to building your own vertical garden wall for small spaces.",
-      date: "Mar 3, 2024",
-      author: "Tom Build",
-      readTime: "10 min read",
-      image:
-        "https://images.unsplash.com/photo-1517191434949-5e90cd67d2b6?w=800&h=500&fit=crop",
-      category: "DIY Projects",
-      tags: ["DIY", "Vertical", "Project"],
-      comments: 56,
-      views: 3560,
-      gradient: "from-amber-500 to-orange-400",
-    },
-    {
-      id: 7,
-      title: "Herb Garden for Beginners",
-      excerpt:
-        "Start your culinary herb garden with these easy-to-grow varieties and care tips.",
-      date: "Mar 1, 2024",
-      author: "Chef Green",
-      readTime: "4 min read",
-      image:
-        "https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?w=800&h=500&fit=crop",
-      category: "Gardening Tips",
-      tags: ["Herbs", "Beginners", "Culinary"],
-      comments: 38,
-      views: 2890,
-      gradient: "from-indigo-500 to-purple-400",
-    },
-    {
-      id: 8,
-      title: "Succulent Arrangement Ideas",
-      excerpt:
-        "Creative ways to arrange succulents for stunning indoor and outdoor displays.",
-      date: "Feb 28, 2024",
-      author: "Suzy Culent",
-      readTime: "5 min read",
-      image:
-        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=800&h=500&fit=crop",
-      category: "Design",
-      tags: ["Succulents", "Arrangement", "Ideas"],
-      comments: 22,
-      views: 1970,
-      gradient: "from-pink-500 to-rose-400",
-    },
-    {
-      id: 9,
-      title: "Organic Pest Control Methods",
-      excerpt:
-        "Natural solutions to protect your plants without harmful chemicals.",
-      date: "Feb 25, 2024",
-      author: "Eco Gardener",
-      readTime: "9 min read",
-      image:
-        "https://images.unsplash.com/photo-1592892111427-bc0c1f0c4658?w=800&h=500&fit=crop",
-      category: "Sustainability",
-      tags: ["Organic", "Pest Control", "Natural"],
-      comments: 47,
-      views: 3210,
-      gradient: "from-emerald-600 to-green-500",
-    },
-    {
-      id: 10,
-      title: "Seasonal Flower Photography",
-      excerpt:
-        "Tips for capturing the beauty of your garden through photography.",
-      date: "Feb 22, 2024",
-      author: "Photo Bloom",
-      readTime: "6 min read",
-      image:
-        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w=800&h=500&fit=crop",
-      category: "Design",
-      tags: ["Photography", "Flowers", "Seasonal"],
-      comments: 19,
-      views: 2450,
-      gradient: "from-cyan-500 to-blue-400",
-    },
-    {
-      id: 11,
-      title: "Composting for Better Soil",
-      excerpt:
-        "Everything you need to know about creating nutrient-rich compost for your garden.",
-      date: "Feb 20, 2024",
-      author: "Soil Expert",
-      readTime: "11 min read",
-      image:
-        "https://images.unsplash.com/photo-1600841541100-bf7835d5d3da?w=800&h=500&fit=crop",
-      category: "Gardening Tips",
-      tags: ["Compost", "Soil", "Nutrients"],
-      comments: 33,
-      views: 2780,
-      gradient: "from-amber-600 to-yellow-500",
-    },
-    {
-      id: 12,
-      title: "Winter Garden Protection",
-      excerpt:
-        "How to protect your plants during cold months and prepare for spring.",
-      date: "Feb 18, 2024",
-      author: "Winter Gardener",
-      readTime: "7 min read",
-      image:
-        "https://images.unsplash.com/photo-1545243421-89e5c9b6d12c?w=800&h=500&fit=crop",
-      category: "Seasonal",
-      tags: ["Winter", "Protection", "Care"],
-      comments: 29,
-      views: 2100,
-      gradient: "from-blue-600 to-cyan-500",
-    },
-  ];
-
-  // Popular products for sidebar
-  const popularProducts = [
-    {
-      id: 1,
-      name: "Premium Rose Seeds",
-      price: "$24.99",
-      image:
-        "https://images.unsplash.com/photo-1519378058457-4c29a0a2efac?w-300&h=200&fit=crop",
-      rating: 4.9,
-      category: "Seeds",
-    },
-    {
-      id: 2,
-      name: "Ceramic Plant Pots",
-      price: "$34.99",
-      image:
-        "https://images.unsplash.com/photo-1485955900006-10f4d324d411?w=300&h=200&fit=crop",
-      rating: 4.8,
-      category: "Pots",
-    },
-    {
-      id: 3,
-      name: "Organic Fertilizer",
-      price: "$19.99",
-      image:
-        "https://images.unsplash.com/photo-1600841541100-bf7835d5d3da?w=300&h=200&fit=crop",
-      rating: 4.7,
-      category: "Soil",
-    },
-    {
-      id: 4,
-      name: "Gardening Tool Set",
-      price: "$49.99",
-      image:
-        "https://images.unsplash.com/photo-1577041241576-f4b964db30ee?w=300&h=200&fit=crop",
-      rating: 4.9,
-      category: "Tools",
-    },
-  ];
+  const filteredPosts =
+    selectedCategory === "all"
+      ? blogs
+      : blogs.filter(
+          (blog) =>
+            blog.blog_category_id?.toString() === selectedCategory.toString()
+        );
 
   // Featured tags
   const featuredTags = ["Flowers", "Gardening", "Plants", "Design"];
@@ -346,12 +101,6 @@ export default function BlogSection1() {
     },
   ];
 
-  // Filter blog posts based on selected category
-  const filteredPosts =
-    selectedCategory === "All"
-      ? blogPosts
-      : blogPosts.filter((post) => post.category === selectedCategory);
-
   // Pagination settings
   const postsPerPage = 4; // Always 4 cards per page on mobile
 
@@ -380,15 +129,6 @@ export default function BlogSection1() {
     }
   };
 
-  // Toggle favorite
-  const toggleFavorite = (postId) => {
-    setFavorites((prev) =>
-      prev.includes(postId)
-        ? prev.filter((id) => id !== postId)
-        : [...prev, postId]
-    );
-  };
-
   // Fix hydration error and detect mobile
   useEffect(() => {
     setMounted(true);
@@ -408,12 +148,18 @@ export default function BlogSection1() {
   }, [selectedCategory]);
 
   // Prevent rendering mismatched content
+  // If not mounted, show minimal UI to prevent hydration mismatch
   if (!mounted) {
     return (
-      <section className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="h-96 flex items-center justify-center">
-            <div className="animate-pulse text-gray-500">Loading...</div>
+      <section className="relative min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {Array.from({ length: 6 }).map((_, idx) => (
+              <div
+                key={idx}
+                className="h-80 bg-gray-800/50 rounded-xl animate-pulse"
+              />
+            ))}
           </div>
         </div>
       </section>
@@ -527,7 +273,7 @@ export default function BlogSection1() {
             {/* Quick Stats */}
             <div className="flex items-center gap-6">
               {[
-                { value: blogPosts.length, label: "Articles" },
+                { value: blogs.length, label: "Articles" },
                 { value: "4.8★", label: "Rating" },
                 { value: "10K+", label: "Readers" },
               ].map((stat, idx) => (
@@ -550,19 +296,33 @@ export default function BlogSection1() {
           className="mb-6"
         >
           <div className="flex flex-wrap gap-2">
+            <motion.button
+              key="all"
+              onClick={() => setSelectedCategory("all")}
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+              className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
+                selectedCategory === "all"
+                  ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                  : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
+              }`}
+            >
+              All
+            </motion.button>
+
             {categories.map((category) => (
               <motion.button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
+                key={category.id}
+                onClick={() => setSelectedCategory(category.id)}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
-                  selectedCategory === category
+                  selectedCategory === category.id
                     ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                 }`}
               >
-                {category}
+                {category.title}
               </motion.button>
             ))}
           </div>
@@ -585,8 +345,6 @@ export default function BlogSection1() {
                       post={post}
                       isHovered={isHovered}
                       setIsHovered={setIsHovered}
-                      favorites={favorites}
-                      toggleFavorite={toggleFavorite}
                     />
                   ))}
                 </div>
@@ -601,8 +359,6 @@ export default function BlogSection1() {
                       post={post}
                       isHovered={isHovered}
                       setIsHovered={setIsHovered}
-                      favorites={favorites}
-                      toggleFavorite={toggleFavorite}
                     />
                   ))}
                 </div>
@@ -750,14 +506,14 @@ export default function BlogSection1() {
                   </h3>
                 </div>
                 <div className="space-y-3">
-                  {popularProducts.map((product) => (
+                  {products.map((product) => (
                     <div
                       key={product.id}
                       className="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-700/30 transition-colors duration-300 cursor-pointer"
                     >
                       <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
                         <img
-                          src={product.image}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
                           alt={product.name}
                           className="w-full h-full object-cover"
                         />
@@ -766,19 +522,8 @@ export default function BlogSection1() {
                         <h4 className="text-xs font-medium text-white truncate">
                           {product.name}
                         </h4>
-                        <div className="flex items-center justify-between">
-                          <span className="text-xs text-emerald-400 font-medium">
-                            {product.price}
-                          </span>
-                          <div className="flex items-center gap-1">
-                            <Star className="w-3 h-3 fill-amber-400 text-amber-400" />
-                            <span className="text-xs text-gray-400">
-                              {product.rating}
-                            </span>
-                          </div>
-                        </div>
-                        <span className="text-[10px] text-gray-500">
-                          {product.category}
+                        <span className="text-[10px] text-gray-400">
+                          {product.description}
                         </span>
                       </div>
                     </div>
@@ -839,13 +584,7 @@ export default function BlogSection1() {
 }
 
 // Blog Card Component
-const BlogCard = ({
-  post,
-  isHovered,
-  setIsHovered,
-  favorites,
-  toggleFavorite,
-}) => (
+const BlogCard = ({ post, isHovered, setIsHovered }) => (
   <motion.div
     initial={{ opacity: 0, scale: 0.95 }}
     animate={{ opacity: 1, scale: 1 }}
@@ -862,11 +601,11 @@ const BlogCard = ({
     {/* Full Image Background */}
     <div className="absolute inset-0 overflow-hidden">
       <motion.img
-        src={post.image}
+        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${post.banner_image}`}
         alt={post.title}
         className="w-full h-full object-cover"
         animate={{
-          scale: isHovered === post.id ? 1.15 : 1.1, // Changed: More zoom on hover
+          scale: isHovered === post.id ? 1.15 : 1.1,
         }}
         transition={{ duration: 0.7 }}
       />
@@ -877,20 +616,9 @@ const BlogCard = ({
       <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
 
-    {/* Content - ALWAYS VISIBLE (this was the hover overlay before) */}
+    {/* Content - ALWAYS VISIBLE */}
     <div className="absolute inset-0 p-6 flex flex-col justify-end">
       <div>
-        {/* Category & Date - Always visible */}
-        <div className="flex items-center justify-between mb-4 opacity-100 group-hover:opacity-80 transition-opacity duration-300">
-          <span className="px-3 py-1 rounded-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium">
-            {post.category}
-          </span>
-          <div className="flex items-center gap-2">
-            <Calendar className="w-3 h-3 text-gray-400" />
-            <span className="text-xs text-gray-300">{post.date}</span>
-          </div>
-        </div>
-
         {/* Title - Always visible */}
         <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
           {post.title}
@@ -898,88 +626,41 @@ const BlogCard = ({
 
         {/* Excerpt - Always visible */}
         <p className="text-gray-300 text-sm mb-4 line-clamp-2 opacity-100 group-hover:opacity-90 transition-opacity duration-300">
-          {post.excerpt}
+          {post.excerpt || "No excerpt available"}
         </p>
 
         {/* Author & Stats - Always visible */}
         <div className="flex items-center justify-between opacity-100 group-hover:opacity-80 transition-opacity duration-300">
-          <div className="flex items-center gap-2">
-            <User className="w-3 h-3 text-emerald-400" />
-            <span className="text-xs text-gray-300">{post.author}</span>
-          </div>
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-1">
               <Eye className="w-3 h-3 text-gray-400" />
-              <span className="text-xs text-gray-300">{post.views}</span>
+              <span className="text-xs text-gray-300">
+                {post.views_count || 0}
+              </span>
             </div>
-            <div className="flex items-center gap-1">
-              <MessageCircle className="w-3 h-3 text-gray-400" />
-              <span className="text-xs text-gray-300">{post.comments}</span>
+            <div className="flex items-center gap-2">
+              <Calendar className="w-3 h-3 text-gray-400" />
+              <span className="text-xs text-gray-300">
+                {new Date(post.created_at).toLocaleDateString("en-US", {
+                  month: "short",
+                  day: "numeric",
+                  year: "numeric",
+                })}
+              </span>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-    {/* Floating Badge - Always Visible */}
-    <div className="absolute top-4 left-4 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-      <div className="px-3 py-1 rounded-full bg-black/60 backdrop-blur-sm border border-white/10">
-        <span className="text-xs font-medium text-white">{post.category}</span>
-      </div>
-    </div>
-
-    {/* Favorite Button */}
-    <motion.button
-      onClick={(e) => {
-        e.stopPropagation();
-        toggleFavorite(post.id);
-      }}
-      whileHover={{ scale: 1.1 }}
-      whileTap={{ scale: 0.9 }}
-      className="absolute top-4 right-4 p-2 rounded-full bg-black/60 backdrop-blur-sm border border-white/10 opacity-100 group-hover:opacity-90 transition-opacity duration-300"
-    >
-      <Heart
-        className={`w-4 h-4 transition-colors duration-300 ${
-          favorites.includes(post.id)
-            ? "fill-rose-500 text-rose-500"
-            : "text-gray-300 group-hover:text-rose-400"
-        }`}
-      />
-    </motion.button>
-
-    {/* Bottom Info - Now shows on hover (swapped) */}
-    <div className="absolute bottom-4 left-4 right-4">
+    {/* Bottom Info */}
+    <div className="absolute bottom-4 right-4">
       <div className="flex items-center justify-between">
-        <div className="flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Clock className="w-3 h-3 text-emerald-400" />
-          <span className="text-xs text-gray-300">{post.readTime}</span>
-        </div>
-
-        {/* NEW HOVER EFFECT: "Explore" button appears on hover */}
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{
-            scale: isHovered === post.id ? 1 : 0.8,
-            opacity: isHovered === post.id ? 1 : 0,
-          }}
-          transition={{ duration: 0.3 }}
-          className="flex items-center gap-2"
-        >
-          <motion.button
-            whileHover={{ scale: 1.05, x: 5 }}
-            whileTap={{ scale: 0.95 }}
-            className="px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-sm font-medium rounded-lg flex items-center gap-2 shadow-lg shadow-emerald-500/20"
-          >
-            <span>Explore</span>
-            <ArrowRight className="w-4 h-4" />
-          </motion.button>
-        </motion.div>
-
         {/* Original Read More button - hidden on hover */}
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 opacity-100 group-hover:opacity-0 transition-opacity duration-300"
+          className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 opacity-100 group-hover:opacity-100 transition-opacity duration-300"
         >
           <span>Read More</span>
           <ArrowRight className="w-3 h-3" />
@@ -988,29 +669,31 @@ const BlogCard = ({
     </div>
 
     {/* NEW HOVER EFFECT: Tags with animation */}
-    <motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{
-        opacity: isHovered === post.id ? 1 : 0,
-        y: isHovered === post.id ? 0 : 10,
-      }}
-      transition={{ duration: 0.3 }}
-      className="absolute top-16 left-4"
-    >
-      <div className="flex flex-wrap gap-2">
-        {post.tags.map((tag, idx) => (
-          <motion.span
-            key={idx}
-            initial={{ scale: 0 }}
-            animate={{ scale: isHovered === post.id ? 1 : 0 }}
-            transition={{ duration: 0.2, delay: idx * 0.1 }}
-            className="px-3 py-1.5 text-xs font-medium text-emerald-300 bg-emerald-900/40 backdrop-blur-sm rounded-lg border border-emerald-500/30"
-          >
-            #{tag}
-          </motion.span>
-        ))}
-      </div>
-    </motion.div>
+    {post.tags && post.tags.length > 0 && (
+      <motion.div
+        initial={{ opacity: 0, y: 10 }}
+        animate={{
+          opacity: isHovered === post.id ? 1 : 0,
+          y: isHovered === post.id ? 0 : 10,
+        }}
+        transition={{ duration: 0.3 }}
+        className="absolute top-16 left-4"
+      >
+        <div className="flex flex-wrap gap-2">
+          {post.tags.slice(0, 3).map((tag, idx) => (
+            <motion.span
+              key={idx}
+              initial={{ scale: 0 }}
+              animate={{ scale: isHovered === post.id ? 1 : 0 }}
+              transition={{ duration: 0.2, delay: idx * 0.1 }}
+              className="px-3 py-1.5 text-xs font-medium text-emerald-300 bg-emerald-900/40 backdrop-blur-sm rounded-lg border border-emerald-500/30"
+            >
+              #{typeof tag === "object" ? tag.name : tag}
+            </motion.span>
+          ))}
+        </div>
+      </motion.div>
+    )}
 
     {/* NEW HOVER EFFECT: Glowing border effect */}
     <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">

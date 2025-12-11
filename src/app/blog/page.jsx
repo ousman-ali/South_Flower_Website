@@ -1,6 +1,6 @@
 "use client";
 
-import { getBatchData } from "@/api/service";
+import { getBatchData, getBlogCategories } from "@/api/service";
 import BlogSection1 from "@/components/blog/BlogSection1";
 import FeaturedBlogPosts from "@/components/blog/FeaturedBlogPosts";
 import Breadcrumb from "@/components/breadcrumb/BreadCrumb";
@@ -11,6 +11,7 @@ import { useEffect, useState } from "react";
 export default function AboutPage() {
   const [products, setProducts] = useState([]);
   const [blogs, setBlogs] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [featuredBlogs, setFeaturedBlogs] = useState([]);
 
   const [loading, setLoading] = useState(true);
@@ -24,7 +25,9 @@ export default function AboutPage() {
     async function fetchData() {
       try {
         const data = await getBatchData(features);
+        const categories = await getBlogCategories();
         setProducts(data.ecommerce_product || []);
+        setCategories(categories);
         setBlogs(data.blog_post || []);
         const featured = (data.blog_post?.data || []).filter(
           (blog) => blog.is_featured === true
@@ -40,8 +43,6 @@ export default function AboutPage() {
 
     fetchData();
   }, []);
-
-  console.log("blogs", blogs.data);
 
   if (loading) {
     return (
@@ -60,7 +61,11 @@ export default function AboutPage() {
         currentPage="South Flower Posts"
       />
       {featuredBlogs.length > 0 && <FeaturedBlogPosts blogs={featuredBlogs} />}
-      <BlogSection1 blogs={blogs.data} products={products.data} />
+      <BlogSection1
+        blogs={blogs.data}
+        products={products.data}
+        categories={categories}
+      />
       <CTACard />
     </div>
   );

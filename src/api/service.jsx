@@ -21,3 +21,14 @@ export async function getProductCategories() {
     return null;
   }
 }
+
+//fetch blog categories
+export async function getBlogCategories() {
+  try {
+    const { data } = await apiClient.get("/blog/categories");
+    return data.data;
+  } catch (err) {
+    console.error("getBlogCategories Error:", err);
+    return null;
+  }
+}
