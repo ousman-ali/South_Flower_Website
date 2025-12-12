@@ -32,8 +32,6 @@ export default function ServicesSection1({ services, products }) {
   const [isMobile, setIsMobile] = useState(false);
   const scrollContainerRef = useRef(null);
 
-  console.log("products", products);
-
   function getFAIcon(iconName) {
     if (
       typeof iconName === "string" &&
@@ -68,53 +66,6 @@ export default function ServicesSection1({ services, products }) {
     window.addEventListener("resize", checkMobile);
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
-
-  // REMOVED AUTO SCROLL - Now manual scrolling only
-
-  // const topProducts = [
-  //   {
-  //     id: 1,
-  //     name: "Enterprise CMS",
-  //     description: "Scalable content management system",
-  //     rating: 4.9,
-  //     users: "2.5k+",
-  //     image:
-  //       "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w=100&q=80",
-  //     color: "from-blue-500 to-cyan-400",
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "E-Commerce Suite",
-  //     description: "Complete online store solution",
-  //     rating: 4.8,
-  //     users: "1.8k+",
-  //     image:
-  //       "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w-100&q=80",
-  //     color: "from-purple-500 to-pink-400",
-  //   },
-  //   {
-  //     id: 3,
-  //     name: "Mobile Platform",
-  //     description: "Cross-platform mobile framework",
-  //     rating: 4.7,
-  //     users: "3.2k+",
-  //     image:
-  //       "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=100&q=80",
-  //     color: "from-emerald-500 to-green-400",
-  //   },
-  //   {
-  //     id: 4,
-  //     name: "Analytics Dashboard",
-  //     description: "Real-time business intelligence",
-  //     rating: 4.9,
-  //     users: "1.5k+",
-  //     image:
-  //       "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100&q=80",
-  //     color: "from-orange-500 to-amber-400",
-  //   },
-  // ];
-
-  // REMOVED quickLinks array as requested
 
   const currentServices = isMobile
     ? services.slice(
