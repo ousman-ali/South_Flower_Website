@@ -331,7 +331,7 @@ export default function Footer() {
               reserved. Powered by
               <Link
                 href="https://keradiontechnology.com"
-                className="text-blue-400 cursor-pointer"
+                className="text-blue-400 cursor-pointer hover:underline underline-offset-4"
               >
                 {" "}
                 Keradion Technology

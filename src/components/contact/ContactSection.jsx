@@ -12,7 +12,6 @@ import {
   Flower,
   Leaf,
   MessageSquare,
-  User,
   Navigation,
   ChevronRight,
 } from "lucide-react";
@@ -466,7 +465,7 @@ export default function ContactSection() {
                       className={`inline-flex items-center justify-center w-12 h-12 rounded-lg ${card.bgColor} mb-3 group-hover:scale-110 transition-transform duration-300`}
                     >
                       <div
-                        className={`bg-gradient-to-r ${card.color} bg-clip-text text-transparent`}
+                        className={`bg-gradient-to-r ${card.color} bg-clip-text text-white`}
                       >
                         {card.icon}
                       </div>
