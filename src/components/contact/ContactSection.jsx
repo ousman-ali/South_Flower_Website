@@ -404,7 +404,7 @@ export default function ContactSection() {
                       whileTap={{ scale: 0.98 }}
                       className="w-full py-3.5 px-6 bg-gradient-to-r from-emerald-600 to-emerald-500 text-white rounded-xl font-semibold text-lg shadow-lg shadow-emerald-500/20 hover:shadow-emerald-500/40 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden group"
                     >
-                      <div className="relative flex items-center justify-center gap-2">
+                      <div className="relative flex items-center justify-center gap-2 cursor-pointer">
                         {isSubmitting ? (
                           <>
                             <motion.div
