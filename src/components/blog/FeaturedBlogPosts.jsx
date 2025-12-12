@@ -197,7 +197,7 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
   return (
     <section
       ref={containerRef}
-      className="relative py-12 bg-gradient-to-b from-gray-100 via-blue to-gray-50 overflow-hidden"
+      className="relative py-12 bg-gradient-to-b from-gray-100 via-blue to-gray-50 overflow-visible"
     >
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
@@ -362,7 +362,7 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                       {isSelected && (
                         <motion.div
                           layoutId="activeBlog"
-                          className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-emerald-400 to-teal-400 rounded-r-full"
+                          className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-blue-400 to-gray-400 rounded-r-full"
                         />
                       )}
 
