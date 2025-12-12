@@ -119,22 +119,39 @@ export default function ContactSection() {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
+    try {
+      const res = await fetch(
+        `${process.env.NEXT_PUBLIC_API_URL}/contact-message`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
-    setIsSubmitting(false);
-    setIsSubmitted(true);
+      const data = await res.json();
 
-    // Reset form after success
-    setTimeout(() => {
+      if (!res.ok) {
+        throw new Error(data.message || "Failed to send message");
+      }
+
+      setIsSubmitted(true);
+
+      // Reset form after success
       setFormData({
         name: "",
         email: "",
         phone: "",
         message: "",
       });
-      setIsSubmitted(false);
-    }, 3000);
+    } catch (error) {
+      console.error("Error submitting contact form:", error);
+      alert("Something went wrong!");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
