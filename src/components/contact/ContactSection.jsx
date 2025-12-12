@@ -22,6 +22,7 @@ export default function ContactSection() {
     name: "",
     email: "",
     phone: "",
+    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -145,6 +146,7 @@ export default function ContactSection() {
           name: "",
           email: "",
           phone: "",
+          subject: "",
           message: "",
         });
         setIsSubmitted(false);
@@ -361,6 +363,21 @@ export default function ContactSection() {
                         value={formData.phone}
                         onChange={handleInputChange}
                         placeholder="+251 900 000 000"
+                        className="w-full px-4 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/30 transition-all duration-300"
+                      />
+                    </div>
+
+                    <div>
+                      <label className="block text-gray-300 mb-2">
+                        Subject
+                      </label>
+                      <input
+                        type="text"
+                        name="subject"
+                        value={formData.subject}
+                        onChange={handleInputChange}
+                        required
+                        placeholder="Subject"
                         className="w-full px-4 py-3 rounded-xl bg-gray-800/60 border border-gray-700/50 text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500/50 focus:border-emerald-500/30 transition-all duration-300"
                       />
                     </div>
