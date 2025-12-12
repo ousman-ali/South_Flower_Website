@@ -67,8 +67,6 @@ export default function Home() {
     fetchData();
   }, []);
 
-  console.log("products home", products.data);
-
   if (loading) {
     return (
       <div className="">

@@ -16,7 +16,7 @@ import {
   ChevronRight,
 } from "lucide-react";
 
-export default function ContactSection() {
+export default function ContactSection({ setup, aboutContent }) {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
