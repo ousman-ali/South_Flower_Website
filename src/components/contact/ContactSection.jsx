@@ -140,12 +140,15 @@ export default function ContactSection() {
       setIsSubmitted(true);
 
       // Reset form after success
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      setTimeout(() => {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
+        setIsSubmitted(false);
+      }, 7000);
     } catch (error) {
       console.error("Error submitting contact form:", error);
       alert("Something went wrong!");
