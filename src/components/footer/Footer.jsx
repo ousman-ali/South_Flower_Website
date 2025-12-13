@@ -39,7 +39,7 @@ export default function Footer() {
 
   useEffect(() => {
     const features = [
-      { name: "about_service", amount: 5 },
+      { name: "about_service", amount: 6 },
       { name: "about_setup" },
     ];
 
@@ -63,12 +63,12 @@ export default function Footer() {
   }, []);
 
   const quickLinks = [
-    { name: "Home", href: "#" },
-    { name: "About Us", href: "#" },
-    { name: "Services", href: "#" },
-    { name: "Portfolio", href: "#" },
-    { name: "Careers", href: "#" },
-    { name: "Blog", href: "#" },
+    { name: "Home", href: "/" },
+    { name: "About Us", href: "/about" },
+    { name: "Services", href: "/service" },
+    { name: "Products", href: "/product" },
+    { name: "Blog", href: "/blog" },
+    { name: "Contact", href: "/contact" },
   ];
 
   const socialMedia = [
@@ -267,7 +267,7 @@ export default function Footer() {
                 >
                   <a
                     href={service.href}
-                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group"
+                    className="text-gray-400 hover:text-white transition-colors duration-300 flex items-center gap-2 group cursor-pointer"
                   >
                     <motion.span
                       className="text-blue-400 opacity-0 group-hover:opacity-100"
@@ -282,7 +282,9 @@ export default function Footer() {
                     >
                       ●
                     </motion.span>
-                    {service.title}
+                    {service?.title.length > 30
+                      ? service?.title.slice(0, 30) + "..."
+                      : service?.title}
                   </a>
                 </motion.li>
               ))}
