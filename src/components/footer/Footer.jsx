@@ -14,6 +14,7 @@ import {
   ArrowRight,
   Send,
 } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 
@@ -99,6 +100,10 @@ export default function Footer() {
     },
   ];
 
+  const logoSrc = setup?.logo_small
+    ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${setup.logo_small}`
+    : "/images/default-logo.png";
+
   return (
     <footer className="relative overflow-hidden bg-gradient-to-b from-black/95 via-black/90 to-black/95">
       {/* Animated Background Grid */}
@@ -148,15 +153,20 @@ export default function Footer() {
               viewport={{ once: true }}
               className="flex items-center gap-3"
             >
+              {/* Logo Glow Wrapper */}
               <div className="relative">
-                <div className="absolute -inset-4 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full blur-xl opacity-30" />
-                <div className="relative p-3 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl">
-                  <Sparkles className="w-8 h-8 text-white" />
+                {/* Logo Container */}
+                <div className="relative rounded-xl">
+                  <Image
+                    src={logoSrc}
+                    alt="Company Logo"
+                    width={200}
+                    height={80}
+                    priority
+                    className="object-contain rounded-md bg-white p-1 w-[200px] h-[80px]"
+                  />
                 </div>
               </div>
-              <h2 className="text-2xl font-bold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-                Innovate<span className="text-white">Co</span>
-              </h2>
             </motion.div>
 
             <motion.p
@@ -305,53 +315,65 @@ export default function Footer() {
             </h3>
 
             <div className="space-y-4">
-              <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-3 text-gray-400 group"
-              >
-                <div className="relative mt-1">
-                  <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300" />
-                  <Mail className="relative w-5 h-5 text-blue-400" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Email</p>
-                  <p className="text-white group-hover:text-blue-400 transition-colors duration-300">
-                    hello@innovateco.com
-                  </p>
-                </div>
-              </motion.div>
+              {setup?.email_addresses?.length >= 1 && (
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-start gap-3 text-gray-400 group"
+                >
+                  <a
+                    href={`mailto:${setup?.email_addresses[0].value}`}
+                    className="relative mt-1"
+                  >
+                    <div className="absolute inset-0 bg-blue-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300" />
+                    <Mail className="relative w-5 h-5 text-blue-400" />
+                  </a>
+                  <a href={`mailto:${setup?.email_addresses[0].value}`}>
+                    <p className="text-sm text-gray-500">Email</p>
+                    <p className="text-white group-hover:text-blue-400 transition-colors duration-300">
+                      {setup?.email_addresses[0].value}
+                    </p>
+                  </a>
+                </motion.div>
+              )}
 
-              <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-3 text-gray-400 group"
-              >
-                <div className="relative mt-1">
-                  <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300" />
-                  <Phone className="relative w-5 h-5 text-purple-400" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Phone</p>
-                  <p className="text-white group-hover:text-purple-400 transition-colors duration-300">
-                    +1 (555) 123-4567
-                  </p>
-                </div>
-              </motion.div>
+              {setup?.phone_numbers?.length >= 1 && (
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-start gap-3 text-gray-400 group"
+                >
+                  <a
+                    href={`tel:${setup?.phone_numbers[0].value}`}
+                    className="relative mt-1"
+                  >
+                    <div className="absolute inset-0 bg-purple-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300" />
+                    <Phone className="relative w-5 h-5 text-purple-400" />
+                  </a>
+                  <a href={`tel:${setup?.phone_numbers[0].value}`}>
+                    <p className="text-sm text-gray-500">Phone</p>
+                    <p className="text-white group-hover:text-purple-400 transition-colors duration-300">
+                      {setup?.phone_numbers[0].value}
+                    </p>
+                  </a>
+                </motion.div>
+              )}
 
-              <motion.div
-                whileHover={{ x: 5 }}
-                className="flex items-start gap-3 text-gray-400 group"
-              >
-                <div className="relative mt-1">
-                  <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300" />
-                  <MapPin className="relative w-5 h-5 text-emerald-400" />
-                </div>
-                <div>
-                  <p className="text-sm text-gray-500">Address</p>
-                  <p className="text-white group-hover:text-emerald-400 transition-colors duration-300">
-                    123 Innovation St, San Francisco, CA 94107
-                  </p>
-                </div>
-              </motion.div>
+              {setup?.company_address && (
+                <motion.div
+                  whileHover={{ x: 5 }}
+                  className="flex items-start gap-3 text-gray-400 group"
+                >
+                  <div className="relative mt-1">
+                    <div className="absolute inset-0 bg-emerald-500/20 rounded-full blur-sm group-hover:blur-md transition-all duration-300" />
+                    <MapPin className="relative w-5 h-5 text-emerald-400" />
+                  </div>
+                  <div>
+                    <p className="text-sm text-gray-500">Address</p>
+                    <p className="text-white group-hover:text-emerald-400 transition-colors duration-300">
+                      {setup?.company_address}
+                    </p>
+                  </div>
+                </motion.div>
+              )}
             </div>
           </motion.div>
         </div>
