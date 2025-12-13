@@ -7,8 +7,36 @@ import InstagramIcon from "../icons/InstagramIcon";
 import TikTokIcon from "../icons/TiktokIcon";
 import PhoneIcon from "../icons/PhoneIcon";
 import EmailIcon from "../icons/EmailIcon";
+import { getBatchData } from "@/api/service";
+import { useEffect, useState } from "react";
 
 export default function TopHeader() {
+  const [aboutContent, setAboutContent] = useState([]);
+  const [setup, setSetup] = useState(null);
+
+  useEffect(() => {
+    const features = [
+      { name: "about_content", amount: 4 },
+      { name: "about_setup" },
+    ];
+
+    async function fetchData() {
+      try {
+        const data = await getBatchData(features);
+
+        // Set states individually
+        setAboutContent(data.about_content.data || []);
+        setSetup(data.about_setup.data || null);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  console.log("a-setup", setup);
+
   return (
     <div
       className="hidden md:flex relative overflow-hidden w-full py-2 px-14 justify-between text-sm 
@@ -25,57 +53,70 @@ export default function TopHeader() {
       {/* Left: Contact Info */}
       <div className="flex space-x-4 relative z-10">
         {/* Phone */}
-        <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl
+        {setup?.phone_numbers?.length >= 1 && (
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl
             bg-white/10 backdrop-blur-md
             border border-white/20
             shadow-sm
             transition-all duration-300
             hover:bg-white/20 hover:border-white/30 
             hover:shadow-md"
-        >
-          <span className="flex items-center justify-center">
-            <PhoneIcon size={15} className="text-blue-400" />
-          </span>
-          <span className="text-blue-200 font-medium tracking-wide">
-            +251 900 000 000
-          </span>
-        </div>
+          >
+            <span className="flex items-center justify-center">
+              <PhoneIcon size={15} className="text-blue-400" />
+            </span>
+            <span className="text-blue-200 font-medium tracking-wide">
+              {setup?.phone_numbers[0].value}
+            </span>
+          </div>
+        )}
 
         {/* Email */}
-        <div
-          className="flex items-center gap-2 px-3 py-1.5 rounded-xl
+        {setup?.email_addresses?.length >= 1 && (
+          <div
+            className="flex items-center gap-2 px-3 py-1.5 rounded-xl
             bg-white/10 backdrop-blur-md
             border border-white/20
             shadow-sm
             transition-all duration-300
             hover:bg-white/20 hover:border-white/30 
             hover:shadow-md"
-        >
-          <span className="flex items-center justify-center">
-            <EmailIcon size={15} className="text-blue-400" />
-          </span>
-          <span className="text-blue-200 font-medium tracking-wide">
-            info@example.com
-          </span>
-        </div>
+          >
+            <span className="flex items-center justify-center">
+              <EmailIcon size={15} className="text-blue-400" />
+            </span>
+            <span className="text-blue-200 font-medium tracking-wide">
+              {setup?.email_addresses[0].value}
+            </span>
+          </div>
+        )}
       </div>
 
       {/* Right: Social Icons */}
       <div className="flex space-x-5 relative z-10">
         {/* Facebook */}
-        <a href="#" className="icon-wrapper metallic-bg">
-          <FacebookIcon
-            size={15}
-            className="text-white hover:text-blue-600 transition"
-          />
-        </a>
+        {setup?.social_media?.facebook && (
+          <a
+            href={setup?.social_media?.facebook}
+            className="icon-wrapper metallic-bg"
+          >
+            <FacebookIcon
+              size={15}
+              className="text-white hover:text-blue-600 transition"
+            />
+          </a>
+        )}
 
         {/* LinkedIn */}
-        <a href="#" className="icon-wrapper metallic-bg">
-          <LinkedInIcon
-            size={15}
-            className="
+        {setup?.social_media?.linkedin && (
+          <a
+            href={setup?.social_media?.linkedin}
+            className="icon-wrapper metallic-bg"
+          >
+            <LinkedInIcon
+              size={15}
+              className="
                         text-white 
                         hover:text-[#0A66C2] 
                         transition 
@@ -83,27 +124,37 @@ export default function TopHeader() {
                         transform 
                         hover:scale-110
                     "
-          />
-        </a>
+            />
+          </a>
+        )}
 
         {/* Telegram */}
-        <a href="#" className="icon-wrapper metallic-bg">
-          <SendIcon
-            size={15}
-            className="
+        {setup?.social_media?.telegram && (
+          <a
+            href={setup?.social_media?.telegram}
+            className="icon-wrapper metallic-bg"
+          >
+            <SendIcon
+              size={15}
+              className="
                         text-white
                         hover:text-[#0088cc] 
                         transition 
                         duration-200  
                     "
-          />
-        </a>
+            />
+          </a>
+        )}
 
         {/* TikTok */}
-        <a href="#" className="icon-wrapper metallic-bg">
-          <InstagramIcon
-            size={15}
-            className="
+        {setup?.social_media?.instagram && (
+          <a
+            href={setup?.social_media?.instagram}
+            className="icon-wrapper metallic-bg"
+          >
+            <InstagramIcon
+              size={15}
+              className="
                         text-white
                         hover:text-pink-500 
                         transition 
@@ -111,12 +162,17 @@ export default function TopHeader() {
                         transform 
                         hover:drop-shadow-[0_0_8px_rgba(236,72,153,0.6)]
                     "
-          />
-        </a>
-        <a href="#" className="icon-wrapper metallic-bg">
-          <TikTokIcon
-            size={15}
-            className="
+            />
+          </a>
+        )}
+        {setup?.social_media?.tiktok && (
+          <a
+            href={setup?.social_media?.tiktok}
+            className="icon-wrapper metallic-bg"
+          >
+            <TikTokIcon
+              size={15}
+              className="
                         text-white
                         transition
                         duration-300
@@ -124,8 +180,9 @@ export default function TopHeader() {
                         hover:drop-shadow-[2px_2px_6px_rgba(0,242,234,0.7)]
                         hover:shadow-[ -2px_-2px_6px_rgba(255,0,80,0.7) ]
                     "
-          />
-        </a>
+            />
+          </a>
+        )}
       </div>
     </div>
   );
