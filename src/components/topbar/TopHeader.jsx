@@ -35,8 +35,6 @@ export default function TopHeader() {
     fetchData();
   }, []);
 
-  console.log("a-setup", setup);
-
   return (
     <div
       className="hidden md:flex relative overflow-hidden w-full py-2 px-14 justify-between text-sm 

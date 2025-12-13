@@ -1,11 +1,12 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import MobileMenu from "./MobileMenu";
 import { Menu, X } from "lucide-react";
 import { usePathname } from "next/navigation";
+import { getBatchData } from "@/api/service";
 
 const navItems = [
   { name: "Home", href: "/" },
@@ -20,6 +21,29 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Home");
   const pathname = usePathname();
+  const [aboutContent, setAboutContent] = useState([]);
+  const [setup, setSetup] = useState(null);
+
+  useEffect(() => {
+    const features = [
+      { name: "about_content", amount: 4 },
+      { name: "about_setup" },
+    ];
+
+    async function fetchData() {
+      try {
+        const data = await getBatchData(features);
+
+        // Set states individually
+        setAboutContent(data.about_content.data || []);
+        setSetup(data.about_setup.data || null);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -28,7 +52,11 @@ export default function Navbar() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Image
-              src="/images/south_flower_logo.png"
+              src={
+                setup?.logo_small
+                  ? `${process.env.NEXT_PUBLIC_IMAGE_URL}/${setup?.logo_small}`
+                  : "/images/south_flower_logo.png"
+              }
               alt="Logo"
               width={120}
               height={50}
@@ -81,11 +109,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile Menu */}
-      <MobileMenu
-        open={open}
-        navItems={navItems}
-        pathname={pathname}
-      />
+      <MobileMenu open={open} navItems={navItems} pathname={pathname} />
     </>
   );
 }
