@@ -21,12 +21,10 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
   const [active, setActive] = useState("Home");
   const pathname = usePathname();
-  const [aboutContent, setAboutContent] = useState([]);
   const [setup, setSetup] = useState(null);
 
   useEffect(() => {
     const features = [
-      { name: "about_content", amount: 4 },
       { name: "about_setup" },
     ];
 
@@ -35,7 +33,6 @@ export default function Navbar() {
         const data = await getBatchData(features);
 
         // Set states individually
-        setAboutContent(data.about_content.data || []);
         setSetup(data.about_setup.data || null);
       } catch (err) {
         console.error(err);

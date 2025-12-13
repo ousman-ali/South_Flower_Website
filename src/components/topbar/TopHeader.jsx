@@ -9,23 +9,19 @@ import PhoneIcon from "../icons/PhoneIcon";
 import EmailIcon from "../icons/EmailIcon";
 import { getBatchData } from "@/api/service";
 import { useEffect, useState } from "react";
+import { TwitterIcon } from "lucide-react";
 
 export default function TopHeader() {
-  const [aboutContent, setAboutContent] = useState([]);
   const [setup, setSetup] = useState(null);
 
   useEffect(() => {
-    const features = [
-      { name: "about_content", amount: 4 },
-      { name: "about_setup" },
-    ];
+    const features = [{ name: "about_setup" }];
 
     async function fetchData() {
       try {
         const data = await getBatchData(features);
 
         // Set states individually
-        setAboutContent(data.about_content.data || []);
         setSetup(data.about_setup.data || null);
       } catch (err) {
         console.error(err);
@@ -175,21 +171,22 @@ export default function TopHeader() {
             />
           </a>
         )}
-        {setup?.social_media?.tiktok && (
+        {setup?.social_media?.twitter && (
           <a
-            href={setup?.social_media?.tiktok}
+            href={setup?.social_media?.twitter}
             className="icon-wrapper metallic-bg"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <TikTokIcon
+            <TwitterIcon
               size={15}
               className="
-                        text-white
-                        transition
-                        duration-300
-                        hover:text-black
-                        hover:drop-shadow-[2px_2px_6px_rgba(0,242,234,0.7)]
-                        hover:shadow-[ -2px_-2px_6px_rgba(255,0,80,0.7) ]
-                    "
+                text-white
+                transition
+                duration-300
+                hover:text-[#1DA1F2]
+                hover:drop-shadow-[0_0_6px_rgba(29,161,242,0.7)]
+              "
             />
           </a>
         )}

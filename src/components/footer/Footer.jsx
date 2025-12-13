@@ -1,5 +1,6 @@
 "use client";
 
+import { getBatchData } from "@/api/service";
 import { motion, useAnimationFrame } from "framer-motion";
 import {
   Sparkles,
@@ -10,8 +11,8 @@ import {
   Mail,
   Phone,
   MapPin,
-  Heart,
   ArrowRight,
+  Send,
 } from "lucide-react";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
@@ -33,6 +34,29 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
 
 export default function Footer() {
   const [isClient, setIsClient] = useState(false);
+  const [services, setServices] = useState([]);
+  const [setup, setSetup] = useState(null);
+
+  useEffect(() => {
+    const features = [
+      { name: "about_service", amount: 5 },
+      { name: "about_setup" },
+    ];
+
+    async function fetchData() {
+      try {
+        const data = await getBatchData(features);
+
+        // Set states individually
+        setServices(data.about_service.data || []);
+        setSetup(data.about_setup.data || null);
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+    fetchData();
+  }, []);
 
   useEffect(() => {
     setIsClient(true);
@@ -47,20 +71,32 @@ export default function Footer() {
     { name: "Blog", href: "#" },
   ];
 
-  const services = [
-    { name: "Web Development", href: "#" },
-    { name: "Mobile Apps", href: "#" },
-    { name: "UI/UX Design", href: "#" },
-    { name: "Digital Marketing", href: "#" },
-    { name: "Cloud Solutions", href: "#" },
-    { name: "Consulting", href: "#" },
-  ];
-
   const socialMedia = [
-    { icon: <Facebook size={20} />, href: "#", color: "hover:text-blue-400" },
-    { icon: <Twitter size={20} />, href: "#", color: "hover:text-cyan-400" },
-    { icon: <Instagram size={20} />, href: "#", color: "hover:text-pink-400" },
-    { icon: <Linkedin size={20} />, href: "#", color: "hover:text-blue-500" },
+    {
+      icon: <Facebook size={20} />,
+      href: setup?.social_media?.facebook,
+      color: "hover:text-blue-400",
+    },
+    {
+      icon: <Twitter size={20} />,
+      href: setup?.social_media?.twitter,
+      color: "hover:text-cyan-400",
+    },
+    {
+      icon: <Instagram size={20} />,
+      href: setup?.social_media?.instagram,
+      color: "hover:text-pink-400",
+    },
+    {
+      icon: <Linkedin size={20} />,
+      href: setup?.social_media?.linkedin,
+      color: "hover:text-blue-500",
+    },
+    {
+      icon: <Send size={20} />,
+      href: setup?.social_media?.telegram,
+      color: "hover:text-[#0088CC]",
+    },
   ];
 
   return (
@@ -142,23 +178,26 @@ export default function Footer() {
               transition={{ delay: 0.2 }}
               className="flex gap-4"
             >
-              {socialMedia.map((social, index) => (
-                <motion.a
-                  key={index}
-                  href={social.href}
-                  whileHover={{ scale: 1.2, y: -5 }}
-                  whileTap={{ scale: 0.9 }}
-                  className={`relative p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 ${social.color} transition-all duration-300 hover:border-white/30`}
-                >
-                  <div className="relative z-10">{social.icon}</div>
-                  <motion.div
-                    className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-300"
-                    initial={{ scale: 0 }}
-                    whileHover={{ scale: 1 }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </motion.a>
-              ))}
+              {socialMedia.map(
+                (social, index) =>
+                  social.href && (
+                    <motion.a
+                      key={index}
+                      href={social.href}
+                      whileHover={{ scale: 1.2, y: -5 }}
+                      whileTap={{ scale: 0.9 }}
+                      className={`relative p-3 rounded-xl bg-white/5 backdrop-blur-sm border border-white/10 text-gray-400 ${social.color} transition-all duration-300 hover:border-white/30`}
+                    >
+                      <div className="relative z-10">{social.icon}</div>
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl opacity-0 hover:opacity-100 transition-opacity duration-300"
+                        initial={{ scale: 0 }}
+                        whileHover={{ scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    </motion.a>
+                  )
+              )}
             </motion.div>
           </div>
 
@@ -243,7 +282,7 @@ export default function Footer() {
                     >
                       ●
                     </motion.span>
-                    {service.name}
+                    {service.title}
                   </a>
                 </motion.li>
               ))}

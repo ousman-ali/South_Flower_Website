@@ -14,12 +14,10 @@ import { useEffect, useState } from "react";
 import { getBatchData } from "@/api/service";
 
 export default function MobileMenu({ open, navItems, pathname }) {
-  const [aboutContent, setAboutContent] = useState([]);
   const [setup, setSetup] = useState(null);
 
   useEffect(() => {
     const features = [
-      { name: "about_content", amount: 4 },
       { name: "about_setup" },
     ];
 
@@ -28,7 +26,6 @@ export default function MobileMenu({ open, navItems, pathname }) {
         const data = await getBatchData(features);
 
         // Set states individually
-        setAboutContent(data.about_content.data || []);
         setSetup(data.about_setup.data || null);
       } catch (err) {
         console.error(err);
