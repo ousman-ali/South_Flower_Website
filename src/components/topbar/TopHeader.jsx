@@ -89,12 +89,18 @@ export default function TopHeader() {
             hover:bg-white/20 hover:border-white/30 
             hover:shadow-md"
           >
-            <span className="flex items-center justify-center">
+            <a
+              href={`mailto:${setup?.email_addresses[0].value}`}
+              className="flex items-center justify-center"
+            >
               <EmailIcon size={15} className="text-blue-400" />
-            </span>
-            <span className="text-blue-200 font-medium tracking-wide">
+            </a>
+            <a
+              href={`mailto:${setup?.email_addresses[0].value}`}
+              className="text-blue-200 font-medium tracking-wide"
+            >
               {setup?.email_addresses[0].value}
-            </span>
+            </a>
           </div>
         )}
       </div>
