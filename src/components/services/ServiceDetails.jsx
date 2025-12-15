@@ -30,131 +30,8 @@ import { useParams } from "next/navigation";
 import NotFound from "../notFound/NotFound";
 import Link from "next/link";
 
-// Mock data for the service - you can replace this with actual data from props/API
-// const serviceData = {
-//   id: 1,
-//   title: "Web Development",
-//   category: "Technology",
-//   description:
-//     "Custom websites and web applications built with modern frameworks for optimal performance and scalability. We create digital experiences that drive business growth and engage users effectively.",
-//   longDescription: `
-//     Our web development services are designed to transform your business ideas into powerful digital solutions. We specialize in creating responsive, high-performance websites and web applications using cutting-edge technologies like React, Next.js, and Node.js.
-
-//     <h3>What We Offer:</h3>
-//     <ul>
-//       <li>Custom website design and development</li>
-//       <li>E-commerce solutions with seamless payment integration</li>
-//       <li>Progressive Web Apps (PWAs) for mobile-like experience</li>
-//       <li>API development and integration</li>
-//       <li>Website maintenance and support</li>
-//       <li>Performance optimization and SEO</li>
-//     </ul>
-
-//     <h3>Our Process:</h3>
-//     <p>We follow an agile development methodology to ensure transparency and timely delivery. From initial consultation to deployment and beyond, we work closely with you to achieve your business objectives.</p>
-//   `,
-//   mainImage:
-//     "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-//   images: [
-//     "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-//     "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
-//     "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80",
-//     "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
-//     "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
-//     "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
-//   ],
-//   price: "$5,000 - $50,000",
-//   duration: "4-12 weeks",
-//   teamSize: "3-8 members",
-//   rating: 4.8,
-//   reviews: 124,
-//   features: [
-//     "Responsive Design",
-//     "SEO Optimized",
-//     "Fast Loading",
-//     "Secure Hosting",
-//     "24/7 Support",
-//     "Custom CMS",
-//     "Mobile First",
-//     "Analytics Integration",
-//   ],
-//   tags: [
-//     "React",
-//     "Next.js",
-//     "Node.js",
-//     "TypeScript",
-//     "Tailwind CSS",
-//     "MongoDB",
-//   ],
-//   status: "Available",
-//   location: "Worldwide",
-//   createdAt: "2024-01-15",
-//   updatedAt: "2024-03-20",
-// };
-
-const relatedServices = [
-  {
-    id: 2,
-    title: "UI/UX Design",
-    image:
-      "https://images.unsplash.com/photo-1561070791-2526d30994b5?auto=format&fit=crop&w=400&q=80",
-    description: "User-centered design solutions",
-    price: "$3,000 - $25,000",
-    rating: 4.7,
-  },
-  {
-    id: 3,
-    title: "Mobile Apps",
-    image:
-      "https://images.unsplash.com/photo-1512941937669-90a1b58e7e9c?auto=format&fit=crop&w=400&q=80",
-    description: "Cross-platform mobile applications",
-    price: "$10,000 - $80,000",
-    rating: 4.9,
-  },
-  {
-    id: 4,
-    title: "E-commerce Solutions",
-    image:
-      "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?auto=format&fit=crop&w=400&q=80",
-    description: "Custom online store platforms",
-    price: "$8,000 - $60,000",
-    rating: 4.8,
-  },
-];
-
-const relatedProducts = [
-  {
-    id: 1,
-    name: "Enterprise CMS",
-    description: "Scalable content management system",
-    price: "$4,999",
-    rating: 4.9,
-    image:
-      "https://images.unsplash.com/photo-1518709268805-4e9042af2176?auto=format&fit=crop&w-100&q=80",
-  },
-  {
-    id: 2,
-    name: "SEO Toolkit",
-    description: "Complete SEO optimization package",
-    price: "$2,499",
-    rating: 4.7,
-    image:
-      "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=100&q=80",
-  },
-  {
-    id: 3,
-    name: "Analytics Dashboard",
-    description: "Real-time business intelligence",
-    price: "$3,999",
-    rating: 4.8,
-    image:
-      "https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=100&q=80",
-  },
-];
-
 export default function ServiceDetails() {
   const { slug } = useParams();
-  const [services, setServices] = useState([]);
   const [products, setProducts] = useState([]);
   const [service, setService] = useState(null);
   const [relatedServices, setRelatedServices] = useState([]);
@@ -165,7 +42,7 @@ export default function ServiceDetails() {
   useEffect(() => {
     const features = [
       { name: "about_service", amount: 10000 },
-      { name: "ecommerce_product", amount: 5 },
+      { name: "ecommerce_product", amount: 3 },
     ];
 
     async function fetchData() {
@@ -175,7 +52,6 @@ export default function ServiceDetails() {
         const fetchedServices = data.about_service?.data || [];
         const fetchedProducts = data.ecommerce_product?.data || [];
 
-        setServices(fetchedServices);
         setProducts(fetchedProducts);
 
         // ✅ Correct filtering
@@ -200,7 +76,7 @@ export default function ServiceDetails() {
 
         const related = fetchedServices
           .filter((s) => s.slug !== slug)
-          .slice(0, 5);
+          .slice(0, 3);
 
         setService(currentService);
         setRelatedServices(related);
@@ -214,11 +90,6 @@ export default function ServiceDetails() {
     fetchData();
   }, []);
 
-  console.log("slug", slug);
-  console.log("service", service);
-  console.log("related services", relatedServices);
-  console.log("images", service?.allImages);
-
   // State for zoom functionality
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -227,9 +98,6 @@ export default function ServiceDetails() {
   // State for image gallery
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [lightboxOpen, setLightboxOpen] = useState(false);
-
-  // State for favorites
-  const [isFavorite, setIsFavorite] = useState(false);
 
   // Ref for zoom container
   const zoomContainerRef = useRef(null);
