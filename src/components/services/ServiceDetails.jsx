@@ -310,25 +310,6 @@ export default function ServiceDetails() {
     });
   };
 
-  // Render stars
-  const renderStars = (rating) => {
-    return (
-      <div className="flex items-center gap-1">
-        {[...Array(5)].map((_, i) => (
-          <Star
-            key={i}
-            className={`w-4 h-4 ${
-              i < Math.floor(rating)
-                ? "fill-yellow-400 text-yellow-400"
-                : "fill-gray-700 text-gray-700"
-            }`}
-          />
-        ))}
-        <span className="ml-2 text-sm text-gray-300">{rating.toFixed(1)}</span>
-      </div>
-    );
-  };
-
   if (loading) {
     return (
       <div className="">
@@ -406,7 +387,7 @@ export default function ServiceDetails() {
                 {/* Zoom Container */}
                 <div
                   ref={zoomContainerRef}
-                  className="relative w-full h-[500px] overflow-hidden cursor-zoom-in"
+                  className="relative w-full h-[400px] overflow-hidden cursor-zoom-in"
                   onMouseMove={handleMouseMove}
                   onMouseLeave={() => isZoomed && handleResetZoom()}
                   onClick={() => openLightbox(0)}
