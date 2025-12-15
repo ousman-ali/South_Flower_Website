@@ -21,7 +21,6 @@ const FloatingShape = ({ delay = 0, className = "", style }) => {
 };
 
 export default function ServicesSection({ servicesData }) {
-
   function getFAIcon(iconName) {
     if (
       typeof iconName === "string" &&
@@ -253,9 +252,11 @@ export default function ServicesSection({ servicesData }) {
                 </div>
 
                 {/* Content */}
-                <h3 className="relative text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
-                  {service.title}
-                </h3>
+                <Link href={`/service/${service.slug}`}>
+                  <h3 className="relative text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
+                    {service.title}
+                  </h3>
+                </Link>
 
                 <p className="relative text-gray-400 leading-relaxed flex-grow">
                   {service.short_description}

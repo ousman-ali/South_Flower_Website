@@ -289,7 +289,7 @@ export default function ServicesSection1({ services, products }) {
                           {service.short_description}
                         </p>
                         <Link
-                          href={`/services/${service.slug}`}
+                          href={`/service/${service.slug}`}
                           className="inline-flex items-center gap-2 px-4 py-2 rounded-lg 
                             bg-gradient-to-r from-gray-700 to-cyan-500 
                             text-white font-medium shadow-md 

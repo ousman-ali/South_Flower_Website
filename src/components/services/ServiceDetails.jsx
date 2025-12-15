@@ -15,84 +15,82 @@ import {
   Calendar,
   Clock,
   Users,
-  Award,
-  CheckCircle,
   Star,
-  ArrowRight,
   ShoppingCart,
   Tag,
-  MapPin,
-  Phone,
-  Mail,
-  Globe,
   Facebook,
   Twitter,
   Linkedin,
   Instagram,
   Youtube,
 } from "lucide-react";
+import { getBatchData } from "@/api/service";
+import Loading from "../loading/Loading";
+import { useParams } from "next/navigation";
+import NotFound from "../notFound/NotFound";
+import Link from "next/link";
 
 // Mock data for the service - you can replace this with actual data from props/API
-const serviceData = {
-  id: 1,
-  title: "Web Development",
-  category: "Technology",
-  description:
-    "Custom websites and web applications built with modern frameworks for optimal performance and scalability. We create digital experiences that drive business growth and engage users effectively.",
-  longDescription: `
-    Our web development services are designed to transform your business ideas into powerful digital solutions. We specialize in creating responsive, high-performance websites and web applications using cutting-edge technologies like React, Next.js, and Node.js.
+// const serviceData = {
+//   id: 1,
+//   title: "Web Development",
+//   category: "Technology",
+//   description:
+//     "Custom websites and web applications built with modern frameworks for optimal performance and scalability. We create digital experiences that drive business growth and engage users effectively.",
+//   longDescription: `
+//     Our web development services are designed to transform your business ideas into powerful digital solutions. We specialize in creating responsive, high-performance websites and web applications using cutting-edge technologies like React, Next.js, and Node.js.
 
-    <h3>What We Offer:</h3>
-    <ul>
-      <li>Custom website design and development</li>
-      <li>E-commerce solutions with seamless payment integration</li>
-      <li>Progressive Web Apps (PWAs) for mobile-like experience</li>
-      <li>API development and integration</li>
-      <li>Website maintenance and support</li>
-      <li>Performance optimization and SEO</li>
-    </ul>
+//     <h3>What We Offer:</h3>
+//     <ul>
+//       <li>Custom website design and development</li>
+//       <li>E-commerce solutions with seamless payment integration</li>
+//       <li>Progressive Web Apps (PWAs) for mobile-like experience</li>
+//       <li>API development and integration</li>
+//       <li>Website maintenance and support</li>
+//       <li>Performance optimization and SEO</li>
+//     </ul>
 
-    <h3>Our Process:</h3>
-    <p>We follow an agile development methodology to ensure transparency and timely delivery. From initial consultation to deployment and beyond, we work closely with you to achieve your business objectives.</p>
-  `,
-  mainImage:
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
-  images: [
-    "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
-    "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
-  ],
-  price: "$5,000 - $50,000",
-  duration: "4-12 weeks",
-  teamSize: "3-8 members",
-  rating: 4.8,
-  reviews: 124,
-  features: [
-    "Responsive Design",
-    "SEO Optimized",
-    "Fast Loading",
-    "Secure Hosting",
-    "24/7 Support",
-    "Custom CMS",
-    "Mobile First",
-    "Analytics Integration",
-  ],
-  tags: [
-    "React",
-    "Next.js",
-    "Node.js",
-    "TypeScript",
-    "Tailwind CSS",
-    "MongoDB",
-  ],
-  status: "Available",
-  location: "Worldwide",
-  createdAt: "2024-01-15",
-  updatedAt: "2024-03-20",
-};
+//     <h3>Our Process:</h3>
+//     <p>We follow an agile development methodology to ensure transparency and timely delivery. From initial consultation to deployment and beyond, we work closely with you to achieve your business objectives.</p>
+//   `,
+//   mainImage:
+//     "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=1200&q=80",
+//   images: [
+//     "https://images.unsplash.com/photo-1555066931-4365d14bab8c?auto=format&fit=crop&w=800&q=80",
+//     "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
+//     "https://images.unsplash.com/photo-1545235617-9465d2a55698?auto=format&fit=crop&w=800&q=80",
+//     "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
+//     "https://images.unsplash.com/photo-1551650975-87deedd944c3?auto=format&fit=crop&w=800&q=80",
+//     "https://images.unsplash.com/photo-1555099962-4199c345e5dd?auto=format&fit=crop&w=800&q=80",
+//   ],
+//   price: "$5,000 - $50,000",
+//   duration: "4-12 weeks",
+//   teamSize: "3-8 members",
+//   rating: 4.8,
+//   reviews: 124,
+//   features: [
+//     "Responsive Design",
+//     "SEO Optimized",
+//     "Fast Loading",
+//     "Secure Hosting",
+//     "24/7 Support",
+//     "Custom CMS",
+//     "Mobile First",
+//     "Analytics Integration",
+//   ],
+//   tags: [
+//     "React",
+//     "Next.js",
+//     "Node.js",
+//     "TypeScript",
+//     "Tailwind CSS",
+//     "MongoDB",
+//   ],
+//   status: "Available",
+//   location: "Worldwide",
+//   createdAt: "2024-01-15",
+//   updatedAt: "2024-03-20",
+// };
 
 const relatedServices = [
   {
@@ -155,6 +153,72 @@ const relatedProducts = [
 ];
 
 export default function ServiceDetails() {
+  const { slug } = useParams();
+  const [services, setServices] = useState([]);
+  const [products, setProducts] = useState([]);
+  const [service, setService] = useState(null);
+  const [relatedServices, setRelatedServices] = useState([]);
+  const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "";
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const features = [
+      { name: "about_service", amount: 10000 },
+      { name: "ecommerce_product", amount: 5 },
+    ];
+
+    async function fetchData() {
+      try {
+        const data = await getBatchData(features);
+
+        const fetchedServices = data.about_service?.data || [];
+        const fetchedProducts = data.ecommerce_product?.data || [];
+
+        setServices(fetchedServices);
+        setProducts(fetchedProducts);
+
+        // ✅ Correct filtering
+        const currentService = fetchedServices.find((s) => s.slug === slug);
+
+        if (currentService) {
+          const bannerImage = currentService.banner_image
+            ? `${IMAGE_BASE_URL}/${currentService.banner_image}`
+            : null;
+
+          const galleryImages =
+            currentService.images?.map(
+              (img) => `${IMAGE_BASE_URL}/${img.image_path}`
+            ) || [];
+
+          // Final ordered images array
+          currentService.allImages = [
+            ...(bannerImage ? [bannerImage] : []),
+            ...galleryImages,
+          ];
+        }
+
+        const related = fetchedServices
+          .filter((s) => s.slug !== slug)
+          .slice(0, 5);
+
+        setService(currentService);
+        setRelatedServices(related);
+      } catch (err) {
+        console.error(err);
+      } finally {
+        setLoading(false); // Global loading done!
+      }
+    }
+
+    fetchData();
+  }, []);
+
+  console.log("slug", slug);
+  console.log("service", service);
+  console.log("related services", relatedServices);
+  console.log("images", service?.allImages);
+
   // State for zoom functionality
   const [zoomLevel, setZoomLevel] = useState(1);
   const [isZoomed, setIsZoomed] = useState(false);
@@ -201,12 +265,12 @@ export default function ServiceDetails() {
 
   // Image gallery navigation
   const nextImage = () => {
-    setCurrentImageIndex((prev) => (prev + 1) % serviceData.images.length);
+    setCurrentImageIndex((prev) => (prev + 1) % service.allImages.length);
   };
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? serviceData.images.length - 1 : prev - 1
+      prev === 0 ? service.allImages.length - 1 : prev - 1
     );
   };
 
@@ -265,6 +329,18 @@ export default function ServiceDetails() {
     );
   };
 
+  if (loading) {
+    return (
+      <div className="">
+        <Loading />
+      </div>
+    );
+  }
+
+  if (!service && !loading) {
+    return <NotFound />;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-b from-gray-900 via-black to-gray-900 text-white">
       {/* Main Content */}
@@ -285,7 +361,7 @@ export default function ServiceDetails() {
                 </li>
                 <li>
                   <a
-                    href="/services"
+                    href="/service"
                     className="hover:text-white transition-colors"
                   >
                     Services
@@ -294,7 +370,7 @@ export default function ServiceDetails() {
                 <li>
                   <ChevronRight className="w-4 h-4" />
                 </li>
-                <li className="text-white">{serviceData.title}</li>
+                <li className="text-white">{service.title}</li>
               </ol>
             </nav>
 
@@ -345,8 +421,8 @@ export default function ServiceDetails() {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <img
-                      src={serviceData.images[currentImageIndex]}
-                      alt={serviceData.title}
+                      src={service.allImages[currentImageIndex]}
+                      alt={service.title}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
@@ -362,7 +438,7 @@ export default function ServiceDetails() {
                 {/* Image Gallery Thumbnails */}
                 <div className="p-4 bg-gray-900/50">
                   <div className="flex items-center gap-4 overflow-x-auto pb-2">
-                    {serviceData.images.map((img, index) => (
+                    {service.allImages.map((img, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
@@ -388,60 +464,13 @@ export default function ServiceDetails() {
             <div className="mb-8">
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div>
-                  <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium mb-2">
-                    {serviceData.category}
-                  </span>
-                  <h1 className="text-4xl font-bold mb-2">
-                    {serviceData.title}
-                  </h1>
+                  <h1 className="text-4xl font-bold mb-2">{service.title}</h1>
                   <div className="flex items-center gap-4 text-gray-400">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      {formatDate(serviceData.createdAt)}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Clock className="w-4 h-4" />
-                      {serviceData.duration}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Users className="w-4 h-4" />
-                      {serviceData.teamSize}
+                      {formatDate(service.created_at)}
                     </span>
                   </div>
-                </div>
-
-                <div className="flex items-center gap-3">
-                  <button
-                    onClick={() => setIsFavorite(!isFavorite)}
-                    className={`p-3 rounded-full border transition-all ${
-                      isFavorite
-                        ? "bg-red-500/20 border-red-500/50 text-red-400"
-                        : "bg-gray-800 border-gray-700 hover:bg-gray-700"
-                    }`}
-                  >
-                    <Heart
-                      className={`w-5 h-5 ${isFavorite ? "fill-current" : ""}`}
-                    />
-                  </button>
-                  <button className="p-3 rounded-full bg-gray-800 border border-gray-700 hover:bg-gray-700 transition-all">
-                    <Share2 className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-
-              {/* Rating and Price */}
-              <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-gray-800/50 rounded-xl">
-                <div>
-                  {renderStars(serviceData.rating)}
-                  <p className="text-sm text-gray-400 mt-1">
-                    {serviceData.reviews} reviews
-                  </p>
-                </div>
-                <div className="text-right">
-                  <div className="text-3xl font-bold text-white">
-                    {serviceData.price}
-                  </div>
-                  <p className="text-sm text-gray-400">Starting from</p>
                 </div>
               </div>
             </div>
@@ -450,11 +479,13 @@ export default function ServiceDetails() {
             <div className="mb-8">
               <h2 className="text-2xl font-bold mb-4">Description</h2>
               <div className="prose prose-invert max-w-none">
-                <p className="text-gray-300 mb-6">{serviceData.description}</p>
+                <p className="text-gray-300 mb-6">
+                  {service.short_description}
+                </p>
                 <div
                   className="text-gray-300"
                   dangerouslySetInnerHTML={{
-                    __html: serviceData.longDescription,
+                    __html: service.description,
                   }}
                 />
               </div>
@@ -480,7 +511,7 @@ export default function ServiceDetails() {
                       <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={service.image}
+                            src={`${IMAGE_BASE_URL}/${service.banner_image}`}
                             alt={service.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
@@ -491,26 +522,15 @@ export default function ServiceDetails() {
                             {service.title}
                           </h4>
                           <p className="text-sm text-gray-400 truncate">
-                            {service.description}
+                            {service.short_description}
                           </p>
-                          <div className="flex items-center justify-between mt-2">
-                            <div className="flex items-center gap-1">
-                              <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                              <span className="text-sm text-gray-300">
-                                {service.rating}
-                              </span>
-                            </div>
-                            <span className="text-sm font-medium text-blue-400">
-                              {service.price}
-                            </span>
-                          </div>
                         </div>
                       </div>
                     </a>
                   ))}
                 </div>
                 <a
-                  href="/services"
+                  href="/service"
                   className="mt-6 block text-center py-3 text-gray-400 hover:text-white transition-colors"
                 >
                   View All Services →
@@ -521,17 +541,17 @@ export default function ServiceDetails() {
               <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
                 <h3 className="text-xl font-bold mb-6 flex items-center gap-2">
                   <ShoppingCart className="w-5 h-5 text-green-400" />
-                  Related Products
+                  Top Products
                 </h3>
                 <div className="space-y-4">
-                  {relatedProducts.map((product) => (
+                  {products.map((product) => (
                     <div
                       key={product.id}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all"
                     >
                       <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden">
                         <img
-                          src={product.image}
+                          src={`${IMAGE_BASE_URL}/${product.banner_image}`}
                           alt={product.name}
                           className="w-full h-full object-cover"
                         />
@@ -543,24 +563,15 @@ export default function ServiceDetails() {
                         <p className="text-xs text-gray-400 truncate">
                           {product.description}
                         </p>
-                        <div className="flex items-center justify-between mt-1">
-                          <div className="flex items-center gap-1">
-                            <Star className="w-3 h-3 fill-yellow-400 text-yellow-400" />
-                            <span className="text-xs text-gray-300">
-                              {product.rating}
-                            </span>
-                          </div>
-                          <span className="text-sm font-medium text-green-400">
-                            {product.price}
-                          </span>
-                        </div>
                       </div>
                     </div>
                   ))}
                 </div>
-                <button className="mt-6 w-full py-3 bg-gray-700/50 hover:bg-gray-700 rounded-xl transition-colors">
-                  View All Products
-                </button>
+                <Link href="/product">
+                  <button className="mt-6 w-full py-3 bg-gray-700/50 hover:bg-gray-700 rounded-xl transition-colors cursor-pointer">
+                    View All Products
+                  </button>
+                </Link>
               </div>
 
               {/* Social Share */}
@@ -645,7 +656,7 @@ export default function ServiceDetails() {
 
             {/* Current Image Index */}
             <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg text-sm">
-              {currentImageIndex + 1} / {serviceData.images.length}
+              {currentImageIndex + 1} / {service.allImages.length}
             </div>
 
             {/* Main Image */}
@@ -657,7 +668,7 @@ export default function ServiceDetails() {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={serviceData.images[currentImageIndex]}
+                src={service.allImages[currentImageIndex]}
                 alt={`Gallery ${currentImageIndex + 1}`}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
               />
@@ -665,7 +676,7 @@ export default function ServiceDetails() {
 
             {/* Thumbnails */}
             <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex items-center gap-2">
-              {serviceData.images.map((img, index) => (
+              {service.allImages.map((img, index) => (
                 <button
                   key={index}
                   onClick={(e) => {
