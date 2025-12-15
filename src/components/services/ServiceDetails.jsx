@@ -2,7 +2,6 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Image from "next/image";
 import {
   ChevronLeft,
   ChevronRight,
@@ -10,19 +9,9 @@ import {
   ZoomIn,
   ZoomOut,
   Maximize2,
-  Heart,
-  Share2,
   Calendar,
-  Clock,
-  Users,
-  Star,
   ShoppingCart,
   Tag,
-  Facebook,
-  Twitter,
-  Linkedin,
-  Instagram,
-  Youtube,
 } from "lucide-react";
 import { getBatchData } from "@/api/service";
 import Loading from "../loading/Loading";
@@ -421,43 +410,6 @@ export default function ServiceDetails() {
                     View All Products
                   </button>
                 </Link>
-              </div>
-
-              {/* Social Share */}
-              <div className="bg-gray-800/30 backdrop-blur-sm border border-gray-700 rounded-2xl p-6">
-                <h3 className="text-xl font-bold mb-6">Share This Service</h3>
-                <div className="flex items-center justify-center gap-4">
-                  {[
-                    { icon: Facebook, color: "bg-blue-600", label: "Facebook" },
-                    { icon: Twitter, color: "bg-sky-500", label: "Twitter" },
-                    { icon: Linkedin, color: "bg-blue-700", label: "LinkedIn" },
-                    {
-                      icon: Instagram,
-                      color: "bg-pink-600",
-                      label: "Instagram",
-                    },
-                    { icon: Youtube, color: "bg-red-600", label: "YouTube" },
-                  ].map((social) => (
-                    <button
-                      key={social.label}
-                      className={`p-3 ${social.color} rounded-full hover:opacity-90 transition-opacity`}
-                      aria-label={`Share on ${social.label}`}
-                    >
-                      <social.icon className="w-5 h-5" />
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Quick Contact */}
-              <div className="bg-gradient-to-br from-blue-500/10 to-purple-500/10 backdrop-blur-sm border border-blue-500/20 rounded-2xl p-6">
-                <h3 className="text-xl font-bold mb-4">Need Help?</h3>
-                <p className="text-gray-300 mb-6">
-                  Have questions about this service? Our team is here to help!
-                </p>
-                <button className="w-full py-3 bg-blue-600 hover:bg-blue-700 rounded-xl font-medium transition-colors">
-                  Contact Sales Team
-                </button>
               </div>
             </div>
           </div>
