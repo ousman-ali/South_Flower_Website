@@ -12,9 +12,7 @@ export default function Loading() {
       </div>
 
       <div>
-        <span className="loading-text-shimmer">
-          South Flower Trading PLC ...
-        </span>
+        <span className="loading-text-shimmer">Engine is not Enough ...</span>
       </div>
     </div>
   );
