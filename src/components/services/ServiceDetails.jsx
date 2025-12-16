@@ -310,7 +310,8 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                 </h3>
                 <div className="space-y-4">
                   {products.map((product) => (
-                    <div
+                    <a
+                      href={`/product/${product.slug}`}
                       key={product.id}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all"
                     >
@@ -329,7 +330,7 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                           {product.description}
                         </p>
                       </div>
-                    </div>
+                    </a>
                   ))}
                 </div>
                 <Link href="/product">
