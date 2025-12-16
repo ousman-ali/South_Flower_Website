@@ -12,7 +12,7 @@ export default function Loading() {
       </div>
 
       <div>
-        <span className="loading-text-shimmer">Engine is not Enough ...</span>
+        <span className="loading-text-shimmer">Engine is Not Enough ...</span>
       </div>
     </div>
   );

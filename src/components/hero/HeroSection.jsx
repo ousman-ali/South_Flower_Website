@@ -270,7 +270,7 @@ export default function HeroSection({ heroSlides }) {
                       >
                         <Sparkles className="w-5 h-5 text-yellow-300" />
                         <span className="text-sm font-semibold">
-                          Engine is not Enough
+                          Engine is Not Enough
                         </span>
                         <Star className="w-5 h-5 text-yellow-300" />
                       </motion.div>
