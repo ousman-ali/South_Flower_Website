@@ -69,11 +69,6 @@ export default function ProductDetailsPage() {
     fetchData();
   }, []);
 
-  console.log("slug", slug);
-  console.log("product", product);
-  console.log("services", services);
-  console.log("related products", relatedProducts);
-
   if (loading) {
     return (
       <div className="">

@@ -17,6 +17,7 @@ import {
   ChevronLeft,
   ChevronRight as ChevronRightIcon,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function BlogSection1({ categories, blogs, products }) {
   const [isHovered, setIsHovered] = useState(null);
@@ -655,7 +656,10 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
 
     {/* Bottom Info */}
     <div className="absolute bottom-4 right-4">
-      <div className="flex items-center justify-between">
+      <Link
+        href={`/blog/${post.slug}`}
+        className="flex items-center justify-between"
+      >
         {/* Original Read More button - hidden on hover */}
         <motion.button
           whileHover={{ scale: 1.05 }}
@@ -665,7 +669,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
           <span>Read More</span>
           <ArrowRight className="w-3 h-3" />
         </motion.button>
-      </div>
+      </Link>
     </div>
 
     {/* NEW HOVER EFFECT: Tags with animation */}
