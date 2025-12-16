@@ -2,13 +2,7 @@
 
 import { motion, useAnimationFrame } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import {
-  Target,
-  Rocket,
-  Globe,
-  Sparkles,
-  Clock,
-} from "lucide-react";
+import { Target, Rocket, Globe, Sparkles, Clock } from "lucide-react";
 import Link from "next/link";
 
 // Floating shape component
@@ -235,7 +229,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 Core Values
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {aboutContent.core_values.map((value, idx) => (
+                {aboutContent.core_values.slice(0, 4).map((value, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ scale: 0.9, opacity: 0 }}
