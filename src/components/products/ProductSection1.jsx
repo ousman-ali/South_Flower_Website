@@ -12,6 +12,7 @@ import {
   Clock,
   Search,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function ProductSection1({ categories, products, services }) {
   const [isHovered, setIsHovered] = useState(null);
@@ -184,10 +185,9 @@ export default function ProductSection1({ categories, products, services }) {
                       onMouseEnter={() => setIsHovered(product.id)}
                       onMouseLeave={() => setIsHovered(null)}
                       className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer"
-                      style={{ height: "320px" }}
                     >
                       {/* Product Image */}
-                      <div className="relative h-32 overflow-hidden">
+                      <div className="relative h-40 overflow-hidden">
                         <motion.img
                           src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
                           alt={product.name}
@@ -217,10 +217,15 @@ export default function ProductSection1({ categories, products, services }) {
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
+                            className="bg-gradient-to-r from-blue-400 to-gray-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
                           >
-                            <Eye className="w-3 h-3" />
-                            <span>Details</span>
+                            <Link
+                              href={`/product/${product.slug}`}
+                              className="flex items-center gap-1 px-2 py-1.5"
+                            >
+                              <Eye className="w-3 h-3" />
+                              <span>Details</span>
+                            </Link>
                           </motion.button>
                         </div>
                       </div>

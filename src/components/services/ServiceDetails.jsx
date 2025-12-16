@@ -315,7 +315,7 @@ export default function ServiceDetails() {
 
             {/* Service Description */}
             <div className="mb-8">
-              <h2 className="text-2xl font-bold mb-4">Description</h2>
+              <h2 className="text-2xl font-bold mb-4">Overview</h2>
               <div className="prose prose-invert max-w-none">
                 <p className="text-gray-300 mb-6">
                   {service.short_description}
