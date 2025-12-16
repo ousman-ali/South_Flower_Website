@@ -7,67 +7,9 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Zap,
-  Globe,
-  Target,
-  Users,
   Star,
-  Play,
-  Pause,
 } from "lucide-react";
 
-const heroSlides = [
-  {
-    id: 1,
-    title: "Innovating Digital Excellence",
-    subtitle: "Transformative Solutions",
-    description:
-      "We create cutting-edge digital experiences that drive growth and redefine industry standards worldwide.",
-    image:
-      "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=80",
-    color: "from-blue-600/20 to-cyan-500/20",
-    icon: <Zap className="w-8 h-8" />,
-    stats: "500+ Success Stories",
-  },
-  {
-    id: 2,
-    title: "Global Reach, Local Impact",
-    subtitle: "Worldwide Presence",
-    description:
-      "Delivering exceptional services across 50+ countries with precision and innovation at every step.",
-    image:
-      "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=2000&q=80",
-    color: "from-purple-600/20 to-pink-500/20",
-    icon: <Globe className="w-8 h-8" />,
-    stats: "50+ Countries",
-  },
-  {
-    id: 3,
-    title: "Expert Team, Exceptional Results",
-    subtitle: "Collaborative Excellence",
-    description:
-      "Our team of 100+ experts transforms visions into reality through shared expertise and innovation.",
-    image:
-      "https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=2000&q=80",
-    color: "from-emerald-600/20 to-green-500/20",
-    icon: <Users className="w-8 h-8" />,
-    stats: "100+ Experts",
-  },
-  {
-    id: 4,
-    title: "Strategic Growth Partners",
-    subtitle: "Business Transformation",
-    description:
-      "Crafting intelligent strategies that propel businesses forward in an ever-evolving digital landscape.",
-    image:
-      "https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=2000&q=80",
-    color: "from-amber-600/20 to-orange-500/20",
-    icon: <Target className="w-8 h-8" />,
-    stats: "98% Success Rate",
-  },
-];
-
-// Deterministic particle positions - same on server and client
 const particlePositions = [
   { left: "42.9%", top: "10.2%" },
   { left: "94.3%", top: "95.5%" },
@@ -91,7 +33,7 @@ const particlePositions = [
   { left: "89.7%", top: "47.5%" },
 ];
 
-export default function HeroSection() {
+export default function HeroSection({ heroSlides }) {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [isPaused, setIsPaused] = useState(false);
@@ -131,6 +73,8 @@ export default function HeroSection() {
     setIsPaused(!isPaused);
   };
 
+  console.log("hero contents", heroSlides);
+
   // Don't render animated content until mounted
   if (!isMounted) {
     return (
@@ -139,10 +83,12 @@ export default function HeroSection() {
         <div className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${heroSlides[0].image})` }}
+            style={{
+              backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}/${heroSlides[0].image})`,
+            }}
           />
           <div
-            className={`absolute inset-0 bg-gradient-to-br ${heroSlides[0].color}`}
+            className={`absolute inset-0 bg-gradient-to-br from-blue-600/20 to-cyan-500/20`}
           />
           <div className="absolute inset-0 bg-black/30" />
         </div>
@@ -153,7 +99,7 @@ export default function HeroSection() {
                 <div className="inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full bg-white/10 backdrop-blur-md border border-white/20 shadow-lg">
                   <Sparkles className="w-5 h-5 text-yellow-300" />
                   <span className="text-sm font-semibold">
-                    {heroSlides[0].subtitle}
+                    Engine is not Enough
                   </span>
                   <Star className="w-5 h-5 text-yellow-300" />
                 </div>
@@ -163,17 +109,6 @@ export default function HeroSection() {
                 <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mb-10">
                   {heroSlides[0].description}
                 </p>
-                <div className="flex items-center gap-4 mb-12">
-                  <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                    {heroSlides[0].icon}
-                  </div>
-                  <div>
-                    <div className="text-2xl md:text-3xl font-bold">
-                      {heroSlides[0].stats}
-                    </div>
-                    <div className="text-gray-300">Trusted Worldwide</div>
-                  </div>
-                </div>
               </div>
               <div className="space-y-6">
                 <button className="w-[50%] px-8 py-5 bg-white text-gray-900 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3">
@@ -210,13 +145,13 @@ export default function HeroSection() {
                   {/* Background Image */}
                   <div
                     className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-                    style={{ backgroundImage: `url(${slide.image})` }}
+                    style={{
+                      backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}/${slide.image})`,
+                    }}
                   />
 
                   {/* Gradient Overlay */}
-                  <div
-                    className={`absolute inset-0 bg-gradient-to-br ${slide.color}`}
-                  />
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-600/20 to-cyan-500/20" />
 
                   {/* Dark Overlay */}
                   <div className="absolute inset-0 bg-black/30" />
@@ -335,7 +270,7 @@ export default function HeroSection() {
                       >
                         <Sparkles className="w-5 h-5 text-yellow-300" />
                         <span className="text-sm font-semibold">
-                          {slide.subtitle}
+                          Engine is not Enough
                         </span>
                         <Star className="w-5 h-5 text-yellow-300" />
                       </motion.div>
@@ -367,24 +302,6 @@ export default function HeroSection() {
                       >
                         {slide.description}
                       </motion.p>
-
-                      {/* Stats */}
-                      <motion.div
-                        initial={{ opacity: 0, x: -20 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 0.8, delay: 1 }}
-                        className="flex items-center gap-4 mb-12"
-                      >
-                        <div className="p-4 bg-white/10 backdrop-blur-md rounded-2xl border border-white/20">
-                          {slide.icon}
-                        </div>
-                        <div>
-                          <div className="text-2xl md:text-3xl font-bold">
-                            {slide.stats}
-                          </div>
-                          <div className="text-gray-300">Trusted Worldwide</div>
-                        </div>
-                      </motion.div>
                     </motion.div>
                   )
               )}
@@ -468,20 +385,6 @@ export default function HeroSection() {
               </motion.button>
             ))}
           </div>
-
-          {/* Play/Pause Button */}
-          <motion.button
-            whileHover={{ scale: 1.1 }}
-            whileTap={{ scale: 0.9 }}
-            onClick={togglePlay}
-            className="w-12 h-12 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center hover:bg-white/20 transition-all"
-          >
-            {isPaused ? (
-              <Play className="w-5 h-5 text-white" />
-            ) : (
-              <Pause className="w-5 h-5 text-white" />
-            )}
-          </motion.button>
 
           {/* Next Button */}
           <motion.button

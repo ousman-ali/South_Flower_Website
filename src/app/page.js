@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from "react";
 
-import { getBatchData } from "@/api/service";
+import {
+  buildHeroContents,
+  getBatchData,
+  getPagesWithContents,
+} from "@/api/service";
 import AboutSection from "@/components/about/AboutSection";
 import BlogSection from "@/components/blog/BlogSection";
 import CTACard from "@/components/cta/CtaSection";
@@ -26,6 +30,8 @@ export default function Home() {
   const [stats, setStats] = useState([]);
   const [products, setProducts] = useState([]);
 
+  const [heroSlides, setHeroSlides] = useState([]);
+
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -45,6 +51,12 @@ export default function Home() {
     async function fetchData() {
       try {
         const data = await getBatchData(features);
+
+        const pages = await getPagesWithContents();
+        const heroData = buildHeroContents(pages);
+        heroData.sort((a, b) => a.order - b.order);
+
+        setHeroSlides(heroData);
 
         // Set states individually
         setBlogs(data.blog_post || []);
@@ -77,7 +89,7 @@ export default function Home() {
 
   return (
     <>
-      <HeroSection />
+      <HeroSection heroSlides={heroSlides} />
       <AboutSection
         setup={setup.data}
         gallery={gallery.data}
