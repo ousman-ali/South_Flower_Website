@@ -6,13 +6,7 @@ import {
   Target,
   Rocket,
   Globe,
-  Lightbulb,
   Clock,
-  Shield,
-  Heart,
-  Code,
-  Briefcase,
-  BarChart,
   ChevronRight,
 } from "lucide-react";
 
@@ -94,69 +88,6 @@ export default function AboutSection1({
     // INVALID → fallback icon
     return <i className="fa-solid fa-concierge-bell  text-xl"></i>;
   }
-
-  const coreValues = [
-    {
-      icon: <Lightbulb className="w-5 h-5" />,
-      title: "Innovation",
-      description:
-        "Pushing boundaries with creative solutions that redefine possibilities",
-      color: "from-blue-500 to-cyan-500",
-    },
-    {
-      icon: <Shield className="w-5 h-5" />,
-      title: "Integrity",
-      description: "Building trust through transparency and ethical practices",
-      color: "from-purple-500 to-pink-500",
-    },
-    {
-      icon: <Heart className="w-5 h-5" />,
-      title: "Passion",
-      description: "Driven by genuine enthusiasm for what we do",
-      color: "from-rose-500 to-pink-500",
-    },
-    {
-      icon: <Code className="w-5 h-5" />,
-      title: "Excellence",
-      description: "Commitment to quality in every detail",
-      color: "from-emerald-500 to-green-500",
-    },
-    {
-      icon: <Briefcase className="w-5 h-5" />,
-      title: "Professionalism",
-      description: "Maintaining high standards in all interactions",
-      color: "from-indigo-500 to-blue-500",
-    },
-    {
-      icon: <BarChart className="w-5 h-5" />,
-      title: "Growth",
-      description: "Continuous improvement and learning mindset",
-      color: "from-amber-500 to-orange-500",
-    },
-  ];
-
-  // const services = [
-  //   {
-  //     title: "Digital Strategy",
-  //     description: "Comprehensive planning for digital transformation",
-  //     icon: "📊",
-  //   },
-  //   {
-  //     title: "Web Development",
-  //     description: "Cutting-edge websites and applications",
-  //     icon: "💻",
-  //   },
-  //   {
-  //     title: "UX/UI Design",
-  //     description: "User-centered design solutions",
-  //     icon: "🎨",
-  //   },
-  //   {
-  //     title: "Cloud Solutions",
-  //     description: "Scalable and secure cloud infrastructure",
-  //     icon: "☁️",
-  //   },
-  // ];
 
   const floatingShapes = [
     {
@@ -368,7 +299,7 @@ export default function AboutSection1({
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {coreValues.map((value, idx) => (
+                {aboutContent.core_values.map((value, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, y: 10 }}
@@ -379,9 +310,11 @@ export default function AboutSection1({
                     className="bg-white/80 backdrop-blur-sm border border-gray-300/50 rounded-xl p-4 hover:border-gray-400/50 transition-all shadow-sm hover:shadow-md"
                   >
                     <div
-                      className={`inline-flex p-2 bg-gradient-to-br ${value.color} rounded-lg mb-3`}
+                      className={`inline-flex p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg mb-3`}
                     >
-                      <div className="text-white">{value.icon}</div>
+                      <div className="text-white">
+                        {getFAIcon(value.icon_class || "fa-solid fa-gem")}
+                      </div>
                     </div>
                     <h4 className="font-semibold text-gray-900 mb-2">
                       {value.title}

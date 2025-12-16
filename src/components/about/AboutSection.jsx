@@ -6,10 +6,7 @@ import {
   Target,
   Rocket,
   Globe,
-  Zap,
   Sparkles,
-  TrendingUp,
-  Lightbulb,
   Clock,
 } from "lucide-react";
 import Link from "next/link";
@@ -70,29 +67,6 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
     // INVALID → fallback icon
     return <i className="fa-solid fa-circle-exclamation text-xl"></i>;
   }
-
-  const values = [
-    {
-      icon: <Lightbulb />,
-      title: "Innovation",
-      desc: "Pushing boundaries with creative solutions",
-    },
-    {
-      icon: <Sparkles />,
-      title: "Excellence",
-      desc: "Delivering quality beyond expectations",
-    },
-    {
-      icon: <TrendingUp />,
-      title: "Growth",
-      desc: "Continuous improvement and learning",
-    },
-    {
-      icon: <Zap />,
-      title: "Agility",
-      desc: "Adapting quickly to changing needs",
-    },
-  ];
 
   const floatingShapes = [
     { id: 1, size: 80, x: "10%", y: "30%", duration: 25 },
