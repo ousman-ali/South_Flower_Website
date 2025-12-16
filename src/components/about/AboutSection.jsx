@@ -261,7 +261,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 Core Values
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {values.map((value, idx) => (
+                {aboutContent.core_values.map((value, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ scale: 0.9, opacity: 0 }}
@@ -273,13 +273,17 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                   >
                     <div className="inline-flex p-3 bg-gradient-to-br from-gray-100 to-gray-50 rounded-lg mb-3 group-hover:from-gray-200 group-hover:to-gray-100 border border-gray-300/30">
                       <div className="text-gray-700 group-hover:text-gray-900">
-                        {value.icon}
+                        {getFAIcon(value.icon_class || "fa-solid fa-gem")}
                       </div>
                     </div>
                     <h4 className="font-semibold text-gray-900 mb-1">
                       {value.title}
                     </h4>
-                    <p className="text-sm text-gray-600">{value.desc}</p>
+                    <p className="text-sm text-gray-600">
+                      {value.description.length > 40
+                        ? value.description.slice(0, 40) + "..."
+                        : value.description}
+                    </p>
                   </motion.div>
                 ))}
               </div>
