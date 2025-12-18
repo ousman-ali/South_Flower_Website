@@ -11,6 +11,7 @@ export default function AboutPage() {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [services, setServices] = useState([]);
+  const [stats, setStats] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -18,6 +19,7 @@ export default function AboutPage() {
     const features = [
       { name: "ecommerce_product", amount: 100000 },
       { name: "about_service", amount: 5 },
+      { name: "about_statistic", amount: 10 },
     ];
 
     async function fetchData() {
@@ -27,6 +29,7 @@ export default function AboutPage() {
         setProducts(data.ecommerce_product || []);
         setCategories(categories || []);
         setServices(data.about_service || []);
+        setStats(data.about_statistic || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -58,7 +61,7 @@ export default function AboutPage() {
         categories={categories}
         services={services.data}
       />
-      <CTACard />
+      <CTACard stats={stats.data} />
     </div>
   );
 }

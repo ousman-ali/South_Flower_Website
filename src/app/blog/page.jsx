@@ -13,6 +13,7 @@ export default function AboutPage() {
   const [blogs, setBlogs] = useState([]);
   const [categories, setCategories] = useState([]);
   const [featuredBlogs, setFeaturedBlogs] = useState([]);
+  const [stats, setStats] = useState([]);
 
   const [loading, setLoading] = useState(true);
 
@@ -20,6 +21,7 @@ export default function AboutPage() {
     const features = [
       { name: "ecommerce_product", amount: 5 },
       { name: "blog_post", amount: 100000 },
+      { name: "about_statistic", amount: 10 },
     ];
 
     async function fetchData() {
@@ -34,6 +36,7 @@ export default function AboutPage() {
         );
 
         setFeaturedBlogs(featured);
+        setStats(data.about_statistic || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -70,7 +73,7 @@ export default function AboutPage() {
         products={products.data}
         categories={categories}
       />
-      <CTACard />
+      <CTACard stats={stats.data} />
     </div>
   );
 }

@@ -15,6 +15,7 @@ export default function AboutPage() {
   const [products, setProducts] = useState([]);
   const [services, setServices] = useState([]);
   const [relatedBlogs, setRelatedBlogs] = useState([]);
+  const [stats, setStats] = useState([]);
   const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "";
 
   const [loading, setLoading] = useState(true);
@@ -24,6 +25,7 @@ export default function AboutPage() {
       { name: "blog_post", amount: 100000 },
       { name: "about_service", amount: 3 },
       { name: "ecommerce_product", amount: 3 },
+      { name: "about_statistic", amount: 10 },
     ];
 
     async function fetchData() {
@@ -61,6 +63,7 @@ export default function AboutPage() {
 
         setBlog(currentBlog);
         setRelatedBlogs(related);
+        setStats(data.about_statistic || []);
       } catch (err) {
         console.error(err);
       } finally {
@@ -70,12 +73,6 @@ export default function AboutPage() {
 
     fetchData();
   }, []);
-
-  console.log("slug", slug);
-  console.log("blog", blog);
-  console.log("services", services);
-  console.log("products", products);
-  console.log("related Blogs", relatedBlogs);
 
   if (loading) {
     return (
@@ -103,7 +100,7 @@ export default function AboutPage() {
         products={products}
         relatedBlogs={relatedBlogs}
       />
-      <CTACard />
+      <CTACard stats={stats.data} />
     </div>
   );
 }

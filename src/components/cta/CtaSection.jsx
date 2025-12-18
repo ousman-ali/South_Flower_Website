@@ -32,7 +32,7 @@ export default function CTACard({ stats }) {
       x: "15%",
       y: "80%",
       duration: 28,
-      icon: <Flower className="w-3 h-3 text-teal-300/50" />,
+      icon: <Flower className="w-3 h-3 text-blue-300/50" />,
     },
     {
       id: 4,
@@ -127,7 +127,7 @@ export default function CTACard({ stats }) {
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4 leading-tight drop-shadow-lg">
                     <span className="block">
                       Let's Grow Your{" "}
-                      <span className="bg-gradient-to-r from-blue-300 via-blue-300 to-teal-300 bg-clip-text text-transparent drop-shadow-lg">
+                      <span className="bg-gradient-to-r from-blue-300 via-blue-300 to-blue-300 bg-clip-text text-transparent drop-shadow-lg">
                         valued Vision
                       </span>
                     </span>
@@ -169,7 +169,7 @@ export default function CTACard({ stats }) {
                       boxShadow: "0 15px 35px rgba(16, 185, 129, 0.4)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-500 via-blue-500 to-teal-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
+                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
                   >
                     {/* Shimmer effect */}
                     <motion.div

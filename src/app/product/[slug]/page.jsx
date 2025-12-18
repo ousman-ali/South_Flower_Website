@@ -13,6 +13,7 @@ export default function ProductDetailsPage() {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [services, setServices] = useState([]);
+  const [stats, setStats] = useState([]);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "";
 
@@ -22,6 +23,7 @@ export default function ProductDetailsPage() {
     const features = [
       { name: "about_service", amount: 3 },
       { name: "ecommerce_product", amount: 100000 },
+      { name: "about_statistic", amount: 10 },
     ];
 
     async function fetchData() {
@@ -32,6 +34,7 @@ export default function ProductDetailsPage() {
         const fetchedProducts = data.ecommerce_product?.data || [];
 
         setServices(fetchedServices);
+        setStats(data.about_statistic || []);
 
         // ✅ Correct filtering
         const currentProduct = fetchedProducts.find((p) => p.slug === slug);
@@ -94,7 +97,7 @@ export default function ProductDetailsPage() {
         product={product}
         relatedProducts={relatedProducts}
       />
-      <CTACard />
+      <CTACard stats={stats.data} />
     </div>
   );
 }

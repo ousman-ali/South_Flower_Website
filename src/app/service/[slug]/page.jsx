@@ -13,6 +13,7 @@ export default function AboutPage() {
   const { slug } = useParams();
   const [products, setProducts] = useState([]);
   const [service, setService] = useState(null);
+  const [stats, setStats] = useState([]);
   const [relatedServices, setRelatedServices] = useState([]);
   const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_IMAGE_URL || "";
 
@@ -22,6 +23,7 @@ export default function AboutPage() {
     const features = [
       { name: "about_service", amount: 10000 },
       { name: "ecommerce_product", amount: 3 },
+      { name: "about_statistic", amount: 10 },
     ];
 
     async function fetchData() {
@@ -32,6 +34,7 @@ export default function AboutPage() {
         const fetchedProducts = data.ecommerce_product?.data || [];
 
         setProducts(fetchedProducts);
+        setStats(data.about_statistic || []);
 
         // ✅ Correct filtering
         const currentService = fetchedServices.find((s) => s.slug === slug);
@@ -94,7 +97,7 @@ export default function AboutPage() {
         products={products}
         relatedServices={relatedServices}
       />
-      <CTACard />
+      <CTACard stats={stats.data} />
     </div>
   );
 }

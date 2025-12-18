@@ -46,8 +46,8 @@ export default function BlogSection1({ categories, blogs, products }) {
       x: "5%",
       y: "15%",
       duration: 30,
-      color: "from-emerald-500/10 to-teal-400/15",
-      icon: <Flower className="w-8 h-8 text-emerald-400/40" />,
+      color: "from-blue-500/10 to-gray-400/15",
+      icon: <Flower className="w-8 h-8 text-blue-400/40" />,
       shape: "circle",
     },
     {
@@ -96,7 +96,7 @@ export default function BlogSection1({ categories, blogs, products }) {
       x: "20%",
       y: "60%",
       duration: 29,
-      color: "from-lime-500/10 to-green-400/15",
+      color: "from-lime-500/10 to-blue-400/15",
       icon: <BookOpen className="w-5 h-5 text-lime-400/40" />,
       shape: "triangle",
     },
@@ -212,7 +212,7 @@ export default function BlogSection1({ categories, blogs, products }) {
 
         {/* Large gradient orbs */}
         <motion.div
-          className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-emerald-700/10 via-teal-700/5 to-cyan-700/10 rounded-full blur-3xl"
+          className="absolute top-1/4 -left-40 w-[600px] h-[600px] bg-gradient-to-br from-blue-700/10 via-gray-700/5 to-cyan-700/10 rounded-full blur-3xl"
           animate={{
             x: [0, 50, 0],
             y: [0, -40, 0],
@@ -251,16 +251,16 @@ export default function BlogSection1({ categories, blogs, products }) {
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-900/30 to-teal-900/30 border border-emerald-500/20">
-                <BookOpen className="w-3 h-3 text-emerald-400" />
-                <span className="text-xs font-medium text-emerald-300">
+              <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full bg-gradient-to-r from-blue-900/30 to-gray-900/30 border border-blue-500/20">
+                <BookOpen className="w-3 h-3 text-blue-400" />
+                <span className="text-xs font-medium text-blue-300">
                   South Flower Blog
                 </span>
               </div>
 
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
                 Garden{" "}
-                <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 via-gray-400 to-cyan-400 bg-clip-text text-transparent">
                   Insights & Tips
                 </span>
               </h1>
@@ -279,7 +279,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                 { value: "10K+", label: "Readers" },
               ].map((stat, idx) => (
                 <div key={idx} className="text-center">
-                  <div className="text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
+                  <div className="text-lg font-bold bg-gradient-to-r from-blue-400 to-gray-400 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
                   <div className="text-xs text-gray-500">{stat.label}</div>
@@ -304,7 +304,7 @@ export default function BlogSection1({ categories, blogs, products }) {
               whileTap={{ scale: 0.95 }}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
                 selectedCategory === "all"
-                  ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                  ? "bg-gradient-to-r from-blue-600 to-gray-500 text-white shadow-lg shadow-blue-500/20"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
               }`}
             >
@@ -319,7 +319,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                 whileTap={{ scale: 0.95 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
                   selectedCategory === category.id
-                    ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                    ? "bg-gradient-to-r from-blue-600 to-gray-500 text-white shadow-lg shadow-blue-500/20"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                 }`}
               >
@@ -423,7 +423,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                                   whileTap={{ scale: 0.9 }}
                                   className={`w-10 h-10 rounded-lg text-sm font-medium transition-all duration-300 ${
                                     currentPage === pageNumber
-                                      ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                                      ? "bg-gradient-to-r from-blue-600 to-gray-500 text-white shadow-lg shadow-blue-500/20"
                                       : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                                   }`}
                                 >
@@ -465,7 +465,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                                 <button
                                   key={page}
                                   onClick={() => paginate(page)}
-                                  className="px-2 py-1 text-xs text-gray-400 hover:text-emerald-400 transition-colors"
+                                  className="px-2 py-1 text-xs text-gray-400 hover:text-blue-400 transition-colors"
                                 >
                                   {page}
                                 </button>
@@ -476,7 +476,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                             <span className="text-xs text-gray-600">...</span>
                             <button
                               onClick={() => paginate(totalPages)}
-                              className="px-2 py-1 text-xs text-gray-400 hover:text-emerald-400 transition-colors"
+                              className="px-2 py-1 text-xs text-gray-400 hover:text-blue-400 transition-colors"
                             >
                               {totalPages}
                             </button>
@@ -501,7 +501,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                 className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-4"
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <TrendingUp className="w-4 h-4 text-emerald-400" />
+                  <TrendingUp className="w-4 h-4 text-blue-400" />
                   <h3 className="text-sm font-bold text-white">
                     Popular Products
                   </h3>
@@ -540,7 +540,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                 className="bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 p-4"
               >
                 <div className="flex items-center gap-2 mb-4">
-                  <Tag className="w-4 h-4 text-emerald-400" />
+                  <Tag className="w-4 h-4 text-blue-400" />
                   <h3 className="text-sm font-bold text-white">
                     Why Choose us
                   </h3>
@@ -596,7 +596,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
     }}
     onMouseEnter={() => setIsHovered(post.id)}
     onMouseLeave={() => setIsHovered(null)}
-    className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer"
+    className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
     style={{ height: "300px" }}
   >
     {/* Full Image Background */}
@@ -614,7 +614,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
       <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/60 to-transparent" />
 
       {/* New Hover Overlay - Lighter gradient on hover */}
-      <div className="absolute inset-0 bg-gradient-to-t from-emerald-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+      <div className="absolute inset-0 bg-gradient-to-t from-blue-900/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
     </div>
 
     {/* Content - ALWAYS VISIBLE */}
@@ -664,7 +664,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
         <motion.button
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
-          className="px-3 py-1.5 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 opacity-100 group-hover:opacity-100 transition-opacity duration-300"
+          className="px-3 py-1.5 bg-gradient-to-r from-blue-600 to-gray-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 opacity-100 group-hover:opacity-100 transition-opacity duration-300"
         >
           <span>Read More</span>
           <ArrowRight className="w-3 h-3" />
@@ -690,7 +690,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
               initial={{ scale: 0 }}
               animate={{ scale: isHovered === post.id ? 1 : 0 }}
               transition={{ duration: 0.2, delay: idx * 0.1 }}
-              className="px-3 py-1.5 text-xs font-medium text-emerald-300 bg-emerald-900/40 backdrop-blur-sm rounded-lg border border-emerald-500/30"
+              className="px-3 py-1.5 text-xs font-medium text-blue-300 bg-blue-900/40 backdrop-blur-sm rounded-lg border border-blue-500/30"
             >
               #{typeof tag === "object" ? tag.name : tag}
             </motion.span>
@@ -701,8 +701,8 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
 
     {/* NEW HOVER EFFECT: Glowing border effect */}
     <div className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none">
-      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-emerald-500/10 via-teal-500/5 to-cyan-500/10" />
-      <div className="absolute inset-0 rounded-xl border-2 border-emerald-500/20" />
+      <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-500/10 via-gray-500/5 to-cyan-500/10" />
+      <div className="absolute inset-0 rounded-xl border-2 border-blue-500/20" />
     </div>
 
     {/* NEW HOVER EFFECT: Sparkle animation */}
@@ -732,7 +732,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
             },
           }}
         >
-          <Sparkles className="w-5 h-5 text-emerald-400/50" />
+          <Sparkles className="w-5 h-5 text-blue-400/50" />
         </motion.div>
         <motion.div
           className="absolute bottom-12 left-8"
