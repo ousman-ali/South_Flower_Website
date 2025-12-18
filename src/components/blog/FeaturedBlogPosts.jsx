@@ -11,6 +11,7 @@ import {
   Share2,
   Award,
 } from "lucide-react";
+import Link from "next/link";
 
 const FeaturedBlogPosts = ({ featuredBlogs }) => {
   const [selectedBlog, setSelectedBlog] = useState(0);
@@ -33,21 +34,15 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
     });
 
   return (
-    <section className="relative py-20 bg-white">
+    <section className="relative py-10 bg-white">
       {/* subtle gray background */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-50 to-white" />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-14">
-          <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-gray-100 border border-gray-200">
-            <Award className="w-4 h-4 text-emerald-600" />
-            <span className="text-sm font-medium text-gray-700">
-              Featured Articles
-            </span>
-          </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Top <span className="text-emerald-600">Picks</span>
+          <h2 className="text-3xl md:text-4xl font-bold text-gray-700 mb-4">
+            Featured <span className="text-blue-600">Articles</span>
           </h2>
           <p className="text-gray-500 max-w-2xl mx-auto">
             Handpicked articles with premium insights
@@ -65,8 +60,8 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                 onClick={() => setSelectedBlog(index)}
                 className={`p-4 rounded-xl cursor-pointer transition-all duration-300 ${
                   selectedBlog === index
-                    ? "bg-emerald-50 border border-emerald-200 shadow-sm"
-                    : "bg-white border border-gray-200 hover:bg-gray-50"
+                    ? "bg-gray-700 border border-blue-200 shadow-sm"
+                    : "bg-gray-700 border border-blue-200 hover:bg-gray-500"
                 }`}
               >
                 <div className="flex items-start gap-3">
@@ -78,10 +73,12 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                     />
                   </div>
                   <div className="flex-1">
-                    <h3 className="text-sm font-semibold text-gray-900 line-clamp-2">
-                      {blog.title}
+                    <h3 className="text-sm font-semibold text-gray-100 line-clamp-2">
+                      {blog.title.length > 50
+                        ? blog.title.slice(0, 50) + " ..."
+                        : blog.title}
                     </h3>
-                    <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
+                    <div className="flex items-center gap-2 text-xs text-blue-400 mt-1">
                       <span>{formatDate(blog.created_at)}</span>
                       <span>•</span>
                       <span>{blog.views_count || 0} views</span>
@@ -109,60 +106,46 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                 >
                   {/* Image */}
                   <div className="relative h-[460px]">
-                    <img
-                      src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${blog.banner_image}`}
-                      alt={blog.title}
-                      className="w-full h-[460px] object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                    <div className="h-[70%] relative">
+                      <img
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${blog.banner_image}`}
+                        alt={blog.title}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
 
-                    <div className="p-8">
-                      <div className="flex justify-between mb-6">
-                        <div className="flex gap-2">
-                          <button
-                            onClick={() => setIsBookmarked(!isBookmarked)}
-                            className="p-2 rounded-full bg-gray-100 border border-gray-200"
-                          >
-                            <Bookmark
-                              className={`w-4 h-4 ${
-                                isBookmarked
-                                  ? "fill-amber-500 text-amber-500"
-                                  : "text-gray-500"
-                              }`}
-                            />
-                          </button>
-                          <button className="p-2 rounded-full bg-gray-100 border border-gray-200">
-                            <Share2 className="w-4 h-4 text-gray-500" />
-                          </button>
-                        </div>
+                    {/* 🔹 BOTTOM 20% — CONTENT */}
+                    <div className="h-[30%] bg-gray-700 p-5 flex flex-col justify-between">
+                      {/* Text block */}
+                      <div>
+                        <h2 className="text-lg md:text-xl font-semibold text-white line-clamp-1">
+                          {blog.title.length > 50
+                            ? blog.title.slice(0, 50) + " ..."
+                            : blog.title}
+                        </h2>
+
+                        <p className="text-sm text-gray-300 line-clamp-2 mt-1">
+                          {blog.excerpt.length > 80
+                            ? blog.excerpt.slice(0, 80) + " ..."
+                            : blog.excerpt}
+                        </p>
                       </div>
 
-                      <div className="flex gap-6 text-sm text-gray-500 mb-4">
-                        <div className="flex items-center gap-2">
-                          <Eye className="w-4 h-4" />
-                          {blog.views_count || 0} views
-                        </div>
-                        <div className="flex items-center gap-2">
+                      {/* Time + Button */}
+                      <div className="flex items-center justify-between mt-3">
+                        <div className="flex items-center gap-2 text-xs text-blue-400">
                           <Calendar className="w-4 h-4" />
                           {formatDate(blog.created_at)}
                         </div>
+
+                        <Link
+                          href={`/blog/${blog.slug}`}
+                          className="inline-flex items-center gap-1.5 bg-blue-400 hover:bg-blue-600 transition text-white px-4 py-2 rounded-md text-sm font-medium"
+                        >
+                          Read Full Article
+                          <ArrowRight className="w-4 h-4" />
+                        </Link>
                       </div>
-
-                      <h2 className="text-3xl font-bold text-gray-900 mb-4">
-                        {blog.title}
-                      </h2>
-
-                      <p className="text-gray-600 mb-6 leading-relaxed">
-                        {blog.excerpt || blog.description}
-                      </p>
-
-                      <motion.button
-                        whileHover={{ scale: 1.05 }}
-                        className="inline-flex items-center gap-2 bg-emerald-600 text-white px-6 py-3 rounded-lg font-medium"
-                      >
-                        Read Full Article
-                        <ArrowRight className="w-4 h-4" />
-                      </motion.button>
                     </div>
                   </div>
                 </motion.div>
