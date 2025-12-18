@@ -188,10 +188,14 @@ export default function ServicesSection1({ services, products }) {
 
                       {/* Content */}
                       <h3 className="text-xl font-semibold text-white mb-2">
-                        {service.title}
+                        {service.title.length > 50
+                          ? service.title.slice(0, 50) + " ..."
+                          : service.title}
                       </h3>
                       <p className="text-gray-400 text-sm mb-4 line-clamp-2">
-                        {service.short_description}
+                        {service.short_description.length > 100
+                          ? service.short_description.slice(0, 100) + " ..."
+                          : service.short_description}
                       </p>
                     </motion.div>
                   ))}
@@ -280,13 +284,17 @@ export default function ServicesSection1({ services, products }) {
                               {getFAIcon(service.icon_class)}
                             </div>
                             <h3 className="text-xl font-semibold text-white">
-                              {service.title}
+                              {service.title.length > 50
+                                ? service.title.slice(0, 50) + " ..."
+                                : service.title}
                             </h3>
                           </div>
                         </div>
 
                         <p className="text-gray-400 text-sm mb-4 line-clamp-3">
-                          {service.short_description}
+                          {service.short_description.length > 100
+                            ? service.short_description.slice(0, 100) + " ..."
+                            : service.short_description}
                         </p>
                         <Link
                           href={`/service/${service.slug}`}

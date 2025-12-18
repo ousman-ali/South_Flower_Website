@@ -145,7 +145,7 @@ export default function CTACard({ stats }) {
 
                   {/* Trust Badges */}
                   <div className="flex flex-wrap gap-3 md:gap-6 mt-4 md:mt-6">
-                    {stats.map((s) => (
+                    {stats?.map((s) => (
                       <div
                         key={s.id}
                         className="flex items-center gap-2 backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10"

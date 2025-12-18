@@ -14,7 +14,6 @@ import {
 } from "lucide-react";
 
 export default function TestimonialSection({ testimonials }) {
-  console.log("testimonials", testimonials);
 
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
