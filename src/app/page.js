@@ -99,7 +99,7 @@ export default function Home() {
       <ServicesSection servicesData={services.data} />
       <BlogSection blogs={blogs.data} />
       <ProductSection products={products.data} />
-      <CTACard />
+      <CTACard stats={stats.data} />
       <TeamSection teams={teams.data} />
       <TestimonialSection testimonials={testimonials.data} />
       <PartnersSection partners={partners.data} />

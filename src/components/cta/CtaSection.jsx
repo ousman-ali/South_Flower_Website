@@ -3,8 +3,9 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Flower, Leaf } from "lucide-react";
+import Link from "next/link";
 
-export default function CTACard() {
+export default function CTACard({ stats }) {
   const [isButtonHovered, setIsButtonHovered] = useState(false);
 
   // Simplified animated nature shapes
@@ -15,7 +16,7 @@ export default function CTACard() {
       x: "10%",
       y: "20%",
       duration: 25,
-      icon: <Flower className="w-4 h-4 text-emerald-300/50" />,
+      icon: <Flower className="w-4 h-4 text-blue-300/50" />,
     },
     {
       id: 2,
@@ -23,7 +24,7 @@ export default function CTACard() {
       x: "85%",
       y: "75%",
       duration: 30,
-      icon: <Leaf className="w-3 h-3 text-green-300/50" />,
+      icon: <Leaf className="w-3 h-3 text-blue-300/50" />,
     },
     {
       id: 3,
@@ -106,7 +107,7 @@ export default function CTACard() {
                 {/* Left Side: Title and Description */}
                 <div className="lg:w-3/5">
                   {/* Badge */}
-                  <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-emerald-400/20 to-green-400/15 backdrop-blur-sm border border-emerald-400/30">
+                  <div className="inline-flex items-center gap-2 mb-4 px-4 py-2 rounded-full bg-gradient-to-r from-blue-400/20 to-blue-400/15 backdrop-blur-sm border border-blue-400/30">
                     <motion.div
                       animate={{ rotate: 360 }}
                       transition={{
@@ -115,9 +116,9 @@ export default function CTACard() {
                         ease: "linear",
                       }}
                     >
-                      <Sparkles className="w-4 h-4 text-emerald-300" />
+                      <Sparkles className="w-4 h-4 text-blue-300" />
                     </motion.div>
-                    <span className="text-sm font-semibold text-emerald-100">
+                    <span className="text-sm font-semibold text-blue-100">
                       South Flower Excellence
                     </span>
                   </div>
@@ -126,17 +127,17 @@ export default function CTACard() {
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4 leading-tight drop-shadow-lg">
                     <span className="block">
                       Let's Grow Your{" "}
-                      <span className="bg-gradient-to-r from-emerald-300 via-green-300 to-teal-300 bg-clip-text text-transparent drop-shadow-lg">
-                        Green Vision
+                      <span className="bg-gradient-to-r from-blue-300 via-blue-300 to-teal-300 bg-clip-text text-transparent drop-shadow-lg">
+                        valued Vision
                       </span>
                     </span>
-                    <span className="text-lg md:text-xl font-semibold text-emerald-50">
+                    <span className="text-lg md:text-xl font-semibold text-blue-50">
                       Partner with South Flower Today
                     </span>
                   </h2>
 
                   {/* Description */}
-                  <p className="text-emerald-100/90 text-sm md:text-base max-w-xl drop-shadow">
+                  <p className="text-blue-100/90 text-sm md:text-base max-w-xl drop-shadow">
                     Transform your space with premium flora and expert
                     horticultural services. Our team is ready to bring your
                     vision to life.
@@ -144,24 +145,17 @@ export default function CTACard() {
 
                   {/* Trust Badges */}
                   <div className="flex flex-wrap gap-3 md:gap-6 mt-4 md:mt-6">
-                    <div className="flex items-center gap-2 backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span className="text-xs md:text-sm text-emerald-50 font-medium">
-                        1000+ Projects
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                      <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
-                      <span className="text-xs md:text-sm text-emerald-50 font-medium">
-                        98% Satisfaction
-                      </span>
-                    </div>
-                    <div className="flex items-center gap-2 backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10">
-                      <div className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
-                      <span className="text-xs md:text-sm text-emerald-50 font-medium">
-                        15+ Years Experience
-                      </span>
-                    </div>
+                    {stats.map((s) => (
+                      <div
+                        key={s.id}
+                        className="flex items-center gap-2 backdrop-blur-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10"
+                      >
+                        <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
+                        <span className="text-xs md:text-sm text-blue-50 font-medium">
+                          {s.value} {s.name}
+                        </span>
+                      </div>
+                    ))}
                   </div>
                 </div>
 
@@ -175,7 +169,7 @@ export default function CTACard() {
                       boxShadow: "0 15px 35px rgba(16, 185, 129, 0.4)",
                     }}
                     whileTap={{ scale: 0.98 }}
-                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-emerald-500 via-green-500 to-teal-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-emerald-400/30"
+                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-500 via-blue-500 to-teal-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
                   >
                     {/* Shimmer effect */}
                     <motion.div
@@ -197,7 +191,7 @@ export default function CTACard() {
                       >
                         <Flower className="w-4 h-4 md:w-5 md:h-5" />
                       </motion.div>
-                      <span>Start Now</span>
+                      <Link href="/contact">Get Quote</Link>
                       <motion.div
                         animate={{ x: isButtonHovered ? 5 : 0 }}
                         transition={{ duration: 0.2 }}
