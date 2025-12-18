@@ -229,7 +229,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 Core Values
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {aboutContent.core_values.slice(0, 4).map((value, idx) => (
+                {aboutContent?.core_values?.slice(0, 4).map((value, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ scale: 0.9, opacity: 0 }}

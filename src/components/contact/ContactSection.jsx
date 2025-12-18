@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 
 export default function ContactSection({ setup, aboutContent }) {
+  console.log("setup", setup);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -72,11 +73,8 @@ export default function ContactSection({ setup, aboutContent }) {
     {
       icon: <MapPin className="w-6 h-6" />,
       title: "Our Location",
-      details: [
-        "123 Flower Avenue",
-        "South Garden District",
-        "Addis Ababa, Ethiopia",
-      ],
+      type: "text",
+      details: setup?.company_address ? [setup.company_address] : [],
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-500/10",
       delay: 0.1,
@@ -84,7 +82,10 @@ export default function ContactSection({ setup, aboutContent }) {
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
-      details: ["+251 911 234 567", "+251 912 345 678"],
+      type: "phone",
+      details: setup?.phone_numbers
+        ? setup.phone_numbers.map((p) => p.value)
+        : [],
       color: "from-blue-500 to-blue-600",
       bgColor: "bg-blue-500/10",
       delay: 0.2,
@@ -92,14 +93,18 @@ export default function ContactSection({ setup, aboutContent }) {
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
-      details: ["hello@southflower.com", "support@southflower.com"],
-      color: "from-rose-500 to-rose-600",
+      type: "email",
+      details: setup?.email_addresses
+        ? setup.email_addresses.map((e) => e.value)
+        : [],
+      color: "from-blue-500 to-blue-600",
       bgColor: "bg-rose-500/10",
       delay: 0.3,
     },
     {
       icon: <Clock className="w-6 h-6" />,
       title: "Working Hours",
+      type: "text",
       details: ["Mon - Fri: 8:00 AM - 7:00 PM", "Sat - Sun: 9:00 AM - 5:00 PM"],
       color: "from-amber-500 to-amber-600",
       bgColor: "bg-amber-500/10",
@@ -476,14 +481,40 @@ export default function ContactSection({ setup, aboutContent }) {
                     </h3>
 
                     <div className="space-y-1 flex-grow">
-                      {card.details.map((detail, idx) => (
-                        <p
-                          key={idx}
-                          className="text-sm text-gray-300 leading-relaxed"
-                        >
-                          {detail}
-                        </p>
-                      ))}
+                      {card.details.map((detail, idx) => {
+                        if (card.type === "phone") {
+                          return (
+                            <a
+                              key={idx}
+                              href={`tel:${detail}`}
+                              className="block text-sm text-gray-300 hover:text-blue-400 transition-colors"
+                            >
+                              {detail}
+                            </a>
+                          );
+                        }
+
+                        if (card.type === "email") {
+                          return (
+                            <a
+                              key={idx}
+                              href={`mailto:${detail}`}
+                              className="block text-sm text-gray-300 hover:text-blue-400 transition-colors"
+                            >
+                              {detail}
+                            </a>
+                          );
+                        }
+
+                        return (
+                          <p
+                            key={idx}
+                            className="text-sm text-gray-300 leading-relaxed"
+                          >
+                            {detail}
+                          </p>
+                        );
+                      })}
                     </div>
 
                     <div className="mt-4 pt-3 border-t border-white/10">
@@ -527,7 +558,7 @@ export default function ContactSection({ setup, aboutContent }) {
                 <Navigation className="w-6 h-6 text-blue-400" />
                 Find Us Here
               </h3>
-              <p className="text-gray-300 mt-1">
+              <p className="text-blue-300 mt-1">
                 Visit our floral paradise in Addis Ababa
               </p>
             </div>
@@ -535,7 +566,7 @@ export default function ContactSection({ setup, aboutContent }) {
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-blue-500/10 border border-blue-500/20">
               <MapPin className="w-4 h-4 text-blue-400" />
               <span className="text-sm text-blue-300 font-medium">
-                123 Flower Avenue, Addis Ababa
+                {setup?.company_address}
               </span>
             </div>
           </div>
@@ -568,7 +599,7 @@ export default function ContactSection({ setup, aboutContent }) {
 
             {/* Map iframe */}
             <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3940.0331488435927!2d38.748!3d9.0108!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x164b8f5f0b5f5f5f%3A0x5f5f5f5f5f5f5f5f!2sAddis%20Ababa%2C%20Ethiopia!5e0!3m2!1sen!2set!4v1620000000000!5m2!1sen!2set"
+              src={setup?.map_src}
               width="100%"
               height="100%"
               style={{ border: 0 }}

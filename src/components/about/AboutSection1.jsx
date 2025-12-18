@@ -2,13 +2,7 @@
 
 import { motion, useAnimationFrame } from "framer-motion";
 import { useEffect, useState, useRef } from "react";
-import {
-  Target,
-  Rocket,
-  Globe,
-  Clock,
-  ChevronRight,
-} from "lucide-react";
+import { Target, Rocket, Globe, Clock, ChevronRight } from "lucide-react";
 
 // Floating shape component with enhanced animation
 const FloatingShape = ({
@@ -299,7 +293,7 @@ export default function AboutSection1({
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {aboutContent.core_values.map((value, idx) => (
+                {aboutContent?.core_values?.map((value, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, y: 10 }}
@@ -423,7 +417,7 @@ export default function AboutSection1({
                 transition={{ delay: 0.7, duration: 0.6 }}
                 className="mt-8 space-y-3"
               >
-                {services.map((service, idx) => (
+                {services?.map((service, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ opacity: 0, x: 20 }}
