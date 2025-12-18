@@ -105,7 +105,7 @@ export default function ContactSection({ setup, aboutContent }) {
       icon: <Clock className="w-6 h-6" />,
       title: "Working Hours",
       type: "text",
-      details: ["Mon - Fri: 8:00 AM - 7:00 PM", "Sat - Sun: 9:00 AM - 5:00 PM"],
+      details: ["Mon - Fri: 8:00 AM - 7:00 PM", "Sat: 9:00 AM - 5:00 PM"],
       color: "from-amber-500 to-amber-600",
       bgColor: "bg-amber-500/10",
       delay: 0.4,
