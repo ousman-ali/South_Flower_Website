@@ -2,16 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  Sparkles,
-  Star,
-  Zap,
-  Shield,
-  Heart,
-  Eye,
-  ChevronLeft,
-  ChevronRight,
-} from "lucide-react";
+import { Eye, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
 
 // Slide container with interval-based sliding
@@ -133,42 +124,10 @@ export default function ProductSection({ products }) {
             transition={{ duration: 0.6, delay: 0.1 }}
             className="text-4xl md:text-6xl font-bold mb-4"
           >
-            <span className="bg-gradient-to-r from-emerald-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
               Our Products
             </span>
           </motion.h2>
-        </motion.div>
-
-        {/* Stats - Simple */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-12 mb-8"
-        >
-          {[
-            { value: "1K+", label: "Happy Customers", icon: Heart },
-            { value: "5.0★", label: "Average Rating", icon: Star },
-            { value: "24/7", label: "Support", icon: Shield },
-            { value: "100%", label: "Original", icon: Zap },
-          ].map((stat, idx) => (
-            <motion.div
-              key={idx}
-              initial={{ scale: 0.9, opacity: 0 }}
-              whileInView={{ scale: 1, opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.1 * idx }}
-              whileHover={{ scale: 1.03, y: -2 }}
-              className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 text-center"
-            >
-              <stat.icon className="w-6 h-6 mx-auto mb-2 text-emerald-400" />
-              <div className="text-2xl font-bold text-white mb-1">
-                {stat.value}
-              </div>
-              <div className="text-gray-400 text-xs">{stat.label}</div>
-            </motion.div>
-          ))}
         </motion.div>
 
         {/* Products Carousel - Simple sliding */}
@@ -213,10 +172,10 @@ export default function ProductSection({ products }) {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="group relative px-4 py-2 bg-gradient-to-r from-emerald-600 to-teal-500 text-white text-sm font-semibold rounded-lg overflow-hidden flex items-center gap-2"
+                      className="group relative px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-semibold rounded-lg overflow-hidden flex items-center gap-2"
                     >
                       <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-teal-500 to-emerald-600"
+                        className="absolute inset-0 bg-gradient-to-r from-blue-500 to-cyan-500"
                         initial={{ x: "100%" }}
                         whileHover={{ x: 0 }}
                         transition={{ duration: 0.3 }}
@@ -242,7 +201,7 @@ export default function ProductSection({ products }) {
           <motion.button
             whileHover={{ scale: 1.03 }}
             whileTap={{ scale: 0.97 }}
-            className="px-8 py-4 bg-gradient-to-r from-emerald-600 to-cyan-600 text-white font-bold rounded-xl shadow-xl hover:shadow-emerald-500/20 transition-all duration-300"
+            className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:shadow-emerald-500/20 transition-all duration-300"
           >
             View All Products
           </motion.button>
