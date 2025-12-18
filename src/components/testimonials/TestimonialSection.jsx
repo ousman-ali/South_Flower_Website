@@ -102,7 +102,7 @@ export default function TestimonialSection({ testimonials }) {
           repeat: Infinity,
           ease: "easeInOut",
         }}
-        className="absolute bottom-1/4 right-4 lg:right-10 w-48 h-48 md:w-64 md:h-64 lg:w-96 lg:h-96 bg-gradient-to-br from-purple-500/10 to-pink-400/10 rounded-full blur-3xl"
+        className="absolute bottom-1/4 right-4 lg:right-10 w-48 h-48 md:w-64 md:h-64 lg:w-96 lg:h-96 bg-gradient-to-br from-gray-500/10 to-pink-400/10 rounded-full blur-3xl"
       />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -118,13 +118,13 @@ export default function TestimonialSection({ testimonials }) {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-3 mb-4 md:mb-6 px-4 py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-white/10 backdrop-blur-sm"
+            className="inline-flex items-center gap-3 mb-4 md:mb-6 px-4 py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-gray-500/10 border border-white/10 backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
-            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-400 to-gray-100 bg-clip-text text-transparent">
               Client Testimonials
             </span>
-            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-purple-400" />
+            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
           </motion.div>
 
           <motion.h2
@@ -135,7 +135,7 @@ export default function TestimonialSection({ testimonials }) {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 text-amber-50"
           >
             Voices of{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-gray-100 bg-clip-text text-transparent">
               Excellence
             </span>
           </motion.h2>
@@ -166,7 +166,7 @@ export default function TestimonialSection({ testimonials }) {
             whileHover={{ scale: 1.1, x: 5 }}
             whileTap={{ scale: 0.9 }}
             onClick={handleNext}
-            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 lg:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-2xl flex items-center justify-center hover:shadow-purple-500/30 transition-all"
+            className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-6 lg:translate-x-12 z-20 w-10 h-10 md:w-12 md:h-12 lg:w-14 lg:h-14 bg-gradient-to-r from-blue-500 to-cyan-400 rounded-full shadow-2xl flex items-center justify-center hover:shadow-gray-500/30 transition-all"
           >
             <ChevronRight className="w-5 h-5 md:w-6 md:h-6 lg:w-7 lg:h-7 text-white" />
           </motion.button>
@@ -240,15 +240,23 @@ export default function TestimonialSection({ testimonials }) {
                       </motion.div>
 
                       <motion.div
-                        initial={{ scale: 0 }}
-                        animate={{ scale: 1 }}
+                        initial={{ scale: 0, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
                         transition={{ duration: 0.4, delay: 0.3 }}
-                        className="absolute -bottom-4 left-1/2 -translate-x-1/2 sm:left-8 sm:translate-x-0 bg-gradient-to-r from-amber-500 to-orange-400 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-2 shadow-xl"
+                        className="absolute -bottom-4 left-1/2 -translate-x-1/2 sm:left-8 sm:translate-x-0 bg-transparent px-3 py-1.5 sm:px-4 sm:py-2 rounded-full flex items-center gap-2"
                       >
-                        <Star className="w-4 h-4 sm:w-5 sm:h-5 fill-white" />
-                        <span className="font-bold text-sm sm:text-base">
-                          {testimonials[activeIndex].rating}.0
-                        </span>
+                        <div className="flex items-center gap-1">
+                          {[
+                            ...Array(Number(testimonials[activeIndex].rating)),
+                          ].map((_, i) => (
+                            <Star
+                              key={i}
+                              fill="currentColor"
+                              stroke="none"
+                              className="h-8 w-8 text-amber-400 drop-shadow-[0_0_6px_rgba(251,191,36,0.8)]"
+                            />
+                          ))}
+                        </div>
                       </motion.div>
                     </div>
                   </motion.div>
