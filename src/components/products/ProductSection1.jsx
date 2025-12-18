@@ -69,16 +69,16 @@ export default function ProductSection1({ categories, products, services }) {
         >
           <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
             <div>
-              <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-gradient-to-r from-emerald-900/30 to-teal-900/30 border border-emerald-500/20">
-                <Sparkles className="w-3 h-3 text-emerald-400" />
-                <span className="text-xs font-medium text-emerald-300">
+              <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-900/30 to-teal-900/30 border border-blue-500/20">
+                <Sparkles className="w-3 h-3 text-blue-400" />
+                <span className="text-xs font-medium text-blue-300">
                   Premium Collection
                 </span>
               </div>
 
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
                 Our{" "}
-                <span className="bg-gradient-to-r from-emerald-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
+                <span className="bg-gradient-to-r from-blue-400 via-teal-400 to-cyan-400 bg-clip-text text-transparent">
                   Products
                 </span>
               </h1>
@@ -86,22 +86,6 @@ export default function ProductSection1({ categories, products, services }) {
               <p className="text-gray-400 text-sm">
                 Discover our curated selection of premium botanical products
               </p>
-            </div>
-
-            {/* Quick Stats */}
-            <div className="flex items-center gap-6">
-              {[
-                { value: "500+", label: "Products" },
-                { value: "4.9★", label: "Rating" },
-                { value: "100%", label: "Natural" },
-              ].map((stat, idx) => (
-                <div key={idx} className="text-center">
-                  <div className="text-lg font-bold bg-gradient-to-r from-emerald-400 to-teal-400 bg-clip-text text-transparent">
-                    {stat.value}
-                  </div>
-                  <div className="text-xs text-gray-500">{stat.label}</div>
-                </div>
-              ))}
             </div>
           </div>
         </motion.div>
@@ -122,7 +106,7 @@ export default function ProductSection1({ categories, products, services }) {
               whileTap={{ scale: 0.95 }}
               className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
                 selectedCategory === "all"
-                  ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                  ? "bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg shadow-blue-500/20"
                   : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
               }`}
             >
@@ -138,7 +122,7 @@ export default function ProductSection1({ categories, products, services }) {
                 whileTap={{ scale: 0.95 }}
                 className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all duration-300 ${
                   selectedCategory === category.id
-                    ? "bg-gradient-to-r from-emerald-600 to-teal-500 text-white shadow-lg shadow-emerald-500/20"
+                    ? "bg-gradient-to-r from-blue-600 to-teal-500 text-white shadow-lg shadow-blue-500/20"
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                 }`}
               >
@@ -184,7 +168,7 @@ export default function ProductSection1({ categories, products, services }) {
                       }}
                       onMouseEnter={() => setIsHovered(product.id)}
                       onMouseLeave={() => setIsHovered(null)}
-                      className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-emerald-500/10 hover:border-emerald-500/30 transition-all duration-300 cursor-pointer"
+                      className="group relative bg-gradient-to-br from-gray-800/80 to-gray-900/80 backdrop-blur-sm rounded-xl border border-gray-700/50 overflow-hidden shadow-lg hover:shadow-2xl hover:shadow-blue-500/10 hover:border-blue-500/30 transition-all duration-300 cursor-pointer"
                     >
                       {/* Product Image */}
                       <div className="relative h-40 overflow-hidden">
@@ -217,7 +201,7 @@ export default function ProductSection1({ categories, products, services }) {
                           <motion.button
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
-                            className="bg-gradient-to-r from-blue-400 to-gray-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-emerald-500/20 transition-all duration-300"
+                            className="bg-gradient-to-r from-blue-400 to-gray-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
                           >
                             <Link
                               href={`/product/${product.slug}`}
@@ -251,8 +235,8 @@ export default function ProductSection1({ categories, products, services }) {
               >
                 <div className="p-4">
                   <div className="flex items-center gap-2 mb-4">
-                    <div className="p-1.5 rounded-lg bg-gradient-to-br from-emerald-900/30 to-teal-900/30 border border-emerald-500/20">
-                      <Sparkles className="w-4 h-4 text-emerald-400" />
+                    <div className="p-1.5 rounded-lg bg-gradient-to-br from-blue-900/30 to-teal-900/30 border border-blue-500/20">
+                      <Sparkles className="w-4 h-4 text-blue-400" />
                     </div>
                     <h2 className="text-sm font-bold text-white">
                       Our Services
@@ -289,7 +273,7 @@ export default function ProductSection1({ categories, products, services }) {
                           </div>
 
                           {/* Arrow */}
-                          <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-emerald-400 transition-colors duration-300 flex-shrink-0" />
+                          <ChevronRight className="w-3 h-3 text-gray-500 group-hover:text-blue-400 transition-colors duration-300 flex-shrink-0" />
                         </div>
                       </motion.div>
                     ))}
@@ -302,7 +286,7 @@ export default function ProductSection1({ categories, products, services }) {
                 initial={{ opacity: 0, x: 20 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.6, delay: 0.4 }}
-                className="bg-gradient-to-br from-emerald-900/30 to-teal-900/30 rounded-xl border border-emerald-500/20 p-4"
+                className="bg-gradient-to-br from-blue-900/30 to-teal-900/30 rounded-xl border border-blue-500/20 p-4"
               >
                 <h3 className="text-sm font-bold text-white mb-3">
                   Why Choose Us
@@ -316,7 +300,7 @@ export default function ProductSection1({ categories, products, services }) {
                   ].map((benefit, idx) => (
                     <div key={idx} className="flex items-center gap-2">
                       <div className="p-1 rounded bg-white/10">
-                        <benefit.icon className="w-3 h-3 text-emerald-400" />
+                        <benefit.icon className="w-3 h-3 text-blue-400" />
                       </div>
                       <span className="text-xs text-gray-300">
                         {benefit.text}
