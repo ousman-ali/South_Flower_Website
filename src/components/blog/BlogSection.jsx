@@ -2,11 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
-import {
-  ChevronLeft,
-  ChevronRight,
-  ExternalLink,
-} from "lucide-react";
+import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
 
 export default function BlogSection({ blogs }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -234,7 +230,9 @@ export default function BlogSection({ blogs }) {
                               className={`w-3 h-3 rounded-full bg-gradient-to-r from-blue-500 to-cyan-500`}
                             />
                             <span className="text-sm font-semibold text-gray-500 uppercase tracking-wider">
-                              {blog.title}
+                              {blog.title.length > 40
+                                ? blog.title.slice(0, 40) + " ..."
+                                : blog.title}
                             </span>
                           </div>
                           <div
@@ -243,7 +241,11 @@ export default function BlogSection({ blogs }) {
                         </div>
 
                         {/* Description */}
-                        <p className="text-gray-600 mb-4">{blog.excerpt}</p>
+                        <p className="text-gray-600 mb-4">
+                          {blog.excerpt.length > 60
+                            ? blog.excerpt.slice(0, 60) + " ..."
+                            : blog.excerpt}
+                        </p>
 
                         {/* Image */}
                         <div className="relative h-48 rounded-2xl overflow-hidden mb-6 group">
