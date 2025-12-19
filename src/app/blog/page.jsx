@@ -64,6 +64,7 @@ export default function AboutPage() {
         pageTitle="Blog"
         pageName="Our Blog Posts"
         currentPage="South Flower Posts"
+        backgroundImage="/images/bread2.jpg"
       />
       {featuredBlogs.length > 0 && (
         <FeaturedBlogPosts featuredBlogs={featuredBlogs} />

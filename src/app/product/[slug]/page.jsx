@@ -91,6 +91,7 @@ export default function ProductDetailsPage() {
         pageTitle="Product Details"
         pageName="Product Details"
         currentPage="South Flower Product"
+        backgroundImage="/images/bread4.jpg"
       />
       <ProductDetails
         services={services}

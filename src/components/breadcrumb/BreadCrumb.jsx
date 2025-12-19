@@ -6,7 +6,7 @@ import { Home, Sparkles, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const Breadcrumb = ({ pageTitle, currentPage }) => {
+const Breadcrumb = ({ pageTitle, currentPage, backgroundImage }) => {
   const router = useRouter();
   const [isVisible, setIsVisible] = useState(false);
 
@@ -22,8 +22,10 @@ const Breadcrumb = ({ pageTitle, currentPage }) => {
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{
-            backgroundImage:
-              "url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80')",
+            backgroundImage: `url(${
+              backgroundImage ||
+              "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=2000&q=80"
+            })`,
             backgroundPosition: "center center",
           }}
         />

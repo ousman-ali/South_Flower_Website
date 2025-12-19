@@ -55,6 +55,7 @@ export default function AboutPage() {
         pageTitle="Products"
         pageName="Our Products"
         currentPage="South Flower Products"
+        backgroundImage="/images/bread4.jpg"
       />
       <ProductSection1
         products={products.data}

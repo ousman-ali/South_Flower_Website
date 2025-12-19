@@ -65,6 +65,7 @@ export default function AboutPage() {
         pageTitle="About"
         pageName="Our Story"
         currentPage="Company History"
+        backgroundImage="/images/bread1.jpg"
       />
       <AboutSection1
         setup={setup.data}

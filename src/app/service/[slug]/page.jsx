@@ -91,6 +91,7 @@ export default function AboutPage() {
         pageTitle="Service Details"
         pageName="Service Details"
         currentPage="South Flower Service"
+        backgroundImage="/images/bread5.jpg"
       />
       <ServiceDetails
         service={service}
