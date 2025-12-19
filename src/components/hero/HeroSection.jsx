@@ -104,10 +104,10 @@ export default function HeroSection({ heroSlides }) {
                   <Star className="w-5 h-5 text-yellow-300" />
                 </div>
                 <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
-                  {heroSlides[0].title}
+                  {heroSlides[0].title.slice(0, 50) + " ..."}
                 </h1>
                 <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mb-10">
-                  {heroSlides[0].description}
+                  {heroSlides[0].description.slice(0, 100) + " ..."}
                 </p>
               </div>
               <div className="space-y-6">
@@ -276,7 +276,7 @@ export default function HeroSection({ heroSlides }) {
                       </motion.div>
 
                       {/* Title */}
-                      <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
+                      <h1 className="text-2xl md:text-3xl lg:text-4xl xl:text-5xl font-bold leading-tight mb-6">
                         {slide.title.split(" ").map((word, wordIndex) => (
                           <motion.span
                             key={wordIndex}
