@@ -622,12 +622,16 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
       <div>
         {/* Title - Always visible */}
         <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
-          {post.title}
+          {post.title.length > 40
+            ? post.title.slice(0, 40) + " ..."
+            : post.title}
         </h3>
 
         {/* Excerpt - Always visible */}
         <p className="text-gray-300 text-sm mb-4 line-clamp-2 opacity-100 group-hover:opacity-90 transition-opacity duration-300">
-          {post.excerpt || "No excerpt available"}
+          {post.excerpt.length > 60
+            ? post.excerpt.slice(0, 60) + " ..."
+            : post.excerpt || "No excerpt available"}
         </p>
 
         {/* Author & Stats - Always visible */}
