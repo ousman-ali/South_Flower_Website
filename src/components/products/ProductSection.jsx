@@ -4,6 +4,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { Eye, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState, useEffect, useRef } from "react";
+import Link from "next/link";
 
 // Slide container with interval-based sliding
 const SlideContainer = ({ children, interval = 3000 }) => {
@@ -198,13 +199,14 @@ export default function ProductSection({ products }) {
           transition={{ delay: 0.8, duration: 0.8 }}
           className="text-center mt-8"
         >
-          <motion.button
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+          <Link
+            href="/product"
+            whilehover={{ scale: 1.03 }}
+            whiletap={{ scale: 0.97 }}
             className="px-8 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 text-white font-bold rounded-xl shadow-xl hover:shadow-emerald-500/20 transition-all duration-300"
           >
             View All Products
-          </motion.button>
+          </Link>
         </motion.div>
       </div>
     </section>
