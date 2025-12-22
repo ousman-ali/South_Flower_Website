@@ -163,8 +163,8 @@ export default function CTACard({ stats }) {
                 <div className="lg:w-2/5 flex justify-center lg:justify-end">
                   <Link
                     href="/contact"
-                    onHoverstart={() => setIsButtonHovered(true)}
-                    onHoverend={() => setIsButtonHovered(false)}
+                    onHoverStart={() => setIsButtonHovered(true)}
+                    onHoverEnd={() => setIsButtonHovered(false)}
                     whilehover={{
                       scale: 1.05,
                       boxShadow: "0 15px 35px rgba(16, 185, 129, 0.4)",

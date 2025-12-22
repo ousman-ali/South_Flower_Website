@@ -31,7 +31,7 @@ const animatedShapes = [
     x: "90%",
     y: "20%",
     duration: 35,
-    color: "from-purple-100 to-pink-100",
+    color: "from-blue-100 to-pink-100",
   },
   {
     id: 3,
@@ -150,7 +150,7 @@ export default function TeamSection({ teams }) {
         />
 
         <motion.div
-          className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-purple-100/30 to-pink-100/20 rounded-full blur-3xl"
+          className="absolute bottom-1/4 -right-40 w-[500px] h-[500px] bg-gradient-to-br from-blue-100/30 to-pink-100/20 rounded-full blur-3xl"
           animate={{
             scale: [1.1, 1, 1.1],
             y: [0, 50, 0],
@@ -178,18 +178,18 @@ export default function TeamSection({ teams }) {
             whileInView={{ scale: 1, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-purple-50 border border-blue-100 backdrop-blur-sm"
+            className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-blue-50 border border-blue-100 backdrop-blur-sm"
           >
             <Sparkles className="w-4 h-4 text-blue-500" />
             <span className="text-sm font-semibold text-blue-600">
               Meet Our Team
             </span>
-            <Users className="w-4 h-4 text-purple-500" />
+            <Users className="w-4 h-4 text-blue-500" />
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
             The{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
               Talented Minds
             </span>{" "}
             Behind Our Success
@@ -251,7 +251,7 @@ export default function TeamSection({ teams }) {
                       onClick={() => setCurrentPage(idx)}
                       className={`w-2 h-2 rounded-full transition-all ${
                         currentPage === idx
-                          ? "bg-gradient-to-r from-blue-500 to-purple-500 w-6"
+                          ? "bg-gradient-to-r from-blue-500 to-blue-500 w-6"
                           : "bg-gray-300 hover:bg-gray-400"
                       }`}
                     />
