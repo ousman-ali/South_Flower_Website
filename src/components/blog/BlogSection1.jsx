@@ -254,20 +254,20 @@ export default function BlogSection1({ categories, blogs, products }) {
               <div className="inline-flex items-center gap-2 mb-3 px-3 py-1 rounded-full bg-gradient-to-r from-blue-900/30 to-gray-900/30 border border-blue-500/20">
                 <BookOpen className="w-3 h-3 text-blue-400" />
                 <span className="text-xs font-medium text-blue-300">
-                  South Flower Blog
+                  Automotive Insights
                 </span>
               </div>
 
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">
-                Garden{" "}
+                Vehicle{" "}
                 <span className="bg-gradient-to-r from-blue-400 via-gray-400 to-cyan-400 bg-clip-text text-transparent">
-                  Insights & Tips
+                  Care & Maintenance
                 </span>
               </h1>
 
               <p className="text-gray-400 text-sm">
-                Discover expert gardening advice, floral design tips, and
-                sustainable practices
+                Discover expert vehicle maintenance tips, repair guides, and
+                automotive best practices.
               </p>
             </div>
 
