@@ -491,17 +491,6 @@ export default function HeroSection({ heroSlides }) {
         />
       </div>
 
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 right-0 h-1 z-20 bg-white/10">
-        <motion.div
-          key={currentSlide}
-          className="h-full bg-gradient-to-r from-blue-500 to-purple-500"
-          initial={{ width: "0%" }}
-          animate={{ width: "100%" }}
-          transition={{ duration: 8, ease: "linear" }}
-        />
-      </div>
-
       {/* Scroll Indicator */}
       <motion.div
         animate={{ y: [0, 10, 0] }}
