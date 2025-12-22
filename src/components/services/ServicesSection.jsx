@@ -111,26 +111,23 @@ export default function ServicesSection({ servicesData }) {
             transition={{ duration: 0.5 }}
             className="inline-block mb-6 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm"
           >
-            <span className="text-sm font-semibold bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">
-              What We Offer
+            <span className="text-sm font-semibold bg-gradient-to-r text-blue-400">
+              Professional Vechile Care
             </span>
           </motion.div>
 
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-300">
-            Our{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Featured Services
-            </span>
+            Our <span className=" text-blue-400 ">Featured Services</span>
           </h2>
 
           <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            We deliver world-class services designed to support your business
-            growth with innovation and excellence.
+            We provide professional car repair and maintenance services to keep
+            your vehicle safe, reliable, and performing at its best.
           </p>
         </motion.div>
 
         {/* Services Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {servicesData.slice(0, 4).map((service, index) => (
             <motion.div
               key={index}
@@ -243,7 +240,7 @@ export default function ServicesSection({ servicesData }) {
                     transition={{ duration: 0.5 }}
                   >
                     <div
-                      className={`absolute inset-0 bg-gradient-to-br from-blue-500 to-cyan-400 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-300`}
+                      className={`absolute inset-0 text-blue-500 rounded-2xl blur-xl opacity-50 group-hover:opacity-100 transition-opacity duration-300`}
                     />
                     <div className="relative text-white">
                       {getFAIcon(service.icon_class)}
@@ -253,16 +250,16 @@ export default function ServicesSection({ servicesData }) {
 
                 {/* Content */}
                 <Link href={`/service/${service.slug}`}>
-                  <h3 className="relative text-2xl font-bold text-white mb-3 group-hover:text-transparent group-hover:bg-gradient-to-r group-hover:bg-clip-text group-hover:from-blue-400 group-hover:to-purple-400 transition-all duration-300">
+                  <h3 className="relative text-xl font-bold text-white mb-3 group-hover:bg-gradient-to-r group-hover:bg-clip-text hover:text-blue-400 transition-all duration-300">
                     {service.title.length > 40
                       ? service.title.slice(0, 40) + " ..."
                       : service.title}
                   </h3>
                 </Link>
 
-                <p className="relative text-gray-400 leading-relaxed flex-grow">
-                  {service.short_description.length > 80
-                    ? service.short_description.slice(0, 80) + " ..."
+                <p className="relative text-gray-400 leading-relaxed flex-grow text-justify">
+                  {service.short_description.length > 60
+                    ? service.short_description.slice(0, 60) + " ..."
                     : service.short_description}
                 </p>
 
@@ -281,15 +278,15 @@ export default function ServicesSection({ servicesData }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ delay: 0.6, duration: 0.8 }}
-          className="text-center mt-20"
+          className="text-center mt-12"
         >
           <motion.button
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
-            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transition-all duration-300 cursor-pointer"
+            className="group relative px-8 py-4 bg-gradient-to-r from-blue-600 to-cyan-500 text-white font-semibold rounded-xl overflow-hidden shadow-lg hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transition-all duration-300 cursor-pointer"
           >
             <motion.div
-              className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600"
+              className="absolute inset-0 bg-gradient-to-r from-blue-600 to-cyan-600"
               initial={{ x: "100%" }}
               whileHover={{ x: 0 }}
               transition={{ duration: 0.3 }}
