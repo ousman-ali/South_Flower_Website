@@ -206,16 +206,12 @@ export default function AboutSection1({
               transition={{ duration: 0.6 }}
               className="mb-10"
             >
-              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight">
-                Pioneering{" "}
-                <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Digital Excellence
-                </span>{" "}
-                Since 2010
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-700">
+                Pioneering Digital Excellence Since 2010
               </h2>
 
               <div className="space-y-4">
-                <p className="text-gray-700 text-lg leading-relaxed">
+                <p className="text-gray-700 text-lg leading-relaxed text-justify">
                   {aboutContent?.text || "this is about text area"}
                 </p>
                 <p className="text-xl font-semibold text-gray-700 italic tracking-wide">
@@ -247,7 +243,7 @@ export default function AboutSection1({
                     </h3>
                   </div>
                   <p
-                    className="text-gray-700"
+                    className="text-gray-700 text-justify"
                     dangerouslySetInnerHTML={{
                       __html: aboutContent?.mission || "this is mission area",
                     }}
@@ -268,7 +264,7 @@ export default function AboutSection1({
                     </h3>
                   </div>
                   <p
-                    className="text-gray-700"
+                    className="text-gray-700 text-justify"
                     dangerouslySetInnerHTML={{
                       __html: aboutContent?.vision || "this is vision area",
                     }}
