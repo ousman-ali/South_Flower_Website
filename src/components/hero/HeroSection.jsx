@@ -9,6 +9,7 @@ import {
   ChevronRight,
   Star,
 } from "lucide-react";
+import Link from "next/link";
 
 const particlePositions = [
   { left: "42.9%", top: "10.2%" },
@@ -127,7 +128,7 @@ export default function HeroSection({ heroSlides }) {
   }
 
   return (
-    <section className="relative min-h-screen overflow-hidden">
+    <section className="relative min-h-[80vh] overflow-hidden">
       {/* Full-width Background Images */}
       <div className="absolute inset-0">
         <AnimatePresence mode="wait">
@@ -241,7 +242,7 @@ export default function HeroSection({ heroSlides }) {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 h-screen flex items-center justify-center ml-10">
+      <div className="relative z-10 h-[80vh] flex items-center justify-center ml-10">
         <div className="max-w-7xl mx-auto px-6 w-full">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left Side - Content */}
@@ -312,34 +313,42 @@ export default function HeroSection({ heroSlides }) {
               initial={{ opacity: 0, x: 50 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.8, delay: 1.2 }}
-              className="space-y-6"
+              className="space-y-6 flex-col items-center justify-center"
             >
               {/* Main CTA Button */}
-              <motion.button
-                whileHover={{
+              <Link
+                href="/about"
+                whilehover={{
                   scale: 1.05,
                   boxShadow: "0 20px 40px rgba(255, 255, 255, 0.2)",
                 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-[50%] px-8 py-5 bg-white text-gray-900 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3 group hover:shadow-3xl transition-all"
+                whiletap={{ scale: 0.95 }}
+                className="w-[50%] px-8 py-5 bg-white text-gray-700 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3 group hover:shadow-3xl transition-all"
               >
-                <span className="text-lg">Start Your Project</span>
+                <span className="text-lg">More About us</span>
                 <motion.span
                   animate={{ x: [0, 5, 0] }}
                   transition={{ duration: 1.5, repeat: Infinity }}
                 >
                   <ArrowRight className="w-6 h-6" />
                 </motion.span>
-              </motion.button>
+              </Link>
 
               {/* Secondary CTA Button */}
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-[50%] px-8 py-5 bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-all"
+              <Link
+                href="/service"
+                whilehover={{ scale: 1.05 }}
+                whiletap={{ scale: 0.95 }}
+                className="w-[50%] px-8 py-5 flex items-center bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-all"
               >
-                Explore Our Services
-              </motion.button>
+                <span className="text-lg">Explore Our Services</span>
+                <motion.span
+                  animate={{ x: [0, 5, 0] }}
+                  transition={{ duration: 1.5, repeat: Infinity }}
+                >
+                  <ArrowRight className="w-6 h-6" />
+                </motion.span>
+              </Link>
             </motion.div>
           </div>
         </div>
@@ -402,7 +411,7 @@ export default function HeroSection({ heroSlides }) {
       <div className="absolute bottom-0 left-0 right-0 z-10">
         {/* Main Wave Shape */}
         <svg
-          className="w-full h-32 md:h-48"
+          className="w-full h-32 md:h-44"
           viewBox="0 0 1440 320"
           preserveAspectRatio="none"
         >
@@ -455,7 +464,7 @@ export default function HeroSection({ heroSlides }) {
           }}
         />
         <motion.div
-          className="absolute -top-4 left-1/2 w-8 h-8 bg-gradient-to-r from-purple-500 to-pink-400 rounded-full blur-sm"
+          className="absolute -top-4 left-1/2 w-8 h-8 bg-gradient-to-r from-cyan-500 to-gray-400 rounded-full blur-sm"
           animate={{
             y: [0, -15, 0],
             scale: [1, 1.3, 1],
