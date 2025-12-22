@@ -170,9 +170,10 @@ export default function ProductSection({ products }) {
 
                   {/* Price & Details Button */}
                   <div className="flex items-center justify-between">
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
+                    <Link
+                      href={`/product/${product.slug}`}
+                      whilehover={{ scale: 1.05 }}
+                      whiletap={{ scale: 0.95 }}
                       className="group relative px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-semibold rounded-lg overflow-hidden flex items-center gap-2"
                     >
                       <motion.div
@@ -181,9 +182,11 @@ export default function ProductSection({ products }) {
                         whileHover={{ x: 0 }}
                         transition={{ duration: 0.3 }}
                       />
-                      <Eye size={16} className="relative z-10" />
-                      <span className="relative z-10">Details</span>
-                    </motion.button>
+                      <Eye size={16} className="relative z-10 text-gray-700" />
+                      <span className="relative z-10 text-gray-700">
+                        Details
+                      </span>
+                    </Link>
                   </div>
                 </div>
               </motion.div>
