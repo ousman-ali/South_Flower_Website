@@ -72,19 +72,20 @@ export default function ProductSection1({ categories, products, services }) {
               <div className="inline-flex items-center gap-2 mb-2 px-3 py-1 rounded-full bg-gradient-to-r from-blue-900/30 to-gray-900/30 border border-blue-500/20">
                 <Sparkles className="w-3 h-3 text-blue-400" />
                 <span className="text-xs font-medium text-blue-300">
-                  Premium Collection
+                  Genuine Collections
                 </span>
               </div>
 
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
-                Our{" "}
+                Auto{" "}
                 <span className="bg-gradient-to-r from-blue-400 via-gray-400 to-cyan-400 bg-clip-text text-transparent">
-                  Products
+                  Parts & Products
                 </span>
               </h1>
 
               <p className="text-gray-400 text-sm">
-                Discover our curated selection of premium botanical products
+                Explore our high-quality auto parts, tools, and vehicle care
+                products.
               </p>
             </div>
           </div>
