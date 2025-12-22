@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight, ExternalLink } from "lucide-react";
+import Link from "next/link";
 
 export default function BlogSection({ blogs }) {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -107,7 +108,7 @@ export default function BlogSection({ blogs }) {
             viewport={{ once: true }}
             className="inline-block mb-4 px-6 py-2 bg-gradient-to-r from-blue-500/10 to-purple-500/10 rounded-full border border-blue-200"
           >
-            <span className="text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <span className="text-sm font-semibold text-blue-600">
               BLOG POSTS
             </span>
           </motion.div>
@@ -119,10 +120,7 @@ export default function BlogSection({ blogs }) {
             transition={{ delay: 0.1 }}
             className="text-5xl md:text-6xl font-bold text-gray-900 mb-6"
           >
-            Our Latest{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-purple-600">
-              News & Events
-            </span>
+            <span className="text-gray-700">Our Latest News & Events</span>
           </motion.h2>
         </div>
 
@@ -277,14 +275,15 @@ export default function BlogSection({ blogs }) {
                         </div>
 
                         {/* Action Button */}
-                        <button
-                          className={`w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-500 to-cyan-500 bg-opacity-10 hover:bg-opacity-20 rounded-xl transition-all duration-300 group/btn`}
+                        <Link
+                          href={`/blog/${blog.slug}`}
+                          className={`w-full flex items-center justify-between px-6 py-4 bg-gradient-to-r from-blue-100 to-cyan-50 bg-opacity-10 hover:bg-opacity-20 rounded-xl transition-all duration-300 group/btn border-gray-700`}
                         >
                           <span className="text-gray-700 font-semibold">
                             View Details
                           </span>
                           <ExternalLink className="text-gray-600 group-hover/btn:translate-x-2 transition-transform" />
-                        </button>
+                        </Link>
                       </div>
                     </div>
 
