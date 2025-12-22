@@ -247,7 +247,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                     <h4 className="font-semibold text-gray-900 mb-1">
                       {value.title}
                     </h4>
-                    <p className="text-sm text-gray-600">
+                    <p className="text-sm text-gray-600 text-justify">
                       {value.description.length > 40
                         ? value.description.slice(0, 40) + "..."
                         : value.description}
@@ -283,7 +283,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 Worldwide
               </h2>
 
-              <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-3xl">
+              <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-3xl text-justify">
                 {aboutContent?.text || "this is about text area"}
               </p>
             </motion.div>
@@ -350,7 +350,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                     </h3>
                   </div>
                   <p
-                    className="text-gray-700 leading-relaxed"
+                    className="text-gray-700 leading-relaxed text-justify"
                     dangerouslySetInnerHTML={{
                       __html: aboutContent?.mission || "this is mission area",
                     }}
@@ -376,7 +376,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                     </h3>
                   </div>
                   <p
-                    className="text-gray-700 leading-relaxed"
+                    className="text-gray-700 leading-relaxed text-justify"
                     dangerouslySetInnerHTML={{
                       __html: aboutContent?.vision || "this is vision area",
                     }}
