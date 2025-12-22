@@ -132,23 +132,16 @@ export default function PartnersSection({ partners }) {
         {/* Header */}
         <div className="text-center mb-10 md:mb-16">
           <div className="inline-flex items-center gap-2 mb-4 md:mb-6 px-4 py-2 md:px-5 md:py-2.5 rounded-full bg-white/80 backdrop-blur-sm border border-gray-200 shadow-lg">
-            <Star className="w-4 h-4 md:w-5 md:h-5 text-amber-500" />
-            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+            <Star className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
+            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-gray-700 to-gray-700 bg-clip-text text-transparent">
               Trusted Partners
             </span>
-            <Zap className="w-4 h-4 md:w-5 md:h-5 text-purple-500" />
+            <Zap className="w-4 h-4 md:w-5 md:h-5 text-gray-700" />
           </div>
 
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 mb-3 md:mb-4">
-            Our Global{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Network
-            </span>
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-700 mb-3 md:mb-4">
+            Our Trusted Service Network
           </h2>
-          <p className="text-gray-600 text-sm sm:text-base md:text-lg max-w-2xl mx-auto px-2">
-            Collaborating with industry leaders to deliver exceptional results
-            worldwide
-          </p>
         </div>
 
         {/* Partners Slider */}
