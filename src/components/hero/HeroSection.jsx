@@ -107,7 +107,7 @@ export default function HeroSection({ heroSlides }) {
                 <h1 className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold leading-tight mb-6">
                   {heroSlides[0].title.slice(0, 50) + " ..."}
                 </h1>
-                <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mb-10">
+                <p className="text-lg md:text-xl text-gray-200 leading-relaxed max-w-xl mb-2 sm:mb-4 lg:mb-10 text-justify">
                   {heroSlides[0].description.slice(0, 100) + " ..."}
                 </p>
               </div>
@@ -242,9 +242,9 @@ export default function HeroSection({ heroSlides }) {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 h-[80vh] flex items-center justify-center ml-10">
+      <div className="relative z-10 h-[80vh] flex items-center justify-center lg:ml-10">
         <div className="max-w-7xl mx-auto px-6 w-full">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-2 sm:gap-4 lg:gap-12 items-center">
             {/* Left Side - Content */}
             <AnimatePresence mode="wait">
               {heroSlides.map(
@@ -323,7 +323,7 @@ export default function HeroSection({ heroSlides }) {
                   boxShadow: "0 20px 40px rgba(255, 255, 255, 0.2)",
                 }}
                 whiletap={{ scale: 0.95 }}
-                className="w-[50%] px-8 py-5 bg-white text-gray-700 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3 group hover:shadow-3xl transition-all"
+                className="w-full sm:w-[75%] lg:w-[50%] px-8 py-5 bg-white text-gray-700 font-semibold rounded-xl shadow-2xl flex items-center justify-center gap-3 group hover:shadow-3xl transition-all"
               >
                 <span className="text-lg">More About us</span>
                 <motion.span
@@ -339,7 +339,7 @@ export default function HeroSection({ heroSlides }) {
                 href="/service"
                 whilehover={{ scale: 1.05 }}
                 whiletap={{ scale: 0.95 }}
-                className="w-[50%] px-8 py-5 flex items-center bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-all"
+                className="w-full sm:w-[75%] lg:w-[50%] px-8 py-5 flex items-center bg-transparent border-2 border-white/30 text-white font-semibold rounded-xl backdrop-blur-sm hover:bg-white/10 transition-all"
               >
                 <span className="text-lg">Explore Our Services</span>
                 <motion.span
