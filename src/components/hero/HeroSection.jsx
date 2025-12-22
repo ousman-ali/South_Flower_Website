@@ -423,11 +423,11 @@ export default function HeroSection({ heroSlides }) {
               />
               <stop
                 offset="50%"
-                style={{ stopColor: "#8b5cf6", stopOpacity: 1 }}
+                style={{ stopColor: "lightblue", stopOpacity: 1 }}
               />
               <stop
                 offset="100%"
-                style={{ stopColor: "#ec4899", stopOpacity: 1 }}
+                style={{ stopColor: "gray", stopOpacity: 1 }}
               />
             </linearGradient>
           </defs>
