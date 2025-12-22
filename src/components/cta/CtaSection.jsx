@@ -161,43 +161,38 @@ export default function CTACard({ stats }) {
 
                 {/* Right Side: CTA Button */}
                 <div className="lg:w-2/5 flex justify-center lg:justify-end">
-                  <Link
-                    href="/contact"
-                    onHoverStart={() => setIsButtonHovered(true)}
-                    onHoverEnd={() => setIsButtonHovered(false)}
-                    whilehover={{
-                      scale: 1.05,
-                      boxShadow: "0 15px 35px rgba(16, 185, 129, 0.4)",
-                    }}
-                    whiletap={{ scale: 0.98 }}
-                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-300 to-cyan-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
-                  >
-                    {/* Shimmer effect */}
+                  <Link href="/contact" passHref>
                     <motion.div
-                      className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
-                      animate={{
-                        x: isButtonHovered ? ["-100%", "100%"] : "-100%",
+                      onHoverStart={() => setIsButtonHovered(true)}
+                      onHoverEnd={() => setIsButtonHovered(false)}
+                      whileHover={{
+                        scale: 1.05,
                       }}
-                      transition={{
-                        duration: 1,
-                        repeat: isButtonHovered ? Infinity : 0,
-                      }}
-                    />
+                      whileTap={{ scale: 0.98 }}
+                      className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-400 to-cyan-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
+                    >
+                      {/* Shimmer */}
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/25 to-transparent"
+                        animate={{
+                          x: isButtonHovered ? ["-100%", "100%"] : "-100%",
+                        }}
+                        transition={{
+                          duration: 1,
+                          repeat: isButtonHovered ? Infinity : 0,
+                        }}
+                      />
 
-                    {/* Button content */}
-                    <span className="relative flex items-center justify-center gap-2 md:gap-3">
-                      <motion.div
-                        animate={{ rotate: isButtonHovered ? 90 : 0 }}
-                        transition={{ duration: 0.3 }}
-                      ></motion.div>
-                      Get Quote
-                      <motion.div
-                        animate={{ x: isButtonHovered ? 5 : 0 }}
-                        transition={{ duration: 0.2 }}
-                      >
-                        <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
-                      </motion.div>
-                    </span>
+                      <span className="relative flex items-center gap-3">
+                        Get Quote
+                        <motion.span
+                          animate={{ x: isButtonHovered ? 5 : 0 }}
+                          transition={{ duration: 0.2 }}
+                        >
+                          <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
+                        </motion.span>
+                      </span>
+                    </motion.div>
                   </Link>
                 </div>
               </div>
