@@ -2,19 +2,9 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import {
-  Quote,
-  Star,
-  ChevronLeft,
-  ChevronRight,
-  Sparkles,
-  Award,
-  Heart,
-  Zap,
-} from "lucide-react";
+import { Quote, Star, ChevronLeft, ChevronRight, Sparkles } from "lucide-react";
 
 export default function TestimonialSection({ testimonials }) {
-
   const [activeIndex, setActiveIndex] = useState(0);
   const [direction, setDirection] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
@@ -119,11 +109,11 @@ export default function TestimonialSection({ testimonials }) {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-3 mb-4 md:mb-6 px-4 py-2 md:px-6 md:py-3 rounded-full bg-gradient-to-r from-blue-500/10 to-gray-500/10 border border-white/10 backdrop-blur-sm"
           >
-            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-400" />
-            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-400 to-gray-100 bg-clip-text text-transparent">
-              Client Testimonials
+            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
+            <span className="text-xs md:text-sm font-semibold bg-gradient-to-r from-blue-600 to-blue-600 bg-clip-text text-transparent">
+              What Our Customers Say
             </span>
-            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-gray-400" />
+            <Sparkles className="w-4 h-4 md:w-5 md:h-5 text-blue-600" />
           </motion.div>
 
           <motion.h2
@@ -134,8 +124,8 @@ export default function TestimonialSection({ testimonials }) {
             className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 text-amber-50"
           >
             Voices of{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-400 to-gray-100 bg-clip-text text-transparent">
-              Excellence
+            <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
+              Vechile Owners
             </span>
           </motion.h2>
 
@@ -146,8 +136,8 @@ export default function TestimonialSection({ testimonials }) {
             transition={{ duration: 1, delay: 0.2 }}
             className="text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed px-4"
           >
-            Discover why industry leaders trust South Flower for their premium
-            botanical needs
+            Hear from customers who trust us to keep their vehicles safe,
+            reliable, and road-ready.
           </motion.p>
         </motion.div>
 
