@@ -174,10 +174,10 @@ export default function Footer() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.1 }}
-              className="text-gray-400 leading-relaxed"
+              className="text-gray-400 leading-relaxed text-justify"
             >
-              We create innovative solutions that drive business growth and
-              deliver exceptional digital experiences.
+              We deliver reliable automotive repair solutions, quality service,
+              and expert care you can trust.
             </motion.p>
 
             {/* Social Media */}
