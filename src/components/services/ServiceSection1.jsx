@@ -87,7 +87,7 @@ export default function ServicesSection1({ services, products }) {
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-gray-900 via-black to-gray-900">
+    <section className="relative py-10 bg-gradient-to-b from-gray-900 via-black to-gray-900">
       {/* Background Elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-0 left-0 w-full h-full bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem]" />
@@ -137,19 +137,19 @@ export default function ServicesSection1({ services, products }) {
           >
             <Sparkles className="w-4 h-4 text-blue-400" />
             <span className="text-sm font-semibold text-white">
-              Our Expertise
+              Our Auto Services
             </span>
           </motion.div>
 
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
-            Comprehensive{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Services
+            Proffessional{" "}
+            <span className="bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">
+              Auto Services
             </span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Explore our wide range of professional services designed to meet
-            your business needs
+            Explore our complete range of professional vehicle repair,
+            maintenance, and diagnostic services.
           </p>
         </motion.div>
 
