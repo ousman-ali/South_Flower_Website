@@ -108,7 +108,7 @@ export default function TeamSection({ teams }) {
   };
 
   return (
-    <section className="relative min-h-screen bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
+    <section className="relative bg-gradient-to-b from-white via-gray-50/50 to-white overflow-hidden">
       {/* Animated Background Shapes */}
       <div className="absolute inset-0 overflow-hidden">
         {animatedShapes.map((shape) => (
@@ -180,19 +180,15 @@ export default function TeamSection({ teams }) {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full bg-gradient-to-r from-blue-50 to-blue-50 border border-blue-100 backdrop-blur-sm"
           >
-            <Sparkles className="w-4 h-4 text-blue-500" />
+            <Sparkles className="w-4 h-4 text-blue-600" />
             <span className="text-sm font-semibold text-blue-600">
-              Meet Our Team
+              Meet Our Experts
             </span>
-            <Users className="w-4 h-4 text-blue-500" />
+            <Users className="w-4 h-4 text-blue-600" />
           </motion.div>
 
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            The{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-blue-600 to-pink-600 bg-clip-text text-transparent">
-              Talented Minds
-            </span>{" "}
-            Behind Our Success
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-700 mb-4">
+            Certified Technicians You Can Trust
           </h2>
         </motion.div>
 
@@ -297,7 +293,7 @@ const TeamCard = ({
       whileHover={{ y: -5 }}
       className={`relative bg-white rounded-2xl overflow-hidden border-2 transition-all duration-300 ${
         isActive
-          ? "border-blue-200 shadow-2xl"
+          ? "border-gray-200 shadow-2xl"
           : "border-gray-100 hover:border-gray-200 shadow-lg hover:shadow-xl"
       }`}
       onMouseEnter={() => setActiveMember(member.id)}
@@ -305,7 +301,7 @@ const TeamCard = ({
     >
       {/* Background Gradient */}
       <div
-        className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-cyan-400`}
+        className={`absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-blue-500 to-blue-500`}
       />
 
       {/* Content */}
@@ -327,7 +323,7 @@ const TeamCard = ({
               />
             </motion.div>
             {/* Online Status Indicator */}
-            <div className="absolute bottom-0 right-0 w-4 h-4 bg-green-500 rounded-full border-2 border-white" />
+            <div className="absolute bottom-0 right-0 w-4 h-4 bg-blue-600 rounded-full border-2 border-white" />
           </div>
 
           <div className="flex-1">
