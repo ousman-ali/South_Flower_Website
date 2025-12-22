@@ -262,7 +262,7 @@ export default function Footer() {
             transition={{ delay: 0.4 }}
           >
             <h3 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-              <Sparkles className="w-5 h-5 text-purple-400" />
+              <Sparkles className="w-5 h-5 text-blue-400" />
               Our Services
             </h3>
             <ul className="space-y-3">
