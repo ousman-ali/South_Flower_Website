@@ -116,23 +116,23 @@ export default function CTACard({ stats }) {
                         ease: "linear",
                       }}
                     >
-                      <Sparkles className="w-4 h-4 text-blue-300" />
+                      <Sparkles className="w-4 h-4 text-blue-400" />
                     </motion.div>
                     <span className="text-sm font-semibold text-blue-100">
-                      South Flower Excellence
+                      Professional Vehicle Care
                     </span>
                   </div>
 
                   {/* Title */}
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4 leading-tight drop-shadow-lg">
                     <span className="block">
-                      Let's Grow Your{" "}
+                      Keep Your Vehicle{" "}
                       <span className="bg-gradient-to-r from-blue-300 via-blue-300 to-blue-300 bg-clip-text text-transparent drop-shadow-lg">
-                        valued Vision
+                        Running at Its Best
                       </span>
                     </span>
                     <span className="text-lg md:text-xl font-semibold text-blue-50">
-                      Partner with South Flower Today
+                      Book Your Trusted Auto Repair Service Today
                     </span>
                   </h2>
 
@@ -161,15 +161,16 @@ export default function CTACard({ stats }) {
 
                 {/* Right Side: CTA Button */}
                 <div className="lg:w-2/5 flex justify-center lg:justify-end">
-                  <motion.button
-                    onHoverStart={() => setIsButtonHovered(true)}
-                    onHoverEnd={() => setIsButtonHovered(false)}
-                    whileHover={{
+                  <Link
+                    href="/contact"
+                    onHoverstart={() => setIsButtonHovered(true)}
+                    onHoverend={() => setIsButtonHovered(false)}
+                    whilehover={{
                       scale: 1.05,
                       boxShadow: "0 15px 35px rgba(16, 185, 129, 0.4)",
                     }}
-                    whileTap={{ scale: 0.98 }}
-                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-500 via-blue-500 to-blue-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
+                    whiletap={{ scale: 0.98 }}
+                    className="relative px-6 md:px-8 py-4 md:py-5 bg-gradient-to-r from-blue-300 to-cyan-500 text-white rounded-xl font-bold text-base md:text-lg shadow-lg overflow-hidden group min-w-[180px] md:min-w-[200px] border border-blue-400/30"
                   >
                     {/* Shimmer effect */}
                     <motion.div
@@ -188,10 +189,8 @@ export default function CTACard({ stats }) {
                       <motion.div
                         animate={{ rotate: isButtonHovered ? 90 : 0 }}
                         transition={{ duration: 0.3 }}
-                      >
-                        <Flower className="w-4 h-4 md:w-5 md:h-5" />
-                      </motion.div>
-                      <Link href="/contact">Get Quote</Link>
+                      ></motion.div>
+                      Get Quote
                       <motion.div
                         animate={{ x: isButtonHovered ? 5 : 0 }}
                         transition={{ duration: 0.2 }}
@@ -199,7 +198,7 @@ export default function CTACard({ stats }) {
                         <ArrowRight className="w-4 h-4 md:w-5 md:h-5" />
                       </motion.div>
                     </span>
-                  </motion.button>
+                  </Link>
                 </div>
               </div>
             </div>
