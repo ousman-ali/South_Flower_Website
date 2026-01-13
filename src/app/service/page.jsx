@@ -52,7 +52,7 @@ export default function AboutPage() {
         pageTitle="Services"
         pageName="Our Services"
         currentPage="South Flower Services"
-        backgroundImage="/images/bread5.jpg"
+        backgroundImage="/images/service-bread.jpg"
       />
       <ServicesSection1 services={services.data} products={products.data} />
       <CTACard stats={stats.data} />

@@ -93,7 +93,7 @@ export default function AboutPage() {
         pageTitle="Blog Details"
         pageName="Blog Details"
         currentPage="South Flower Post"
-        backgroundImage="/images/bread2.jpg"
+        backgroundImage="/images/blog-slug-bread.jpg"
       />
       <BlogDetails
         blog={blog}

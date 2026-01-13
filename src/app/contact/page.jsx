@@ -37,7 +37,7 @@ export default function AboutPage() {
         pageTitle="Contacts"
         pageName="Our Socials"
         currentPage="Contact South Flower"
-        backgroundImage="/images/bread3.jpg"
+        backgroundImage="/images/contact-bread.jpg"
       />
       <ContactSection setup={setup} aboutContent={aboutContent} />
     </div>
