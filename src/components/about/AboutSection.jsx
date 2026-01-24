@@ -27,7 +27,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
 
   const galleryImages =
     gallery?.flatMap((album) =>
-      album.images.map((img) => `${IMAGE_URL}/${img.image}`)
+      album.images.map((img) => `${IMAGE_URL}/${img.image}`),
     ) || [];
 
   // Auto change images every 4 seconds
@@ -400,7 +400,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                   boxShadow: "0 20px 40px rgba(107, 114, 128, 0.2)",
                 }}
                 whiletap={{ scale: 0.95 }}
-                className="px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-xl shadow-lg flex items-center gap-3 group hover:shadow-xl transition-shadow cursor-pointer w-[38%]"
+                className="px-8 py-4 bg-gradient-to-r from-gray-700 to-gray-800 text-white font-semibold rounded-xl shadow-lg flex items-center gap-3 group hover:shadow-xl transition-shadow cursor-pointer md:w-[38%] lg:w-[38%] sm:w-auto"
               >
                 Learn More About Us
                 <motion.span
