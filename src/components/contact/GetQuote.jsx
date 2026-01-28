@@ -246,7 +246,7 @@ export default function GetQuote({ categories, products }) {
 
           {/* RIGHT — CONTACT FORM */}
           <div>
-            <motion.div className="bg-gray-900/60 backdrop-blur-lg rounded-2xl p-6 border border-white/10 shadow-2xl">
+            <motion.div className="bg-gray-900/60 backdrop-blur-lg rounded-2xl p-6 border border-white/10 shadow-2xl sticky top-20 ">
               <div className="flex items-center gap-3 mb-6">
                 <div className="p-3 rounded-xl bg-blue-500/20 border border-blue-500/30">
                   <MessageSquare className="w-6 h-6 text-blue-400" />
