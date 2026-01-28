@@ -24,9 +24,7 @@ export default function Navbar() {
   const [setup, setSetup] = useState(null);
 
   useEffect(() => {
-    const features = [
-      { name: "about_setup" },
-    ];
+    const features = [{ name: "about_setup" }];
 
     async function fetchData() {
       try {
@@ -88,7 +86,7 @@ export default function Navbar() {
 
             {/* Get Quote Button */}
             <Link
-              href="/contact"
+              href="/getquote"
               className="ml-4 px-5 py-2 rounded-lg bg-gray-700 text-white font-medium text-sm shadow transition hover:scale-[1.1]"
             >
               Get Quote
