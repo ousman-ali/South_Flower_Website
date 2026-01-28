@@ -45,7 +45,7 @@ export default function Navbar() {
       <nav className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur shadow-sm">
         <div className="max-w-7xl mx-auto flex items-center justify-between py-3 px-4">
           {/* Logo */}
-          <div className="flex-shrink-0">
+          <Link href="/" className="flex items-center gap-3 flex-shrink-0">
             <Image
               src={
                 setup?.logo_small
@@ -53,11 +53,15 @@ export default function Navbar() {
                   : "/images/south_flower_logo.png"
               }
               alt="Logo"
-              width={120}
+              width={80}
               height={50}
-              className="object-contain rounded-md w-[120px] h-[50px]"
+              className="object-contain rounded-md w-[80px] h-[50px]"
             />
-          </div>
+
+            <span className="font-semibold text-md tracking-wide text-gray-900">
+              {setup?.company_name || "South Flower General Trading PLC"}
+            </span>
+          </Link>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-3">
