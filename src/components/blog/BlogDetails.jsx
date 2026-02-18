@@ -76,7 +76,7 @@ export default function BlogDetails({
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? blog.allImages.length - 1 : prev - 1
+      prev === 0 ? blog.allImages.length - 1 : prev - 1,
     );
   };
 
@@ -136,7 +136,7 @@ export default function BlogDetails({
                 <li>
                   <ChevronRight className="w-4 h-4" />
                 </li>
-                <li className="text-white truncate">{blog.title}</li>
+                <li className="text-white truncate">{blog?.title}</li>
               </ol>
             </nav>
 
@@ -204,7 +204,7 @@ export default function BlogDetails({
                 {/* Image Gallery Thumbnails */}
                 <div className="p-4 bg-gray-900/50">
                   <div className="flex items-center gap-4 overflow-x-auto pb-2">
-                    {blog.allImages.map((img, index) => (
+                    {blog?.allImages.map((img, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
@@ -232,21 +232,21 @@ export default function BlogDetails({
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="inline-block px-3 py-1 bg-emerald-500/20 text-emerald-400 rounded-full text-sm font-medium">
-                      {blog.category.title}
+                      {blog?.category.title}
                     </span>
                   </div>
                   <h1 className="text-3xl md:text-4xl font-bold mb-2">
-                    {blog.title}
+                    {blog?.title}
                   </h1>
                   <div className="flex flex-wrap items-center gap-4 text-gray-400">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      {new Date(blog.created_at).toLocaleDateString()}
+                      {new Date(blog?.created_at).toLocaleDateString()}
                     </span>
                     <div className="flex items-center gap-2">
                       <Eye className="w-4 h-4 text-blue-400" />
                       <div className="text-lg font-bold text-white">
-                        {blog.views_count}
+                        {blog?.views_count}
                       </div>
                       <div className="text-xs text-gray-400">Views</div>
                     </div>
@@ -260,13 +260,13 @@ export default function BlogDetails({
               <div className="prose prose-invert max-w-none">
                 <div className="mb-6">
                   <p className="text-xl text-gray-300 leading-relaxed">
-                    {blog.excerpt}
+                    {blog?.excerpt}
                   </p>
                 </div>
                 <div
                   className="text-gray-300 space-y-6"
                   dangerouslySetInnerHTML={{
-                    __html: blog.content,
+                    __html: blog?.content || "",
                   }}
                 />
               </div>
@@ -281,13 +281,13 @@ export default function BlogDetails({
                     key={index}
                     className="p-4 bg-gradient-to-br from-emerald-500/10 to-teal-500/10 backdrop-blur-sm border border-emerald-500/20 rounded-xl hover:border-emerald-500/40 transition-all cursor-pointer"
                   >
-                    <Link href={`/blog/${topic.slug}`}>
+                    <Link href={`/blog/${topic?.slug}`}>
                       <h3 className="font-semibold text-white">
-                        {topic.title}
+                        {topic?.title}
                       </h3>
                     </Link>
                     <p className="text-sm text-gray-400 mt-1">
-                      {topic.excerpt}
+                      {topic?.excerpt}
                     </p>
                   </div>
                 ))}
@@ -308,14 +308,14 @@ export default function BlogDetails({
                   {products.map((product) => (
                     <a
                       key={product.id}
-                      href={`/product/${product.slug}`}
+                      href={`/product/${product?.slug}`}
                       className="group block"
                     >
                       <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                            alt={product.name}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                            alt={product?.name}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
@@ -324,15 +324,15 @@ export default function BlogDetails({
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <span className="text-xs text-blue-400 font-medium">
-                                {product.category.name}
+                                {product?.category.name}
                               </span>
                               <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
-                                {product.name}
+                                {product?.name}
                               </h4>
                             </div>
                           </div>
                           <p className="text-sm text-gray-400 truncate">
-                            {product.description}
+                            {product?.description}
                           </p>
                         </div>
                       </div>
@@ -363,8 +363,8 @@ export default function BlogDetails({
                       <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service.banner_image}`}
-                            alt={service.title}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service?.banner_image}`}
+                            alt={service?.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-gradient-to-br from-emerald-500/20 to-teal-500/20" />
@@ -373,12 +373,12 @@ export default function BlogDetails({
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <h4 className="font-semibold text-white group-hover:text-emerald-400 transition-colors truncate">
-                                {service.title}
+                                {service?.title}
                               </h4>
                             </div>
                           </div>
                           <p className="text-sm text-gray-400 truncate">
-                            {service.short_description}
+                            {service?.short_description}
                           </p>
                         </div>
                       </div>

@@ -18,8 +18,6 @@ export default function GetQuote({ categories, products }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  console.log("products", products);
-
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -162,7 +160,7 @@ export default function GetQuote({ categories, products }) {
                       : "bg-gray-800 text-gray-300 hover:bg-gray-700"
                   }`}
                 >
-                  {cat.name}
+                  {cat?.name}
                 </button>
               ))}
             </div>
@@ -205,8 +203,8 @@ export default function GetQuote({ categories, products }) {
                         {/* Image */}
                         <div className="h-24 bg-black">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                            alt={product.name}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                            alt={product?.name}
                             className="w-full h-full object-cover"
                           />
                         </div>
@@ -214,11 +212,11 @@ export default function GetQuote({ categories, products }) {
                         {/* Info */}
                         <div className="p-2">
                           <h3 className="text-xs font-semibold text-white line-clamp-1">
-                            {product.name}
+                            {product?.name}
                           </h3>
 
                           <Link
-                            href={`/product/${product.slug}`}
+                            href={`/product/${product?.slug}`}
                             className="inline-flex items-center gap-1 mt-2 text-xs text-blue-400 hover:text-blue-300"
                           >
                             <Eye className="w-3 h-3" />

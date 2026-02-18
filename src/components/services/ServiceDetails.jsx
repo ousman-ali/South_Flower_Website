@@ -66,7 +66,7 @@ export default function ServiceDetails({ service, products, relatedServices }) {
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? service.allImages.length - 1 : prev - 1
+      prev === 0 ? service.allImages.length - 1 : prev - 1,
     );
   };
 
@@ -135,7 +135,7 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                 <li>
                   <ChevronRight className="w-4 h-4" />
                 </li>
-                <li className="text-white">{service.title}</li>
+                <li className="text-white">{service?.title}</li>
               </ol>
             </nav>
 
@@ -186,8 +186,8 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <img
-                      src={service.allImages[currentImageIndex]}
-                      alt={service.title}
+                      src={service?.allImages[currentImageIndex]}
+                      alt={service?.title}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
@@ -203,7 +203,7 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                 {/* Image Gallery Thumbnails */}
                 <div className="p-4 bg-gray-900/50">
                   <div className="flex items-center gap-4 overflow-x-auto pb-2">
-                    {service.allImages.map((img, index) => (
+                    {service?.allImages.map((img, index) => (
                       <button
                         key={index}
                         onClick={() => setCurrentImageIndex(index)}
@@ -229,11 +229,11 @@ export default function ServiceDetails({ service, products, relatedServices }) {
             <div className="mb-8">
               <div className="flex flex-wrap items-start justify-between gap-4 mb-4">
                 <div>
-                  <h1 className="text-4xl font-bold mb-2">{service.title}</h1>
+                  <h1 className="text-4xl font-bold mb-2">{service?.title}</h1>
                   <div className="flex items-center gap-4 text-gray-400">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      {formatDate(service.created_at)}
+                      {formatDate(service?.created_at)}
                     </span>
                   </div>
                 </div>
@@ -245,12 +245,12 @@ export default function ServiceDetails({ service, products, relatedServices }) {
               <h2 className="text-2xl font-bold mb-4">Overview</h2>
               <div className="prose prose-invert max-w-none">
                 <p className="text-gray-300 mb-6">
-                  {service.short_description}
+                  {service?.short_description}
                 </p>
                 <div
                   className="text-gray-300"
                   dangerouslySetInnerHTML={{
-                    __html: service.description,
+                    __html: service?.description || "",
                   }}
                 />
               </div>
@@ -269,25 +269,25 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                 <div className="space-y-4">
                   {relatedServices.map((service) => (
                     <a
-                      key={service.id}
-                      href={`/services/${service.id}`}
+                      key={service?.id}
+                      href={`/services/${service?.id}`}
                       className="group block"
                     >
                       <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={`${IMAGE_BASE_URL}/${service.banner_image}`}
-                            alt={service.title}
+                            src={`${IMAGE_BASE_URL}/${service?.banner_image}`}
+                            alt={service?.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
                         </div>
                         <div className="flex-1 min-w-0">
                           <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
-                            {service.title}
+                            {service?.title}
                           </h4>
                           <p className="text-sm text-gray-400 truncate">
-                            {service.short_description}
+                            {service?.short_description}
                           </p>
                         </div>
                       </div>
@@ -311,23 +311,23 @@ export default function ServiceDetails({ service, products, relatedServices }) {
                 <div className="space-y-4">
                   {products.map((product) => (
                     <a
-                      href={`/product/${product.slug}`}
-                      key={product.id}
+                      href={`/product/${product?.slug}`}
+                      key={product?.id}
                       className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all"
                     >
                       <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden">
                         <img
-                          src={`${IMAGE_BASE_URL}/${product.banner_image}`}
-                          alt={product.name}
+                          src={`${IMAGE_BASE_URL}/${product?.banner_image}`}
+                          alt={product?.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="font-semibold text-white truncate">
-                          {product.name}
+                          {product?.name}
                         </h4>
                         <p className="text-xs text-gray-400 truncate">
-                          {product.description}
+                          {product?.description}
                         </p>
                       </div>
                     </a>

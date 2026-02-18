@@ -32,7 +32,7 @@ export default function BlogSection1({ categories, blogs, products }) {
       ? blogs
       : blogs.filter(
           (blog) =>
-            blog.blog_category_id?.toString() === selectedCategory.toString()
+            blog.blog_category_id?.toString() === selectedCategory.toString(),
         );
 
   // Featured tags
@@ -187,8 +187,8 @@ export default function BlogSection1({ categories, blogs, products }) {
                 shape.shape === "circle"
                   ? "50%"
                   : shape.shape === "hexagon"
-                  ? "30%"
-                  : "20%",
+                    ? "30%"
+                    : "20%",
               clipPath:
                 shape.shape === "triangle"
                   ? "polygon(50% 0%, 0% 100%, 100% 100%)"
@@ -282,7 +282,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                   <div className="text-lg font-bold bg-gradient-to-r from-blue-400 to-gray-400 bg-clip-text text-transparent">
                     {stat.value}
                   </div>
-                  <div className="text-xs text-gray-500">{stat.label}</div>
+                  <div className="text-xs text-gray-500">{stat?.label}</div>
                 </div>
               ))}
             </div>
@@ -323,7 +323,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                 }`}
               >
-                {category.title}
+                {category?.title}
               </motion.button>
             ))}
           </div>
@@ -342,7 +342,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                 <div className="grid grid-cols-2 gap-4">
                   {filteredPosts.map((post) => (
                     <BlogCard
-                      key={post.id}
+                      key={post?.id}
                       post={post}
                       isHovered={isHovered}
                       setIsHovered={setIsHovered}
@@ -356,7 +356,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                 <div className="grid grid-cols-1 gap-4">
                   {currentPosts.map((post) => (
                     <BlogCard
-                      key={post.id}
+                      key={post?.id}
                       post={post}
                       isHovered={isHovered}
                       setIsHovered={setIsHovered}
@@ -432,7 +432,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                               );
                             }
                             return null;
-                          }
+                          },
                         )}
                       </div>
 
@@ -469,7 +469,7 @@ export default function BlogSection1({ categories, blogs, products }) {
                                 >
                                   {page}
                                 </button>
-                              )
+                              ),
                           )}
                         {totalPages > 3 && (
                           <>
@@ -514,17 +514,17 @@ export default function BlogSection1({ categories, blogs, products }) {
                     >
                       <div className="w-12 h-12 rounded-lg overflow-hidden flex-shrink-0">
                         <img
-                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                          alt={product.name}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                          alt={product?.name}
                           className="w-full h-full object-cover"
                         />
                       </div>
                       <div className="flex-1 min-w-0">
                         <h4 className="text-xs font-medium text-white truncate">
-                          {product.name}
+                          {product?.name}
                         </h4>
                         <span className="text-[10px] text-gray-400">
-                          {product.description}
+                          {product?.description}
                         </span>
                       </div>
                     </div>
@@ -602,7 +602,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
     {/* Full Image Background */}
     <div className="absolute inset-0 overflow-hidden">
       <motion.img
-        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${post.banner_image}`}
+        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${post?.banner_image}`}
         alt={post.title}
         className="w-full h-full object-cover"
         animate={{
@@ -622,16 +622,16 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
       <div>
         {/* Title - Always visible */}
         <h3 className="text-xl font-bold text-white mb-3 line-clamp-2">
-          {post.title.length > 40
-            ? post.title.slice(0, 40) + " ..."
-            : post.title}
+          {post?.title.length > 40
+            ? post?.title.slice(0, 40) + " ..."
+            : post?.title}
         </h3>
 
         {/* Excerpt - Always visible */}
         <p className="text-gray-300 text-sm mb-4 line-clamp-2 opacity-100 group-hover:opacity-90 transition-opacity duration-300">
-          {post.excerpt.length > 60
-            ? post.excerpt.slice(0, 60) + " ..."
-            : post.excerpt || "No excerpt available"}
+          {post?.excerpt.length > 60
+            ? post?.excerpt.slice(0, 60) + " ..."
+            : post?.excerpt || "No excerpt available"}
         </p>
 
         {/* Author & Stats - Always visible */}
@@ -640,13 +640,13 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
             <div className="flex items-center gap-1">
               <Eye className="w-3 h-3 text-gray-400" />
               <span className="text-xs text-gray-300">
-                {post.views_count || 0}
+                {post?.views_count || 0}
               </span>
             </div>
             <div className="flex items-center gap-2">
               <Calendar className="w-3 h-3 text-gray-400" />
               <span className="text-xs text-gray-300">
-                {new Date(post.created_at).toLocaleDateString("en-US", {
+                {new Date(post?.created_at).toLocaleDateString("en-US", {
                   month: "short",
                   day: "numeric",
                   year: "numeric",
@@ -661,7 +661,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
     {/* Bottom Info */}
     <div className="absolute bottom-4 right-4">
       <Link
-        href={`/blog/${post.slug}`}
+        href={`/blog/${post?.slug}`}
         className="flex items-center justify-between"
       >
         {/* Original Read More button - hidden on hover */}
@@ -677,7 +677,7 @@ const BlogCard = ({ post, isHovered, setIsHovered }) => (
     </div>
 
     {/* NEW HOVER EFFECT: Tags with animation */}
-    {post.tags && post.tags.length > 0 && (
+    {post?.tags && post.tags.length > 0 && (
       <motion.div
         initial={{ opacity: 0, y: 10 }}
         animate={{

@@ -68,20 +68,20 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                   <div className="w-14 h-14 rounded-lg overflow-hidden flex-shrink-0">
                     <img
                       src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${blog.banner_image}`}
-                      alt={blog.title}
+                      alt={blog?.title}
                       className="w-full h-full object-cover"
                     />
                   </div>
                   <div className="flex-1">
                     <h3 className="text-sm font-semibold text-gray-100 line-clamp-2">
                       {blog.title.length > 50
-                        ? blog.title.slice(0, 50) + " ..."
-                        : blog.title}
+                        ? blog?.title.slice(0, 50) + " ..."
+                        : blog?.title}
                     </h3>
                     <div className="flex items-center gap-2 text-xs text-blue-400 mt-1">
-                      <span>{formatDate(blog.created_at)}</span>
+                      <span>{formatDate(blog?.created_at)}</span>
                       <span>•</span>
-                      <span>{blog.views_count || 0} views</span>
+                      <span>{blog?.views_count || 0} views</span>
                     </div>
                   </div>
                   <ChevronRight className="w-4 h-4 text-gray-400" />
@@ -97,7 +97,7 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
 
               return (
                 <motion.div
-                  key={blog.id || index}
+                  key={blog?.id || index}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   className={`rounded-2xl overflow-hidden border border-gray-200 bg-white shadow-lg ${
@@ -108,8 +108,8 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                   <div className="relative h-[460px]">
                     <div className="h-[70%] relative">
                       <img
-                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${blog.banner_image}`}
-                        alt={blog.title}
+                        src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${blog?.banner_image}`}
+                        alt={blog?.title}
                         className="w-full h-full object-cover"
                       />
                     </div>
@@ -119,15 +119,15 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                       {/* Text block */}
                       <div>
                         <h2 className="text-lg md:text-xl font-semibold text-white line-clamp-1">
-                          {blog.title.length > 50
-                            ? blog.title.slice(0, 50) + " ..."
-                            : blog.title}
+                          {blog?.title.length > 50
+                            ? blog?.title.slice(0, 50) + " ..."
+                            : blog?.title}
                         </h2>
 
                         <p className="text-sm text-gray-300 line-clamp-2 mt-1">
-                          {blog.excerpt.length > 80
-                            ? blog.excerpt.slice(0, 80) + " ..."
-                            : blog.excerpt}
+                          {blog?.excerpt.length > 80
+                            ? blog?.excerpt.slice(0, 80) + " ..."
+                            : blog?.excerpt}
                         </p>
                       </div>
 
@@ -135,11 +135,11 @@ const FeaturedBlogPosts = ({ featuredBlogs }) => {
                       <div className="flex items-center justify-between mt-3">
                         <div className="flex items-center gap-2 text-xs text-blue-400">
                           <Calendar className="w-4 h-4" />
-                          {formatDate(blog.created_at)}
+                          {formatDate(blog?.created_at)}
                         </div>
 
                         <Link
-                          href={`/blog/${blog.slug}`}
+                          href={`/blog/${blog?.slug}`}
                           className="inline-flex items-center gap-1.5 bg-blue-400 hover:bg-blue-600 transition text-white px-4 py-2 rounded-md text-sm font-medium"
                         >
                           Read Full Article

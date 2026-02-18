@@ -67,7 +67,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
 
   const prevImage = () => {
     setCurrentImageIndex((prev) =>
-      prev === 0 ? product.allImages.length - 1 : prev - 1
+      prev === 0 ? product.allImages.length - 1 : prev - 1,
     );
   };
 
@@ -136,7 +136,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                 <li>
                   <ChevronRight className="w-4 h-4" />
                 </li>
-                <li className="text-white">{product.name}</li>
+                <li className="text-white">{product?.name}</li>
               </ol>
             </nav>
 
@@ -187,8 +187,8 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                     transition={{ type: "spring", stiffness: 300 }}
                   >
                     <img
-                      src={product.allImages[currentImageIndex]}
-                      alt={product.name}
+                      src={product?.allImages[currentImageIndex]}
+                      alt={product?.name}
                       className="w-full h-full object-cover"
                     />
                   </motion.div>
@@ -235,11 +235,11 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                       {product.category.name}
                     </span>
                   </div>
-                  <h1 className="text-4xl font-bold mb-2">{product.name}</h1>
+                  <h1 className="text-4xl font-bold mb-2">{product?.name}</h1>
                   <div className="flex items-center gap-4 text-gray-400">
                     <span className="flex items-center gap-1">
                       <Calendar className="w-4 h-4" />
-                      Created: {formatDate(product.created_at)}
+                      Created: {formatDate(product?.created_at)}
                     </span>
                   </div>
                 </div>
@@ -250,7 +250,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
             <div className="mb-8">
               <h2 className="text-2xl font-bold mb-4">Product Overview</h2>
               <div className="prose prose-invert max-w-none">
-                <p className="text-gray-300 mb-6">{product.description}</p>
+                <p className="text-gray-300 mb-6">{product?.description}</p>
                 {/* <div
                   className="text-gray-300"
                   dangerouslySetInnerHTML={{
@@ -274,14 +274,14 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                   {relatedProducts.map((product) => (
                     <a
                       key={product.id}
-                      href={`/product/${product.slug}`}
+                      href={`/product/${product?.slug}`}
                       className="group block"
                     >
                       <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                            alt={product.name}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                            alt={product?.name}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20" />
@@ -290,15 +290,15 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <span className="text-xs text-blue-400 font-medium">
-                                {product.category.name}
+                                {product?.category.name}
                               </span>
                               <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
-                                {product.name}
+                                {product?.name}
                               </h4>
                             </div>
                           </div>
                           <p className="text-sm text-gray-400 truncate">
-                            {product.description}
+                            {product?.description}
                           </p>
                         </div>
                       </div>
@@ -323,14 +323,14 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                   {services.map((service) => (
                     <a
                       key={service.id}
-                      href={`/service/${service.slug}`}
+                      href={`/service/${service?.slug}`}
                       className="group block"
                     >
                       <div className="flex items-center gap-4 p-3 rounded-xl hover:bg-gray-800/50 transition-all">
                         <div className="relative w-16 h-16 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service.banner_image}`}
-                            alt={service.title}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service?.banner_image}`}
+                            alt={service?.title}
                             className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                           />
                           <div className="absolute inset-0 bg-gradient-to-br from-yellow-500/20 to-orange-500/20" />
@@ -339,12 +339,12 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <h4 className="font-semibold text-white group-hover:text-yellow-400 transition-colors truncate">
-                                {service.title}
+                                {service?.title}
                               </h4>
                             </div>
                           </div>
                           <p className="text-sm text-gray-400 truncate">
-                            {service.short_description}
+                            {service?.short_description}
                           </p>
                         </div>
                       </div>
@@ -404,7 +404,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
 
             {/* Current Image Index */}
             <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 px-4 py-2 bg-black/50 backdrop-blur-sm rounded-lg text-sm">
-              {currentImageIndex + 1} / {product.allImages.length}
+              {currentImageIndex + 1} / {product?.allImages.length}
             </div>
 
             {/* Main Image */}
@@ -416,7 +416,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={product.allImages[currentImageIndex]}
+                src={product?.allImages[currentImageIndex]}
                 alt={`Gallery ${currentImageIndex + 1}`}
                 className="max-w-full max-h-[80vh] object-contain rounded-lg"
               />
@@ -424,7 +424,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
 
             {/* Thumbnails */}
             <div className="absolute bottom-20 left-1/2 transform -translate-x-1/2 flex items-center gap-2">
-              {product.allImages.map((img, index) => (
+              {product?.allImages.map((img, index) => (
                 <button
                   key={index}
                   onClick={(e) => {
