@@ -58,7 +58,7 @@ export default function Navbar() {
               className="object-contain rounded-md w-[80px] h-[50px]"
             />
 
-            <span className="font-semibold text-md tracking-wide text-gray-900">
+            <span className="hidden sm:block font-semibold text-md tracking-wide text-gray-900">
               {setup?.company_name || "South Flower General Trading PLC"}
             </span>
           </Link>

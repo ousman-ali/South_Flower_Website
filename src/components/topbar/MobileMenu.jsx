@@ -17,9 +17,7 @@ export default function MobileMenu({ open, navItems, pathname }) {
   const [setup, setSetup] = useState(null);
 
   useEffect(() => {
-    const features = [
-      { name: "about_setup" },
-    ];
+    const features = [{ name: "about_setup" }];
 
     async function fetchData() {
       try {
@@ -87,7 +85,7 @@ export default function MobileMenu({ open, navItems, pathname }) {
                   </a>
                   <a
                     href={`tel:${setup?.phone_numbers[0].value}`}
-                    className="text-sm font-medium"
+                    className="text-sm font-medium break-all"
                   >
                     {setup?.phone_numbers[0].value}
                   </a>
@@ -105,7 +103,7 @@ export default function MobileMenu({ open, navItems, pathname }) {
                   </a>
                   <a
                     href={`mailto:${setup?.email_addresses[0].value}`}
-                    className="text-sm font-medium"
+                    className="text-sm font-medium break-all"
                   >
                     {setup?.email_addresses[0].value}
                   </a>
@@ -150,7 +148,7 @@ export default function MobileMenu({ open, navItems, pathname }) {
                         whileHover={{ scale: 1 }}
                       />
                     </motion.a>
-                  )
+                  ),
               )}
             </motion.div>
           </div>
@@ -171,6 +169,19 @@ export default function MobileMenu({ open, navItems, pathname }) {
                 {item.name}
               </Link>
             ))}
+
+            {/* Get Quote Button */}
+            <Link
+              href="/getquote"
+              className="mt-4 w-full flex items-center justify-center px-5 py-3 
+             rounded-lg bg-gray-700 text-white font-medium text-sm 
+             shadow transition hover:scale-[1.05]"
+            >
+              <span className="flex items-center gap-2">
+                Get Quote
+                <span className="animate-danceRight">→</span>
+              </span>
+            </Link>
           </div>
         </motion.div>
       )}
