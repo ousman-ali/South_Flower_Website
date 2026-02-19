@@ -272,48 +272,6 @@ export default function AboutSection1({
                 </motion.div>
               </div>
             </motion.div>
-
-            {/* Core Values */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.3 }}
-              className="mb-10"
-            >
-              <div className="flex items-center gap-3 mb-6">
-                <h3 className="text-2xl font-bold text-gray-900">
-                  Core Values
-                </h3>
-                <div className="h-px flex-1 bg-gradient-to-r from-gray-300 to-transparent" />
-              </div>
-
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {aboutContent?.core_values?.map((value, idx) => (
-                  <motion.div
-                    key={idx}
-                    initial={{ opacity: 0, y: 10 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.4, delay: idx * 0.1 }}
-                    whileHover={{ scale: 1.03, y: -2 }}
-                    className="bg-white/80 backdrop-blur-sm border border-gray-300/50 rounded-xl p-4 hover:border-gray-400/50 transition-all shadow-sm hover:shadow-md"
-                  >
-                    <div
-                      className={`inline-flex p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg mb-3`}
-                    >
-                      <div className="text-white">
-                        {getFAIcon(value.icon_class || "fa-solid fa-gem")}
-                      </div>
-                    </div>
-                    <h4 className="font-semibold text-gray-900 mb-2">
-                      {value.title}
-                    </h4>
-                    <p className="text-sm text-gray-600">{value.description}</p>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
           </div>
 
           {/* Right Side - Image Gallery */}
@@ -431,7 +389,9 @@ export default function AboutSection1({
                         {service.title}
                       </div>
                       <div className="text-sm text-gray-600">
-                        {service.short_description}
+                        {service.short_description.length > 100
+                          ? service.short_description.slice(0, 97) + "..."
+                          : service.short_description}
                       </div>
                     </div>
                     <ChevronRight className="w-4 h-4 text-blue-500" />
@@ -451,6 +411,45 @@ export default function AboutSection1({
           className="text-center"
         ></motion.div>
       </div>
+      {/* Core Values */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.6, delay: 0.3 }}
+        className="mb-10 p-4 mt-6"
+      >
+        <div className="flex items-center gap-3 mb-6">
+          <h3 className="text-2xl font-bold text-gray-900">Core Values</h3>
+          <div className="h-px flex-1 bg-gradient-to-r from-gray-300 to-transparent" />
+        </div>
+
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+          {aboutContent?.core_values?.map((value, idx) => (
+            <motion.div
+              key={idx}
+              initial={{ opacity: 0, y: 10 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: idx * 0.1 }}
+              whileHover={{ scale: 1.03, y: -2 }}
+              className="bg-white/80 backdrop-blur-sm border border-gray-300/50 rounded-xl p-4 hover:border-gray-400/50 transition-all shadow-sm hover:shadow-md"
+            >
+              <div
+                className={`inline-flex p-2 bg-gradient-to-br from-blue-500 to-cyan-500 rounded-lg mb-3`}
+              >
+                <div className="text-white">
+                  {getFAIcon(value.icon_class || "fa-solid fa-gem")}
+                </div>
+              </div>
+              <h4 className="font-semibold text-gray-900 mb-2">
+                {value.title}
+              </h4>
+              <p className="text-sm text-gray-600">{value.description}</p>
+            </motion.div>
+          ))}
+        </div>
+      </motion.div>
     </section>
   );
 }
