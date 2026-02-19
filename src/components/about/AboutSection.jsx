@@ -352,7 +352,9 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                   <p
                     className="text-gray-700 leading-relaxed text-justify"
                     dangerouslySetInnerHTML={{
-                      __html: aboutContent?.mission || "this is mission area",
+                      __html: aboutContent?.mission
+                        ? aboutContent.mission.slice(0, 200) + "..."
+                        : "this is mission area",
                     }}
                   ></p>
                 </div>
@@ -378,7 +380,9 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                   <p
                     className="text-gray-700 leading-relaxed text-justify"
                     dangerouslySetInnerHTML={{
-                      __html: aboutContent?.vision || "this is vision area",
+                      __html: aboutContent?.vision
+                        ? aboutContent.vision.slice(0, 200) + "..."
+                        : "this is vision area",
                     }}
                   ></p>
                 </div>
