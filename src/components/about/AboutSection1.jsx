@@ -48,7 +48,7 @@ export default function AboutSection1({
 
   const galleryImages =
     gallery?.flatMap((album) =>
-      album.images.map((img) => `${IMAGE_URL}/${img.image}`)
+      album.images.map((img) => `${IMAGE_URL}/${img.image}`),
     ) || [];
 
   // Auto change images every 4 seconds
@@ -156,8 +156,8 @@ export default function AboutSection1({
                 shape.shape === "triangle"
                   ? "polygon(50% 0%, 0% 100%, 100% 100%)"
                   : shape.shape === "hexagon"
-                  ? "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
-                  : "none",
+                    ? "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)"
+                    : "none",
             }}
             shape={shape.shape}
           />
@@ -215,7 +215,7 @@ export default function AboutSection1({
                   {aboutContent?.text || "this is about text area"}
                 </p>
                 <p className="text-xl font-semibold text-gray-700 italic tracking-wide">
-                  {setup?.company_moto || "This is the company moto area"}
+                  {setup?.company_motto || "This is the company moto area"}
                 </p>
               </div>
             </motion.div>

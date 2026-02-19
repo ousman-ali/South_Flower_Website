@@ -70,7 +70,7 @@ export default function ServicesSection1({ services, products }) {
   const currentServices = isMobile
     ? services.slice(
         currentPage * servicesPerPage,
-        (currentPage + 1) * servicesPerPage
+        (currentPage + 1) * servicesPerPage,
       )
     : services;
 
@@ -144,7 +144,7 @@ export default function ServicesSection1({ services, products }) {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Proffessional{" "}
             <span className="bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">
-              Auto Services
+              Body Fabrication & Restoration
             </span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
