@@ -229,7 +229,7 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 Core Values
               </h3>
               <div className="grid grid-cols-2 gap-4">
-                {aboutContent?.core_values?.slice(0, 4).map((value, idx) => (
+                {aboutContent?.core_values?.slice(0, 6).map((value, idx) => (
                   <motion.div
                     key={idx}
                     initial={{ scale: 0.9, opacity: 0 }}
@@ -330,17 +330,17 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
-              className="grid md:grid-cols-2 gap-6 mb-12"
+              className="grid md:grid-cols-2 gap-6 mb-12 items-stretch"
             >
               {/* Mission Card */}
               <motion.div
-                onHoverStart={() => setHoveredCard("mission")}
-                onHoverEnd={() => setHoveredCard(null)}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="relative group"
+                className="relative group h-full"
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-400/20 to-gray-300/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-                <div className="relative bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-300/50 shadow-xl">
+
+                <div className="relative bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-300/50 shadow-xl h-full flex flex-col">
+                  {/* Header */}
                   <div className="flex items-center gap-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-gray-700 to-gray-600 rounded-xl">
                       <Target className="w-6 h-6 text-white" />
@@ -349,26 +349,31 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                       Our Mission
                     </h3>
                   </div>
-                  <p
-                    className="text-gray-700 leading-relaxed text-justify"
-                    dangerouslySetInnerHTML={{
-                      __html: aboutContent?.mission
-                        ? aboutContent.mission.slice(0, 200) + "..."
-                        : "this is mission area",
-                    }}
-                  ></p>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <p
+                      className="text-gray-700 leading-relaxed text-justify"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          aboutContent?.mission?.length > 260
+                            ? aboutContent.mission.slice(0, 257) + "..."
+                            : aboutContent?.mission || "",
+                      }}
+                    />
+                  </div>
                 </div>
               </motion.div>
 
               {/* Vision Card */}
               <motion.div
-                onHoverStart={() => setHoveredCard("vision")}
-                onHoverEnd={() => setHoveredCard(null)}
                 whileHover={{ scale: 1.02, y: -5 }}
-                className="relative group"
+                className="relative group h-full"
               >
                 <div className="absolute -inset-0.5 bg-gradient-to-r from-gray-500/20 to-gray-400/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition duration-500" />
-                <div className="relative bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-300/50 shadow-xl">
+
+                <div className="relative bg-white/90 backdrop-blur-sm p-8 rounded-2xl border border-gray-300/50 shadow-xl h-full flex flex-col">
+                  {/* Header */}
                   <div className="flex items-center gap-3 mb-4">
                     <div className="p-3 bg-gradient-to-br from-gray-800 to-gray-700 rounded-xl">
                       <Globe className="w-6 h-6 text-white" />
@@ -377,14 +382,19 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                       Our Vision
                     </h3>
                   </div>
-                  <p
-                    className="text-gray-700 leading-relaxed text-justify"
-                    dangerouslySetInnerHTML={{
-                      __html: aboutContent?.vision
-                        ? aboutContent.vision.slice(0, 200) + "..."
-                        : "this is vision area",
-                    }}
-                  ></p>
+
+                  {/* Content */}
+                  <div className="flex-1">
+                    <p
+                      className="text-gray-700 leading-relaxed text-justify"
+                      dangerouslySetInnerHTML={{
+                        __html:
+                          aboutContent?.vision?.length > 260
+                            ? aboutContent.vision.slice(0, 257) + "..."
+                            : aboutContent?.vision || "",
+                      }}
+                    />
+                  </div>
                 </div>
               </motion.div>
             </motion.div>
