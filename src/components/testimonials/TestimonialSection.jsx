@@ -31,7 +31,7 @@ export default function TestimonialSection({ testimonials }) {
   const handlePrevious = () => {
     setDirection(-1);
     setActiveIndex(
-      (prev) => (prev - 1 + testimonials.length) % testimonials.length
+      (prev) => (prev - 1 + testimonials.length) % testimonials.length,
     );
   };
 
@@ -121,11 +121,11 @@ export default function TestimonialSection({ testimonials }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold mb-4 md:mb-6 text-amber-50"
+            className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold mb-4 md:mb-6 text-amber-50"
           >
             Voices of{" "}
             <span className="bg-gradient-to-r from-blue-500 to-cyan-500 bg-clip-text text-transparent">
-              Vechile Owners
+              Our Clients
             </span>
           </motion.h2>
 
@@ -134,10 +134,11 @@ export default function TestimonialSection({ testimonials }) {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.2 }}
-            className="text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed px-4"
+            className="text-gray-400 text-base sm:text-lg md:text-xl lg:text-2xl max-w-3xl mx-auto leading-relaxed px-4 text-justify"
           >
-            Hear from customers who trust us to keep their vehicles safe,
-            reliable, and road-ready.
+            Hear from companies and partners who trust South Flower General
+            Trading PLC to deliver high-quality truck bodies, fuel tankers,
+            trailers, and industrial transport solutions
           </motion.p>
         </motion.div>
 

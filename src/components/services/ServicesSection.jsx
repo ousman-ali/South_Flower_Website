@@ -101,7 +101,7 @@ export default function ServicesSection({ servicesData }) {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="text-center mb-20"
+          className="text-center mb-10"
         >
           {/* Badge */}
           <motion.div
@@ -112,17 +112,19 @@ export default function ServicesSection({ servicesData }) {
             className="inline-block mb-6 px-4 py-2 rounded-full bg-gradient-to-r from-blue-500/10 to-purple-500/10 border border-blue-500/20 backdrop-blur-sm"
           >
             <span className="text-sm font-semibold bg-gradient-to-r text-blue-400">
-              Professional Vechile Care
+              Advanced Transport Manufacturing
             </span>
           </motion.div>
 
           <h2 className="text-5xl md:text-6xl font-bold mb-6 text-gray-300">
-            Our <span className=" text-blue-400 ">Featured Services</span>
+            Our <span className=" text-blue-400 ">Featured Solutions</span>
           </h2>
 
-          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
-            We provide professional car repair and maintenance services to keep
-            your vehicle safe, reliable, and performing at its best.
+          <p className="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-justify">
+            We provide durable, high-performance fabrication services including
+            fuel cargo tankers, dry cargo bodies, high bed semi-trailers,
+            drawbar trailers, and custom steel structures engineered to meet
+            industry standards
           </p>
         </motion.div>
 

@@ -119,28 +119,26 @@ export default function CTACard({ stats }) {
                       <Sparkles className="w-4 h-4 text-blue-400" />
                     </motion.div>
                     <span className="text-sm font-semibold text-blue-100">
-                      Professional Vehicle Care
+                      Professional Transport Manufacturing Engineering Strength
                     </span>
                   </div>
 
                   {/* Title */}
                   <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-white mb-3 md:mb-4 leading-tight drop-shadow-lg">
-                    <span className="block">
-                      Keep Your Vehicle{" "}
-                      <span className="bg-gradient-to-r from-blue-300 via-blue-300 to-blue-300 bg-clip-text text-transparent drop-shadow-lg">
-                        Running at Its Best
-                      </span>
-                    </span>
+                    <span className="block">Delivering Quality</span>
                     <span className="text-lg md:text-xl font-semibold text-blue-50">
-                      Book Your Trusted Auto Repair Service Today
+                      Request a Quote Today
                     </span>
                   </h2>
 
                   {/* Description */}
-                  <p className="text-blue-100/90 text-sm md:text-base max-w-xl drop-shadow">
-                    Transform your space with premium flora and expert
-                    horticultural services. Our team is ready to bring your
-                    vision to life.
+                  <p className="text-blue-100/90 text-sm md:text-base max-w-xl drop-shadow text-justify">
+                    We specialize in the design and fabrication of high-quality
+                    truck bodies, fuel tankers, semi-trailers, buses, and
+                    industrial storage solutions. Our expert team delivers
+                    durable, safe, and performance-driven transport systems
+                    built to meet the demands of Ethiopia’s growing industrial
+                    and logistics sectors
                   </p>
 
                   {/* Trust Badges */}

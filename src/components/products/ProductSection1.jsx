@@ -28,7 +28,7 @@ export default function ProductSection1({ categories, products, services }) {
       : products.filter(
           (product) =>
             product.product_category_id?.toString() ===
-            selectedCategory.toString()
+            selectedCategory.toString(),
         );
 
   useEffect(() => {
@@ -77,15 +77,15 @@ export default function ProductSection1({ categories, products, services }) {
               </div>
 
               <h1 className="text-2xl md:text-3xl font-bold text-white mb-1">
-                Auto{" "}
+                Advanced Manufacturing{" "}
                 <span className="bg-gradient-to-r from-blue-400 via-gray-400 to-cyan-400 bg-clip-text text-transparent">
-                  Parts & Products
+                  Products
                 </span>
               </h1>
 
               <p className="text-gray-400 text-sm">
-                Explore our high-quality auto parts, tools, and vehicle care
-                products.
+                We design and fabricate reliable transport and storage systems
+                built for strength, safety, and long-term performance
               </p>
             </div>
           </div>

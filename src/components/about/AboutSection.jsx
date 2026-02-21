@@ -275,12 +275,12 @@ export default function AboutSection({ setup, gallery, stats, aboutContent }) {
                 </span>
               </div>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-                Empowering{" "}
+              <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
+                Manufacturing{" "}
                 <span className="bg-gradient-to-r from-gray-800 via-gray-700 to-gray-900 bg-clip-text text-transparent">
-                  Innovation
+                  Reliability
                 </span>{" "}
-                Worldwide
+                You Can Trust
               </h2>
 
               <p className="text-gray-600 text-lg md:text-xl leading-relaxed max-w-3xl text-justify">

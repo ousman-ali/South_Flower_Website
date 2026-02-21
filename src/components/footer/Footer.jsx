@@ -176,8 +176,9 @@ export default function Footer() {
               transition={{ delay: 0.1 }}
               className="text-gray-400 leading-relaxed text-justify"
             >
-              We deliver reliable automotive repair solutions, quality service,
-              and expert care you can trust.
+              We deliver reliable truck body, tanker, and trailer manufacturing
+              solutions built with quality materials, advanced fabrication
+              techniques, and expert engineering you can trust
             </motion.p>
 
             {/* Social Media */}
@@ -206,7 +207,7 @@ export default function Footer() {
                         transition={{ duration: 0.3 }}
                       />
                     </motion.a>
-                  )
+                  ),
               )}
             </motion.div>
           </div>

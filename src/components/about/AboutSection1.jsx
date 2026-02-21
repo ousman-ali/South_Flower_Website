@@ -207,7 +207,7 @@ export default function AboutSection1({
               className="mb-10"
             >
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 leading-tight text-gray-700">
-                Pioneering Digital Excellence Since 2010
+                Engineering Excellence in Truck Bodies, Tankers & Trailers
               </h2>
 
               <div className="space-y-4">

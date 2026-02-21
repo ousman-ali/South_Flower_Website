@@ -144,12 +144,12 @@ export default function ServicesSection1({ services, products }) {
           <h2 className="text-4xl md:text-5xl font-bold text-white mb-4">
             Proffessional{" "}
             <span className="bg-gradient-to-r from-blue-400 to-blue-400 bg-clip-text text-transparent">
-              Body Fabrication & Restoration
+              Manufacturing Solutions
             </span>
           </h2>
           <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-            Explore our complete range of professional vehicle repair,
-            maintenance, and diagnostic services.
+            Explore our complete range of truck body fabrication, fuel tanker
+            production, trailer manufacturing, and industrial steel solutions
           </p>
         </motion.div>
 
