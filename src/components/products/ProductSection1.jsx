@@ -127,7 +127,7 @@ export default function ProductSection1({ categories, products, services }) {
                     : "bg-gray-800 text-gray-300 hover:bg-gray-700 border border-gray-700"
                 }`}
               >
-                {category.name}
+                {category?.name}
               </motion.button>
             ))}
           </div>
@@ -174,11 +174,11 @@ export default function ProductSection1({ categories, products, services }) {
                       {/* Product Image */}
                       <div className="relative h-40 overflow-hidden">
                         <motion.img
-                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                          alt={product.name}
+                          src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                          alt={product?.name}
                           className="w-full h-full object-cover"
                           animate={{
-                            scale: isHovered === product.id ? 1.05 : 1,
+                            scale: isHovered === product?.id ? 1.05 : 1,
                           }}
                           transition={{ duration: 0.5 }}
                         />
@@ -189,12 +189,12 @@ export default function ProductSection1({ categories, products, services }) {
                       <div className="p-3 h-32 flex flex-col">
                         {/* Name */}
                         <h3 className="text-sm font-bold text-white mb-1 line-clamp-1">
-                          {product.name}
+                          {product?.name}
                         </h3>
 
                         {/* Truncated Description */}
                         <p className="text-gray-400 text-xs mb-3 line-clamp-2 flex-grow">
-                          {product.description}
+                          {product?.description}
                         </p>
 
                         {/* Price & CTA */}
@@ -205,7 +205,7 @@ export default function ProductSection1({ categories, products, services }) {
                             className="bg-gradient-to-r from-blue-400 to-gray-500 text-white text-xs font-medium rounded-lg flex items-center gap-1 shadow-lg hover:shadow-blue-500/20 transition-all duration-300"
                           >
                             <Link
-                              href={`/product/${product.slug}`}
+                              href={`/product/${product?.slug}`}
                               className="flex items-center gap-1 px-2 py-1.5"
                             >
                               <Eye className="w-3 h-3" />
@@ -256,8 +256,8 @@ export default function ProductSection1({ categories, products, services }) {
                           <div className="p-0.5 rounded-md bg-gradient-to-r from-blue-500 to-cyan-400 flex-shrink-0">
                             <div className="w-10 h-10 rounded overflow-hidden bg-gray-900">
                               <img
-                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service.banner_image}`}
-                                alt={service.title}
+                                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${service?.banner_image}`}
+                                alt={service?.title}
                                 className="w-full h-full object-cover"
                               />
                             </div>
@@ -266,10 +266,10 @@ export default function ProductSection1({ categories, products, services }) {
                           {/* Service Name */}
                           <div className="flex-1">
                             <h3 className="text-xs font-medium text-gray-300 group-hover:text-white">
-                              {service.title}
+                              {service?.title}
                             </h3>
                             <p className="text-gray-400 text-xs line-clamp-2">
-                              {service.short_description}
+                              {service?.short_description}
                             </p>
                           </div>
 

@@ -150,7 +150,7 @@ export default function CTACard({ stats }) {
                       >
                         <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse" />
                         <span className="text-xs md:text-sm text-blue-50 font-medium">
-                          {s.value} {s.name}
+                          {s?.value} {s?.name}
                         </span>
                       </div>
                     ))}

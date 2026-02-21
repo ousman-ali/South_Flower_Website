@@ -147,8 +147,8 @@ export default function ProductSection({ products }) {
                 {/* Product Image - Full width, no padding */}
                 <div className="relative h-64 overflow-hidden">
                   <motion.img
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                    alt={product.name}
+                    src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                    alt={product?.name}
                     className="w-full h-full object-cover"
                     animate={{ scale: isHovered === product.id ? 1.1 : 1 }}
                     transition={{ duration: 0.5 }}
@@ -160,10 +160,10 @@ export default function ProductSection({ products }) {
                   <div className="flex items-start justify-between mb-3">
                     <div>
                       <h3 className="text-lg font-bold text-white mb-1">
-                        {product.name}
+                        {product?.name}
                       </h3>
                       <p className="text-gray-400 text-sm line-clamp-2 mb-3">
-                        {product.description}
+                        {product?.description}
                       </p>
                     </div>
                   </div>
@@ -171,7 +171,7 @@ export default function ProductSection({ products }) {
                   {/* Price & Details Button */}
                   <div className="flex items-center justify-between">
                     <Link
-                      href={`/product/${product.slug}`}
+                      href={`/product/${product?.slug}`}
                       whilehover={{ scale: 1.05 }}
                       whiletap={{ scale: 0.95 }}
                       className="group relative px-4 py-2 bg-gradient-to-r from-blue-500 to-cyan-500 text-white text-sm font-semibold rounded-lg overflow-hidden flex items-center gap-2"

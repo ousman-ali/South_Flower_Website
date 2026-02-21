@@ -317,8 +317,8 @@ const TeamCard = ({
               transition={{ duration: 0.3 }}
             >
               <img
-                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${member.image}`}
-                alt={member.name}
+                src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${member?.image}`}
+                alt={member?.name}
                 className="w-full h-full object-cover"
               />
             </motion.div>
@@ -330,13 +330,13 @@ const TeamCard = ({
             <h3 className="text-xl font-bold text-gray-900">
               {member.title_prefix}
               {". "}
-              {member.name}
+              {member?.name}
             </h3>
             <div className="flex items-center gap-2 mb-2">
               <span
                 className={`inline-block px-3 py-1 rounded-full text-xs font-semibold text-blue-500 bg-blue-50`}
               >
-                {member.position}
+                {member?.position}
               </span>
               <div className="flex-1" />
             </div>

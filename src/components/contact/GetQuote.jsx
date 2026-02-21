@@ -52,7 +52,7 @@ export default function GetQuote({ categories, products }) {
     if (selectedProducts.length === 0) return;
 
     const productList = selectedProducts
-      .map((p, i) => `${i + 1}. ${p.name}`)
+      .map((p, i) => `${i + 1}. ${p?.name}`)
       .join("\n");
 
     const messageTemplate = `Hello,

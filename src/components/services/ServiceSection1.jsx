@@ -342,8 +342,8 @@ export default function ServicesSection1({ services, products }) {
                         {/* Product Image */}
                         <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden">
                           <img
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product.banner_image}`}
-                            alt={product.name}
+                            src={`${process.env.NEXT_PUBLIC_IMAGE_URL}/${product?.banner_image}`}
+                            alt={product?.name}
                             className="w-full h-full object-cover"
                           />
                           <div
@@ -353,10 +353,10 @@ export default function ServicesSection1({ services, products }) {
 
                         <div className="flex-1 min-w-0">
                           <h4 className="font-medium text-white group-hover:text-blue-400 transition-colors truncate">
-                            {product.name}
+                            <Link href={`/product/${product.slug}`}>{product?.name}</Link>
                           </h4>
                           <p className="text-xs text-gray-400 truncate">
-                            {product.description}
+                            {product?.description}
                           </p>
                         </div>
                         <div className="text-right flex-shrink-0">

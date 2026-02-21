@@ -40,7 +40,7 @@ export default function PartnersSection({ partners }) {
       if (!isAnimating) {
         setDirection(1);
         setCurrentIndex(
-          (prev) => (prev + (isMobile ? 1 : 1)) % partners.length
+          (prev) => (prev + (isMobile ? 1 : 1)) % partners.length,
         );
         setIsAnimating(true);
         setTimeout(() => setIsAnimating(false), 500);
@@ -176,30 +176,30 @@ export default function PartnersSection({ partners }) {
                       ? direction > 0
                         ? 300
                         : direction < 0
-                        ? -300
-                        : 0
+                          ? -300
+                          : 0
                       : direction > 0
-                      ? partner.position === (isMobile ? 0 : 3)
-                        ? 400
-                        : 0
-                      : direction < 0
-                      ? partner.position === 0
-                        ? -400
-                        : 0
-                      : 0,
+                        ? partner.position === (isMobile ? 0 : 3)
+                          ? 400
+                          : 0
+                        : direction < 0
+                          ? partner.position === 0
+                            ? -400
+                            : 0
+                          : 0,
                     opacity: isMobile
                       ? direction !== 0
                         ? 0
                         : 1
                       : direction > 0
-                      ? partner.position === (isMobile ? 0 : 3)
-                        ? 0
-                        : 1
-                      : direction < 0
-                      ? partner.position === 0
-                        ? 0
-                        : 1
-                      : 1,
+                        ? partner.position === (isMobile ? 0 : 3)
+                          ? 0
+                          : 1
+                        : direction < 0
+                          ? partner.position === 0
+                            ? 0
+                            : 1
+                          : 1,
                   }}
                   animate={{
                     x: 0,
@@ -223,7 +223,7 @@ export default function PartnersSection({ partners }) {
                       <div
                         className="absolute inset-0 bg-gray-100 transition-transform duration-500 group-hover:scale-110"
                         style={{
-                          backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}/${partner.image})`,
+                          backgroundImage: `url(${process.env.NEXT_PUBLIC_IMAGE_URL}/${partner?.image})`,
                           backgroundSize: "cover",
                           backgroundPosition: "center",
                         }}
@@ -232,7 +232,7 @@ export default function PartnersSection({ partners }) {
                       {/* Gradient overlay on hover */}
                       <div
                         className={`absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent transition-opacity duration-300 ${
-                          isMobile || isHovered === partner.id
+                          isMobile || isHovered === partner?.id
                             ? "opacity-100"
                             : "opacity-0"
                         }`}
@@ -241,13 +241,13 @@ export default function PartnersSection({ partners }) {
                       {/* Partner Name - Shows on hover (or always on mobile) */}
                       <div
                         className={`absolute bottom-0 left-0 right-0 p-4 md:p-6 transition-all duration-300 ${
-                          isMobile || isHovered === partner.id
+                          isMobile || isHovered === partner?.id
                             ? "translate-y-0 opacity-100"
                             : "translate-y-4 opacity-0"
                         }`}
                       >
                         <h3 className="text-lg sm:text-xl md:text-2xl font-bold text-white text-center">
-                          {partner.name}
+                          {partner?.name}
                         </h3>
                       </div>
                     </div>
@@ -255,7 +255,7 @@ export default function PartnersSection({ partners }) {
                     {/* Subtle indicator */}
                     <div
                       className={`absolute -top-2 -right-2 w-3 h-3 md:w-4 md:h-4 rounded-full bg-gradient-to-r from-blue-500 to-purple-500 transition-all duration-300 ${
-                        isMobile || isHovered === partner.id
+                        isMobile || isHovered === partner?.id
                           ? "scale-125"
                           : "scale-100"
                       }`}
@@ -265,7 +265,7 @@ export default function PartnersSection({ partners }) {
                   {/* Glow effect */}
                   <div
                     className={`absolute inset-0 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-xl md:rounded-2xl blur-xl transition-opacity duration-300 ${
-                      isMobile || isHovered === partner.id
+                      isMobile || isHovered === partner?.id
                         ? "opacity-100"
                         : "opacity-0"
                     }`}
