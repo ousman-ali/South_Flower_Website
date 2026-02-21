@@ -46,7 +46,7 @@ export default function ProductDetailsPage() {
 
           const galleryImages =
             currentProduct.images?.map(
-              (img) => `${IMAGE_BASE_URL}/${img.image_path}`
+              (img) => `${IMAGE_BASE_URL}/${img.image_path}`,
             ) || [];
 
           // Final ordered images array
@@ -88,8 +88,8 @@ export default function ProductDetailsPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       {/* Breadcrumb Component */}
       <Breadcrumb
-        pageTitle="Product Details"
-        pageName="Product Details"
+        pageTitle={product?.name}
+        pageName={product?.name}
         currentPage="South Flower Product"
         backgroundImage="/images/product-slug-bread.jpg"
       />

@@ -232,7 +232,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                 <div>
                   <div className="flex items-center gap-2 mb-2">
                     <span className="inline-block px-3 py-1 bg-blue-500/20 text-blue-400 rounded-full text-sm font-medium">
-                      {product.category.name}
+                      {product?.category?.name}
                     </span>
                   </div>
                   <h1 className="text-4xl font-bold mb-2">{product?.name}</h1>
@@ -290,7 +290,7 @@ export default function ProductDetails({ services, product, relatedProducts }) {
                           <div className="flex items-start justify-between gap-2">
                             <div>
                               <span className="text-xs text-blue-400 font-medium">
-                                {product?.category.name}
+                                {product?.category?.name}
                               </span>
                               <h4 className="font-semibold text-white group-hover:text-blue-400 transition-colors truncate">
                                 {product?.name}

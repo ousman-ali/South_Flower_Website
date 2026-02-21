@@ -49,7 +49,7 @@ export default function AboutPage() {
 
           const galleryImages =
             currentBlog.images?.map(
-              (img) => `${IMAGE_BASE_URL}/${img.image_path}`
+              (img) => `${IMAGE_BASE_URL}/${img.image_path}`,
             ) || [];
 
           // Final ordered images array
@@ -90,8 +90,8 @@ export default function AboutPage() {
     <div className="min-h-screen bg-gradient-to-b from-gray-900 to-black">
       {/* Breadcrumb Component */}
       <Breadcrumb
-        pageTitle="Blog Details"
-        pageName="Blog Details"
+        pageTitle={blog?.title}
+        pageName={blog?.title}
         currentPage="South Flower Post"
         backgroundImage="/images/blog-slug-bread.jpg"
       />
